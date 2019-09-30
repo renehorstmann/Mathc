@@ -52,11 +52,11 @@ int main() {
     // -2.000000 -1.000000 0.600000
     // -2.000000 -1.000000 0.900000
 
-    Mat44 mat = mat44_eye();
+    mat44 mat = mat44_eye();
     mat_col_set(mat.m, -1, 1, 4);
     mat.m[3] = 3;
 
-    Mat44 inv = mat44_invert(mat.m);
+    mat44 inv = mat44_invert(mat.m);
     print_mat(inv.m, 4);
     // 1.000000 2.000000 -0.000000 -3.000000
     // -0.000000 -1.000000 -0.000000 -0.000000

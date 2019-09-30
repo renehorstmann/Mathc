@@ -27,7 +27,7 @@ int main() {
     printf("%f\n", norm);
 
     // double typed function with specified size
-    Vec3d vec_d = vec3d_add_sca((double[]){-1.23, -2.34, -3.45}, 10);
+    vec3d vec_d = vec3d_add_sca((double[]){-1.23, -2.34, -3.45}, 10);
     double sum = vecd_sum(vec_d.v, 3);
     printf("%f\n", sum);
 
@@ -60,7 +60,7 @@ int main() {
     printf("%f %f %f\n", col[0], col[1], col[2]);
 
     // double typed function with specified size
-    Mat44d mat_d = mat44d_eye();
+    mat44d mat_d = mat44d_eye();
     printf("%f\n", mat_d.m[1*4+1]);
 
     // output:

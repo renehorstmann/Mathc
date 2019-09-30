@@ -54,7 +54,7 @@ int main() {
     print_veci(ires, 10);
     // 0 1 4 9 16 25 36 49 64 81
 
-    Vec3 vec = vec3_copy(b);
+    vec3 vec = vec3_copy(b);
     print_vec(vec.v, 3);
     // 10.000000 20.000000 30.000000
 

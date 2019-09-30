@@ -115,122 +115,128 @@ static void mat_mul_vec(float *dst_vec, const float *mat_a, const float *vec_b, 
 }
 
 /** returns = det mat<3*3> mat33 */
-static float mat_determinant33(const float *mat33) {
+static float mat_determinant33(const float *mat) {
+    const float (*m)[3] = (const float (*)[3]) mat;
     return
-            mat33[0 * 3 + 0] * mat33[1 * 3 + 1] * mat33[2 * 3 + 2] +
-            mat33[0 * 3 + 1] * mat33[1 * 3 + 2] * mat33[2 * 3 + 0] +
-            mat33[0 * 3 + 2] * mat33[1 * 3 + 0] * mat33[2 * 3 + 1] -
-            mat33[0 * 3 + 0] * mat33[1 * 3 + 2] * mat33[2 * 3 + 1] -
-            mat33[0 * 3 + 1] * mat33[1 * 3 + 0] * mat33[2 * 3 + 2] -
-            mat33[0 * 3 + 2] * mat33[1 * 3 + 1] * mat33[2 * 3 + 0];
+            m[0][0] * m[1][1] * m[2][2] +
+            m[0][1] * m[1][2] * m[2][0] +
+            m[0][2] * m[1][0] * m[2][1] -
+            m[0][0] * m[1][2] * m[2][1] -
+            m[0][1] * m[1][0] * m[2][2] -
+            m[0][2] * m[1][1] * m[2][0];
 }
 
 /** returns = det mat<4*4> mat44 */
-static float mat_determinant44(const float *mat44) {
+static float mat_determinant44(const float *mat) {
+    const float (*m)[4] = (const float (*)[4]) mat;
     return
-            mat44[0 * 4 + 3] * mat44[1 * 4 + 2] * mat44[2 * 4 + 1] * mat44[3 * 4 + 0] -
-            mat44[0 * 4 + 2] * mat44[1 * 4 + 3] * mat44[2 * 4 + 1] * mat44[3 * 4 + 0] -
-            mat44[0 * 4 + 3] * mat44[1 * 4 + 1] * mat44[2 * 4 + 2] * mat44[3 * 4 + 0] +
-            mat44[0 * 4 + 1] * mat44[1 * 4 + 3] * mat44[2 * 4 + 2] * mat44[3 * 4 + 0] +
-            mat44[0 * 4 + 2] * mat44[1 * 4 + 1] * mat44[2 * 4 + 3] * mat44[3 * 4 + 0] -
-            mat44[0 * 4 + 1] * mat44[1 * 4 + 2] * mat44[2 * 4 + 3] * mat44[3 * 4 + 0] -
-            mat44[0 * 4 + 3] * mat44[1 * 4 + 2] * mat44[2 * 4 + 0] * mat44[3 * 4 + 1] +
-            mat44[0 * 4 + 2] * mat44[1 * 4 + 3] * mat44[2 * 4 + 0] * mat44[3 * 4 + 1] +
-            mat44[0 * 4 + 3] * mat44[1 * 4 + 0] * mat44[2 * 4 + 2] * mat44[3 * 4 + 1] -
-            mat44[0 * 4 + 0] * mat44[1 * 4 + 3] * mat44[2 * 4 + 2] * mat44[3 * 4 + 1] -
-            mat44[0 * 4 + 2] * mat44[1 * 4 + 0] * mat44[2 * 4 + 3] * mat44[3 * 4 + 1] +
-            mat44[0 * 4 + 0] * mat44[1 * 4 + 2] * mat44[2 * 4 + 3] * mat44[3 * 4 + 1] +
-            mat44[0 * 4 + 3] * mat44[1 * 4 + 1] * mat44[2 * 4 + 0] * mat44[3 * 4 + 2] -
-            mat44[0 * 4 + 1] * mat44[1 * 4 + 3] * mat44[2 * 4 + 0] * mat44[3 * 4 + 2] -
-            mat44[0 * 4 + 3] * mat44[1 * 4 + 0] * mat44[2 * 4 + 1] * mat44[3 * 4 + 2] +
-            mat44[0 * 4 + 0] * mat44[1 * 4 + 3] * mat44[2 * 4 + 1] * mat44[3 * 4 + 2] +
-            mat44[0 * 4 + 1] * mat44[1 * 4 + 0] * mat44[2 * 4 + 3] * mat44[3 * 4 + 2] -
-            mat44[0 * 4 + 0] * mat44[1 * 4 + 1] * mat44[2 * 4 + 3] * mat44[3 * 4 + 2] -
-            mat44[0 * 4 + 2] * mat44[1 * 4 + 1] * mat44[2 * 4 + 0] * mat44[3 * 4 + 3] +
-            mat44[0 * 4 + 1] * mat44[1 * 4 + 2] * mat44[2 * 4 + 0] * mat44[3 * 4 + 3] +
-            mat44[0 * 4 + 2] * mat44[1 * 4 + 0] * mat44[2 * 4 + 1] * mat44[3 * 4 + 3] -
-            mat44[0 * 4 + 0] * mat44[1 * 4 + 2] * mat44[2 * 4 + 1] * mat44[3 * 4 + 3] -
-            mat44[0 * 4 + 1] * mat44[1 * 4 + 0] * mat44[2 * 4 + 2] * mat44[3 * 4 + 3] +
-            mat44[0 * 4 + 0] * mat44[1 * 4 + 1] * mat44[2 * 4 + 2] * mat44[3 * 4 + 3];
+            m[0][3] * m[1][2] * m[2][1] * m[3][0] -
+            m[0][2] * m[1][3] * m[2][1] * m[3][0] -
+            m[0][3] * m[1][1] * m[2][2] * m[3][0] +
+            m[0][1] * m[1][3] * m[2][2] * m[3][0] +
+            m[0][2] * m[1][1] * m[2][3] * m[3][0] -
+            m[0][1] * m[1][2] * m[2][3] * m[3][0] -
+            m[0][3] * m[1][2] * m[2][0] * m[3][1] +
+            m[0][2] * m[1][3] * m[2][0] * m[3][1] +
+            m[0][3] * m[1][0] * m[2][2] * m[3][1] -
+            m[0][0] * m[1][3] * m[2][2] * m[3][1] -
+            m[0][2] * m[1][0] * m[2][3] * m[3][1] +
+            m[0][0] * m[1][2] * m[2][3] * m[3][1] +
+            m[0][3] * m[1][1] * m[2][0] * m[3][2] -
+            m[0][1] * m[1][3] * m[2][0] * m[3][2] -
+            m[0][3] * m[1][0] * m[2][1] * m[3][2] +
+            m[0][0] * m[1][3] * m[2][1] * m[3][2] +
+            m[0][1] * m[1][0] * m[2][3] * m[3][2] -
+            m[0][0] * m[1][1] * m[2][3] * m[3][2] -
+            m[0][2] * m[1][1] * m[2][0] * m[3][3] +
+            m[0][1] * m[1][2] * m[2][0] * m[3][3] +
+            m[0][2] * m[1][0] * m[2][1] * m[3][3] -
+            m[0][0] * m[1][2] * m[2][1] * m[3][3] -
+            m[0][1] * m[1][0] * m[2][2] * m[3][3] +
+            m[0][0] * m[1][1] * m[2][2] * m[3][3];
 }
 
 /** mat<3*3> dst = inv(mat<3*3> mat33) (dst != mat33) */
-static void mat_invert33_no_alias(float *dst_mat33, const float *mat33) {
-    float idet = 1.0f / mat_determinant33(mat33);
-    dst_mat33[0 * 3 + 0] = (mat33[1 * 3 + 1] * mat33[2 * 3 + 2] - mat33[1 * 3 + 2] * mat33[2 * 3 + 1]) * idet;
-    dst_mat33[0 * 3 + 1] = (mat33[0 * 3 + 2] * mat33[2 * 3 + 1] - mat33[0 * 3 + 1] * mat33[2 * 3 + 2]) * idet;
-    dst_mat33[0 * 3 + 2] = (mat33[0 * 3 + 1] * mat33[1 * 3 + 2] - mat33[0 * 3 + 2] * mat33[1 * 3 + 1]) * idet;
-    dst_mat33[1 * 3 + 0] = (mat33[1 * 3 + 2] * mat33[2 * 3 + 0] - mat33[1 * 3 + 0] * mat33[2 * 3 + 2]) * idet;
-    dst_mat33[1 * 3 + 1] = (mat33[0 * 3 + 0] * mat33[2 * 3 + 2] - mat33[0 * 3 + 2] * mat33[2 * 3 + 0]) * idet;
-    dst_mat33[1 * 3 + 2] = (mat33[0 * 3 + 2] * mat33[1 * 3 + 0] - mat33[0 * 3 + 0] * mat33[1 * 3 + 2]) * idet;
-    dst_mat33[2 * 3 + 0] = (mat33[1 * 3 + 0] * mat33[2 * 3 + 1] - mat33[1 * 3 + 1] * mat33[2 * 3 + 0]) * idet;
-    dst_mat33[2 * 3 + 1] = (mat33[0 * 3 + 1] * mat33[2 * 3 + 0] - mat33[0 * 3 + 0] * mat33[2 * 3 + 1]) * idet;
-    dst_mat33[2 * 3 + 2] = (mat33[0 * 3 + 0] * mat33[1 * 3 + 1] - mat33[0 * 3 + 1] * mat33[1 * 3 + 0]) * idet;
+static void mat_invert33_no_alias(float *dst_mat, const float *mat) {
+    float inv_det = 1.0f / mat_determinant33(mat);
+    const float (*m)[3] = (const float (*)[3]) mat;
+    float (*d)[3] = (float (*)[3]) dst_mat;
+    d[0][0] = (m[1][1] * m[2][2] - m[1][2] * m[2][1]) * inv_det;
+    d[0][1] = (m[0][2] * m[2][1] - m[0][1] * m[2][2]) * inv_det;
+    d[0][2] = (m[0][1] * m[1][2] - m[0][2] * m[1][1]) * inv_det;
+    d[1][0] = (m[1][2] * m[2][0] - m[1][0] * m[2][2]) * inv_det;
+    d[1][1] = (m[0][0] * m[2][2] - m[0][2] * m[2][0]) * inv_det;
+    d[1][2] = (m[0][2] * m[1][0] - m[0][0] * m[1][2]) * inv_det;
+    d[2][0] = (m[1][0] * m[2][1] - m[1][1] * m[2][0]) * inv_det;
+    d[2][1] = (m[0][1] * m[2][0] - m[0][0] * m[2][1]) * inv_det;
+    d[2][2] = (m[0][0] * m[1][1] - m[0][1] * m[1][0]) * inv_det;
 }
 
 /** mat<3*3> dst = inv(mat<3*3> mat33) */
-static void mat_invert33(float *dst_mat33, const float *mat33) {
-    if (dst_mat33 == mat33) {
+static void mat_invert33(float *dst_mat, const float *mat) {
+    if (dst_mat == mat) {
         float tmp[9];
-        mat_invert33_no_alias(tmp, mat33);
+        mat_invert33_no_alias(tmp, mat);
         for (int i = 0; i < 9; i++)
-            dst_mat33[i] = tmp[i];
+            dst_mat[i] = tmp[i];
     } else
-        mat_invert33_no_alias(dst_mat33, mat33);
+        mat_invert33_no_alias(dst_mat, mat);
 }
 
 /** mat<4*4> dst = inv(mat<4*4> mat44) (dst != mat44) */
-static void mat_invert44_no_alias(float *dst_mat44, const float *mat44) {
+static void mat_invert44_no_alias(float *dst_mat, const float *mat) {
     // algorithm from https://github.com/datenwolf/linmath.h/blob/master/linmath.h
     float s[6];
     float c[6];
-    s[0] = mat44[0 * 4 + 0] * mat44[1 * 4 + 1] - mat44[1 * 4 + 0] * mat44[0 * 4 + 1];
-    s[1] = mat44[0 * 4 + 0] * mat44[1 * 4 + 2] - mat44[1 * 4 + 0] * mat44[0 * 4 + 2];
-    s[2] = mat44[0 * 4 + 0] * mat44[1 * 4 + 3] - mat44[1 * 4 + 0] * mat44[0 * 4 + 3];
-    s[3] = mat44[0 * 4 + 1] * mat44[1 * 4 + 2] - mat44[1 * 4 + 1] * mat44[0 * 4 + 2];
-    s[4] = mat44[0 * 4 + 1] * mat44[1 * 4 + 3] - mat44[1 * 4 + 1] * mat44[0 * 4 + 3];
-    s[5] = mat44[0 * 4 + 2] * mat44[1 * 4 + 3] - mat44[1 * 4 + 2] * mat44[0 * 4 + 3];
+    const float (*m)[4] = (const float (*)[4]) mat;
+    float (*d)[4] = (float (*)[4]) dst_mat;
+    s[0] = m[0][0] * m[1][1] - m[1][0] * m[0][1];
+    s[1] = m[0][0] * m[1][2] - m[1][0] * m[0][2];
+    s[2] = m[0][0] * m[1][3] - m[1][0] * m[0][3];
+    s[3] = m[0][1] * m[1][2] - m[1][1] * m[0][2];
+    s[4] = m[0][1] * m[1][3] - m[1][1] * m[0][3];
+    s[5] = m[0][2] * m[1][3] - m[1][2] * m[0][3];
 
-    c[0] = mat44[2 * 4 + 0] * mat44[3 * 4 + 1] - mat44[3 * 4 + 0] * mat44[2 * 4 + 1];
-    c[1] = mat44[2 * 4 + 0] * mat44[3 * 4 + 2] - mat44[3 * 4 + 0] * mat44[2 * 4 + 2];
-    c[2] = mat44[2 * 4 + 0] * mat44[3 * 4 + 3] - mat44[3 * 4 + 0] * mat44[2 * 4 + 3];
-    c[3] = mat44[2 * 4 + 1] * mat44[3 * 4 + 2] - mat44[3 * 4 + 1] * mat44[2 * 4 + 2];
-    c[4] = mat44[2 * 4 + 1] * mat44[3 * 4 + 3] - mat44[3 * 4 + 1] * mat44[2 * 4 + 3];
-    c[5] = mat44[2 * 4 + 2] * mat44[3 * 4 + 3] - mat44[3 * 4 + 2] * mat44[2 * 4 + 3];
+    c[0] = m[2][0] * m[3][1] - m[3][0] * m[2][1];
+    c[1] = m[2][0] * m[3][2] - m[3][0] * m[2][2];
+    c[2] = m[2][0] * m[3][3] - m[3][0] * m[2][3];
+    c[3] = m[2][1] * m[3][2] - m[3][1] * m[2][2];
+    c[4] = m[2][1] * m[3][3] - m[3][1] * m[2][3];
+    c[5] = m[2][2] * m[3][3] - m[3][2] * m[2][3];
 
     /* Assumes it is invertible */
-    float idet = 1.0f / (s[0] * c[5] - s[1] * c[4] + s[2] * c[3] + s[3] * c[2] - s[4] * c[1] + s[5] * c[0]);
+    float inv_det = 1.0f / (s[0] * c[5] - s[1] * c[4] + s[2] * c[3] + s[3] * c[2] - s[4] * c[1] + s[5] * c[0]);
 
-    dst_mat44[0 * 4 + 0] = (mat44[1 * 4 + 1] * c[5] - mat44[1 * 4 + 2] * c[4] + mat44[1 * 4 + 3] * c[3]) * idet;
-    dst_mat44[0 * 4 + 1] = (-mat44[0 * 4 + 1] * c[5] + mat44[0 * 4 + 2] * c[4] - mat44[0 * 4 + 3] * c[3]) * idet;
-    dst_mat44[0 * 4 + 2] = (mat44[3 * 4 + 1] * s[5] - mat44[3 * 4 + 2] * s[4] + mat44[3 * 4 + 3] * s[3]) * idet;
-    dst_mat44[0 * 4 + 3] = (-mat44[2 * 4 + 1] * s[5] + mat44[2 * 4 + 2] * s[4] - mat44[2 * 4 + 3] * s[3]) * idet;
+    d[0][0] = (m[1][1] * c[5] - m[1][2] * c[4] + m[1][3] * c[3]) * inv_det;
+    d[0][1] = (-m[0][1] * c[5] + m[0][2] * c[4] - m[0][3] * c[3]) * inv_det;
+    d[0][2] = (m[3][1] * s[5] - m[3][2] * s[4] + m[3][3] * s[3]) * inv_det;
+    d[0][3] = (-m[2][1] * s[5] + m[2][2] * s[4] - m[2][3] * s[3]) * inv_det;
 
-    dst_mat44[1 * 4 + 0] = (-mat44[1 * 4 + 0] * c[5] + mat44[1 * 4 + 2] * c[2] - mat44[1 * 4 + 3] * c[1]) * idet;
-    dst_mat44[1 * 4 + 1] = (mat44[0 * 4 + 0] * c[5] - mat44[0 * 4 + 2] * c[2] + mat44[0 * 4 + 3] * c[1]) * idet;
-    dst_mat44[1 * 4 + 2] = (-mat44[3 * 4 + 0] * s[5] + mat44[3 * 4 + 2] * s[2] - mat44[3 * 4 + 3] * s[1]) * idet;
-    dst_mat44[1 * 4 + 3] = (mat44[2 * 4 + 0] * s[5] - mat44[2 * 4 + 2] * s[2] + mat44[2 * 4 + 3] * s[1]) * idet;
+    d[1][0] = (-m[1][0] * c[5] + m[1][2] * c[2] - m[1][3] * c[1]) * inv_det;
+    d[1][1] = (m[0][0] * c[5] - m[0][2] * c[2] + m[0][3] * c[1]) * inv_det;
+    d[1][2] = (-m[3][0] * s[5] + m[3][2] * s[2] - m[3][3] * s[1]) * inv_det;
+    d[1][3] = (m[2][0] * s[5] - m[2][2] * s[2] + m[2][3] * s[1]) * inv_det;
 
-    dst_mat44[2 * 4 + 0] = (mat44[1 * 4 + 0] * c[4] - mat44[1 * 4 + 1] * c[2] + mat44[1 * 4 + 3] * c[0]) * idet;
-    dst_mat44[2 * 4 + 1] = (-mat44[0 * 4 + 0] * c[4] + mat44[0 * 4 + 1] * c[2] - mat44[0 * 4 + 3] * c[0]) * idet;
-    dst_mat44[2 * 4 + 2] = (mat44[3 * 4 + 0] * s[4] - mat44[3 * 4 + 1] * s[2] + mat44[3 * 4 + 3] * s[0]) * idet;
-    dst_mat44[2 * 4 + 3] = (-mat44[2 * 4 + 0] * s[4] + mat44[2 * 4 + 1] * s[2] - mat44[2 * 4 + 3] * s[0]) * idet;
+    d[2][0] = (m[1][0] * c[4] - m[1][1] * c[2] + m[1][3] * c[0]) * inv_det;
+    d[2][1] = (-m[0][0] * c[4] + m[0][1] * c[2] - m[0][3] * c[0]) * inv_det;
+    d[2][2] = (m[3][0] * s[4] - m[3][1] * s[2] + m[3][3] * s[0]) * inv_det;
+    d[2][3] = (-m[2][0] * s[4] + m[2][1] * s[2] - m[2][3] * s[0]) * inv_det;
 
-    dst_mat44[3 * 4 + 0] = (-mat44[1 * 4 + 0] * c[3] + mat44[1 * 4 + 1] * c[1] - mat44[1 * 4 + 2] * c[0]) * idet;
-    dst_mat44[3 * 4 + 1] = (mat44[0 * 4 + 0] * c[3] - mat44[0 * 4 + 1] * c[1] + mat44[0 * 4 + 2] * c[0]) * idet;
-    dst_mat44[3 * 4 + 2] = (-mat44[3 * 4 + 0] * s[3] + mat44[3 * 4 + 1] * s[1] - mat44[3 * 4 + 2] * s[0]) * idet;
-    dst_mat44[3 * 4 + 3] = (mat44[2 * 4 + 0] * s[3] - mat44[2 * 4 + 1] * s[1] + mat44[2 * 4 + 2] * s[0]) * idet;
+    d[3][0] = (-m[1][0] * c[3] + m[1][1] * c[1] - m[1][2] * c[0]) * inv_det;
+    d[3][1] = (m[0][0] * c[3] - m[0][1] * c[1] + m[0][2] * c[0]) * inv_det;
+    d[3][2] = (-m[3][0] * s[3] + m[3][1] * s[1] - m[3][2] * s[0]) * inv_det;
+    d[3][3] = (m[2][0] * s[3] - m[2][1] * s[1] + m[2][2] * s[0]) * inv_det;
 }
 
 /** mat<4*4> dst = inv(mat<4*4> mat44) */
-static void mat_invert44(float *dst_mat44, const float *mat44) {
-    if (dst_mat44 == mat44) {
+static void mat_invert44(float *dst_mat, const float *mat) {
+    if (dst_mat == mat) {
         float tmp[16];
-        mat_invert44_no_alias(tmp, mat44);
+        mat_invert44_no_alias(tmp, mat);
         for (int i = 0; i < 16; i++)
-            dst_mat44[i] = tmp[i];
+            dst_mat[i] = tmp[i];
     } else
-        mat_invert44_no_alias(dst_mat44, mat44);
+        mat_invert44_no_alias(dst_mat, mat);
 }
 
 
@@ -338,122 +344,122 @@ static void matd_mul_vec(double *dst_vec, const double *mat_a, const double *vec
 }
 
 /** returns = det mat<3*3> mat33 */
-static double matd_determinant33(const double *mat33) {
+static double matd_determinant33(const double *mat) {
     return
-            mat33[0 * 3 + 0] * mat33[1 * 3 + 1] * mat33[2 * 3 + 2] +
-            mat33[0 * 3 + 1] * mat33[1 * 3 + 2] * mat33[2 * 3 + 0] +
-            mat33[0 * 3 + 2] * mat33[1 * 3 + 0] * mat33[2 * 3 + 1] -
-            mat33[0 * 3 + 0] * mat33[1 * 3 + 2] * mat33[2 * 3 + 1] -
-            mat33[0 * 3 + 1] * mat33[1 * 3 + 0] * mat33[2 * 3 + 2] -
-            mat33[0 * 3 + 2] * mat33[1 * 3 + 1] * mat33[2 * 3 + 0];
+            mat[0 * 3 + 0] * mat[1 * 3 + 1] * mat[2 * 3 + 2] +
+            mat[0 * 3 + 1] * mat[1 * 3 + 2] * mat[2 * 3 + 0] +
+            mat[0 * 3 + 2] * mat[1 * 3 + 0] * mat[2 * 3 + 1] -
+            mat[0 * 3 + 0] * mat[1 * 3 + 2] * mat[2 * 3 + 1] -
+            mat[0 * 3 + 1] * mat[1 * 3 + 0] * mat[2 * 3 + 2] -
+            mat[0 * 3 + 2] * mat[1 * 3 + 1] * mat[2 * 3 + 0];
 }
 
 /** returns = det mat<4*4> mat44 */
-static double matd_determinant44(const double *mat44) {
+static double matd_determinant44(const double *mat) {
     return
-            mat44[0 * 4 + 3] * mat44[1 * 4 + 2] * mat44[2 * 4 + 1] * mat44[3 * 4 + 0] -
-            mat44[0 * 4 + 2] * mat44[1 * 4 + 3] * mat44[2 * 4 + 1] * mat44[3 * 4 + 0] -
-            mat44[0 * 4 + 3] * mat44[1 * 4 + 1] * mat44[2 * 4 + 2] * mat44[3 * 4 + 0] +
-            mat44[0 * 4 + 1] * mat44[1 * 4 + 3] * mat44[2 * 4 + 2] * mat44[3 * 4 + 0] +
-            mat44[0 * 4 + 2] * mat44[1 * 4 + 1] * mat44[2 * 4 + 3] * mat44[3 * 4 + 0] -
-            mat44[0 * 4 + 1] * mat44[1 * 4 + 2] * mat44[2 * 4 + 3] * mat44[3 * 4 + 0] -
-            mat44[0 * 4 + 3] * mat44[1 * 4 + 2] * mat44[2 * 4 + 0] * mat44[3 * 4 + 1] +
-            mat44[0 * 4 + 2] * mat44[1 * 4 + 3] * mat44[2 * 4 + 0] * mat44[3 * 4 + 1] +
-            mat44[0 * 4 + 3] * mat44[1 * 4 + 0] * mat44[2 * 4 + 2] * mat44[3 * 4 + 1] -
-            mat44[0 * 4 + 0] * mat44[1 * 4 + 3] * mat44[2 * 4 + 2] * mat44[3 * 4 + 1] -
-            mat44[0 * 4 + 2] * mat44[1 * 4 + 0] * mat44[2 * 4 + 3] * mat44[3 * 4 + 1] +
-            mat44[0 * 4 + 0] * mat44[1 * 4 + 2] * mat44[2 * 4 + 3] * mat44[3 * 4 + 1] +
-            mat44[0 * 4 + 3] * mat44[1 * 4 + 1] * mat44[2 * 4 + 0] * mat44[3 * 4 + 2] -
-            mat44[0 * 4 + 1] * mat44[1 * 4 + 3] * mat44[2 * 4 + 0] * mat44[3 * 4 + 2] -
-            mat44[0 * 4 + 3] * mat44[1 * 4 + 0] * mat44[2 * 4 + 1] * mat44[3 * 4 + 2] +
-            mat44[0 * 4 + 0] * mat44[1 * 4 + 3] * mat44[2 * 4 + 1] * mat44[3 * 4 + 2] +
-            mat44[0 * 4 + 1] * mat44[1 * 4 + 0] * mat44[2 * 4 + 3] * mat44[3 * 4 + 2] -
-            mat44[0 * 4 + 0] * mat44[1 * 4 + 1] * mat44[2 * 4 + 3] * mat44[3 * 4 + 2] -
-            mat44[0 * 4 + 2] * mat44[1 * 4 + 1] * mat44[2 * 4 + 0] * mat44[3 * 4 + 3] +
-            mat44[0 * 4 + 1] * mat44[1 * 4 + 2] * mat44[2 * 4 + 0] * mat44[3 * 4 + 3] +
-            mat44[0 * 4 + 2] * mat44[1 * 4 + 0] * mat44[2 * 4 + 1] * mat44[3 * 4 + 3] -
-            mat44[0 * 4 + 0] * mat44[1 * 4 + 2] * mat44[2 * 4 + 1] * mat44[3 * 4 + 3] -
-            mat44[0 * 4 + 1] * mat44[1 * 4 + 0] * mat44[2 * 4 + 2] * mat44[3 * 4 + 3] +
-            mat44[0 * 4 + 0] * mat44[1 * 4 + 1] * mat44[2 * 4 + 2] * mat44[3 * 4 + 3];
+            mat[0 * 4 + 3] * mat[1 * 4 + 2] * mat[2 * 4 + 1] * mat[3 * 4 + 0] -
+            mat[0 * 4 + 2] * mat[1 * 4 + 3] * mat[2 * 4 + 1] * mat[3 * 4 + 0] -
+            mat[0 * 4 + 3] * mat[1 * 4 + 1] * mat[2 * 4 + 2] * mat[3 * 4 + 0] +
+            mat[0 * 4 + 1] * mat[1 * 4 + 3] * mat[2 * 4 + 2] * mat[3 * 4 + 0] +
+            mat[0 * 4 + 2] * mat[1 * 4 + 1] * mat[2 * 4 + 3] * mat[3 * 4 + 0] -
+            mat[0 * 4 + 1] * mat[1 * 4 + 2] * mat[2 * 4 + 3] * mat[3 * 4 + 0] -
+            mat[0 * 4 + 3] * mat[1 * 4 + 2] * mat[2 * 4 + 0] * mat[3 * 4 + 1] +
+            mat[0 * 4 + 2] * mat[1 * 4 + 3] * mat[2 * 4 + 0] * mat[3 * 4 + 1] +
+            mat[0 * 4 + 3] * mat[1 * 4 + 0] * mat[2 * 4 + 2] * mat[3 * 4 + 1] -
+            mat[0 * 4 + 0] * mat[1 * 4 + 3] * mat[2 * 4 + 2] * mat[3 * 4 + 1] -
+            mat[0 * 4 + 2] * mat[1 * 4 + 0] * mat[2 * 4 + 3] * mat[3 * 4 + 1] +
+            mat[0 * 4 + 0] * mat[1 * 4 + 2] * mat[2 * 4 + 3] * mat[3 * 4 + 1] +
+            mat[0 * 4 + 3] * mat[1 * 4 + 1] * mat[2 * 4 + 0] * mat[3 * 4 + 2] -
+            mat[0 * 4 + 1] * mat[1 * 4 + 3] * mat[2 * 4 + 0] * mat[3 * 4 + 2] -
+            mat[0 * 4 + 3] * mat[1 * 4 + 0] * mat[2 * 4 + 1] * mat[3 * 4 + 2] +
+            mat[0 * 4 + 0] * mat[1 * 4 + 3] * mat[2 * 4 + 1] * mat[3 * 4 + 2] +
+            mat[0 * 4 + 1] * mat[1 * 4 + 0] * mat[2 * 4 + 3] * mat[3 * 4 + 2] -
+            mat[0 * 4 + 0] * mat[1 * 4 + 1] * mat[2 * 4 + 3] * mat[3 * 4 + 2] -
+            mat[0 * 4 + 2] * mat[1 * 4 + 1] * mat[2 * 4 + 0] * mat[3 * 4 + 3] +
+            mat[0 * 4 + 1] * mat[1 * 4 + 2] * mat[2 * 4 + 0] * mat[3 * 4 + 3] +
+            mat[0 * 4 + 2] * mat[1 * 4 + 0] * mat[2 * 4 + 1] * mat[3 * 4 + 3] -
+            mat[0 * 4 + 0] * mat[1 * 4 + 2] * mat[2 * 4 + 1] * mat[3 * 4 + 3] -
+            mat[0 * 4 + 1] * mat[1 * 4 + 0] * mat[2 * 4 + 2] * mat[3 * 4 + 3] +
+            mat[0 * 4 + 0] * mat[1 * 4 + 1] * mat[2 * 4 + 2] * mat[3 * 4 + 3];
 }
 
 /** mat<3*3> dst = inv(mat<3*3> mat33) (dst != mat33) */
-static void matd_invert33_no_alias(double *dst_mat33, const double *mat33) {
-    double idet = 1.0 / matd_determinant33(mat33);
-    dst_mat33[0 * 3 + 0] = (mat33[1 * 3 + 1] * mat33[2 * 3 + 2] - mat33[1 * 3 + 2] * mat33[2 * 3 + 1]) * idet;
-    dst_mat33[0 * 3 + 1] = (mat33[0 * 3 + 2] * mat33[2 * 3 + 1] - mat33[0 * 3 + 1] * mat33[2 * 3 + 2]) * idet;
-    dst_mat33[0 * 3 + 2] = (mat33[0 * 3 + 1] * mat33[1 * 3 + 2] - mat33[0 * 3 + 2] * mat33[1 * 3 + 1]) * idet;
-    dst_mat33[1 * 3 + 0] = (mat33[1 * 3 + 2] * mat33[2 * 3 + 0] - mat33[1 * 3 + 0] * mat33[2 * 3 + 2]) * idet;
-    dst_mat33[1 * 3 + 1] = (mat33[0 * 3 + 0] * mat33[2 * 3 + 2] - mat33[0 * 3 + 2] * mat33[2 * 3 + 0]) * idet;
-    dst_mat33[1 * 3 + 2] = (mat33[0 * 3 + 2] * mat33[1 * 3 + 0] - mat33[0 * 3 + 0] * mat33[1 * 3 + 2]) * idet;
-    dst_mat33[2 * 3 + 0] = (mat33[1 * 3 + 0] * mat33[2 * 3 + 1] - mat33[1 * 3 + 1] * mat33[2 * 3 + 0]) * idet;
-    dst_mat33[2 * 3 + 1] = (mat33[0 * 3 + 1] * mat33[2 * 3 + 0] - mat33[0 * 3 + 0] * mat33[2 * 3 + 1]) * idet;
-    dst_mat33[2 * 3 + 2] = (mat33[0 * 3 + 0] * mat33[1 * 3 + 1] - mat33[0 * 3 + 1] * mat33[1 * 3 + 0]) * idet;
+static void matd_invert33_no_alias(double *dst_mat, const double *mat) {
+    double idet = 1.0 / matd_determinant33(mat);
+    dst_mat[0 * 3 + 0] = (mat[1 * 3 + 1] * mat[2 * 3 + 2] - mat[1 * 3 + 2] * mat[2 * 3 + 1]) * idet;
+    dst_mat[0 * 3 + 1] = (mat[0 * 3 + 2] * mat[2 * 3 + 1] - mat[0 * 3 + 1] * mat[2 * 3 + 2]) * idet;
+    dst_mat[0 * 3 + 2] = (mat[0 * 3 + 1] * mat[1 * 3 + 2] - mat[0 * 3 + 2] * mat[1 * 3 + 1]) * idet;
+    dst_mat[1 * 3 + 0] = (mat[1 * 3 + 2] * mat[2 * 3 + 0] - mat[1 * 3 + 0] * mat[2 * 3 + 2]) * idet;
+    dst_mat[1 * 3 + 1] = (mat[0 * 3 + 0] * mat[2 * 3 + 2] - mat[0 * 3 + 2] * mat[2 * 3 + 0]) * idet;
+    dst_mat[1 * 3 + 2] = (mat[0 * 3 + 2] * mat[1 * 3 + 0] - mat[0 * 3 + 0] * mat[1 * 3 + 2]) * idet;
+    dst_mat[2 * 3 + 0] = (mat[1 * 3 + 0] * mat[2 * 3 + 1] - mat[1 * 3 + 1] * mat[2 * 3 + 0]) * idet;
+    dst_mat[2 * 3 + 1] = (mat[0 * 3 + 1] * mat[2 * 3 + 0] - mat[0 * 3 + 0] * mat[2 * 3 + 1]) * idet;
+    dst_mat[2 * 3 + 2] = (mat[0 * 3 + 0] * mat[1 * 3 + 1] - mat[0 * 3 + 1] * mat[1 * 3 + 0]) * idet;
 }
 
 /** mat<3*3> dst = inv(mat<3*3> mat33) */
-static void matd_invert33(double *dst_mat33, const double *mat33) {
-    if (dst_mat33 == mat33) {
+static void matd_invert33(double *dst_mat, const double *mat) {
+    if (dst_mat == mat) {
         double tmp[9];
-        matd_invert33_no_alias(tmp, mat33);
+        matd_invert33_no_alias(tmp, mat);
         for (int i = 0; i < 9; i++)
-            dst_mat33[i] = tmp[i];
+            dst_mat[i] = tmp[i];
     } else
-        matd_invert33_no_alias(dst_mat33, mat33);
+        matd_invert33_no_alias(dst_mat, mat);
 }
 
 /** mat<4*4> dst = inv(mat<4*4> mat44) (dst != mat44) */
-static void matd_invert44_no_alias(double *dst_mat44, const double *mat44) {
+static void matd_invert44_no_alias(double *dst_mat, const double *mat) {
     // algorithm from https://github.com/datenwolf/linmath.h/blob/master/linmath.h
     double s[6];
     double c[6];
-    s[0] = mat44[0 * 4 + 0] * mat44[1 * 4 + 1] - mat44[1 * 4 + 0] * mat44[0 * 4 + 1];
-    s[1] = mat44[0 * 4 + 0] * mat44[1 * 4 + 2] - mat44[1 * 4 + 0] * mat44[0 * 4 + 2];
-    s[2] = mat44[0 * 4 + 0] * mat44[1 * 4 + 3] - mat44[1 * 4 + 0] * mat44[0 * 4 + 3];
-    s[3] = mat44[0 * 4 + 1] * mat44[1 * 4 + 2] - mat44[1 * 4 + 1] * mat44[0 * 4 + 2];
-    s[4] = mat44[0 * 4 + 1] * mat44[1 * 4 + 3] - mat44[1 * 4 + 1] * mat44[0 * 4 + 3];
-    s[5] = mat44[0 * 4 + 2] * mat44[1 * 4 + 3] - mat44[1 * 4 + 2] * mat44[0 * 4 + 3];
+    s[0] = mat[0 * 4 + 0] * mat[1 * 4 + 1] - mat[1 * 4 + 0] * mat[0 * 4 + 1];
+    s[1] = mat[0 * 4 + 0] * mat[1 * 4 + 2] - mat[1 * 4 + 0] * mat[0 * 4 + 2];
+    s[2] = mat[0 * 4 + 0] * mat[1 * 4 + 3] - mat[1 * 4 + 0] * mat[0 * 4 + 3];
+    s[3] = mat[0 * 4 + 1] * mat[1 * 4 + 2] - mat[1 * 4 + 1] * mat[0 * 4 + 2];
+    s[4] = mat[0 * 4 + 1] * mat[1 * 4 + 3] - mat[1 * 4 + 1] * mat[0 * 4 + 3];
+    s[5] = mat[0 * 4 + 2] * mat[1 * 4 + 3] - mat[1 * 4 + 2] * mat[0 * 4 + 3];
 
-    c[0] = mat44[2 * 4 + 0] * mat44[3 * 4 + 1] - mat44[3 * 4 + 0] * mat44[2 * 4 + 1];
-    c[1] = mat44[2 * 4 + 0] * mat44[3 * 4 + 2] - mat44[3 * 4 + 0] * mat44[2 * 4 + 2];
-    c[2] = mat44[2 * 4 + 0] * mat44[3 * 4 + 3] - mat44[3 * 4 + 0] * mat44[2 * 4 + 3];
-    c[3] = mat44[2 * 4 + 1] * mat44[3 * 4 + 2] - mat44[3 * 4 + 1] * mat44[2 * 4 + 2];
-    c[4] = mat44[2 * 4 + 1] * mat44[3 * 4 + 3] - mat44[3 * 4 + 1] * mat44[2 * 4 + 3];
-    c[5] = mat44[2 * 4 + 2] * mat44[3 * 4 + 3] - mat44[3 * 4 + 2] * mat44[2 * 4 + 3];
+    c[0] = mat[2 * 4 + 0] * mat[3 * 4 + 1] - mat[3 * 4 + 0] * mat[2 * 4 + 1];
+    c[1] = mat[2 * 4 + 0] * mat[3 * 4 + 2] - mat[3 * 4 + 0] * mat[2 * 4 + 2];
+    c[2] = mat[2 * 4 + 0] * mat[3 * 4 + 3] - mat[3 * 4 + 0] * mat[2 * 4 + 3];
+    c[3] = mat[2 * 4 + 1] * mat[3 * 4 + 2] - mat[3 * 4 + 1] * mat[2 * 4 + 2];
+    c[4] = mat[2 * 4 + 1] * mat[3 * 4 + 3] - mat[3 * 4 + 1] * mat[2 * 4 + 3];
+    c[5] = mat[2 * 4 + 2] * mat[3 * 4 + 3] - mat[3 * 4 + 2] * mat[2 * 4 + 3];
 
     /* Assumes it is invertible */
     double idet = 1.0f / (s[0] * c[5] - s[1] * c[4] + s[2] * c[3] + s[3] * c[2] - s[4] * c[1] + s[5] * c[0]);
 
-    dst_mat44[0 * 4 + 0] = (mat44[1 * 4 + 1] * c[5] - mat44[1 * 4 + 2] * c[4] + mat44[1 * 4 + 3] * c[3]) * idet;
-    dst_mat44[0 * 4 + 1] = (-mat44[0 * 4 + 1] * c[5] + mat44[0 * 4 + 2] * c[4] - mat44[0 * 4 + 3] * c[3]) * idet;
-    dst_mat44[0 * 4 + 2] = (mat44[3 * 4 + 1] * s[5] - mat44[3 * 4 + 2] * s[4] + mat44[3 * 4 + 3] * s[3]) * idet;
-    dst_mat44[0 * 4 + 3] = (-mat44[2 * 4 + 1] * s[5] + mat44[2 * 4 + 2] * s[4] - mat44[2 * 4 + 3] * s[3]) * idet;
+    dst_mat[0 * 4 + 0] = (mat[1 * 4 + 1] * c[5] - mat[1 * 4 + 2] * c[4] + mat[1 * 4 + 3] * c[3]) * idet;
+    dst_mat[0 * 4 + 1] = (-mat[0 * 4 + 1] * c[5] + mat[0 * 4 + 2] * c[4] - mat[0 * 4 + 3] * c[3]) * idet;
+    dst_mat[0 * 4 + 2] = (mat[3 * 4 + 1] * s[5] - mat[3 * 4 + 2] * s[4] + mat[3 * 4 + 3] * s[3]) * idet;
+    dst_mat[0 * 4 + 3] = (-mat[2 * 4 + 1] * s[5] + mat[2 * 4 + 2] * s[4] - mat[2 * 4 + 3] * s[3]) * idet;
 
-    dst_mat44[1 * 4 + 0] = (-mat44[1 * 4 + 0] * c[5] + mat44[1 * 4 + 2] * c[2] - mat44[1 * 4 + 3] * c[1]) * idet;
-    dst_mat44[1 * 4 + 1] = (mat44[0 * 4 + 0] * c[5] - mat44[0 * 4 + 2] * c[2] + mat44[0 * 4 + 3] * c[1]) * idet;
-    dst_mat44[1 * 4 + 2] = (-mat44[3 * 4 + 0] * s[5] + mat44[3 * 4 + 2] * s[2] - mat44[3 * 4 + 3] * s[1]) * idet;
-    dst_mat44[1 * 4 + 3] = (mat44[2 * 4 + 0] * s[5] - mat44[2 * 4 + 2] * s[2] + mat44[2 * 4 + 3] * s[1]) * idet;
+    dst_mat[1 * 4 + 0] = (-mat[1 * 4 + 0] * c[5] + mat[1 * 4 + 2] * c[2] - mat[1 * 4 + 3] * c[1]) * idet;
+    dst_mat[1 * 4 + 1] = (mat[0 * 4 + 0] * c[5] - mat[0 * 4 + 2] * c[2] + mat[0 * 4 + 3] * c[1]) * idet;
+    dst_mat[1 * 4 + 2] = (-mat[3 * 4 + 0] * s[5] + mat[3 * 4 + 2] * s[2] - mat[3 * 4 + 3] * s[1]) * idet;
+    dst_mat[1 * 4 + 3] = (mat[2 * 4 + 0] * s[5] - mat[2 * 4 + 2] * s[2] + mat[2 * 4 + 3] * s[1]) * idet;
 
-    dst_mat44[2 * 4 + 0] = (mat44[1 * 4 + 0] * c[4] - mat44[1 * 4 + 1] * c[2] + mat44[1 * 4 + 3] * c[0]) * idet;
-    dst_mat44[2 * 4 + 1] = (-mat44[0 * 4 + 0] * c[4] + mat44[0 * 4 + 1] * c[2] - mat44[0 * 4 + 3] * c[0]) * idet;
-    dst_mat44[2 * 4 + 2] = (mat44[3 * 4 + 0] * s[4] - mat44[3 * 4 + 1] * s[2] + mat44[3 * 4 + 3] * s[0]) * idet;
-    dst_mat44[2 * 4 + 3] = (-mat44[2 * 4 + 0] * s[4] + mat44[2 * 4 + 1] * s[2] - mat44[2 * 4 + 3] * s[0]) * idet;
+    dst_mat[2 * 4 + 0] = (mat[1 * 4 + 0] * c[4] - mat[1 * 4 + 1] * c[2] + mat[1 * 4 + 3] * c[0]) * idet;
+    dst_mat[2 * 4 + 1] = (-mat[0 * 4 + 0] * c[4] + mat[0 * 4 + 1] * c[2] - mat[0 * 4 + 3] * c[0]) * idet;
+    dst_mat[2 * 4 + 2] = (mat[3 * 4 + 0] * s[4] - mat[3 * 4 + 1] * s[2] + mat[3 * 4 + 3] * s[0]) * idet;
+    dst_mat[2 * 4 + 3] = (-mat[2 * 4 + 0] * s[4] + mat[2 * 4 + 1] * s[2] - mat[2 * 4 + 3] * s[0]) * idet;
 
-    dst_mat44[3 * 4 + 0] = (-mat44[1 * 4 + 0] * c[3] + mat44[1 * 4 + 1] * c[1] - mat44[1 * 4 + 2] * c[0]) * idet;
-    dst_mat44[3 * 4 + 1] = (mat44[0 * 4 + 0] * c[3] - mat44[0 * 4 + 1] * c[1] + mat44[0 * 4 + 2] * c[0]) * idet;
-    dst_mat44[3 * 4 + 2] = (-mat44[3 * 4 + 0] * s[3] + mat44[3 * 4 + 1] * s[1] - mat44[3 * 4 + 2] * s[0]) * idet;
-    dst_mat44[3 * 4 + 3] = (mat44[2 * 4 + 0] * s[3] - mat44[2 * 4 + 1] * s[1] + mat44[2 * 4 + 2] * s[0]) * idet;
+    dst_mat[3 * 4 + 0] = (-mat[1 * 4 + 0] * c[3] + mat[1 * 4 + 1] * c[1] - mat[1 * 4 + 2] * c[0]) * idet;
+    dst_mat[3 * 4 + 1] = (mat[0 * 4 + 0] * c[3] - mat[0 * 4 + 1] * c[1] + mat[0 * 4 + 2] * c[0]) * idet;
+    dst_mat[3 * 4 + 2] = (-mat[3 * 4 + 0] * s[3] + mat[3 * 4 + 1] * s[1] - mat[3 * 4 + 2] * s[0]) * idet;
+    dst_mat[3 * 4 + 3] = (mat[2 * 4 + 0] * s[3] - mat[2 * 4 + 1] * s[1] + mat[2 * 4 + 2] * s[0]) * idet;
 }
 
 /** mat<4*4> dst = inv(mat<4*4> mat44) */
-static void matd_invert44(double *dst_mat44, const double *mat44) {
-    if (dst_mat44 == mat44) {
+static void matd_invert44(double *dst_mat, const double *mat) {
+    if (dst_mat == mat) {
         double tmp[16];
-        matd_invert44_no_alias(tmp, mat44);
+        matd_invert44_no_alias(tmp, mat);
         for (int i = 0; i < 16; i++)
-            dst_mat44[i] = tmp[i];
+            dst_mat[i] = tmp[i];
     } else
-        matd_invert44_no_alias(dst_mat44, mat44);
+        matd_invert44_no_alias(dst_mat, mat);
 }
 
 
@@ -463,147 +469,147 @@ static void matd_invert44(double *dst_mat44, const double *mat44) {
 //
 
 //
-// Mat33
+// mat33
 //
 typedef struct {
     float m[9];
-} Mat33;
+} mat33;
 
 /** Mat33 = r==c ? 1 : 0 (identity) */
-static Mat33 mat33_eye() {
-    Mat33 res;
+static mat33 mat33_eye() {
+    mat33 res;
     mat_eye(res.m, 3);
     return res;
 }
 
 /** Mat33 = mat<3*3>^t */
-static Mat33 mat33_transpose(const float *mat) {
-    Mat33 res;
+static mat33 mat33_transpose(const float *mat) {
+    mat33 res;
     mat_transpose_no_alias(res.m, mat, 3);
     return res;
 }
 
 /** Mat33 = mat<3*3> a * mat<3*3> b */
-static Mat33 mat33_mul_mat(const float *mat_a, const float *mat_b) {
-    Mat33 res;
+static mat33 mat33_mul_mat(const float *mat_a, const float *mat_b) {
+    mat33 res;
     mat_mul_mat_no_alias(res.m, mat_a, mat_b, 3);
     return res;
 }
 
 /** Mat33 = inv(mat<3*3> mat33) */
-static Mat33 mat33_invert(const float *mat33) {
-    Mat33 res;
-    mat_invert33_no_alias(res.m, mat33);
+static mat33 mat33_invert(const float *mat) {
+    mat33 res;
+    mat_invert33_no_alias(res.m, mat);
     return res;
 }
 
 
 //
-// Mat33d
+// mat33d
 //
 typedef struct {
     double m[9];
-} Mat33d;
+} mat33d;
 
 /** Mat33 = r==c ? 1 : 0 (identity) */
-static Mat33d mat33d_eye() {
-    Mat33d res;
+static mat33d mat33d_eye() {
+    mat33d res;
     matd_eye(res.m, 3);
     return res;
 }
 
 /** Mat33 = mat<3*3>^t */
-static Mat33d mat33d_transpose(const double *mat) {
-    Mat33d res;
+static mat33d mat33d_transpose(const double *mat) {
+    mat33d res;
     matd_transpose_no_alias(res.m, mat, 3);
     return res;
 }
 
 /** Mat33 = mat<3*3> a * mat<3*3> b */
-static Mat33d mat33d_mul_mat(const double *mat_a, const double *mat_b) {
-    Mat33d res;
+static mat33d mat33d_mul_mat(const double *mat_a, const double *mat_b) {
+    mat33d res;
     matd_mul_mat_no_alias(res.m, mat_a, mat_b, 3);
     return res;
 }
 
 /** Mat33 = inv(mat<3*3> mat33) */
-static Mat33d mat33d_invert(const double *mat33) {
-    Mat33d res;
-    matd_invert33_no_alias(res.m, mat33);
+static mat33d mat33d_invert(const double *mat) {
+    mat33d res;
+    matd_invert33_no_alias(res.m, mat);
     return res;
 }
 
 
 
 //
-// Mat44
+// mat44
 //
 typedef struct {
     float m[16];
-} Mat44;
+} mat44;
 
 /** Mat44 = r==c ? 1 : 0 (identity) */
-static Mat44 mat44_eye() {
-    Mat44 res;
+static mat44 mat44_eye() {
+    mat44 res;
     mat_eye(res.m, 4);
     return res;
 }
 
 /** Mat44 = mat<4*4>^t */
-static Mat44 mat44_transpose(const float *mat) {
-    Mat44 res;
+static mat44 mat44_transpose(const float *mat) {
+    mat44 res;
     mat_transpose_no_alias(res.m, mat, 4);
     return res;
 }
 
 /** Mat44 = mat<4*4> a * mat<4*4> b */
-static Mat44 mat44_mul_mat(const float *mat_a, const float *mat_b) {
-    Mat44 res;
+static mat44 mat44_mul_mat(const float *mat_a, const float *mat_b) {
+    mat44 res;
     mat_mul_mat_no_alias(res.m, mat_a, mat_b, 4);
     return res;
 }
 
 /** Mat44 = inv(mat<4*4> mat44) */
-static Mat44 mat44_invert(const float *mat44) {
-    Mat44 res;
-    mat_invert44_no_alias(res.m, mat44);
+static mat44 mat44_invert(const float *mat) {
+    mat44 res;
+    mat_invert44_no_alias(res.m, mat);
     return res;
 }
 
 
 
 //
-// Mat44d
+// mat44d
 //
 typedef struct {
     double m[16];
-} Mat44d;
+} mat44d;
 
 /** Mat44 = r==c ? 1 : 0 (identity) */
-static Mat44d mat44d_eye() {
-    Mat44d res;
+static mat44d mat44d_eye() {
+    mat44d res;
     matd_eye(res.m, 4);
     return res;
 }
 
 /** Mat44 = mat<4*4>^t */
-static Mat44d mat44d_transpose(const double *mat) {
-    Mat44d res;
+static mat44d mat44d_transpose(const double *mat) {
+    mat44d res;
     matd_transpose_no_alias(res.m, mat, 4);
     return res;
 }
 
 /** Mat44 = mat<4*4> a * mat<4*4> b */
-static Mat44d mat44d_mul_mat(const double *mat_a, const double *mat_b) {
-    Mat44d res;
+static mat44d mat44d_mul_mat(const double *mat_a, const double *mat_b) {
+    mat44d res;
     matd_mul_mat_no_alias(res.m, mat_a, mat_b, 4);
     return res;
 }
 
 /** Mat44 = inv(mat<4*4> mat44) */
-static Mat44d mat44d_invert(const double *mat44) {
-    Mat44d res;
-    matd_invert44_no_alias(res.m, mat44);
+static mat44d mat44d_invert(const double *mat) {
+    mat44d res;
+    matd_invert44_no_alias(res.m, mat);
     return res;
 }
 
