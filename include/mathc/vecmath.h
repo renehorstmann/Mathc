@@ -168,8 +168,14 @@ static float vec_norm(const float *vec, int n) {
 }
 
 /** dst = vec / norm(vec) */
-static void vec_normalize(float *dst_vec, const float *vec, int n) {
+static void vec_normalize_unsafe(float *dst_vec, const float *vec, int n) {
     vec_scale_sca(dst_vec, vec, 1.0f / vec_norm(vec, n), n);
+}
+
+/** dst = vec / (norm(vec) > 0 ? norm(vec) : 1) */
+static void vec_normalize(float *dst_vec, const float *vec, int n) {
+    float norm = vec_norm(vec, n);
+    vec_scale_sca(dst_vec, vec, 1.0f / (norm > 0 ? norm : 1), n);
 }
 
 
@@ -249,8 +255,14 @@ static double vecd_norm(const double *vec, int n) {
 }
 
 /** dst = vec / norm(vec) */
+static void vecd_normalize_unsafe(double *dst_vec, const double *vec, int n) {
+    vecd_scale_sca(dst_vec, vec, 1.0 / vecd_norm(vec, n), n);
+}
+
+/** dst = vec / (norm(vec) > 0 ? norm(vec) : 1) */
 static void vecd_normalize(double *dst_vec, const double *vec, int n) {
-    vecd_scale_sca(dst_vec, vec, 1.0f / vecd_norm(vec, n), n);
+    double norm = vecd_norm(vec, n);
+    vecd_scale_sca(dst_vec, vec, 1.0 / (norm > 0 ? norm : 1), n);
 }
 
 
@@ -322,8 +334,14 @@ static vec3 vec3_cross(const float *vec_a, const float *vec_b) {
 }
 
 /** dst = vec / norm(vec) */
-static vec3 vec3_normalize(const float *vec) {
+static vec3 vec3_normalize_unsafe(const float *vec) {
     return vec3_scale_sca(vec, 1.0f / vec_norm(vec, 3));
+}
+
+/** dst = vec / (norm(vec) > 0 ? norm(vec) : 1) */
+static vec3 vec3_normalize(const float *vec) {
+    float norm = vec_norm(vec, 3);
+    return vec3_scale_sca(vec, 1.0f / (norm > 0 ? norm : 1));
 }
 
 
@@ -391,8 +409,14 @@ static vec3d vec3d_cross(const double *vec_a, const double *vec_b) {
 }
 
 /** dst = vec / norm(vec) */
-static vec3d vec3d_normalize(const double *vec) {
+static vec3d vec3d_normalize_unsafe(const double *vec) {
     return vec3d_scale_sca(vec, 1.0f / vecd_norm(vec, 3));
+}
+
+/** dst = vec / (norm(vec) > 0 ? norm(vec) : 1) */
+static vec3d vec3d_normalize(const double *vec) {
+    double norm = vecd_norm(vec, 3);
+    return vec3d_scale_sca(vec, 1.0 / (norm > 0 ? norm : 1));
 }
 
 
@@ -460,8 +484,14 @@ static vec4 vec4_cross(const float *vec_a, const float *vec_b) {
 }
 
 /** dst = vec / norm(vec) */
-static vec4 vec4_normalize(const float *vec) {
+static vec4 vec4_normalize_unsafe(const float *vec) {
     return vec4_scale_sca(vec, 1.0f / vec_norm(vec, 4));
+}
+
+/** dst = vec / (norm(vec) > 0 ? norm(vec) : 1) */
+static vec4 vec4_normalize(const float *vec) {
+    float norm = vec_norm(vec, 4);
+    return vec4_scale_sca(vec, 1.0f / (norm > 0 ? norm : 1));
 }
 
 
@@ -529,8 +559,14 @@ static vec4d vec4d_cross(const double *vec_a, const double *vec_b) {
 }
 
 /** dst = vec / norm(vec) */
-static vec4d vec4d_normalize(const double *vec) {
+static vec4d vec4d_normalize_unsafe(const double *vec) {
     return vec4d_scale_sca(vec, 1.0f / vecd_norm(vec, 4));
+}
+
+/** dst = vec / (norm(vec) > 0 ? norm(vec) : 1) */
+static vec4d vec4d_normalize(const double *vec) {
+    double norm = vecd_norm(vec, 4);
+    return vec4d_scale_sca(vec, 1.0 / (norm > 0 ? norm : 1));
 }
 
 #endif //UTILC_VECMATH_H
