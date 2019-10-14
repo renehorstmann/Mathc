@@ -153,13 +153,13 @@ static float vec_dot(const float *vec_a, const float *vec_b, int n) {
     return dot;
 }
 
-/** vec3 dst = a cross b, all values after the third will be set to 1 */
+/** vec3 dst = a cross b, all values after the third will be set to 0 */
 static void vec_cross(float *dst_vec, const float *vec_a, const float *vec_b, int n) {
     dst_vec[0] = vec_a[1] * vec_b[2] - vec_a[2] * vec_b[1];
     dst_vec[1] = vec_a[2] * vec_b[0] - vec_a[0] * vec_b[2];
     dst_vec[2] = vec_a[0] * vec_b[1] - vec_a[1] * vec_b[0];
     for (int i = 3; i < n; i++)
-        dst_vec[i] = 1;
+        dst_vec[i] = 0;
 }
 
 /** returns norm2 of a float vector */
@@ -240,13 +240,13 @@ static double vecd_dot(const double *vec_a, const double *vec_b, int n) {
     return dot;
 }
 
-/** vec3 dst = a cross b, all values after the third will be set to 1 */
+/** vec3 dst = a cross b, all values after the third will be set to 0 */
 static void vecd_cross(double *dst_vec, const double *vec_a, const double *vec_b, int n) {
     dst_vec[0] = vec_a[1] * vec_b[2] - vec_a[2] * vec_b[1];
     dst_vec[1] = vec_a[2] * vec_b[0] - vec_a[0] * vec_b[2];
     dst_vec[2] = vec_a[0] * vec_b[1] - vec_a[1] * vec_b[0];
     for (int i = 3; i < n; i++)
-        dst_vec[i] = 1;
+        dst_vec[i] = 0;
 }
 
 /** returns norm2 of a double vector */
