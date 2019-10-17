@@ -100,8 +100,8 @@ static void mat_mul_mat(float *dst_mat, const float *mat_a, const float *mat_b, 
 }
 
 /** vec<n> dst = mat<n*n> a * vec<n> b  (restrict data) */
-static void mat_mul_vec_no_alias(float * restrict dst_vec, const float * restrict mat_a,
-        const float * restrict vec_b, int n) {
+static void mat_mul_vec_no_alias(float *restrict dst_vec, const float *restrict mat_a,
+                                 const float *restrict vec_b, int n) {
     for (int r = 0; r < n; r++) {
         dst_vec[r] = 0;
         for (int c = 0; c < n; c++) {
@@ -111,9 +111,28 @@ static void mat_mul_vec_no_alias(float * restrict dst_vec, const float * restric
 }
 
 /** vec<n> dst = mat<n*n> a * vec<n> b */
-static void mat_mul_vec(float * dst_vec, const float * mat_a, const float * vec_b, int n) {
+static void mat_mul_vec(float *dst_vec, const float *mat_a, const float *vec_b, int n) {
     float tmp[n];
     mat_mul_vec_no_alias(tmp, mat_a, vec_b, n);
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = tmp[i];
+}
+
+/** vec<n> dst = mat<n*n> a * vec<n> b  (restrict data) */
+static void vec_mul_mat_no_alias(float *restrict dst_vec, const float *restrict vec_a,
+                                 const float *restrict mat_b, int n) {
+    for (int c = 0; c < n; c++) {
+        dst_vec[c] = 0;
+        for (int r = 0; r < n; r++) {
+            dst_vec[c] += mat_b[r * n + c] * vec_a[r];
+        }
+    }
+}
+
+/** vec<n> dst = mat<n*n> a * vec<n> b */
+static void vec_mul_mat(float *dst_vec, const float *vec_a, const float *mat_b, int n) {
+    float tmp[n];
+    vec_mul_mat_no_alias(tmp, vec_a, mat_b, n);
     for (int i = 0; i < n; i++)
         dst_vec[i] = tmp[i];
 }
@@ -326,8 +345,8 @@ static void matd_mul_mat(double *dst_mat, const double *mat_a, const double *mat
 }
 
 /** vec<n> dst = mat<n*n> a * vec<n> b (restrict data)*/
-static void matd_mul_vec_no_alias(double * restrict dst_vec, const double * restrict mat_a,
-                                  const double * restrict vec_b, int n) {
+static void matd_mul_vec_no_alias(double *restrict dst_vec, const double *restrict mat_a,
+                                  const double *restrict vec_b, int n) {
     for (int r = 0; r < n; r++) {
         for (int c = 0; c < n; c++) {
             dst_vec[r] = 0;
@@ -338,9 +357,28 @@ static void matd_mul_vec_no_alias(double * restrict dst_vec, const double * rest
 }
 
 /** vec<n> dst = mat<n*n> a * vec<n> b */
-static void matd_mul_vec(double * dst_vec, const double * mat_a, const double * vec_b, int n) {
+static void matd_mul_vec(double *dst_vec, const double *mat_a, const double *vec_b, int n) {
     double tmp[n];
     matd_mul_vec_no_alias(tmp, mat_a, vec_b, n);
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = tmp[i];
+}
+
+/** vec<n> dst = mat<n*n> a * vec<n> b  (restrict data) */
+static void vecd_mul_mat_no_alias(double *restrict dst_vec, const double *restrict vec_a,
+                                  const double *restrict mat_b, int n) {
+    for (int c = 0; c < n; c++) {
+        dst_vec[c] = 0;
+        for (int r = 0; r < n; r++) {
+            dst_vec[c] += mat_b[r * n + c] * vec_a[r];
+        }
+    }
+}
+
+/** vec<n> dst = mat<n*n> a * vec<n> b */
+static void vecd_mul_mat(double *dst_vec, const double *vec_a, const double *mat_b, int n) {
+    double tmp[n];
+    vecd_mul_mat_no_alias(tmp, vec_a, mat_b, n);
     for (int i = 0; i < n; i++)
         dst_vec[i] = tmp[i];
 }
