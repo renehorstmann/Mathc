@@ -62,8 +62,8 @@ static void mat_col_set(float *dst_mat, float scalar, int col, int n) {
         dst_mat[r * n + col] = scalar;
 }
 
-/** mat<n*n> dst = mat<n*n>^t (dst != mat) */
-static void mat_transpose_no_alias(float *dst_mat, const float *mat, int n) {
+/** mat<n*n> dst = mat<n*n>^t  (restrict data) */
+static void mat_transpose_no_alias(float *restrict dst_mat, const float *restrict mat, int n) {
     for (int r = 0; r < n; r++) {
         for (int c = 0; c < n; c++) {
             dst_mat[r * n + c] = mat[c * n + r];
@@ -73,17 +73,15 @@ static void mat_transpose_no_alias(float *dst_mat, const float *mat, int n) {
 
 /** mat<n*n> dst = mat<n*n>^t */
 static void mat_transpose(float *dst_mat, const float *mat, int n) {
-    if (dst_mat == mat) {
-        float tmp[n * n];
-        mat_transpose_no_alias(tmp, mat, n);
-        for (int i = 0; i < n * n; i++)
-            dst_mat[i] = tmp[i];
-    } else
-        mat_transpose_no_alias(dst_mat, mat, n);
+    float tmp[n * n];
+    mat_transpose_no_alias(tmp, mat, n);
+    for (int i = 0; i < n * n; i++)
+        dst_mat[i] = tmp[i];
 }
 
-/** mat<n*n> dst = mat<n*n> a * mat<n*n> b (dst != a && dst != b) */
-static void mat_mul_mat_no_alias(float *dst_mat, const float *mat_a, const float *mat_b, int n) {
+/** mat<n*n> dst = mat<n*n> a * mat<n*n> b  (restrict data) */
+static void mat_mul_mat_no_alias(float *restrict dst_mat, const float *restrict mat_a,
+                                 const float *restrict mat_b, int n) {
     for (int r = 0; r < n; r++) {
         for (int c = 0; c < n; c++) {
             dst_mat[r * n + c] = 0;
@@ -95,23 +93,29 @@ static void mat_mul_mat_no_alias(float *dst_mat, const float *mat_a, const float
 
 /** mat<n*n> dst = mat<n*n> a * mat<n*n> b */
 static void mat_mul_mat(float *dst_mat, const float *mat_a, const float *mat_b, int n) {
-    if (dst_mat == mat_a || dst_mat == mat_b) {
-        float tmp[n * n];
-        mat_mul_mat_no_alias(tmp, mat_a, mat_b, n);
-        for (int i = 0; i < n * n; i++)
-            dst_mat[i] = tmp[i];
-    } else
-        mat_mul_mat_no_alias(dst_mat, mat_a, mat_b, n);
+    float tmp[n * n];
+    mat_mul_mat_no_alias(tmp, mat_a, mat_b, n);
+    for (int i = 0; i < n * n; i++)
+        dst_mat[i] = tmp[i];
 }
 
-/** vec<n> dst = mat<n*n> a * vec<n> b */
-static void mat_mul_vec(float *dst_vec, const float *mat_a, const float *vec_b, int n) {
+/** vec<n> dst = mat<n*n> a * vec<n> b  (restrict data) */
+static void mat_mul_vec_no_alias(float * restrict dst_vec, const float * restrict mat_a, 
+        const float * restrict vec_b, int n) {
     for (int r = 0; r < n; r++) {
         dst_vec[r] = 0;
         for (int c = 0; c < n; c++) {
             dst_vec[r] += mat_a[r * n + c] * vec_b[c];
         }
     }
+}
+
+/** vec<n> dst = mat<n*n> a * vec<n> b */
+static void mat_mul_vec(float * dst_vec, const float * mat_a, const float * vec_b, int n) {
+    float tmp[n];
+    mat_mul_vec_no_alias(tmp, mat_a, vec_b, n);
+    for (int i = 0; i < n * n; i++)
+        dst_vec[i] = tmp[i];
 }
 
 /** returns = det mat<3*3> mat33 */
@@ -156,8 +160,8 @@ static float mat_determinant44(const float *mat) {
             m[0][0] * m[1][1] * m[2][2] * m[3][3];
 }
 
-/** mat<3*3> dst = inv(mat<3*3> mat33) (dst != mat33) */
-static void mat_invert33_no_alias(float *dst_mat, const float *mat) {
+/** mat<3*3> dst = inv(mat<3*3> mat33)  (restrict data) */
+static void mat_invert33_no_alias(float *restrict dst_mat, const float *restrict mat) {
     float inv_det = 1.0f / mat_determinant33(mat);
     const float (*m)[3] = (const float (*)[3]) mat;
     float (*d)[3] = (float (*)[3]) dst_mat;
@@ -174,17 +178,14 @@ static void mat_invert33_no_alias(float *dst_mat, const float *mat) {
 
 /** mat<3*3> dst = inv(mat<3*3> mat33) */
 static void mat_invert33(float *dst_mat, const float *mat) {
-    if (dst_mat == mat) {
-        float tmp[9];
-        mat_invert33_no_alias(tmp, mat);
-        for (int i = 0; i < 9; i++)
-            dst_mat[i] = tmp[i];
-    } else
-        mat_invert33_no_alias(dst_mat, mat);
+    float tmp[9];
+    mat_invert33_no_alias(tmp, mat);
+    for (int i = 0; i < 9; i++)
+        dst_mat[i] = tmp[i];
 }
 
-/** mat<4*4> dst = inv(mat<4*4> mat44) (dst != mat44) */
-static void mat_invert44_no_alias(float *dst_mat, const float *mat) {
+/** mat<4*4> dst = inv(mat<4*4> mat44)  (restrict data) */
+static void mat_invert44_no_alias(float *restrict dst_mat, const float *restrict mat) {
     // algorithm from https://github.com/datenwolf/linmath.h/blob/master/linmath.h
     float s[6];
     float c[6];
@@ -230,13 +231,10 @@ static void mat_invert44_no_alias(float *dst_mat, const float *mat) {
 
 /** mat<4*4> dst = inv(mat<4*4> mat44) */
 static void mat_invert44(float *dst_mat, const float *mat) {
-    if (dst_mat == mat) {
-        float tmp[16];
-        mat_invert44_no_alias(tmp, mat);
-        for (int i = 0; i < 16; i++)
-            dst_mat[i] = tmp[i];
-    } else
-        mat_invert44_no_alias(dst_mat, mat);
+    float tmp[16];
+    mat_invert44_no_alias(tmp, mat);
+    for (int i = 0; i < 16; i++)
+        dst_mat[i] = tmp[i];
 }
 
 
@@ -290,8 +288,8 @@ static void matd_col_set(double *dst_mat, double scalar, int col, int n) {
         dst_mat[r * n + col] = scalar;
 }
 
-/** mat<n*n> dst = mat<n*n>^t (dst != mat) */
-static void matd_transpose_no_alias(double *dst_mat, const double *mat, int n) {
+/** mat<n*n> dst = mat<n*n>^t  (restrict data) */
+static void matd_transpose_no_alias(double *restrict dst_mat, const double *restrict mat, int n) {
     for (int r = 0; r < n; r++) {
         for (int c = 0; c < n; c++) {
             dst_mat[r * n + c] = mat[c * n + r];
@@ -301,17 +299,15 @@ static void matd_transpose_no_alias(double *dst_mat, const double *mat, int n) {
 
 /** mat<n*n> dst = mat<n*n>^t */
 static void matd_transpose(double *dst_mat, const double *mat, int n) {
-    if (dst_mat == mat) {
-        double tmp[n * n];
-        matd_transpose_no_alias(tmp, mat, n);
-        for (int i = 0; i < n * n; i++)
-            dst_mat[i] = tmp[i];
-    } else
-        matd_transpose_no_alias(dst_mat, mat, n);
+    double tmp[n * n];
+    matd_transpose_no_alias(tmp, mat, n);
+    for (int i = 0; i < n * n; i++)
+        dst_mat[i] = tmp[i];
 }
 
-/** mat<n*n> dst = mat<n*n> a * mat<n*n> b (dst != a && dst != b) */
-static void matd_mul_mat_no_alias(double *dst_mat, const double *mat_a, const double *mat_b, int n) {
+/** mat<n*n> dst = mat<n*n> a * mat<n*n> b (restrict data) */
+static void matd_mul_mat_no_alias(double *restrict dst_mat, const double *restrict mat_a,
+                                  const double *restrict mat_b, int n) {
     for (int r = 0; r < n; r++) {
         for (int c = 0; c < n; c++) {
             dst_mat[r * n + c] = 0;
@@ -323,17 +319,15 @@ static void matd_mul_mat_no_alias(double *dst_mat, const double *mat_a, const do
 
 /** mat<n*n> dst = mat<n*n> a * mat<n*n> b */
 static void matd_mul_mat(double *dst_mat, const double *mat_a, const double *mat_b, int n) {
-    if (dst_mat == mat_a || dst_mat == mat_b) {
-        double tmp[n * n];
-        matd_mul_mat_no_alias(tmp, mat_a, mat_b, n);
-        for (int i = 0; i < n * n; i++)
-            dst_mat[i] = tmp[i];
-    } else
-        matd_mul_mat_no_alias(dst_mat, mat_a, mat_b, n);
+    double tmp[n * n];
+    matd_mul_mat_no_alias(tmp, mat_a, mat_b, n);
+    for (int i = 0; i < n * n; i++)
+        dst_mat[i] = tmp[i];
 }
 
-/** vec<n> dst = mat<n*n> a * vec<n> b */
-static void matd_mul_vec(double *dst_vec, const double *mat_a, const double *vec_b, int n) {
+/** vec<n> dst = mat<n*n> a * vec<n> b (restrict data)*/
+static void matd_mul_vec_no_alias(double * restrict dst_vec, const double * restrict mat_a,
+                                  const double * restrict vec_b, int n) {
     for (int r = 0; r < n; r++) {
         for (int c = 0; c < n; c++) {
             dst_vec[r] = 0;
@@ -341,6 +335,14 @@ static void matd_mul_vec(double *dst_vec, const double *mat_a, const double *vec
                 dst_vec[r] += mat_a[r * n + c] * vec_b[c];
         }
     }
+}
+
+/** vec<n> dst = mat<n*n> a * vec<n> b */
+static void matd_mul_vec(double * dst_vec, const double * mat_a, const double * vec_b, int n) {
+    double tmp[n];
+    matd_mul_vec_no_alias(tmp, mat_a, vec_b, n);
+    for (int i = 0; i < n * n; i++)
+        dst_vec[i] = tmp[i];
 }
 
 /** returns = det mat<3*3> mat33 */
@@ -383,8 +385,8 @@ static double matd_determinant44(const double *mat) {
             mat[0 * 4 + 0] * mat[1 * 4 + 1] * mat[2 * 4 + 2] * mat[3 * 4 + 3];
 }
 
-/** mat<3*3> dst = inv(mat<3*3> mat33) (dst != mat33) */
-static void matd_invert33_no_alias(double *dst_mat, const double *mat) {
+/** mat<3*3> dst = inv(mat<3*3> mat33) (restrict data) */
+static void matd_invert33_no_alias(double *restrict dst_mat, const double *restrict mat) {
     double idet = 1.0 / matd_determinant33(mat);
     dst_mat[0 * 3 + 0] = (mat[1 * 3 + 1] * mat[2 * 3 + 2] - mat[1 * 3 + 2] * mat[2 * 3 + 1]) * idet;
     dst_mat[0 * 3 + 1] = (mat[0 * 3 + 2] * mat[2 * 3 + 1] - mat[0 * 3 + 1] * mat[2 * 3 + 2]) * idet;
@@ -399,17 +401,14 @@ static void matd_invert33_no_alias(double *dst_mat, const double *mat) {
 
 /** mat<3*3> dst = inv(mat<3*3> mat33) */
 static void matd_invert33(double *dst_mat, const double *mat) {
-    if (dst_mat == mat) {
-        double tmp[9];
-        matd_invert33_no_alias(tmp, mat);
-        for (int i = 0; i < 9; i++)
-            dst_mat[i] = tmp[i];
-    } else
-        matd_invert33_no_alias(dst_mat, mat);
+    double tmp[9];
+    matd_invert33_no_alias(tmp, mat);
+    for (int i = 0; i < 9; i++)
+        dst_mat[i] = tmp[i];
 }
 
-/** mat<4*4> dst = inv(mat<4*4> mat44) (dst != mat44) */
-static void matd_invert44_no_alias(double *dst_mat, const double *mat) {
+/** mat<4*4> dst = inv(mat<4*4> mat44)  (restrict data) */
+static void matd_invert44_no_alias(double *restrict dst_mat, const double *restrict mat) {
     // algorithm from https://github.com/datenwolf/linmath.h/blob/master/linmath.h
     double s[6];
     double c[6];
@@ -453,13 +452,10 @@ static void matd_invert44_no_alias(double *dst_mat, const double *mat) {
 
 /** mat<4*4> dst = inv(mat<4*4> mat44) */
 static void matd_invert44(double *dst_mat, const double *mat) {
-    if (dst_mat == mat) {
-        double tmp[16];
-        matd_invert44_no_alias(tmp, mat);
-        for (int i = 0; i < 16; i++)
-            dst_mat[i] = tmp[i];
-    } else
-        matd_invert44_no_alias(dst_mat, mat);
+    double tmp[16];
+    matd_invert44_no_alias(tmp, mat);
+    for (int i = 0; i < 16; i++)
+        dst_mat[i] = tmp[i];
 }
 
 
@@ -540,7 +536,6 @@ static mat33d mat33d_invert(const double *mat) {
 }
 
 
-
 //
 // mat44
 //
@@ -575,7 +570,6 @@ static mat44 mat44_invert(const float *mat) {
     mat_invert44_no_alias(res.m, mat);
     return res;
 }
-
 
 
 //
