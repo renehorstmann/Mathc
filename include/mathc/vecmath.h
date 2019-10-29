@@ -27,6 +27,12 @@ for (int i = 0; i < (n); i++) {\
     (out_set)[i] = (scalar);\
 }
 
+/** vec<n> res_i = -vec_i */
+#define VecNeg(out_neg, vec, n)\
+for (int i = 0; i < (n), i++) {\
+    (out_neg)[i] = -(vec);\
+}
+
 /** vec<n> res_i = a_i + b_i */
 #define VecAddVec(out_vec, vec_a, vec_b, n)\
 for (int i = 0; i < (n); i++) {\
@@ -105,6 +111,12 @@ static void vec_copy(float *dst_vec, const float *vec, int n) {
 static void vec_set(float *dst_vec, float scalar, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = scalar;
+}
+
+/** vec<n> dst_i = -vec_i */
+static void vec_neg(float *dst_vec, const float *vec, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = -vec[i];
 }
 
 /** vec<n> dst_i = a_i + b_i */
@@ -192,6 +204,12 @@ static void vecd_copy(double *dst_vec, const double *vec, int n) {
 static void vecd_set(double *dst_vec, double scalar, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = scalar;
+}
+
+/** vec<n> dst_i = -vec_i */
+static void vecd_neg(double *dst_vec, const double *vec, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = -vec[i];
 }
 
 /** vec<n> dst_i = a_i + b_i */
@@ -291,6 +309,13 @@ static vec3 vec3_set(float scalar) {
     return res;
 }
 
+/** vec<n> dst_i = -vec_i */
+static vec3 vec3_neg(const float *vec) {
+    vec3 res;
+    vec_neg(res.v, vec, 3);
+    return res;
+}
+
 /** vec<n> dst_i = a_i + b_i */
 static vec3 vec3_add_vec(const float *vec_a, const float *vec_b) {
     vec3 res;
@@ -363,6 +388,13 @@ static vec3d vec3d_copy(const double *vec) {
 static vec3d vec3d_set(double scalar) {
     vec3d res;
     vecd_set(res.v, scalar, 3);
+    return res;
+}
+
+/** vec<n> dst_i = -vec_i */
+static vec3d vec3d_neg(const double *vec) {
+    vec3d res;
+    vecd_neg(res.v, vec, 3);
     return res;
 }
 
@@ -441,6 +473,13 @@ static vec4 vec4_set(float scalar) {
     return res;
 }
 
+/** vec<n> dst_i = -vec_i */
+static vec4 vec4_neg(const float *vec) {
+    vec4 res;
+    vec_neg(res.v, vec, 4);
+    return res;
+}
+
 /** vec<n> dst_i = a_i + b_i */
 static vec4 vec4_add_vec(const float *vec_a, const float *vec_b) {
     vec4 res;
@@ -513,6 +552,13 @@ static vec4d vec4d_copy(const double *vec) {
 static vec4d vec4d_set(double scalar) {
     vec4d res;
     vecd_set(res.v, scalar, 4);
+    return res;
+}
+
+/** vec<n> dst_i = -vec_i */
+static vec4d vec4d_neg(const double_t *vec) {
+    vec4d res;
+    vecd_neg(res.v, vec, 4);
     return res;
 }
 
