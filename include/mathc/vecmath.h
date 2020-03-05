@@ -291,7 +291,7 @@ static void vecd_normalize(double *dst_vec, const double *vec, int n) {
 //
 // vec3
 //
-typedef struct {
+typedef struct vec3 {
     float v[3];
 } vec3;
 
@@ -373,7 +373,7 @@ static vec3 vec3_normalize(const float *vec) {
 //
 // vec3d
 //
-typedef struct {
+typedef struct vec3d {
     double v[3];
 } vec3d;
 
@@ -455,7 +455,7 @@ static vec3d vec3d_normalize(const double *vec) {
 //
 // vec4
 //
-typedef struct {
+typedef struct vec4 {
     float v[4];
 } vec4;
 
@@ -537,7 +537,7 @@ static vec4 vec4_normalize(const float *vec) {
 //
 // vec4d
 //
-typedef struct {
+typedef struct vec4d {
     double v[4];
 } vec4d;
 

@@ -505,7 +505,7 @@ static void matd_invert44(double *dst_mat, const double *mat) {
 //
 // mat33
 //
-typedef struct {
+typedef struct mat33 {
     float m[9];
 } mat33;
 
@@ -541,7 +541,7 @@ static mat33 mat33_invert(const float *mat) {
 //
 // mat33d
 //
-typedef struct {
+typedef struct mat33d {
     double m[9];
 } mat33d;
 
@@ -577,7 +577,7 @@ static mat33d mat33d_invert(const double *mat) {
 //
 // mat44
 //
-typedef struct {
+typedef struct mat44 {
     float m[16];
 } mat44;
 
@@ -613,7 +613,7 @@ static mat44 mat44_invert(const float *mat) {
 //
 // mat44d
 //
-typedef struct {
+typedef struct mat44d {
     double m[16];
 } mat44d;
 
