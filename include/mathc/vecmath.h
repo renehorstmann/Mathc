@@ -1,6 +1,11 @@
 #ifndef UTILC_VECMATH_H
 #define UTILC_VECMATH_H
 
+// restrict
+#ifdef __cplusplus
+#define restrict __restrict
+#endif
+
 #include <math.h>   //sqrt(f)
 
 //

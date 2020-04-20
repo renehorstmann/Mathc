@@ -1,6 +1,11 @@
 #ifndef UTILC_MATMATH_H
 #define UTILC_MATMATH_H
 
+// restrict
+#ifdef __cplusplus
+#define restrict __restrict
+#endif
+
 //
 
 // this header file has the following content:
