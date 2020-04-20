@@ -647,3 +647,4 @@ static mat44d mat44d_invert(const double *mat) {
 
 
 #endif //UTILC_MATMATH_H
+

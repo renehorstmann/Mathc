@@ -616,3 +616,4 @@ static vec4d vec4d_normalize(const double *vec) {
 }
 
 #endif //UTILC_VECMATH_H
+
