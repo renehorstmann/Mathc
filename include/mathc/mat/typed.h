@@ -16,19 +16,6 @@
 
 
 //
-// mat33f
-//
-typedef struct mat33f {
-    float m[3][3];
-} mat33f;
-
-/** casts a float * to a dereferenced mat33f */
-#define Mat33f(mat) (*(mat33f *) (mat))
-
-/** casts a float * to a dereferenced const mat33f */
-#define ConstMat33f(mat) (*(const mat33f *) (mat))
-
-//
 // vec3f (as in vec/typed.h)
 //
 typedef struct vec3f {
@@ -40,6 +27,20 @@ typedef struct vec3f {
 
 /** casts a float * to a dereferenced const vec3f */
 #define ConstVec3f(vec) (*(const vec3f *) (vec))
+
+//
+// mat33f
+//
+typedef union mat33f {
+    float m[3][3];
+    vec3f rows[3];
+} mat33f;
+
+/** casts a float * to a dereferenced mat33f */
+#define Mat33f(mat) (*(mat33f *) (mat))
+
+/** casts a float * to a dereferenced const mat33f */
+#define ConstMat33f(mat) (*(const mat33f *) (mat))
 
 /** mat<n*n> dst = r==c ? 1 : 0 (identity)  */
 static mat33f mat33f_eye() {
@@ -128,19 +129,6 @@ static mat33f mat33f_invert(mat33f mat) {
 
 
 //
-// mat44f
-//
-typedef struct mat44f {
-    float m[4][4];
-} mat44f;
-
-/** casts a float * to a dereferenced mat44f */
-#define Mat44f(mat) (*(mat44f *) (mat))
-
-/** casts a float * to a dereferenced const mat44f */
-#define ConstMat44f(mat) (*(const mat44f *) (mat))
-
-//
 // vec4f (as in vec/typed.h)
 //
 typedef struct vec4f {
@@ -152,6 +140,21 @@ typedef struct vec4f {
 
 /** casts a float * to a dereferenced const vec4f */
 #define ConstVec4f(vec) (*(const vec4f *) (vec))
+
+
+//
+// mat44f
+//
+typedef union mat44f {
+    float m[4][4];
+    vec4f rows[4];
+} mat44f;
+
+/** casts a float * to a dereferenced mat44f */
+#define Mat44f(mat) (*(mat44f *) (mat))
+
+/** casts a float * to a dereferenced const mat44f */
+#define ConstMat44f(mat) (*(const mat44f *) (mat))
 
 /** mat<n*n> dst = r==c ? 1 : 0 (identity)  */
 static mat44f mat44f_eye() {
@@ -239,20 +242,6 @@ static mat44f mat44f_invert(mat44f mat) {
 }
 
 
-
-//
-// mat33d
-//
-typedef struct mat33d {
-    double m[3][3];
-} mat33d;
-
-/** casts a double * to a dereferenced mat33d */
-#define Mat33d(mat) (*(mat33d *) (mat))
-
-/** casts a double * to a dereferenced const mat33d */
-#define ConstMat33d(mat) (*(const mat33d *) (mat))
-
 //
 // vec3d (as in vec/typed.h)
 //
@@ -265,6 +254,20 @@ typedef struct vec3d {
 
 /** casts a double * to a dereferenced const vec3d */
 #define ConstVec3d(vec) (*(const vec3d *) (vec))
+
+//
+// mat33d
+//
+typedef union mat33d {
+    double m[3][3];
+    vec3d rows[3];
+} mat33d;
+
+/** casts a double * to a dereferenced mat33d */
+#define Mat33d(mat) (*(mat33d *) (mat))
+
+/** casts a double * to a dereferenced const mat33d */
+#define ConstMat33d(mat) (*(const mat33d *) (mat))
 
 /** mat<n*n> dst = r==c ? 1 : 0 (identity)  */
 static mat33d mat33d_eye() {
@@ -351,20 +354,6 @@ static mat33d mat33d_invert(mat33d mat) {
     return res;
 }
 
-
-//
-// mat44d
-//
-typedef struct mat44d {
-    double m[4][4];
-} mat44d;
-
-/** casts a double * to a dereferenced mat44d */
-#define Mat44d(mat) (*(mat44d *) (mat))
-
-/** casts a double * to a dereferenced const mat44d */
-#define ConstMat44d(mat) (*(const mat44d *) (mat))
-
 //
 // vec4d (as in vec/typed.h)
 //
@@ -377,6 +366,21 @@ typedef struct vec4d {
 
 /** casts a double * to a dereferenced const vec4d */
 #define ConstVec4d(vec) (*(const vec4d *) (vec))
+
+//
+// mat44d
+//
+typedef union mat44d {
+    double m[4][4];
+    vec4d rows[4];
+} mat44d;
+
+/** casts a double * to a dereferenced mat44d */
+#define Mat44d(mat) (*(mat44d *) (mat))
+
+/** casts a double * to a dereferenced const mat44d */
+#define ConstMat44d(mat) (*(const mat44d *) (mat))
+
 
 /** mat<n*n> dst = r==c ? 1 : 0 (identity)  */
 static mat44d mat44d_eye() {
@@ -463,22 +467,6 @@ static mat44d mat44d_invert(mat44d mat) {
     return res;
 }
 
-
-
-
-//
-// mat33i
-//
-typedef struct mat33i {
-    int m[3][3];
-} mat33i;
-
-/** casts a int * to a dereferenced mat33i */
-#define Mat33i(mat) (*(mat33i *) (mat))
-
-/** casts a int * to a dereferenced const mat33i */
-#define ConstMat33i(mat) (*(const mat33i *) (mat))
-
 //
 // vec3i (as in vec/typed.h)
 //
@@ -491,6 +479,21 @@ typedef struct vec3i {
 
 /** casts a int * to a dereferenced const vec3i */
 #define ConstVec3i(vec) (*(const vec3i *) (vec))
+
+//
+// mat33i
+//
+typedef union mat33i {
+    int m[3][3];
+    vec3i rows[3];
+} mat33i;
+
+/** casts a int * to a dereferenced mat33i */
+#define Mat33i(mat) (*(mat33i *) (mat))
+
+/** casts a int * to a dereferenced const mat33i */
+#define ConstMat33i(mat) (*(const mat33i *) (mat))
+
 
 /** mat<n*n> dst = r==c ? 1 : 0 (identity)  */
 static mat33i mat33i_eye() {
@@ -577,20 +580,6 @@ static mat33i mat33i_invert(mat33i mat) {
     return res;
 }
 
-
-//
-// mat44i
-//
-typedef struct mat44i {
-    int m[4][4];
-} mat44i;
-
-/** casts a int * to a dereferenced mat44i */
-#define Mat44i(mat) (*(mat44i *) (mat))
-
-/** casts a int * to a dereferenced const mat44i */
-#define ConstMat44i(mat) (*(const mat44i *) (mat))
-
 //
 // vec4i (as in vec/typed.h)
 //
@@ -603,6 +592,21 @@ typedef struct vec4i {
 
 /** casts a int * to a dereferenced const vec4i */
 #define ConstVec4i(vec) (*(const vec4i *) (vec))
+
+//
+// mat44i
+//
+typedef union mat44i {
+    int m[4][4];
+    vec4i rows[4];
+} mat44i;
+
+/** casts a int * to a dereferenced mat44i */
+#define Mat44i(mat) (*(mat44i *) (mat))
+
+/** casts a int * to a dereferenced const mat44i */
+#define ConstMat44i(mat) (*(const mat44i *) (mat))
+
 
 /** mat<n*n> dst = r==c ? 1 : 0 (identity)  */
 static mat44i mat44i_eye() {
