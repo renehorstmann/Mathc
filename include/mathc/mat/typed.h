@@ -23,10 +23,10 @@ typedef struct mat33f {
 } mat33f;
 
 /** casts a float * to a dereferenced mat33f */
-#define Mat33f(mat) (*(mat33f *) (vec))
+#define Mat33f(mat) (*(mat33f *) (mat))
 
 /** casts a float * to a dereferenced const mat33f */
-#define ConstMat33f(vec) (*(const mat33f *) (vec))
+#define ConstMat33f(mat) (*(const mat33f *) (mat))
 
 //
 // vec3f (as in vec/typed.h)
@@ -135,10 +135,10 @@ typedef struct mat44f {
 } mat44f;
 
 /** casts a float * to a dereferenced mat44f */
-#define Mat44f(mat) (*(mat44f *) (vec))
+#define Mat44f(mat) (*(mat44f *) (mat))
 
 /** casts a float * to a dereferenced const mat44f */
-#define ConstMat44f(vec) (*(const mat44f *) (vec))
+#define ConstMat44f(mat) (*(const mat44f *) (mat))
 
 //
 // vec4f (as in vec/typed.h)
@@ -248,10 +248,10 @@ typedef struct mat33d {
 } mat33d;
 
 /** casts a double * to a dereferenced mat33d */
-#define Mat33d(mat) (*(mat33d *) (vec))
+#define Mat33d(mat) (*(mat33d *) (mat))
 
 /** casts a double * to a dereferenced const mat33d */
-#define ConstMat33d(vec) (*(const mat33d *) (vec))
+#define ConstMat33d(mat) (*(const mat33d *) (mat))
 
 //
 // vec3d (as in vec/typed.h)
@@ -360,10 +360,10 @@ typedef struct mat44d {
 } mat44d;
 
 /** casts a double * to a dereferenced mat44d */
-#define Mat44d(mat) (*(mat44d *) (vec))
+#define Mat44d(mat) (*(mat44d *) (mat))
 
 /** casts a double * to a dereferenced const mat44d */
-#define ConstMat44d(vec) (*(const mat44d *) (vec))
+#define ConstMat44d(mat) (*(const mat44d *) (mat))
 
 //
 // vec4d (as in vec/typed.h)
@@ -474,10 +474,10 @@ typedef struct mat33i {
 } mat33i;
 
 /** casts a int * to a dereferenced mat33i */
-#define Mat33i(mat) (*(mat33i *) (vec))
+#define Mat33i(mat) (*(mat33i *) (mat))
 
 /** casts a int * to a dereferenced const mat33i */
-#define ConstMat33i(vec) (*(const mat33i *) (vec))
+#define ConstMat33i(mat) (*(const mat33i *) (mat))
 
 //
 // vec3i (as in vec/typed.h)
@@ -586,10 +586,10 @@ typedef struct mat44i {
 } mat44i;
 
 /** casts a int * to a dereferenced mat44i */
-#define Mat44i(mat) (*(mat44i *) (vec))
+#define Mat44i(mat) (*(mat44i *) (mat))
 
 /** casts a int * to a dereferenced const mat44i */
-#define ConstMat44i(vec) (*(const mat44i *) (vec))
+#define ConstMat44i(mat) (*(const mat44i *) (mat))
 
 //
 // vec4i (as in vec/typed.h)
