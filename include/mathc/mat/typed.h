@@ -18,9 +18,12 @@
 //
 // vec3f (as in vec/typed.h)
 //
+#ifndef VEC3F_DEFINED
+#define VEC3F_DEFINED
 typedef struct vec3f {
     float v[3];
 } vec3f;
+#endif
 
 /** casts a float * to a dereferenced vec3f */
 #define Vec3f(vec) (*(vec3f *) (vec))
@@ -131,9 +134,12 @@ static mat33f mat33f_invert(mat33f mat) {
 //
 // vec4f (as in vec/typed.h)
 //
+#ifndef VEC4F_DEFINED
+#define VEC4F_DEFINED
 typedef struct vec4f {
     float v[4];
 } vec4f;
+#endif
 
 /** casts a float * to a dereferenced vec4f */
 #define Vec4f(vec) (*(vec4f *) (vec))
@@ -245,9 +251,12 @@ static mat44f mat44f_invert(mat44f mat) {
 //
 // vec3d (as in vec/typed.h)
 //
+#ifndef VEC3D_DEFINED
+#define VEC3D_DEFINED
 typedef struct vec3d {
     double v[3];
 } vec3d;
+#endif
 
 /** casts a double * to a dereferenced vec3d */
 #define Vec3d(vec) (*(vec3d *) (vec))
@@ -357,9 +366,12 @@ static mat33d mat33d_invert(mat33d mat) {
 //
 // vec4d (as in vec/typed.h)
 //
+#ifndef VEC4D_DEFINED
+#define VEC4D_DEFINED
 typedef struct vec4d {
     double v[4];
 } vec4d;
+#endif
 
 /** casts a double * to a dereferenced vec4d */
 #define Vec4d(vec) (*(vec4d *) (vec))
@@ -470,9 +482,12 @@ static mat44d mat44d_invert(mat44d mat) {
 //
 // vec3i (as in vec/typed.h)
 //
+#ifndef VEC3I_DEFINED
+#define VEC3I_DEFINED
 typedef struct vec3i {
     int v[3];
 } vec3i;
+#endif
 
 /** casts a int * to a dereferenced vec3i */
 #define Vec3i(vec) (*(vec3i *) (vec))
@@ -583,9 +598,12 @@ static mat33i mat33i_invert(mat33i mat) {
 //
 // vec4i (as in vec/typed.h)
 //
+#ifndef VEC4I_DEFINED
+#define VEC4I_DEFINED
 typedef struct vec4i {
     int v[4];
 } vec4i;
+#endif
 
 /** casts a int * to a dereferenced vec4i */
 #define Vec4i(vec) (*(vec4i *) (vec))
