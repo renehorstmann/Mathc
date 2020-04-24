@@ -66,12 +66,12 @@ default: "type_error" \
 
 /** nested generic for both vec_add_vec and vec_add_sca: vec<n> dst_i = a_i + b */
 #define vec_add(vec_a, b) _Generic((vec_a), \
-vec3f: _Generic((b), vec3f: vec3f_add_vec, float: vec3f_add_sca, default: "type_error"), \
-vec4f: _Generic((b), vec4f: vec4f_add_vec, float: vec4f_add_sca, default: "type_error"), \
-vec3d: _Generic((b), vec3d: vec3d_add_vec, double: vec3d_add_sca, default: "type_error"), \
-vec4d: _Generic((b), vec3d: vec4d_add_vec, double: vec4d_add_sca, default: "type_error"), \
-vec3i: _Generic((b), vec3i: vec3i_add_vec, int: vec3i_add_sca, default: "type_error"), \
-vec4i: _Generic((b), vec4i: vec4i_add_vec, int: vec4i_add_sca, default: "type_error"), \
+vec3f: _Generic((b), vec3f: vec3f_add_vec, default: vec3f_add_sca), \
+vec4f: _Generic((b), vec4f: vec4f_add_vec, default: vec4f_add_sca), \
+vec3d: _Generic((b), vec3d: vec3d_add_vec, default: vec3d_add_sca), \
+vec4d: _Generic((b), vec3d: vec4d_add_vec, default: vec4d_add_sca), \
+vec3i: _Generic((b), vec3i: vec3i_add_vec, default: vec3i_add_sca), \
+vec4i: _Generic((b), vec4i: vec4i_add_vec, default: vec4i_add_sca), \
 default: "type_error"\
 ) ((vec_a), (b))
 
@@ -99,12 +99,12 @@ default: "type_error" \
 
 /** nested generic for both vec_sub_vec and vec_sub_sca: vec<n> dst_i = a_i - b */
 #define vec_sub(vec_a, b) _Generic((vec_a), \
-vec3f: _Generic((b), vec3f: vec3f_sub_vec, float: vec3f_sub_sca, default: "type_error"), \
-vec4f: _Generic((b), vec4f: vec4f_sub_vec, float: vec4f_sub_sca, default: "type_error"), \
-vec3d: _Generic((b), vec3d: vec3d_sub_vec, double: vec3d_sub_sca, default: "type_error"), \
-vec4d: _Generic((b), vec3d: vec4d_sub_vec, double: vec4d_sub_sca, default: "type_error"), \
-vec3i: _Generic((b), vec3i: vec3i_sub_vec, int: vec3i_sub_sca, default: "type_error"), \
-vec4i: _Generic((b), vec4i: vec4i_sub_vec, int: vec4i_sub_sca, default: "type_error"), \
+vec3f: _Generic((b), vec3f: vec3f_sub_vec, default: vec3f_sub_sca), \
+vec4f: _Generic((b), vec4f: vec4f_sub_vec, default: vec4f_sub_sca), \
+vec3d: _Generic((b), vec3d: vec3d_sub_vec, default: vec3d_sub_sca), \
+vec4d: _Generic((b), vec3d: vec4d_sub_vec, default: vec4d_sub_sca), \
+vec3i: _Generic((b), vec3i: vec3i_sub_vec, default: vec3i_sub_sca), \
+vec4i: _Generic((b), vec4i: vec4i_sub_vec, default: vec4i_sub_sca), \
 default: "type_error"\
 ) ((vec_a), (b))
 
@@ -132,12 +132,12 @@ default: "type_error" \
 
 /** nested generic for both vec_scale_vec and vec_scale_sca: vec<n> dst_i = a_i * b */
 #define vec_scale(vec_a, b) _Generic((vec_a), \
-vec3f: _Generic((b), vec3f: vec3f_scale_vec, float: vec3f_scale_sca, default: "type_error"), \
-vec4f: _Generic((b), vec4f: vec4f_scale_vec, float: vec4f_scale_sca, default: "type_error"), \
-vec3d: _Generic((b), vec3d: vec3d_scale_vec, double: vec3d_scale_sca, default: "type_error"), \
-vec4d: _Generic((b), vec3d: vec4d_scale_vec, double: vec4d_scale_sca, default: "type_error"), \
-vec3i: _Generic((b), vec3i: vec3i_scale_vec, int: vec3i_scale_sca, default: "type_error"), \
-vec4i: _Generic((b), vec4i: vec4i_scale_vec, int: vec4i_scale_sca, default: "type_error"), \
+vec3f: _Generic((b), vec3f: vec3f_scale_vec, default: vec3f_scale_sca), \
+vec4f: _Generic((b), vec4f: vec4f_scale_vec, default: vec4f_scale_sca), \
+vec3d: _Generic((b), vec3d: vec3d_scale_vec, default: vec3d_scale_sca), \
+vec4d: _Generic((b), vec3d: vec4d_scale_vec, default: vec4d_scale_sca), \
+vec3i: _Generic((b), vec3i: vec3i_scale_vec, default: vec3i_scale_sca), \
+vec4i: _Generic((b), vec4i: vec4i_scale_vec, default: vec4i_scale_sca), \
 default: "type_error"\
 ) ((vec_a), (b))
 
@@ -165,12 +165,12 @@ default: "type_error" \
 
 /** nested generic for both vec_div_vec and vec_div_sca: vec<n> dst_i = a_i / b */
 #define vec_div(vec_a, b) _Generic((vec_a), \
-vec3f: _Generic((b), vec3f: vec3f_div_vec, float: vec3f_div_sca, default: "type_error"), \
-vec4f: _Generic((b), vec4f: vec4f_div_vec, float: vec4f_div_sca, default: "type_error"), \
-vec3d: _Generic((b), vec3d: vec3d_div_vec, double: vec3d_div_sca, default: "type_error"), \
-vec4d: _Generic((b), vec3d: vec4d_div_vec, double: vec4d_div_sca, default: "type_error"), \
-vec3i: _Generic((b), vec3i: vec3i_div_vec, int: vec3i_div_sca, default: "type_error"), \
-vec4i: _Generic((b), vec4i: vec4i_div_vec, int: vec4i_div_sca, default: "type_error"), \
+vec3f: _Generic((b), vec3f: vec3f_div_vec, default: vec3f_div_sca), \
+vec4f: _Generic((b), vec4f: vec4f_div_vec, default: vec4f_div_sca), \
+vec3d: _Generic((b), vec3d: vec3d_div_vec, default: vec3d_div_sca), \
+vec4d: _Generic((b), vec3d: vec4d_div_vec, default: vec4d_div_sca), \
+vec3i: _Generic((b), vec3i: vec3i_div_vec, default: vec3i_div_sca), \
+vec4i: _Generic((b), vec4i: vec4i_div_vec, default: vec4i_div_sca), \
 default: "type_error"\
 ) ((vec_a), (b))
 
