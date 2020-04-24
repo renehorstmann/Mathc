@@ -1,7 +1,7 @@
-#ifndef MATHC_VEC_TYPED_GENERIC_H
-#define MATHC_VEC_TYPED_GENERIC_H
+#ifndef MATHC_VEC_GENERIC_H
+#define MATHC_VEC_GENERIC_H
 
-#include "mathc/vec/typed.h"
+#include "typed.h"
 
 //
 // this header file has the following content:
@@ -237,4 +237,4 @@ default: "type_error" \
 ) ((vec))
 
 
-#endif //MATHC_VEC_TYPED_GENERIC_H
+#endif //MATHC_VEC_GENERIC_H

@@ -1,7 +1,7 @@
 #ifndef MATHC_VEC_TYPED_H
 #define MATHC_VEC_TYPED_H
 
-#include "mathc/vec/functions.h"
+#include "functions.h"
 
 
 //
