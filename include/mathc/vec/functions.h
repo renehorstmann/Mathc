@@ -1,5 +1,5 @@
-#ifndef MATHC_FUNCTIONS_H
-#define MATHC_FUNCTIONS_H
+#ifndef MATHC_VEC_FUNCTIONS_H
+#define MATHC_VEC_FUNCTIONS_H
 
 
 // restrict
@@ -56,6 +56,12 @@ static void vecf_sub_vec(float *dst_vec, const float *vec_a, const float *vec_b,
         dst_vec[i] = vec_a[i] - vec_b[i];
 }
 
+/** vec<n> dst_i = a_i - b */
+static void vecf_sub_sca(float *dst_vec, const float *vec_a, float scalar_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] - scalar_b;
+}
+
 /** vec<n> dst_i = a_i * b_i */
 static void vecf_scale_vec(float *dst_vec, const float *vec_a, const float *vec_b, int n) {
     for (int i = 0; i < n; i++)
@@ -66,6 +72,18 @@ static void vecf_scale_vec(float *dst_vec, const float *vec_a, const float *vec_
 static void vecf_scale_sca(float *dst_vec, const float *vec_a, float scalar_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] * scalar_b;
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static void vecf_div_vec(float *dst_vec, const float *vec_a, const float *vec_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] / vec_b[i];
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static void vecf_div_sca(float *dst_vec, const float *vec_a, float scalar_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] / scalar_b;
 }
 
 /** returns vec[0] + vec[1] + ... + vec[n-1] */
@@ -149,6 +167,12 @@ static void vecd_sub_vec(double *dst_vec, const double *vec_a, const double *vec
         dst_vec[i] = vec_a[i] - vec_b[i];
 }
 
+/** vec<n> dst_i = a_i - b */
+static void vecd_sub_sca(double *dst_vec, const double *vec_a, double scalar_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] - scalar_b;
+}
+
 /** vec<n> dst_i = a_i * b_i */
 static void vecd_scale_vec(double *dst_vec, const double *vec_a, const double *vec_b, int n) {
     for (int i = 0; i < n; i++)
@@ -159,6 +183,18 @@ static void vecd_scale_vec(double *dst_vec, const double *vec_a, const double *v
 static void vecd_scale_sca(double *dst_vec, const double *vec_a, double scalar_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] * scalar_b;
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static void vecd_div_vec(double *dst_vec, const double *vec_a, const double *vec_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] / vec_b[i];
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static void vecd_div_sca(double *dst_vec, const double *vec_a, double scalar_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] / scalar_b;
 }
 
 /** returns vec[0] + vec[1] + ... + vec[n-1] */
@@ -242,6 +278,12 @@ static void veci_sub_vec(int *dst_vec, const int *vec_a, const int *vec_b, int n
         dst_vec[i] = vec_a[i] - vec_b[i];
 }
 
+/** vec<n> dst_i = a_i - b */
+static void veci_sub_sca(int *dst_vec, const int *vec_a, int scalar_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] - scalar_b;
+}
+
 /** vec<n> dst_i = a_i * b_i */
 static void veci_scale_vec(int *dst_vec, const int *vec_a, const int *vec_b, int n) {
     for (int i = 0; i < n; i++)
@@ -252,6 +294,18 @@ static void veci_scale_vec(int *dst_vec, const int *vec_a, const int *vec_b, int
 static void veci_scale_sca(int *dst_vec, const int *vec_a, int scalar_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] * scalar_b;
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static void veci_div_vec(int *dst_vec, const int *vec_a, const int *vec_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] / vec_b[i];
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static void veci_div_sca(int *dst_vec, const int *vec_a, int scalar_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] / scalar_b;
 }
 
 /** returns vec[0] + vec[1] + ... + vec[n-1] */
@@ -285,4 +339,4 @@ static double veci_norm(const int *vec, int n) {
 }
 
 
-#endif //MATHC_FUNCTIONS_H
+#endif //MATHC_VEC_FUNCTIONS_H

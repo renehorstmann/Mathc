@@ -1,7 +1,7 @@
-#ifndef MATHC_TYPED_H
-#define MATHC_TYPED_H
+#ifndef MATHC_VEC_TYPED_H
+#define MATHC_VEC_TYPED_H
 
-#include "functions.h"
+#include "mathc/vec/functions.h"
 
 
 //
@@ -63,6 +63,13 @@ static vec3f vec3f_sub_vec(vec3f vec_a, vec3f vec_b) {
     return res;
 }
 
+/** vec<n> dst_i = a_i - b_i */
+static vec3f vec3f_sub_sca(vec3f vec_a, float scalar_b) {
+    vec3f res;
+    vecf_sub_sca(res.v, vec_a.v, scalar_b, 3);
+    return res;
+}
+
 /** vec<n> dst_i = a_i * b_i */
 static vec3f vec3f_scale_vec(vec3f vec_a, vec3f vec_b) {
     vec3f res;
@@ -74,6 +81,20 @@ static vec3f vec3f_scale_vec(vec3f vec_a, vec3f vec_b) {
 static vec3f vec3f_scale_sca(vec3f vec_a, float scalar_b) {
     vec3f res;
     vecf_scale_sca(res.v, vec_a.v, scalar_b, 3);
+    return res;
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static vec3f vec3f_div_vec(vec3f vec_a, vec3f vec_b) {
+    vec3f res;
+    vecf_div_vec(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+
+/** vec<n> res_i = a_i / b */
+static vec3f vec3f_div_sca(vec3f vec_a, float scalar_b) {
+    vec3f res;
+    vecf_div_sca(res.v, vec_a.v, scalar_b, 3);
     return res;
 }
 
@@ -162,6 +183,13 @@ static vec4f vec4f_sub_vec(vec4f vec_a, vec4f vec_b) {
     return res;
 }
 
+/** vec<n> dst_i = a_i - b_i */
+static vec4f vec4f_sub_sca(vec4f vec_a, float scalar_b) {
+    vec4f res;
+    vecf_sub_sca(res.v, vec_a.v, scalar_b, 4);
+    return res;
+}
+
 /** vec<n> dst_i = a_i * b_i */
 static vec4f vec4f_scale_vec(vec4f vec_a, vec4f vec_b) {
     vec4f res;
@@ -173,6 +201,20 @@ static vec4f vec4f_scale_vec(vec4f vec_a, vec4f vec_b) {
 static vec4f vec4f_scale_sca(vec4f vec_a, float scalar_b) {
     vec4f res;
     vecf_scale_sca(res.v, vec_a.v, scalar_b, 4);
+    return res;
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static vec4f vec4f_div_vec(vec4f vec_a, vec4f vec_b) {
+    vec4f res;
+    vecf_div_vec(res.v, vec_a.v, vec_b.v, 4);
+    return res;
+}
+
+/** vec<n> res_i = a_i / b */
+static vec4f vec4f_div_sca(vec4f vec_a, float scalar_b) {
+    vec4f res;
+    vecf_div_sca(res.v, vec_a.v, scalar_b, 4);
     return res;
 }
 
@@ -211,7 +253,6 @@ static vec4f vec4f_normalize(vec4f vec) {
     vecf_normalize(res.v, vec.v, 4);
     return res;
 }
-
 
 
 //
@@ -262,6 +303,13 @@ static vec3d vec3d_sub_vec(vec3d vec_a, vec3d vec_b) {
     return res;
 }
 
+/** vec<n> dst_i = a_i - b_i */
+static vec3d vec3d_sub_sca(vec3d vec_a, double scalar_b) {
+    vec3d res;
+    vecd_sub_sca(res.v, vec_a.v, scalar_b, 3);
+    return res;
+}
+
 /** vec<n> dst_i = a_i * b_i */
 static vec3d vec3d_scale_vec(vec3d vec_a, vec3d vec_b) {
     vec3d res;
@@ -273,6 +321,20 @@ static vec3d vec3d_scale_vec(vec3d vec_a, vec3d vec_b) {
 static vec3d vec3d_scale_sca(vec3d vec_a, double scalar_b) {
     vec3d res;
     vecd_scale_sca(res.v, vec_a.v, scalar_b, 3);
+    return res;
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static vec3d vec3d_div_vec(vec3d vec_a, vec3d vec_b) {
+    vec3d res;
+    vecd_div_vec(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+
+/** vec<n> res_i = a_i / b */
+static vec3d vec3d_div_sca(vec3d vec_a, double scalar_b) {
+    vec3d res;
+    vecd_div_sca(res.v, vec_a.v, scalar_b, 3);
     return res;
 }
 
@@ -311,7 +373,6 @@ static vec3d vec3d_normalize(vec3d vec) {
     vecd_normalize(res.v, vec.v, 3);
     return res;
 }
-
 
 
 //
@@ -362,6 +423,13 @@ static vec4d vec4d_sub_vec(vec4d vec_a, vec4d vec_b) {
     return res;
 }
 
+/** vec<n> dst_i = a_i - b_i */
+static vec4d vec4d_sub_sca(vec4d vec_a, double scalar_b) {
+    vec4d res;
+    vecd_sub_sca(res.v, vec_a.v, scalar_b, 4);
+    return res;
+}
+
 /** vec<n> dst_i = a_i * b_i */
 static vec4d vec4d_scale_vec(vec4d vec_a, vec4d vec_b) {
     vec4d res;
@@ -373,6 +441,20 @@ static vec4d vec4d_scale_vec(vec4d vec_a, vec4d vec_b) {
 static vec4d vec4d_scale_sca(vec4d vec_a, double scalar_b) {
     vec4d res;
     vecd_scale_sca(res.v, vec_a.v, scalar_b, 4);
+    return res;
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static vec4d vec4d_div_vec(vec4d vec_a, vec4d vec_b) {
+    vec4d res;
+    vecd_div_vec(res.v, vec_a.v, vec_b.v, 4);
+    return res;
+}
+
+/** vec<n> res_i = a_i / b */
+static vec4d vec4d_div_sca(vec4d vec_a, double scalar_b) {
+    vec4d res;
+    vecd_div_sca(res.v, vec_a.v, scalar_b, 4);
     return res;
 }
 
@@ -460,6 +542,13 @@ static vec3i vec3i_sub_vec(vec3i vec_a, vec3i vec_b) {
     return res;
 }
 
+/** vec<n> dst_i = a_i - b_i */
+static vec3i vec3i_sub_sca(vec3i vec_a, int scalar_b) {
+    vec3i res;
+    veci_sub_sca(res.v, vec_a.v, scalar_b, 3);
+    return res;
+}
+
 /** vec<n> dst_i = a_i * b_i */
 static vec3i vec3i_scale_vec(vec3i vec_a, vec3i vec_b) {
     vec3i res;
@@ -471,6 +560,20 @@ static vec3i vec3i_scale_vec(vec3i vec_a, vec3i vec_b) {
 static vec3i vec3i_scale_sca(vec3i vec_a, int scalar_b) {
     vec3i res;
     veci_scale_sca(res.v, vec_a.v, scalar_b, 3);
+    return res;
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static vec3i vec3i_div_vec(vec3i vec_a, vec3i vec_b) {
+    vec3i res;
+    veci_div_vec(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+
+/** vec<n> res_i = a_i / b */
+static vec3i vec3i_div_sca(vec3i vec_a, int scalar_b) {
+    vec3i res;
+    veci_div_sca(res.v, vec_a.v, scalar_b, 3);
     return res;
 }
 
@@ -544,6 +647,13 @@ static vec4i vec4i_sub_vec(vec4i vec_a, vec4i vec_b) {
     return res;
 }
 
+/** vec<n> dst_i = a_i - b_i */
+static vec4i vec4i_sub_sca(vec4i vec_a, int scalar_b) {
+    vec4i res;
+    veci_sub_sca(res.v, vec_a.v, scalar_b, 4);
+    return res;
+}
+
 /** vec<n> dst_i = a_i * b_i */
 static vec4i vec4i_scale_vec(vec4i vec_a, vec4i vec_b) {
     vec4i res;
@@ -555,6 +665,20 @@ static vec4i vec4i_scale_vec(vec4i vec_a, vec4i vec_b) {
 static vec4i vec4i_scale_sca(vec4i vec_a, int scalar_b) {
     vec4i res;
     veci_scale_sca(res.v, vec_a.v, scalar_b, 4);
+    return res;
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static vec4i vec4i_div_vec(vec4i vec_a, vec4i vec_b) {
+    vec4i res;
+    veci_div_vec(res.v, vec_a.v, vec_b.v, 4);
+    return res;
+}
+
+/** vec<n> res_i = a_i / b */
+static vec4i vec4i_div_sca(vec4i vec_a, int scalar_b) {
+    vec4i res;
+    veci_div_sca(res.v, vec_a.v, scalar_b, 4);
     return res;
 }
 
@@ -581,4 +705,4 @@ static double vec4i_norm(vec4i vec) {
 }
 
 
-#endif //MATHC_TYPED_H
+#endif //MATHC_VEC_TYPED_H
