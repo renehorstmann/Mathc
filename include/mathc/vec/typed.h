@@ -1,6 +1,7 @@
 #ifndef MATHC_VEC_TYPED_H
 #define MATHC_VEC_TYPED_H
 
+#include "../types.h"
 #include "functions.h"
 
 
@@ -18,18 +19,6 @@
 //
 // vec3f
 //
-#ifndef VEC3F_DEFINED
-#define VEC3F_DEFINED
-typedef struct vec3f {
-    float v[3];
-} vec3f;
-#endif
-
-/** casts a float * to a dereferenced vec3f */
-#define Vec3f(vec) (*(vec3f *) (vec))
-
-/** casts a float * to a dereferenced const vec3f */
-#define ConstVec3f(vec) (*(const vec3f *) (vec))
 
 /** vec<n> dst_i = scalar */
 static vec3f vec3f_set(float scalar) {
@@ -141,18 +130,6 @@ static vec3f vec3f_normalize(vec3f vec) {
 //
 // vec4f
 //
-#ifndef VEC4F_DEFINED
-#define VEC4F_DEFINED
-typedef struct vec4f {
-    float v[4];
-} vec4f;
-#endif
-
-/** casts a float * to a dereferenced vec4f */
-#define Vec4f(vec) (*(vec4f *) (vec))
-
-/** casts a float * to a dereferenced const vec4f */
-#define ConstVec4f(vec) (*(const vec4f *) (vec))
 
 /** vec<n> dst_i = scalar */
 static vec4f vec4f_set(float scalar) {
@@ -264,18 +241,6 @@ static vec4f vec4f_normalize(vec4f vec) {
 //
 // vec3d
 //
-#ifndef VEC3D_DEFINED
-#define VEC3D_DEFINED
-typedef struct vec3d {
-    double v[3];
-} vec3d;
-#endif
-
-/** casts a double * to a dereferenced vec3d */
-#define Vec3d(vec) (*(vec3d *) (vec))
-
-/** casts a double * to a dereferenced const vec3d */
-#define ConstVec3d(vec) (*(const vec3d *) (vec))
 
 /** vec<n> dst_i = scalar */
 static vec3d vec3d_set(double scalar) {
@@ -387,18 +352,6 @@ static vec3d vec3d_normalize(vec3d vec) {
 //
 // vec4d
 //
-#ifndef VEC4D_DEFINED
-#define VEC4D_DEFINED
-typedef struct vec4d {
-    double v[4];
-} vec4d;
-#endif
-
-/** casts a double * to a dereferenced vec4d */
-#define Vec4d(vec) (*(vec4d *) (vec))
-
-/** casts a double * to a dereferenced vec4d */
-#define ConstVec4d(vec) (*(const vec4d *) (vec))
 
 /** vec<n> dst_i = scalar */
 static vec4d vec4d_set(double scalar) {
@@ -509,18 +462,6 @@ static vec4d vec4d_normalize(vec4d vec) {
 //
 // vec3i
 //
-#ifndef VEC3I_DEFINED
-#define VEC3I_DEFINED
-typedef struct vec3i {
-    int v[3];
-} vec3i;
-#endif
-
-/** casts an int * to a dereferenced vec3i */
-#define Vec3i(vec) (*(vec3i *) (vec))
-
-/** casts an int * to a dereferenced vec3i */
-#define ConstVec3i(vec) (*(const vec3i *) (vec))
 
 /** vec<n> dst_i = scalar */
 static vec3i vec3i_set(int scalar) {
@@ -617,18 +558,6 @@ static double vec3i_norm(vec3i vec) {
 //
 // vec4i
 //
-#ifndef VEC4I_DEFINED
-#define VEC4I_DEFINED
-typedef struct vec4i {
-    int v[4];
-} vec4i;
-#endif
-
-/** casts an int * to a dereferenced vec4i */
-#define Vec4i(vec) (*(vec4i *) (vec))
-
-/** casts an int * to a dereferenced const vec4i */
-#define ConstVec4i(vec) (*(const vec4i *) (vec))
 
 /** vec<n> dst_i = scalar */
 static vec4i vec4i_set(int scalar) {
@@ -721,6 +650,7 @@ static vec4i vec4i_cross(vec4i vec_a, vec4i vec_b) {
 static double vec4i_norm(vec4i vec) {
     return veci_norm(vec.v, 4);
 }
+
 
 
 #endif //MATHC_VEC_TYPED_H
