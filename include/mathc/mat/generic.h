@@ -9,50 +9,6 @@
 // generic nested macros for add, sub, scale, div
 //
 
-/** casts a float, double, into <const> mat33<x> */
-#define Mat33(mat) _Generic((mat), \
-float *: Mat33f(mat), \
-const float *: ConstMat33f(mat), \
-double *: Mat33d(mat), \
-const double *: ConstMat33d(mat), \
-int *: Mat33i(mat), \
-const int *: ConstMat33i(mat), \
-default: "type_error" \
-)
-
-/** casts a float, double, into <const> mat44<x> */
-#define Mat44(mat) _Generic((mat), \
-float *: Mat44f(mat), \
-const float *: ConstMat44f(mat), \
-double *: Mat44d(mat), \
-const double *: ConstMat44d(mat), \
-int *: Mat44i(mat), \
-const int *: ConstMat44i(mat), \
-default: "type_error" \
-)
-
-/** casts a float, double, into <const> vec3<x> */
-#define Vec3(vec) _Generic((vec), \
-float *: Vec3f(vec), \
-const float *: ConstVec3f(vec), \
-double *: Vec3d(vec), \
-const double *: ConstVec3d(vec), \
-int *: Vec3i(vec), \
-const int *: ConstVec3i(vec), \
-default: "type_error" \
-)
-
-/** casts a float, double, into <const> vec4<x> */
-#define Vec4(vec) _Generic((vec), \
-float *: Vec4f(vec), \
-const float *: ConstVec4f(vec), \
-double *: Vec4d(vec), \
-const double *: ConstVec4d(vec), \
-int *: Vec4i(vec), \
-const int *: ConstVec4i(vec), \
-default: "type_error" \
-)
-
 /** vec<n> dst = mat<n*n>[row][:] */
 #define mat_get_row(mat, row) _Generic((mat), \
 mat33f: mat33f_get_row, \

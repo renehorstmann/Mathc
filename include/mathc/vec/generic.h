@@ -9,27 +9,6 @@
 // generic nested macros for add, sub, scale, div
 //
 
-/** casts a float, double, into <const> vec3<x> */
-#define Vec3(vec) _Generic((vec), \
-float *: Vec3f(vec), \
-const float *: ConstVec3f(vec), \
-double *: Vec3d(vec), \
-const double *: ConstVec3d(vec), \
-int *: Vec3i(vec), \
-const int *: ConstVec3i(vec), \
-default: "type_error" \
-)
-
-/** casts a float, double, into <const> vec4<x> */
-#define Vec4(vec) _Generic((vec), \
-float *: Vec4f(vec), \
-const float *: ConstVec4f(vec), \
-double *: Vec4d(vec), \
-const double *: ConstVec4d(vec), \
-int *: Vec4i(vec), \
-const int *: ConstVec4i(vec), \
-default: "type_error" \
-)
 
 /** vec<n> dst_i = -vec_i */
 #define vec_neg(vec) _Generic((vec), \

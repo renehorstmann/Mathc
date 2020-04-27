@@ -44,11 +44,11 @@ void float_test() {
     float data_vec[3];
 
     // save eye into data_res
-    Mat33(data_res) = mat33f_eye();
+    Mat33f(data_res) = mat33f_eye();
     print_mat("eye:\n", data_res, 3);
 
     // calls mat33f_transpose and saves the result into data_res
-    Mat33(data_res) = mat_transpose(Mat33(data_a));
+    Mat33f(data_res) = mat_transpose(Mat33f(data_a));
     print_mat("transpose:\n", data_res, 3);
 
     // it is also possible to cast the float pointers into vec3f pointer:
@@ -67,16 +67,14 @@ void float_test() {
     print_vec("mul_vec: ", data_vec, 3);
 
     mat33f A = {{
-                        {10, 0, 20},
-                        {30, 30, 20},
-                        {5, 6, 10}
+                        10, 0, 20,
+                        30, 30, 20,
+                        5, 6, 10
     }};
     vec3f r = {{1, 2, 3}};
 
     vec3f x = mat_mul_vec(mat_invert(A), r);
     print_vec("solve: ", x.v, 3);
-
-
 }
 
 void int_test() {
@@ -87,11 +85,11 @@ void int_test() {
     int data_vec[3];
 
     // save eye into data_res
-    Mat33(data_res) = mat33i_eye();
+    Mat33i(data_res) = mat33i_eye();
     print_mati("eye:\n", data_res, 3);
 
     // calls mat33i_transpose and saves the result into data_res
-    Mat33(data_res) = mat_transpose(Mat33(data_a));
+    Mat33i(data_res) = mat_transpose(Mat33i(data_a));
     print_mati("transpose:\n", data_res, 3);
 
     // it is also possible to cast the int pointers into vec3i pointer:
@@ -109,7 +107,6 @@ void int_test() {
     *vec = mat_mul_vec(*a, *vec);
     print_veci("mul_vec: ", data_vec, 3);
 }
-
 
 int main() {
     float_test();

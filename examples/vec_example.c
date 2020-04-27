@@ -22,7 +22,7 @@ void float_test() {
     float data_res[3];
 
     // calls vec3f_add_sca and saves the result into data_res
-    Vec3(data_res) = vec_add(Vec3(data_a), 10);
+    Vec3f(data_res) = vec_add(Vec3f(data_a), 10);
     print_vec(data_res, 3);
 
     // it is also possible to cast the float pointers into vec3f pointer:
@@ -50,7 +50,7 @@ void int_test() {
     int data_res[3];
 
     // calls vec3i_add_sca
-    Vec3(data_res) = vec_add(Vec3(data_a), 10);
+    Vec3i(data_res) = vec_add(Vec3i(data_a), 10);
     print_veci(data_res, 3);
 
     vec3i *a = (vec3i *) data_a;

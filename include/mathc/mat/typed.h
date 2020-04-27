@@ -35,8 +35,8 @@ typedef struct vec3f {
 // mat33f
 //
 typedef union mat33f {
-    float m[3][3];
     float v[9];
+    float m[3][3];
     vec3f rows[3];
 } mat33f;
 
@@ -153,8 +153,8 @@ typedef struct vec4f {
 // mat44f
 //
 typedef union mat44f {
-    float m[4][4];
     float v[16];
+    float m[4][4];
     vec4f rows[4];
 } mat44f;
 
@@ -270,8 +270,8 @@ typedef struct vec3d {
 // mat33d
 //
 typedef union mat33d {
-    double m[3][3];
     double v[9];
+    double m[3][3];
     vec3d rows[3];
 } mat33d;
 
@@ -386,8 +386,8 @@ typedef struct vec4d {
 // mat44d
 //
 typedef union mat44d {
-    double m[4][4];
     double v[16];
+    double m[4][4];
     vec4d rows[4];
 } mat44d;
 
@@ -503,8 +503,8 @@ typedef struct vec3i {
 // mat33i
 //
 typedef union mat33i {
-    int m[3][3];
     int v[9];
+    int m[3][3];
     vec3i rows[3];
 } mat33i;
 
@@ -620,8 +620,8 @@ typedef struct vec4i {
 // mat44i
 //
 typedef union mat44i {
-    int m[4][4];
     int v[16];
+    int m[4][4];
     vec4i rows[4];
 } mat44i;
 
