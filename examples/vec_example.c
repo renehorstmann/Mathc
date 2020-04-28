@@ -21,6 +21,10 @@ void float_test() {
 
     float data_res[3];
 
+    const float *a_view = data_a;
+    vec3f neg = vec3_neg_v(a_view);
+    print_vec(neg.v, 3);
+
     // calls vec3f_add_sca and saves the result into data_res
     Vec3f(data_res) = vec_add(Vec3f(data_a), 10);
     print_vec(data_res, 3);

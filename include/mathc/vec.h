@@ -6,5 +6,6 @@
 #include "vec/typed.h"
 #include "vec/typed_v.h"
 #include "vec/generic.h"
+#include "vec/generic_v.h"
 
 #endif //MATHC_VEC_H
