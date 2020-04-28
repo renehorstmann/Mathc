@@ -6,5 +6,6 @@
 #include "mat/typed.h"
 #include "mat/typed_v.h"
 #include "mat/generic.h"
+#include "mat/generic_v.h"
 
 #endif //MATHC_MAT_H
