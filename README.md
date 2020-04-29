@@ -1,5 +1,5 @@
 # Mathc
-A simple math only header math library for C
+A simple math header only math library for C
 
 ## Getting Started
 Copy the header files into your project and have fun.
