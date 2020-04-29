@@ -8,7 +8,7 @@ int main() {
     float det = matf_determinant33(mat_a);
     printf("%f\n", det);
 
-    // double typed with generic macros (vec_add also works for mat33f, mat44i, ...)
+    // double typed with generic macros (mat_invert also works for mat33f, mat44i, ...)
     mat44d mat_b = {{
                             1, 0, 0, 0,
                             0, -1, 0, 0,
