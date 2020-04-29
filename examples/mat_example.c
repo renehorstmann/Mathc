@@ -1,114 +1,49 @@
 #include <stdio.h>
-
 #include "mathc/mat.h"
 
-
-
-void print_mat(const char *msg, const float *mat, int n) {
-    printf("%s", msg);
-    for(int r=0; r<n; r++) {
-        for(int c=0; c<n; c++)
-            printf("%f ", mat[r*n + c]);
-        puts("");
-    }
-}
-
-void print_mati(const char *msg, const int *mat, int n) {
-    printf("%s", msg);
-    for(int r=0; r<n; r++) {
-        for(int c=0; c<n; c++)
-            printf("%d ", mat[r*n + c]);
-        puts("");
-    }
-}
-
-void print_vec(const char *msg, const float *vec, int n) {
-    printf("%s", msg);
-    for (int i = 0; i < n; i++)
-        printf("%f ", vec[i]);
-    puts("");
-}
-
-void print_veci(const char *msg, const int *vec, int n) {
-    printf("%s", msg);
-    for (int i = 0; i < n; i++)
-        printf("%d ", vec[i]);
-    puts("");
-}
-
-void float_test() {
-    float data_a[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    float data_b[9] = {10, 20, 30, 40, 50, 60, 70, 80, 90};
-
-    float data_res[9];
-    float data_vec[3];
-
-    // save eye into data_res
-    Mat33f(data_res) = mat33f_eye();
-    print_mat("eye:\n", data_res, 3);
-
-    // calls mat33f_transpose and saves the result into data_res
-    Mat33f(data_res) = mat_transpose(Mat33f(data_a));
-    print_mat("transpose:\n", data_res, 3);
-
-    // it is also possible to cast the float pointers into vec3f pointer:
-    mat33f *a = (mat33f *) data_a;
-    mat33f *b = (mat33f *) data_b;
-    mat33f *res = (mat33f *) data_res;
-    vec3f *vec = (vec3f *) data_vec;
-
-    *res = mat_mul_mat(*res, *a);
-    print_mat("mul_mat:\n", data_res, 3);
-
-    *vec = mat_get_col(*b, 2);
-    print_vec("col: ", data_vec, 3);
-
-    *vec = mat_mul_vec(*a, *vec);
-    print_vec("mul_vec: ", data_vec, 3);
-
-    mat33f A = {{
-                        10, 0, 20,
-                        30, 30, 20,
-                        5, 6, 10
-    }};
-    vec3f r = {{1, 2, 3}};
-
-    vec3f x = mat_mul_vec(mat_invert(A), r);
-    print_vec("solve: ", x.v, 3);
-}
-
-void int_test() {
-    int data_a[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    int data_b[9] = {10, 20, 30, 40, 50, 60, 70, 80, 90};
-
-    int data_res[9];
-    int data_vec[3];
-
-    // save eye into data_res
-    Mat33i(data_res) = mat33i_eye();
-    print_mati("eye:\n", data_res, 3);
-
-    // calls mat33i_transpose and saves the result into data_res
-    Mat33i(data_res) = mat_transpose(Mat33i(data_a));
-    print_mati("transpose:\n", data_res, 3);
-
-    // it is also possible to cast the int pointers into vec3i pointer:
-    mat33i *a = (mat33i *) data_a;
-    mat33i *b = (mat33i *) data_b;
-    mat33i *res = (mat33i *) data_res;
-    vec3i *vec = (vec3i *) data_vec;
-
-    *res = mat_mul_mat(*res, *a);
-    print_mati("mul_mat:\n", data_res, 3);
-
-    *vec = mat_get_col(*b, 2);
-    print_veci("col: ", data_vec, 3);
-
-    *vec = mat_mul_vec(*a, *vec);
-    print_veci("mul_vec: ", data_vec, 3);
-}
-
 int main() {
-    float_test();
-    int_test();
+
+    // matrix float base functions that are sizeless
+    float mat_a[] = {1, 2, 3, 40, 50, 60, 0, -1, 5};
+    float det = matf_determinant33(mat_a);
+    printf("%f\n", det);
+
+    // double typed with generic macros (vec_add also works for mat33f, mat44i, ...)
+    mat44d mat_b = {{
+                            1, 0, 0, 0,
+                            0, -1, 0, 0,
+                            0, 0, -1, 0,
+                            100, 200, 300, 1
+                    }};
+    mat_b = mat_invert(mat_b);
+    for(int c=0; c < 4; c++) {
+        vec4d col = mat_get_col(mat_b, c);
+        printf("col[%d] = {%f %f %f %f}\n", c, col.v[0], col.v[1], col.v[2], col.v[3]);
+    }
+
+    // Homogeneous coordinates transformation (calcs: vec_b = vec_b @ mat_b)
+    // there is also the function/macro mat_mul_vec (calcs: vec_b = mat_b @ vec_b)
+    vec4d vec_b = {{10, 20, 30, 1}};
+    vec_b = vec_mul_mat(vec_b, mat_b);
+    printf("vec = {%f %f %f %f}\n", vec_b.v[0], vec_b.v[1], vec_b.v[2], vec_b.v[3]);
+
+    // with the Mat macros, raw pointers can be casted to the given type.
+    // the typed_v functions allow the use of raw pointers as parameters.
+    int mat_c[9];
+    Mat33i(mat_c) = mat33i_eye();
+    for(int r=0; r < 3; r++) {
+        vec3i row = mat33_get_row_v(mat_c, r);
+        printf("row[%d] = {%d %d %d}\n", r, row.v[0], row.v[1], row.v[2]);
+    }
+
+    // output:
+    // -210.000000
+    // col[0] = {1.000000 0.000000 0.000000 -100.000000}
+    // col[1] = {0.000000 -1.000000 0.000000 200.000000}
+    // col[2] = {0.000000 0.000000 -1.000000 300.000000}
+    // col[3] = {-0.000000 0.000000 0.000000 1.000000}
+    // vec = {-90.000000 180.000000 270.000000 1.000000}
+    // row[0] = {1 0 0}
+    // row[1] = {0 1 0}
+    // row[2] = {0 0 1}
 }
