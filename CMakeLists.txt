@@ -23,3 +23,13 @@ target_link_libraries(vec m)
 add_executable(mat examples/mat_example.c)
 target_include_directories(mat PUBLIC include)
 target_link_libraries(mat m)
+
+
+
+add_library(performance_test_lib SHARED examples/performance_test_lib.c)
+target_include_directories(performance_test_lib PUBLIC include)
+target_link_libraries(performance_test_lib m)
+
+add_executable(performance_test_call examples/performance_test_call.c)
+target_include_directories(performance_test_call PUBLIC include)
+target_link_libraries(performance_test_call m performance_test_lib)
