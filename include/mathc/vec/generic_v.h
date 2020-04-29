@@ -49,12 +49,12 @@ default: "type_error" \
 
 /** nested generic for both vec3_add_vec_v and vec3_add_sca_: vec<n> dst_i = a_i + b */
 #define vec3_add_v(vec_a, b) _Generic((vec_a), \
-float *: _Generic((b), float *: vec3f_add_vec_v, const float *: vec3f_add_vec_v default: vec3f_add_sca_v), \
-const float *: _Generic((b), float *: vec3f_add_vec_v, const float *: vec3f_add_vec_v default: vec3f_add_sca_v), \
-double *: _Generic((b), double *: vec3d_add_vec_v, const double *: vec3d_add_vec_v default: vec3d_add_sca_v), \
-const double *: _Generic((b), double *: vec3d_add_vec_v, const double *: vec3d_add_vec_v default: vec3d_add_sca_v), \
-int *: _Generic((b), int *: vec3i_add_vec_v, const int *: vec3i_add_vec_v default: vec3i_add_sca_v), \
-const int *: _Generic((b), int *: vec3i_add_vec_v, const int *: vec3i_add_vec_v default: vec3i_add_sca_v), \
+float *: _Generic((b), float *: vec3f_add_vec_v, const float *: vec3f_add_vec_v, default: vec3f_add_sca_v), \
+const float *: _Generic((b), float *: vec3f_add_vec_v, const float *: vec3f_add_vec_v, default: vec3f_add_sca_v), \
+double *: _Generic((b), double *: vec3d_add_vec_v, const double *: vec3d_add_vec_v, default: vec3d_add_sca_v), \
+const double *: _Generic((b), double *: vec3d_add_vec_v, const double *: vec3d_add_vec_v, default: vec3d_add_sca_v), \
+int *: _Generic((b), int *: vec3i_add_vec_v, const int *: vec3i_add_vec_v, default: vec3i_add_sca_v), \
+const int *: _Generic((b), int *: vec3i_add_vec_v, const int *: vec3i_add_vec_v, default: vec3i_add_sca_v), \
 default: "type_error"\
 ) ((vec_a), (b))
 

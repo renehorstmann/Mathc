@@ -25,6 +25,10 @@ target_include_directories(mat PUBLIC include)
 target_link_libraries(mat m)
 
 
+add_executable(test examples/test.c)
+target_include_directories(test PUBLIC include)
+target_link_libraries(test m)
+
 
 add_library(performance_test_lib SHARED examples/performance_test_lib.c)
 target_include_directories(performance_test_lib PUBLIC include)
