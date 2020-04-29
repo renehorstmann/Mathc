@@ -120,7 +120,7 @@ typedef struct vec3f {
 ```
 
 ## Performance
-Also it seems that there will be an overhead due to the casts and copying. 
+It seems that there will be an overhead due to the casts and copying. 
 The [performance test](examples/performance_test_lib.c) shows that the overhead is only noticeable in debug mode of the compiler.
 
 ## Running the examples
