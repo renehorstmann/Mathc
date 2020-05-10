@@ -23,8 +23,17 @@ int main() {
     int sum_c = vec3_sum_v(vec_c);
     printf("%d\n", sum_c);
 
+
+    // the fourth element of a vec4 is not effected, if wrapped into vec3
+    float vec_d_a[4] = {5, 4, 3, 1};
+    float vec_d_b[4] = {1, 1, 1, 1};
+    float vec_d_res[4] = {0, 0, 0, 2.34f};
+    Vec3f(vec_d_res) = vec3_sub_v(vec_d_a, vec_d_b);
+    printf("%f %f %f %f\n", vec_d_res[0], vec_d_res[1], vec_d_res[2], vec_d_res[3]);
+
     // output:
     // 123.826492
     // 22.980000
     // 615
+    // 4.000000 3.000000 2.000000 2.340000
 }
