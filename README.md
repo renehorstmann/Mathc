@@ -126,6 +126,27 @@ The [performance test](examples/performance_test_lib.c) shows that the overhead 
 ## Running the examples
 The top directory of this project contains a CmakeLists.txt file, which sets up the examples for each library
 
+## Todo:
+- Fork functions from cglm to this style. LookAt, ortho, perspective, quat, rotation axis, ...
+- structs with anonym unions:
+```c
+typedef struct vec3f {
+    union {
+        float raw[3];
+        struct {
+            float x, y, z;
+        };
+        struct {
+            float r, g, b;
+        };
+        vec2f xy;
+        vec2f rg;
+        // ...
+    };
+} vec3f
+
+```
+
 ## Author
 
 * **René Horstmann**
