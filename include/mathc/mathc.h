@@ -2,6 +2,7 @@
 #define MATHC_MATHC_H
 
 #include "types.h"
+#include "io.h"
 #include "vec.h"
 #include "mat.h"
 
