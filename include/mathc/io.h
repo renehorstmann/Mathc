@@ -28,7 +28,7 @@
 // f = float
 //
 
-void vec2f_print_f(vec2f vec, FILE *ostream) {
+static void vec2f_print_f(vec2f vec, FILE *ostream) {
     fprintf(ostream, "vec2f: " MATHC_PRINT_COLOR "(");
     for (int v = 0; v < 2; v++) {
         if (vec.v[v] < MATHC_PRINT_MAX_TO_SHORT)
@@ -39,11 +39,11 @@ void vec2f_print_f(vec2f vec, FILE *ostream) {
     fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void vec2f_print(vec2f vec) {
+static void vec2f_print(vec2f vec) {
     vec2f_print_f(vec, stdout);
 }
 
-void mat22f_print_f(mat22f mat, FILE *ostream) {
+static void mat22f_print_f(mat22f mat, FILE *ostream) {
     fprintf(ostream, "mat22f: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 2; c++) {
         fprintf(ostream, "  |");
@@ -58,12 +58,12 @@ void mat22f_print_f(mat22f mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void mat22f_print(mat22f matrix) {
+static void mat22f_print(mat22f matrix) {
     mat22f_print_f(matrix, stdout);
 }
 
 
-void vec3f_print_f(vec3f vec, FILE *ostream) {
+static void vec3f_print_f(vec3f vec, FILE *ostream) {
     fprintf(ostream, "vec3f: " MATHC_PRINT_COLOR "(");
     for (int v = 0; v < 3; v++) {
         if (vec.v[v] < MATHC_PRINT_MAX_TO_SHORT)
@@ -74,11 +74,11 @@ void vec3f_print_f(vec3f vec, FILE *ostream) {
     fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void vec3f_print(vec3f vec) {
+static void vec3f_print(vec3f vec) {
     vec3f_print_f(vec, stdout);
 }
 
-void mat33f_print_f(mat33f mat, FILE *ostream) {
+static void mat33f_print_f(mat33f mat, FILE *ostream) {
     fprintf(ostream, "mat33f: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 3; c++) {
         fprintf(ostream, "  |");
@@ -93,11 +93,11 @@ void mat33f_print_f(mat33f mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void mat33f_print(mat33f matrix) {
+static void mat33f_print(mat33f matrix) {
     mat33f_print_f(matrix, stdout);
 }
 
-void vec4f_print_f(vec4f vec, FILE *ostream) {
+static void vec4f_print_f(vec4f vec, FILE *ostream) {
     fprintf(ostream, "vec4f: " MATHC_PRINT_COLOR "(");
     for (int v = 0; v < 4; v++) {
         if (vec.v[v] < MATHC_PRINT_MAX_TO_SHORT)
@@ -108,11 +108,11 @@ void vec4f_print_f(vec4f vec, FILE *ostream) {
     fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void vec4f_print(vec4f vec) {
+static void vec4f_print(vec4f vec) {
     vec4f_print_f(vec, stdout);
 }
 
-void mat44f_print_f(mat44f mat, FILE *ostream) {
+static void mat44f_print_f(mat44f mat, FILE *ostream) {
     fprintf(ostream, "mat44f: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 4; c++) {
         fprintf(ostream, "  |");
@@ -127,7 +127,7 @@ void mat44f_print_f(mat44f mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void mat44f_print(mat44f matrix) {
+static void mat44f_print(mat44f matrix) {
     mat44f_print_f(matrix, stdout);
 }
 
@@ -137,7 +137,7 @@ void mat44f_print(mat44f matrix) {
 // d = double
 //
 
-void vec2d_print_f(vec2d vec, FILE *ostream) {
+static void vec2d_print_f(vec2d vec, FILE *ostream) {
     fprintf(ostream, "vec2d: " MATHC_PRINT_COLOR "(");
     for (int v = 0; v < 2; v++) {
         if (vec.v[v] < MATHC_PRINT_MAX_TO_SHORT)
@@ -148,11 +148,11 @@ void vec2d_print_f(vec2d vec, FILE *ostream) {
     fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void vec2d_print(vec2d vec) {
+static void vec2d_print(vec2d vec) {
     vec2d_print_f(vec, stdout);
 }
 
-void mat22d_print_f(mat22d mat, FILE *ostream) {
+static void mat22d_print_f(mat22d mat, FILE *ostream) {
     fprintf(ostream, "mat22d: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 2; c++) {
         fprintf(ostream, "  |");
@@ -167,12 +167,12 @@ void mat22d_print_f(mat22d mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void mat22d_print(mat22d matrix) {
+static void mat22d_print(mat22d matrix) {
     mat22d_print_f(matrix, stdout);
 }
 
 
-void vec3d_print_f(vec3d vec, FILE *ostream) {
+static void vec3d_print_f(vec3d vec, FILE *ostream) {
     fprintf(ostream, "vec3d: " MATHC_PRINT_COLOR "(");
     for (int v = 0; v < 3; v++) {
         if (vec.v[v] < MATHC_PRINT_MAX_TO_SHORT)
@@ -183,11 +183,11 @@ void vec3d_print_f(vec3d vec, FILE *ostream) {
     fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void vec3d_print(vec3d vec) {
+static void vec3d_print(vec3d vec) {
     vec3d_print_f(vec, stdout);
 }
 
-void mat33d_print_f(mat33d mat, FILE *ostream) {
+static void mat33d_print_f(mat33d mat, FILE *ostream) {
     fprintf(ostream, "mat33d: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 3; c++) {
         fprintf(ostream, "  |");
@@ -202,11 +202,11 @@ void mat33d_print_f(mat33d mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void mat33d_print(mat33d matrix) {
+static void mat33d_print(mat33d matrix) {
     mat33d_print_f(matrix, stdout);
 }
 
-void vec4d_print_f(vec4d vec, FILE *ostream) {
+static void vec4d_print_f(vec4d vec, FILE *ostream) {
     fprintf(ostream, "vec4d: " MATHC_PRINT_COLOR "(");
     for (int v = 0; v < 4; v++) {
         if (vec.v[v] < MATHC_PRINT_MAX_TO_SHORT)
@@ -217,11 +217,11 @@ void vec4d_print_f(vec4d vec, FILE *ostream) {
     fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void vec4d_print(vec4d vec) {
+static void vec4d_print(vec4d vec) {
     vec4d_print_f(vec, stdout);
 }
 
-void mat44d_print_f(mat44d mat, FILE *ostream) {
+static void mat44d_print_f(mat44d mat, FILE *ostream) {
     fprintf(ostream, "mat44d: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 4; c++) {
         fprintf(ostream, "  |");
@@ -236,7 +236,7 @@ void mat44d_print_f(mat44d mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void mat44d_print(mat44d matrix) {
+static void mat44d_print(mat44d matrix) {
     mat44d_print_f(matrix, stdout);
 }
 
@@ -246,7 +246,7 @@ void mat44d_print(mat44d matrix) {
 // i = int
 //
 
-void vec2i_print_f(vec2i vec, FILE *ostream) {
+static void vec2i_print_f(vec2i vec, FILE *ostream) {
     fprintf(ostream, "vec2i: " MATHC_PRINT_COLOR "(");
     for (int v = 0; v < 2; v++) {
         fprintf(ostream, " %d", vec.v[v]);
@@ -254,11 +254,11 @@ void vec2i_print_f(vec2i vec, FILE *ostream) {
     fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void vec2i_print(vec2i vec) {
+static void vec2i_print(vec2i vec) {
     vec2i_print_f(vec, stdout);
 }
 
-void mat22i_print_f(mat22i mat, FILE *ostream) {
+static void mat22i_print_f(mat22i mat, FILE *ostream) {
     fprintf(ostream, "mat22i: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 2; c++) {
         fprintf(ostream, "  |");
@@ -270,12 +270,12 @@ void mat22i_print_f(mat22i mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void mat22i_print(mat22i matrix) {
+static void mat22i_print(mat22i matrix) {
     mat22i_print_f(matrix, stdout);
 }
 
 
-void vec3i_print_f(vec3i vec, FILE *ostream) {
+static void vec3i_print_f(vec3i vec, FILE *ostream) {
     fprintf(ostream, "vec3i: " MATHC_PRINT_COLOR "(");
     for (int v = 0; v < 3; v++) {
         fprintf(ostream, " %i", vec.v[v]);
@@ -283,11 +283,11 @@ void vec3i_print_f(vec3i vec, FILE *ostream) {
     fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void vec3i_print(vec3i vec) {
+static void vec3i_print(vec3i vec) {
     vec3i_print_f(vec, stdout);
 }
 
-void mat33i_print_f(mat33i mat, FILE *ostream) {
+static void mat33i_print_f(mat33i mat, FILE *ostream) {
     fprintf(ostream, "mat33i: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 3; c++) {
         fprintf(ostream, "  |");
@@ -299,11 +299,11 @@ void mat33i_print_f(mat33i mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void mat33i_print(mat33i matrix) {
+static void mat33i_print(mat33i matrix) {
     mat33i_print_f(matrix, stdout);
 }
 
-void vec4i_print_f(vec4i vec, FILE *ostream) {
+static void vec4i_print_f(vec4i vec, FILE *ostream) {
     fprintf(ostream, "vec4i: " MATHC_PRINT_COLOR "(");
     for (int v = 0; v < 4; v++) {
         fprintf(ostream, " %i", vec.v[v]);
@@ -311,11 +311,11 @@ void vec4i_print_f(vec4i vec, FILE *ostream) {
     fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void vec4i_print(vec4i vec) {
+static void vec4i_print(vec4i vec) {
     vec4i_print_f(vec, stdout);
 }
 
-void mat44i_print_f(mat44i mat, FILE *ostream) {
+static void mat44i_print_f(mat44i mat, FILE *ostream) {
     fprintf(ostream, "mat44i: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 4; c++) {
         fprintf(ostream, "  |");
@@ -327,7 +327,7 @@ void mat44i_print_f(mat44i mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-void mat44i_print(mat44i matrix) {
+static void mat44i_print(mat44i matrix) {
     mat44i_print_f(matrix, stdout);
 }
 
