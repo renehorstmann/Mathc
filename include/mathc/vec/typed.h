@@ -7,14 +7,120 @@
 
 //
 // this header file has the following content:
-// 1. typed functions for float[3] as vec3f
-// 2. typed functions for float[4] as vec4f
-// 3. typed functions for double[3] as vec3d
-// 4. typed functions for double[4] as vec4d
-// 5. typed functions for int[3] as vec3i
-// 6. typed functions for int[4] as vec4i
+// 1. typed functions for float[2] as vec2f
+// 2. typed functions for float[3] as vec3f
+// 3. typed functions for float[4] as vec4f
+// 4. typed functions for double[2] as vec2d
+// 5. typed functions for double[3] as vec3d
+// 6. typed functions for double[4] as vec4d
+// 7. typed functions for int[2] as vec2i
+// 8. typed functions for int[3] as vec3i
+// 9. typed functions for int[4] as vec4i
 //
 
+
+//
+// vec2f
+//
+
+/** vec<n> dst_i = scalar */
+static vec2f vec2f_set(float scalar) {
+    vec2f res;
+    vecf_set(res.v, scalar, 2);
+    return res;
+}
+
+/** vec<n> dst_i = -vec_i */
+static vec2f vec2f_neg(vec2f vec) {
+    vec2f res;
+    vecf_neg(res.v, vec.v, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i + b_i */
+static vec2f vec2f_add_vec(vec2f vec_a, vec2f vec_b) {
+    vec2f res;
+    vecf_add_vec(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i + b */
+static vec2f vec2f_add_sca(vec2f vec_a, float scalar_b) {
+    vec2f res;
+    vecf_add_sca(res.v, vec_a.v, scalar_b, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i - b_i */
+static vec2f vec2f_sub_vec(vec2f vec_a, vec2f vec_b) {
+    vec2f res;
+    vecf_sub_vec(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i - b_i */
+static vec2f vec2f_sub_sca(vec2f vec_a, float scalar_b) {
+    vec2f res;
+    vecf_sub_sca(res.v, vec_a.v, scalar_b, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i * b_i */
+static vec2f vec2f_scale_vec(vec2f vec_a, vec2f vec_b) {
+    vec2f res;
+    vecf_scale_vec(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+
+/** vec<n> res_i = a_i * b */
+static vec2f vec2f_scale_sca(vec2f vec_a, float scalar_b) {
+    vec2f res;
+    vecf_scale_sca(res.v, vec_a.v, scalar_b, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static vec2f vec2f_div_vec(vec2f vec_a, vec2f vec_b) {
+    vec2f res;
+    vecf_div_vec(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+
+/** vec<n> res_i = a_i / b */
+static vec2f vec2f_div_sca(vec2f vec_a, float scalar_b) {
+    vec2f res;
+    vecf_div_sca(res.v, vec_a.v, scalar_b, 2);
+    return res;
+}
+
+/** returns vec[0] + vec[1] + ... + vec[n-1] */
+static float vec2f_sum(vec2f vec) {
+    return vecf_sum(vec.v, 2);
+}
+
+/** returns vec<n> dot vec<n> */
+static float vec2f_dot(vec2f vec_a, vec2f vec_b) {
+    return vecf_dot(vec_a.v, vec_b.v, 2);
+}
+
+/** returns norm2 of a float vector */
+static float vec2f_norm(vec2f vec) {
+    return vecf_norm(vec.v, 2);
+}
+
+/** dst = vec / norm(vec) */
+static vec2f vec2f_normalize_unsafe(vec2f vec) {
+    vec2f res;
+    vecf_normalize_unsafe(res.v, vec.v, 2);
+    return res;
+}
+
+/** dst = vec / (norm(vec) > 0 ? norm(vec) : 1) */
+static vec2f vec2f_normalize(vec2f vec) {
+    vec2f res;
+    vecf_normalize(res.v, vec.v, 2);
+    return res;
+}
 
 //
 // vec3f
@@ -234,6 +340,110 @@ static vec4f vec4f_normalize_unsafe(vec4f vec) {
 static vec4f vec4f_normalize(vec4f vec) {
     vec4f res;
     vecf_normalize(res.v, vec.v, 4);
+    return res;
+}
+
+
+//
+// vec2d
+//
+
+/** vec<n> dst_i = scalar */
+static vec2d vec2d_set(double scalar) {
+    vec2d res;
+    vecd_set(res.v, scalar, 2);
+    return res;
+}
+
+/** vec<n> dst_i = -vec_i */
+static vec2d vec2d_neg(vec2d vec) {
+    vec2d res;
+    vecd_neg(res.v, vec.v, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i + b_i */
+static vec2d vec2d_add_vec(vec2d vec_a, vec2d vec_b) {
+    vec2d res;
+    vecd_add_vec(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i + b */
+static vec2d vec2d_add_sca(vec2d vec_a, double scalar_b) {
+    vec2d res;
+    vecd_add_sca(res.v, vec_a.v, scalar_b, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i - b_i */
+static vec2d vec2d_sub_vec(vec2d vec_a, vec2d vec_b) {
+    vec2d res;
+    vecd_sub_vec(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i - b_i */
+static vec2d vec2d_sub_sca(vec2d vec_a, double scalar_b) {
+    vec2d res;
+    vecd_sub_sca(res.v, vec_a.v, scalar_b, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i * b_i */
+static vec2d vec2d_scale_vec(vec2d vec_a, vec2d vec_b) {
+    vec2d res;
+    vecd_scale_vec(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+
+/** vec<n> res_i = a_i * b */
+static vec2d vec2d_scale_sca(vec2d vec_a, double scalar_b) {
+    vec2d res;
+    vecd_scale_sca(res.v, vec_a.v, scalar_b, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static vec2d vec2d_div_vec(vec2d vec_a, vec2d vec_b) {
+    vec2d res;
+    vecd_div_vec(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+
+/** vec<n> res_i = a_i / b */
+static vec2d vec2d_div_sca(vec2d vec_a, double scalar_b) {
+    vec2d res;
+    vecd_div_sca(res.v, vec_a.v, scalar_b, 2);
+    return res;
+}
+
+/** returns vec[0] + vec[1] + ... + vec[n-1] */
+static double vec2d_sum(vec2d vec) {
+    return vecd_sum(vec.v, 2);
+}
+
+/** returns vec<n> dot vec<n> */
+static double vec2d_dot(vec2d vec_a, vec2d vec_b) {
+    return vecd_dot(vec_a.v, vec_b.v, 2);
+}
+
+/** returns norm2 of a double vector */
+static double vec2d_norm(vec2d vec) {
+    return vecd_norm(vec.v, 2);
+}
+
+/** dst = vec / norm(vec) */
+static vec2d vec2d_normalize_unsafe(vec2d vec) {
+    vec2d res;
+    vecd_normalize_unsafe(res.v, vec.v, 2);
+    return res;
+}
+
+/** dst = vec / (norm(vec) > 0 ? norm(vec) : 1) */
+static vec2d vec2d_normalize(vec2d vec) {
+    vec2d res;
+    vecd_normalize(res.v, vec.v, 2);
     return res;
 }
 
@@ -460,6 +670,96 @@ static vec4d vec4d_normalize(vec4d vec) {
 }
 
 //
+// vec2i
+//
+
+/** vec<n> dst_i = scalar */
+static vec2i vec2i_set(int scalar) {
+    vec2i res;
+    veci_set(res.v, scalar, 2);
+    return res;
+}
+
+/** vec<n> dst_i = -vec_i */
+static vec2i vec2i_neg(vec2i vec) {
+    vec2i res;
+    veci_neg(res.v, vec.v, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i + b_i */
+static vec2i vec2i_add_vec(vec2i vec_a, vec2i vec_b) {
+    vec2i res;
+    veci_add_vec(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i + b */
+static vec2i vec2i_add_sca(vec2i vec_a, int scalar_b) {
+    vec2i res;
+    veci_add_sca(res.v, vec_a.v, scalar_b, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i - b_i */
+static vec2i vec2i_sub_vec(vec2i vec_a, vec2i vec_b) {
+    vec2i res;
+    veci_sub_vec(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i - b_i */
+static vec2i vec2i_sub_sca(vec2i vec_a, int scalar_b) {
+    vec2i res;
+    veci_sub_sca(res.v, vec_a.v, scalar_b, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i * b_i */
+static vec2i vec2i_scale_vec(vec2i vec_a, vec2i vec_b) {
+    vec2i res;
+    veci_scale_vec(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+
+/** vec<n> res_i = a_i * b */
+static vec2i vec2i_scale_sca(vec2i vec_a, int scalar_b) {
+    vec2i res;
+    veci_scale_sca(res.v, vec_a.v, scalar_b, 2);
+    return res;
+}
+
+/** vec<n> dst_i = a_i / b_i */
+static vec2i vec2i_div_vec(vec2i vec_a, vec2i vec_b) {
+    vec2i res;
+    veci_div_vec(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+
+/** vec<n> res_i = a_i / b */
+static vec2i vec2i_div_sca(vec2i vec_a, int scalar_b) {
+    vec2i res;
+    veci_div_sca(res.v, vec_a.v, scalar_b, 2);
+    return res;
+}
+
+/** returns vec[0] + vec[1] + ... + vec[n-1] */
+static int vec2i_sum(vec2i vec) {
+    return veci_sum(vec.v, 2);
+}
+
+/** returns vec<n> dot vec<n> */
+static int vec2i_dot(vec2i vec_a, vec2i vec_b) {
+    return veci_dot(vec_a.v, vec_b.v, 2);
+}
+
+/** returns norm2 of a int vector */
+static double vec2i_norm(vec2i vec) {
+    return veci_norm(vec.v, 2);
+}
+
+
+//
 // vec3i
 //
 
@@ -650,7 +950,6 @@ static vec4i vec4i_cross(vec4i vec_a, vec4i vec_b) {
 static double vec4i_norm(vec4i vec) {
     return veci_norm(vec.v, 4);
 }
-
 
 
 #endif //MATHC_VEC_TYPED_H

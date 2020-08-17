@@ -11,6 +11,207 @@
 
 
 //
+// vec2
+//
+
+/** vec<n> dst_i = -vec_i */
+#define vec2_neg_v(vec) _Generic((vec), \
+float *: vec2f_neg_v, \
+const float *: vec2f_neg_v, \
+double *: vec2d_neg_v, \
+const double *: vec2d_neg_v, \
+int *: vec2i_neg_v, \
+const int *: vec2i_neg_v, \
+default: "type_error" \
+) ((vec))
+
+/** vec<n> dst_i = a_i + b_i */
+#define vec2_add_vec_v(vec_a, vec_b) _Generic((vec_a), \
+float *: vec2f_add_vec_v, \
+const float *: vec2f_add_vec_v, \
+double *: vec2d_add_vec_v, \
+const double *: vec2d_add_vec_v, \
+int *: vec2i_add_vec_v, \
+const int *: vec2i_add_vec_v, \
+default: "type_error" \
+) ((vec_a), (vec_b))
+
+/** vec<n> dst_i = a_i + b */
+#define vec2_add_sca_v(vec_a, scalar_b) _Generic((vec_a), \
+float *: vec2f_add_sca_v, \
+const float *: vec2f_add_sca_v, \
+double *: vec2d_add_sca_v, \
+const double *: vec2d_add_sca_v, \
+int *: vec2i_add_sca_v, \
+const int *: vec2i_add_sca_v, \
+default: "type_error" \
+) ((vec_a), (scalar_b))
+
+/** nested generic for both vec2_add_vec_v and vec2_add_sca_: vec<n> dst_i = a_i + b */
+#define vec2_add_v(vec_a, b) _Generic((vec_a), \
+float *: _Generic((b), float *: vec2f_add_vec_v, const float *: vec2f_add_vec_v, default: vec2f_add_sca_v), \
+const float *: _Generic((b), float *: vec2f_add_vec_v, const float *: vec2f_add_vec_v, default: vec2f_add_sca_v), \
+double *: _Generic((b), double *: vec2d_add_vec_v, const double *: vec2d_add_vec_v, default: vec2d_add_sca_v), \
+const double *: _Generic((b), double *: vec2d_add_vec_v, const double *: vec2d_add_vec_v, default: vec2d_add_sca_v), \
+int *: _Generic((b), int *: vec2i_add_vec_v, const int *: vec2i_add_vec_v, default: vec2i_add_sca_v), \
+const int *: _Generic((b), int *: vec2i_add_vec_v, const int *: vec2i_add_vec_v, default: vec2i_add_sca_v), \
+default: "type_error"\
+) ((vec_a), (b))
+
+/** vec<n> dst_i = a_i - b_i */
+#define vec2_sub_vec_v(vec_a, vec_b) _Generic((vec_a), \
+float *: vec2f_sub_vec_v, \
+const float *: vec2f_sub_vec_v, \
+double *: vec2d_sub_vec_v, \
+const double *: vec2d_sub_vec_v, \
+int *: vec2i_sub_vec_v, \
+const int *: vec2i_sub_vec_v, \
+default: "type_error" \
+) ((vec_a), (vec_b))
+
+/** vec<n> dst_i = a_i - b_i */
+#define vec2_sub_sca_v(vec_a, scalar_b) _Generic((vec_a), \
+float *: vec2f_sub_sca_v, \
+const float *: vec2f_sub_sca_v, \
+double *: vec2d_sub_sca_v, \
+const double *: vec2d_sub_sca_v, \
+int *: vec2i_sub_sca_v, \
+const int *: vec2i_sub_sca_v, \
+default: "type_error" \
+) ((vec_a), (scalar_b))
+
+/** nested generic for both vec2_sub_vec_v and vec2_sub_sca_v: vec<n> dst_i = a_i - b */
+#define vec2_sub_v(vec_a, b) _Generic((vec_a), \
+float *: _Generic((b), float *: vec2f_sub_vec_v, const float *: vec2f_sub_vec_v, default: vec2f_sub_sca_v), \
+const float *: _Generic((b), float *: vec2f_sub_vec_v, const float *: vec2f_sub_vec_v, default: vec2f_sub_sca_v), \
+double *: _Generic((b), double *: vec2d_sub_vec_v, const double *: vec2d_sub_vec_v, default: vec2d_sub_sca_v), \
+const double *: _Generic((b), double *: vec2d_sub_vec_v, const double *: vec2d_sub_vec_v, default: vec2d_sub_sca_v), \
+int *: _Generic((b), int *: vec2i_sub_vec_v, const int *: vec2i_sub_vec_v, default: vec2i_sub_sca_v), \
+const int *: _Generic((b), int *: vec2i_sub_vec_v, const int *: vec2i_sub_vec_v, default: vec2i_sub_sca_v), \
+default: "type_error"\
+) ((vec_a), (b))
+
+/** vec<n> dst_i = a_i * b_i */
+#define vec2_scale_vec_v(vec_a, vec_b) _Generic((vec_a), \
+float *: vec2f_scale_vec_v, \
+const float *: vec2f_scale_vec_v, \
+double *: vec2d_scale_vec_v, \
+const double *: vec2d_scale_vec_v, \
+int *: vec2i_scale_vec_v, \
+const int *: vec2i_scale_vec_v, \
+default: "type_error" \
+) ((vec_a), (vec_b))
+
+/** vec<n> res_i = a_i * b */
+#define vec2_scale_sca_v(vec_a, scalar_b) _Generic((vec_a), \
+float *: vec2f_scale_sca_v, \
+const float *: vec2f_scale_sca_v, \
+double *: vec2d_scale_sca_v, \
+const double *: vec2d_scale_sca_v, \
+int *: vec2i_scale_sca_v, \
+const int *: vec2i_scale_sca_v, \
+default: "type_error" \
+) ((vec_a), (scalar_b))
+
+/** nested generic for both vec2_scale_vec_v and vec2_scale_sca_v: vec<n> dst_i = a_i * b */
+#define vec2_scale_v(vec_a, b) _Generic((vec_a), \
+float *: _Generic((b), float *: vec2f_scale_vec_v, const float *: vec2f_scale_vec_v, default: vec2f_scale_sca_v), \
+const float *: _Generic((b), float *: vec2f_scale_vec_v, const float *: vec2f_scale_vec_v, default: vec2f_scale_sca_v), \
+double *: _Generic((b), double *: vec2d_scale_vec_v, const double *: vec2d_scale_vec_v, default: vec2d_scale_sca_v), \
+const double *: _Generic((b), double *: vec2d_scale_vec_v, const double *: vec2d_scale_vec_v, default: vec2d_scale_sca_v), \
+int *: _Generic((b), int *: vec2i_scale_vec_v, const int *: vec2i_scale_vec_v, default: vec2i_scale_sca_v), \
+const int *: _Generic((b), int *: vec2i_scale_vec_v, const int *: vec2i_scale_vec_v, default: vec2i_scale_sca_v), \
+default: "type_error"\
+) ((vec_a), (b))
+
+/** vec<n> dst_i = a_i / b_i */
+#define vec2_div_vec_v(vec_a, vec_b) _Generic((vec_a), \
+float *: vec2f_div_vec_v, \
+const float *: vec2f_div_vec_v, \
+double *: vec2d_div_vec_v, \
+const double *: vec2d_div_vec_v, \
+int *: vec2i_div_vec_v, \
+const int *: vec2i_div_vec_v, \
+default: "type_error" \
+) ((vec_a), (vec_b))
+
+/** vec<n> res_i = a_i / b */
+#define vec2_div_sca_v(vec_a, scalar_b) _Generic((vec_a), \
+float *: vec2f_div_sca_v, \
+const float *: vec2f_div_sca_v, \
+double *: vec2d_div_sca_v, \
+const double *: vec2d_div_sca_v, \
+int *: vec2i_div_sca_v, \
+const int *: vec2i_div_sca_v, \
+default: "type_error" \
+) ((vec_a), (scalar_b))
+
+/** nested generic for both vec2_div_vec_v and vec2_div_sca_v: vec<n> dst_i = a_i / b */
+#define vec2_div_v(vec_a, b) _Generic((vec_a), \
+float *: _Generic((b), float *: vec2f_div_vec_v, const float *: vec2f_div_vec_v, default: vec2f_div_sca_v), \
+const float *: _Generic((b), float *: vec2f_div_vec_v, const float *: vec2f_div_vec_v, default: vec2f_div_sca_v), \
+double *: _Generic((b), double *: vec2d_div_vec_v, const double *: vec2d_div_vec_v, default: vec2d_div_sca_v), \
+const double *: _Generic((b), double *: vec2d_div_vec_v, const double *: vec2d_div_vec_v, default: vec2d_div_sca_v), \
+int *: _Generic((b), int *: vec2i_div_vec_v, const int *: vec2i_div_vec_v, default: vec2i_div_sca_v), \
+const int *: _Generic((b), int *: vec2i_div_vec_v, const int *: vec2i_div_vec_v, default: vec2i_div_sca_v), \
+default: "type_error"\
+) ((vec_a), (b))
+
+/** returns vec[0] + vec[1] + ... + vec[n-1] */
+#define vec2_sum_v(vec) _Generic((vec), \
+float *: vec2f_sum_v, \
+const float *: vec2f_sum_v, \
+double *: vec2d_sum_v, \
+const double *: vec2d_sum_v, \
+int *: vec2i_sum_v, \
+const int *: vec2i_sum_v, \
+default: "type_error" \
+) ((vec))
+
+/** returns vec<n> dot vec<n> */
+#define vec2_dot_v(vec_a, vec_b) _Generic((vec_a), \
+float *: vec2f_dot_v, \
+const float *: vec2f_dot_v, \
+double *: vec2d_dot_v, \
+const double *: vec2d_dot_v, \
+int *: vec2i_dot_v, \
+const int *: vec2i_dot_v, \
+default: "type_error" \
+) ((vec_a), (vec_b))
+
+/** returns norm2 of a float vector */
+#define vec2_norm_v(vec) _Generic((vec), \
+float *: vec2f_norm_v, \
+const float *: vec2f_norm_v, \
+double *: vec2d_norm_v, \
+const double *: vec2d_norm_v, \
+int *: vec2i_norm_v, \
+const int *: vec2i_norm_v, \
+default: "type_error" \
+) ((vec))
+
+/** dst = vec / norm(vec) */
+#define vec2_normalize_unsafe_v(vec) _Generic((vec), \
+float *: vec2f_normalize_unsafe_v, \
+const float *: vec2f_normalize_unsafe_v, \
+double *: vec2d_normalize_unsafe_v, \
+const double *: vec2d_normalize_unsafe_v, \
+default: "type_error" \
+) ((vec))
+
+/** dst = vec / (norm(vec) > 0 ? norm(vec) : 1) */
+#define vec2_normalize_v(vec) _Generic((vec), \
+float *: vec2f_normalize_v, \
+const float *: vec2f_normalize_v, \
+double *: vec2d_normalize_v, \
+const double *: vec2d_normalize_v, \
+default: "type_error" \
+) ((vec))
+
+
+
+
+//
 // vec3
 //
 
@@ -430,7 +631,6 @@ double *: vec4d_normalize_v, \
 const double *: vec4d_normalize_v, \
 default: "type_error" \
 ) ((vec))
-
 
 
 #endif //MATHC_VEC_GENERIC_V_H
