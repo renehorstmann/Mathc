@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "mathc/mat.h"
+#include "mathc/io.h"
 
 int main() {
 
@@ -44,6 +45,7 @@ int main() {
     printf("%f %f %f %f\n", v.col[0].x, v.col[0].y, v.col[1].v0, v.col[1].v1);
     printf("%f %f %f %f\n", v.m[0][0], v.m[0][1], v.m[1][0], v.m[1][1]);
     printf("%f %f %f %f\n", v.m00, v.m01, v.m10, v.m11);
+    mat_print(v);
 
     // output:
     // -210.000000
@@ -61,4 +63,7 @@ int main() {
     // 1.000000 2.000000 3.000000 4.000000
     // 1.000000 2.000000 3.000000 4.000000
     // 1.000000 2.000000 3.000000 4.000000
+    // mat22f:
+    //   | 1.00000 3.00000 |
+    //   | 2.00000 4.00000 |
 }

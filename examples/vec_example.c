@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "mathc/vec.h"
+#include "mathc/io.h"
 
 int main() {
 
@@ -37,6 +38,8 @@ int main() {
     printf("%f %f %f %f\n", v.v0, v.v1, v.v2, v.v3);
     printf("%f %f %f %f\n", v.v[0], v.v[1], v.v[2], v.v[3]);
     printf("%f %f %f %f\n", v.xy.v0, v.yz.v0, v.zw.v0, v.yzw.v2);
+    vec_print(v);
+
     // output:
     // 123.826492
     // 22.980000
@@ -47,4 +50,5 @@ int main() {
     // 1.000000 2.000000 3.000000 4.000000
     // 1.000000 2.000000 3.000000 4.000000
     // 1.000000 2.000000 3.000000 4.000000
+    // vec4f: ( 1.00000 2.00000 3.00000 4.00000 )
 }
