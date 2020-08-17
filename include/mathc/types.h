@@ -1,10 +1,62 @@
 #ifndef MATHC_TYPES_H
 #define MATHC_TYPES_H
 
-typedef struct vec3f {
+typedef union vec2f {
+    float v[2];
+    struct {
+        float v0, v1;
+    };
+    struct {
+        float x, y;
+    };
+} vec2f;
+_Static_assert(sizeof(vec2f) == sizeof(float) * 2, "[Mathc] wrong expected size");
+
+/** casts a float * to a dereferenced vec2f */
+#define Vec2f(vec) (*(vec2f *) (vec))
+
+/** casts a float * to a dereferenced const vec2f */
+#define ConstVec2f(vec) (*(const vec2f *) (vec))
+
+
+typedef union mat22f {
+    float v[4];
+    float m[2][2];
+    vec2f col[2];
+    struct {
+        float v0, v1;
+        float v2, v3;
+    };
+    struct {
+        float m00, m01;
+        float m10, m11;
+    };
+} mat22f;
+_Static_assert(sizeof(mat22f) == sizeof(float) * 4, "[Mathc] wrong expected size");
+
+/** casts a float * to a dereferenced mat22f */
+#define Mat22f(mat) (*(mat22f *) (mat))
+
+/** casts a float * to a dereferenced const mat22f */
+#define ConstMat22f(mat) (*(const mat22f *) (mat))
+
+typedef union vec3f {
     float v[3];
+    struct {
+        float v0, v1, v2;
+    };
+    vec2f xy;
+    struct {
+        float x;
+        union {
+            struct {
+                float y, z;
+            };
+            vec2f yz;
+        };
+    };
 } vec3f;
-_Static_assert(sizeof(vec3f)==sizeof(float)*3, "[Mathc] wrong expected size");
+_Static_assert(sizeof(vec3f) == sizeof(float) * 3, "[Mathc] wrong expected size");
 
 /** casts a float * to a dereferenced vec3f */
 #define Vec3f(vec) (*(vec3f *) (vec))
@@ -16,9 +68,19 @@ _Static_assert(sizeof(vec3f)==sizeof(float)*3, "[Mathc] wrong expected size");
 typedef union mat33f {
     float v[9];
     float m[3][3];
-    vec3f rows[3];
+    vec3f col[3];
+    struct {
+        float v0, v1, v2;
+        float v3, v4, v5;
+        float v6, v7, v8;
+    };
+    struct {
+        float m00, m01, m02;
+        float m10, m11, m12;
+        float m20, m21, m22;
+    };
 } mat33f;
-_Static_assert(sizeof(mat33f)==sizeof(float)*9, "[Mathc] wrong expected size");
+_Static_assert(sizeof(mat33f) == sizeof(float) * 9, "[Mathc] wrong expected size");
 
 /** casts a float * to a dereferenced mat33f */
 #define Mat33f(mat) (*(mat33f *) (mat))
@@ -27,10 +89,31 @@ _Static_assert(sizeof(mat33f)==sizeof(float)*9, "[Mathc] wrong expected size");
 #define ConstMat33f(mat) (*(const mat33f *) (mat))
 
 
-typedef struct vec4f {
+typedef union vec4f {
     float v[4];
+    struct {
+        float v0, v1, v2, v3;
+    };
+    vec2f xy;
+    vec3f xyz;
+    struct {
+        float x;
+        union {
+            struct {
+                float y;
+                union {
+                    struct {
+                        float z, w;
+                    };
+                    vec2f zw;
+                };
+            };
+            vec2f yz;
+            vec3f yzw;
+        };
+    };
 } vec4f;
-_Static_assert(sizeof(vec4f)==sizeof(float)*4, "[Mathc] wrong expected size");
+_Static_assert(sizeof(vec4f) == sizeof(float) * 4, "[Mathc] wrong expected size");
 
 /** casts a float * to a dereferenced vec4f */
 #define Vec4f(vec) (*(vec4f *) (vec))
@@ -42,9 +125,21 @@ _Static_assert(sizeof(vec4f)==sizeof(float)*4, "[Mathc] wrong expected size");
 typedef union mat44f {
     float v[16];
     float m[4][4];
-    vec4f rows[4];
+    vec4f col[4];
+    struct {
+        float v0, v1, v2, v3;
+        float v4, v5, v6, v7;
+        float v8, v9, v10, v11;
+        float v12, v13, v14, v15;
+    };
+    struct {
+        float m00, m01, m02, m03;
+        float m10, m11, m12, m13;
+        float m20, m21, m22, m23;
+        float m30, m31, m32, m33;
+    };
 } mat44f;
-_Static_assert(sizeof(mat44f)==sizeof(float)*16, "[Mathc] wrong expected size");
+_Static_assert(sizeof(mat44f) == sizeof(float) * 16, "[Mathc] wrong expected size");
 
 /** casts a float * to a dereferenced mat44f */
 #define Mat44f(mat) (*(mat44f *) (mat))
@@ -53,10 +148,63 @@ _Static_assert(sizeof(mat44f)==sizeof(float)*16, "[Mathc] wrong expected size");
 #define ConstMat44f(mat) (*(const mat44f *) (mat))
 
 
-typedef struct vec3d {
+
+typedef union vec2d {
+    double v[2];
+    struct {
+        double v0, v1;
+    };
+    struct {
+        double x, y;
+    };
+} vec2d;
+_Static_assert(sizeof(vec2d) == sizeof(double) * 2, "[Mathc] wrong expected size");
+
+/** casts a double * to a dereferenced vec2d */
+#define Vec2d(vec) (*(vec2d *) (vec))
+
+/** casts a double * to a dereferenced const vec2d */
+#define ConstVec2d(vec) (*(const vec2d *) (vec))
+
+
+typedef union mat22d {
+    double v[4];
+    double m[2][2];
+    vec2d col[2];
+    struct {
+        double v0, v1;
+        double v2, v3;
+    };
+    struct {
+        double m00, m01;
+        double m10, m11;
+    };
+} mat22d;
+_Static_assert(sizeof(mat22d) == sizeof(double) * 4, "[Mathc] wrong expected size");
+
+/** casts a double * to a dereferenced mat22d */
+#define Mat22d(mat) (*(mat22d *) (mat))
+
+/** casts a double * to a dereferenced const mat22d */
+#define ConstMat22d(mat) (*(const mat22d *) (mat))
+
+typedef union vec3d {
     double v[3];
+    struct {
+        double v0, v1, v2;
+    };
+    vec2d xy;
+    struct {
+        double x;
+        union {
+            struct {
+                double y, z;
+            };
+            vec2d yz;
+        };
+    };
 } vec3d;
-_Static_assert(sizeof(vec3d)==sizeof(double)*3, "[Mathc] wrong expected size");
+_Static_assert(sizeof(vec3d) == sizeof(double) * 3, "[Mathc] wrong expected size");
 
 /** casts a double * to a dereferenced vec3d */
 #define Vec3d(vec) (*(vec3d *) (vec))
@@ -68,9 +216,19 @@ _Static_assert(sizeof(vec3d)==sizeof(double)*3, "[Mathc] wrong expected size");
 typedef union mat33d {
     double v[9];
     double m[3][3];
-    vec3d rows[3];
+    vec3d col[3];
+    struct {
+        double v0, v1, v2;
+        double v3, v4, v5;
+        double v6, v7, v8;
+    };
+    struct {
+        double m00, m01, m02;
+        double m10, m11, m12;
+        double m20, m21, m22;
+    };
 } mat33d;
-_Static_assert(sizeof(mat33d)==sizeof(double)*9, "[Mathc] wrong expected size");
+_Static_assert(sizeof(mat33d) == sizeof(double) * 9, "[Mathc] wrong expected size");
 
 /** casts a double * to a dereferenced mat33d */
 #define Mat33d(mat) (*(mat33d *) (mat))
@@ -79,24 +237,57 @@ _Static_assert(sizeof(mat33d)==sizeof(double)*9, "[Mathc] wrong expected size");
 #define ConstMat33d(mat) (*(const mat33d *) (mat))
 
 
-typedef struct vec4d {
+typedef union vec4d {
     double v[4];
+    struct {
+        double v0, v1, v2, v3;
+    };
+    vec2d xy;
+    vec3d xyz;
+    struct {
+        double x;
+        union {
+            struct {
+                double y;
+                union {
+                    struct {
+                        double z, w;
+                    };
+                    vec2d zw;
+                };
+            };
+            vec2d yz;
+            vec3d yzw;
+        };
+    };
 } vec4d;
-_Static_assert(sizeof(vec4d)==sizeof(double)*4, "[Mathc] wrong expected size");
+_Static_assert(sizeof(vec4d) == sizeof(double) * 4, "[Mathc] wrong expected size");
 
 /** casts a double * to a dereferenced vec4d */
 #define Vec4d(vec) (*(vec4d *) (vec))
 
-/** casts a double * to a dereferenced vec4d */
+/** casts a double * to a dereferenced const vec4d */
 #define ConstVec4d(vec) (*(const vec4d *) (vec))
 
 
 typedef union mat44d {
     double v[16];
     double m[4][4];
-    vec4d rows[4];
+    vec4d col[4];
+    struct {
+        double v0, v1, v2, v3;
+        double v4, v5, v6, v7;
+        double v8, v9, v10, v11;
+        double v12, v13, v14, v15;
+    };
+    struct {
+        double m00, m01, m02, m03;
+        double m10, m11, m12, m13;
+        double m20, m21, m22, m23;
+        double m30, m31, m32, m33;
+    };
 } mat44d;
-_Static_assert(sizeof(mat44d)==sizeof(double)*16, "[Mathc] wrong expected size");
+_Static_assert(sizeof(mat44d) == sizeof(double) * 16, "[Mathc] wrong expected size");
 
 /** casts a double * to a dereferenced mat44d */
 #define Mat44d(mat) (*(mat44d *) (mat))
@@ -105,24 +296,87 @@ _Static_assert(sizeof(mat44d)==sizeof(double)*16, "[Mathc] wrong expected size")
 #define ConstMat44d(mat) (*(const mat44d *) (mat))
 
 
-typedef struct vec3i {
-    int v[3];
-} vec3i;
-_Static_assert(sizeof(vec3i)==sizeof(int)*3, "[Mathc] wrong expected size");
 
-/** casts an int * to a dereferenced vec3i */
+typedef union vec2i {
+    int v[2];
+    struct {
+        int v0, v1;
+    };
+    struct {
+        int x, y;
+    };
+} vec2i;
+_Static_assert(sizeof(vec2i) == sizeof(int) * 2, "[Mathc] wrong expected size");
+
+/** casts a int * to a dereferenced vec2i */
+#define Vec2i(vec) (*(vec2i *) (vec))
+
+/** casts a int * to a dereferenced const vec2i */
+#define ConstVec2i(vec) (*(const vec2i *) (vec))
+
+
+typedef union mat22i {
+    int v[4];
+    int m[2][2];
+    vec2i col[2];
+    struct {
+        int v0, v1;
+        int v2, v3;
+    };
+    struct {
+        int m00, m01;
+        int m10, m11;
+    };
+} mat22i;
+_Static_assert(sizeof(mat22i) == sizeof(int) * 4, "[Mathc] wrong expected size");
+
+/** casts a int * to a dereferenced mat22i */
+#define Mat22i(mat) (*(mat22i *) (mat))
+
+/** casts a int * to a dereferenced const mat22i */
+#define ConstMat22i(mat) (*(const mat22i *) (mat))
+
+typedef union vec3i {
+    int v[3];
+    struct {
+        int v0, v1, v2;
+    };
+    vec2i xy;
+    struct {
+        int x;
+        union {
+            struct {
+                int y, z;
+            };
+            vec2i yz;
+        };
+    };
+} vec3i;
+_Static_assert(sizeof(vec3i) == sizeof(int) * 3, "[Mathc] wrong expected size");
+
+/** casts a int * to a dereferenced vec3i */
 #define Vec3i(vec) (*(vec3i *) (vec))
 
-/** casts an int * to a dereferenced vec3i */
+/** casts a int * to a dereferenced const vec3i */
 #define ConstVec3i(vec) (*(const vec3i *) (vec))
 
 
 typedef union mat33i {
     int v[9];
     int m[3][3];
-    vec3i rows[3];
+    vec3i col[3];
+    struct {
+        int v0, v1, v2;
+        int v3, v4, v5;
+        int v6, v7, v8;
+    };
+    struct {
+        int m00, m01, m02;
+        int m10, m11, m12;
+        int m20, m21, m22;
+    };
 } mat33i;
-_Static_assert(sizeof(mat33i)==sizeof(int)*9, "[Mathc] wrong expected size");
+_Static_assert(sizeof(mat33i) == sizeof(int) * 9, "[Mathc] wrong expected size");
 
 /** casts a int * to a dereferenced mat33i */
 #define Mat33i(mat) (*(mat33i *) (mat))
@@ -131,25 +385,57 @@ _Static_assert(sizeof(mat33i)==sizeof(int)*9, "[Mathc] wrong expected size");
 #define ConstMat33i(mat) (*(const mat33i *) (mat))
 
 
-typedef struct vec4i {
+typedef union vec4i {
     int v[4];
+    struct {
+        int v0, v1, v2, v3;
+    };
+    vec2i xy;
+    vec3i xyz;
+    struct {
+        int x;
+        union {
+            struct {
+                int y;
+                union {
+                    struct {
+                        int z, w;
+                    };
+                    vec2i zw;
+                };
+            };
+            vec2i yz;
+            vec3i yzw;
+        };
+    };
 } vec4i;
-_Static_assert(sizeof(vec4i)==sizeof(int)*4, "[Mathc] wrong expected size");
+_Static_assert(sizeof(vec4i) == sizeof(int) * 4, "[Mathc] wrong expected size");
 
-
-/** casts an int * to a dereferenced vec4i */
+/** casts a int * to a dereferenced vec4i */
 #define Vec4i(vec) (*(vec4i *) (vec))
 
-/** casts an int * to a dereferenced const vec4i */
+/** casts a int * to a dereferenced const vec4i */
 #define ConstVec4i(vec) (*(const vec4i *) (vec))
 
 
 typedef union mat44i {
     int v[16];
     int m[4][4];
-    vec4i rows[4];
+    vec4i col[4];
+    struct {
+        int v0, v1, v2, v3;
+        int v4, v5, v6, v7;
+        int v8, v9, v10, v11;
+        int v12, v13, v14, v15;
+    };
+    struct {
+        int m00, m01, m02, m03;
+        int m10, m11, m12, m13;
+        int m20, m21, m22, m23;
+        int m30, m31, m32, m33;
+    };
 } mat44i;
-_Static_assert(sizeof(mat44i)==sizeof(int)*16, "[Mathc] wrong expected size");
+_Static_assert(sizeof(mat44i) == sizeof(int) * 16, "[Mathc] wrong expected size");
 
 /** casts a int * to a dereferenced mat44i */
 #define Mat44i(mat) (*(mat44i *) (mat))

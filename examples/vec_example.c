@@ -31,9 +31,20 @@ int main() {
     Vec3f(vec_d_res) = vec3_sub_v(vec_d_a, vec_d_b);
     printf("%f %f %f %f\n", vec_d_res[0], vec_d_res[1], vec_d_res[2], vec_d_res[3]);
 
+    puts("accessing...");
+    vec4f v = {{1, 2, 3, 4}};
+    printf("%f %f %f %f\n", v.x, v.y, v.z, v.w);
+    printf("%f %f %f %f\n", v.v0, v.v1, v.v2, v.v3);
+    printf("%f %f %f %f\n", v.v[0], v.v[1], v.v[2], v.v[3]);
+    printf("%f %f %f %f\n", v.xy.v0, v.yz.v0, v.zw.v0, v.yzw.v2);
     // output:
     // 123.826492
     // 22.980000
     // 615
     // 4.000000 3.000000 2.000000 2.340000
+    // accessing...
+    // 1.000000 2.000000 3.000000 4.000000
+    // 1.000000 2.000000 3.000000 4.000000
+    // 1.000000 2.000000 3.000000 4.000000
+    // 1.000000 2.000000 3.000000 4.000000
 }
