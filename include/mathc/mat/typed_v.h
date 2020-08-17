@@ -6,15 +6,100 @@
 
 //
 // this header file has the following content:
-// 1. typed_v functions for float[3][3] as mat33f
-// 2. typed_v functions for float[4][4] as mat44f
-// 3. typed_v functions for double[3][3] as mat33d
-// 4. typed_v functions for double[4][4] as mat44d
-// 5. typed_v functions for int[3][3] as int33d
-// 6. typed_v functions for int[4][4] as int44d
+// 1. typed_v functions for float[2][2] as mat22f
+// 2. typed_v functions for float[3][3] as mat33f
+// 3. typed_v functions for float[4][4] as mat44f
+// 4. typed_v functions for double[2][2] as mat22d
+// 5. typed_v functions for double[3][3] as mat33d
+// 6. typed_v functions for double[4][4] as mat44d
+// 7. typed_v functions for int[2][2] as mat22i
+// 8. typed_v functions for int[3][3] as mat33i
+// 9. typed_v functions for int[4][4] as mat44i
 //
 
 
+
+//
+// mat22f
+//
+
+/** vec<n> dst = mat<n*n>[row][:] */
+static vec2f mat22f_get_row_v(const float *mat, int row) {
+    vec2f res;
+    matf_get_row(res.v, mat, row, 2);
+    return res;
+}
+
+/** vec<n> dst = mat<n*n>[:][col] */
+static vec2f mat22f_get_col_v(const float *mat, int col) {
+    vec2f res;
+    matf_get_col(res.v, mat, col, 2);
+    return res;
+}
+
+/** mat<n*n>[row][:] dst = vec<n>, returns in_out_mat */
+static mat22f mat22f_set_row_v(float *in_out_mat, const float *vec, int row) {
+    matf_set_row(in_out_mat, vec, row, 2);
+    return Mat22f(in_out_mat);
+}
+
+/** mat<n*n>[:][col] dst = vec<n>, returns in_out_mat */
+static mat22f mat22f_set_col_v(float *in_out_mat, const float *vec, int col) {
+    matf_set_col(in_out_mat, vec, col, 2);
+    return Mat22f(in_out_mat);
+}
+
+/** mat<n*n>[row][:] dst = scalar, returns in_out_mat */
+static mat22f mat22f_row_set_sca_v(float *in_out_mat, float scalar, int row) {
+    matf_row_set_sca(in_out_mat, scalar, row, 2);
+    return Mat22f(in_out_mat);
+}
+
+/** mat<n*n>[:][col] dst = scalar, returns in_out_mat */
+static mat22f mat22f_col_set_sca_v(float *in_out_mat, float scalar, int col) {
+    matf_col_set_sca(in_out_mat, scalar, col, 2);
+    return Mat22f(in_out_mat);
+}
+
+/** mat<n*n> dst = mat<n*n>^t */
+static mat22f mat22f_transpose_v(const float *mat) {
+    mat22f res;
+    matf_transpose_no_alias(res.v, mat, 2);
+    return res;
+}
+
+/** mat<n*n> dst = mat<n*n> a * mat<n*n> b */
+static mat22f mat22f_mul_mat_v(const float *mat_a, const float *mat_b) {
+    mat22f res;
+    matf_mul_mat_no_alias(res.v, mat_a, mat_b, 2);
+    return res;
+}
+
+/** vec<n> dst = mat<n*n> a * vec<n> b */
+static vec2f mat22f_mul_vec_v(const float *mat_a, const float *vec_b) {
+    vec2f res;
+    matf_mul_vec_no_alias(res.v, mat_a, vec_b, 2);
+    return res;
+}
+
+/** vec<n> dst = vec<n> a * mat<n*n> b */
+static vec2f vec2f_mul_mat_v(const float *vec_a, const float *mat_b) {
+    vec2f res;
+    vecf_mul_mat_no_alias(res.v, vec_a, mat_b, 2);
+    return res;
+}
+
+/** returns = det mat<2*2> mat22 */
+static float mat22f_determinant_v(const float *mat) {
+    return matf_determinant22(mat);
+}
+
+/** mat<2*2> dst = inv(mat<2*2> mat22) */
+static mat22f mat22f_invert_v(const float *mat) {
+    mat22f res;
+    matf_invert22_no_alias(res.v, mat);
+    return res;
+}
 
 //
 // mat33f
@@ -178,6 +263,91 @@ static float mat44f_determinant_v(const float *mat) {
 static mat44f mat44f_invert_v(const float *mat) {
     mat44f res;
     matf_invert44_no_alias(res.v, mat);
+    return res;
+}
+
+
+
+
+//
+// mat22d
+//
+
+/** vec<n> dst = mat<n*n>[row][:] */
+static vec2d mat22d_get_row_v(const double *mat, int row) {
+    vec2d res;
+    matd_get_row(res.v, mat, row, 2);
+    return res;
+}
+
+/** vec<n> dst = mat<n*n>[:][col] */
+static vec2d mat22d_get_col_v(const double *mat, int col) {
+    vec2d res;
+    matd_get_col(res.v, mat, col, 2);
+    return res;
+}
+
+/** mat<n*n>[row][:] dst = vec<n>, returns in_out_mat */
+static mat22d mat22d_set_row_v(double *in_out_mat, const double *vec, int row) {
+    matd_set_row(in_out_mat, vec, row, 2);
+    return Mat22d(in_out_mat);
+}
+
+/** mat<n*n>[:][col] dst = vec<n>, returns in_out_mat */
+static mat22d mat22d_set_col_v(double *in_out_mat, const double *vec, int col) {
+    matd_set_col(in_out_mat, vec, col, 2);
+    return Mat22d(in_out_mat);
+}
+
+/** mat<n*n>[row][:] dst = scalar, returns in_out_mat */
+static mat22d mat22d_row_set_sca_v(double *in_out_mat, double scalar, int row) {
+    matd_row_set_sca(in_out_mat, scalar, row, 2);
+    return Mat22d(in_out_mat);
+}
+
+/** mat<n*n>[:][col] dst = scalar, returns in_out_mat */
+static mat22d mat22d_col_set_sca_v(double *in_out_mat, double scalar, int col) {
+    matd_col_set_sca(in_out_mat, scalar, col, 2);
+    return Mat22d(in_out_mat);
+}
+
+/** mat<n*n> dst = mat<n*n>^t */
+static mat22d mat22d_transpose_v(const double *mat) {
+    mat22d res;
+    matd_transpose_no_alias(res.v, mat, 2);
+    return res;
+}
+
+/** mat<n*n> dst = mat<n*n> a * mat<n*n> b */
+static mat22d mat22d_mul_mat_v(const double *mat_a, const double *mat_b) {
+    mat22d res;
+    matd_mul_mat_no_alias(res.v, mat_a, mat_b, 2);
+    return res;
+}
+
+/** vec<n> dst = mat<n*n> a * vec<n> b */
+static vec2d mat22d_mul_vec_v(const double *mat_a, const double *vec_b) {
+    vec2d res;
+    matd_mul_vec_no_alias(res.v, mat_a, vec_b, 2);
+    return res;
+}
+
+/** vec<n> dst = vec<n> a * mat<n*n> b */
+static vec2d vec2d_mul_mat_v(const double *vec_a, const double *mat_b) {
+    vec2d res;
+    vecd_mul_mat_no_alias(res.v, vec_a, mat_b, 2);
+    return res;
+}
+
+/** returns = det mat<2*2> mat22 */
+static double mat22d_determinant_v(const double *mat) {
+    return matd_determinant22(mat);
+}
+
+/** mat<2*2> dst = inv(mat<2*2> mat22) */
+static mat22d mat22d_invert_v(const double *mat) {
+    mat22d res;
+    matd_invert22_no_alias(res.v, mat);
     return res;
 }
 
@@ -350,6 +520,89 @@ static mat44d mat44d_invert_v(const double *mat) {
 }
 
 
+
+
+//
+// mat22i
+//
+
+/** vec<n> dst = mat<n*n>[row][:] */
+static vec2i mat22i_get_row_v(const int *mat, int row) {
+    vec2i res;
+    mati_get_row(res.v, mat, row, 2);
+    return res;
+}
+
+/** vec<n> dst = mat<n*n>[:][col] */
+static vec2i mat22i_get_col_v(const int *mat, int col) {
+    vec2i res;
+    mati_get_col(res.v, mat, col, 2);
+    return res;
+}
+
+/** mat<n*n>[row][:] dst = vec<n>, returns in_out_mat */
+static mat22i mat22i_set_row_v(int *in_out_mat, const int *vec, int row) {
+    mati_set_row(in_out_mat, vec, row, 2);
+    return Mat22i(in_out_mat);
+}
+
+/** mat<n*n>[:][col] dst = vec<n>, returns in_out_mat */
+static mat22i mat22i_set_col_v(int *in_out_mat, const int *vec, int col) {
+    mati_set_col(in_out_mat, vec, col, 2);
+    return Mat22i(in_out_mat);
+}
+
+/** mat<n*n>[row][:] dst = scalar, returns in_out_mat */
+static mat22i mat22i_row_set_sca_v(int *in_out_mat, int scalar, int row) {
+    mati_row_set_sca(in_out_mat, scalar, row, 2);
+    return Mat22i(in_out_mat);
+}
+
+/** mat<n*n>[:][col] dst = scalar, returns in_out_mat */
+static mat22i mat22i_col_set_sca_v(int *in_out_mat, int scalar, int col) {
+    mati_col_set_sca(in_out_mat, scalar, col, 2);
+    return Mat22i(in_out_mat);
+}
+
+/** mat<n*n> dst = mat<n*n>^t */
+static mat22i mat22i_transpose_v(const int *mat) {
+    mat22i res;
+    mati_transpose_no_alias(res.v, mat, 2);
+    return res;
+}
+
+/** mat<n*n> dst = mat<n*n> a * mat<n*n> b */
+static mat22i mat22i_mul_mat_v(const int *mat_a, const int *mat_b) {
+    mat22i res;
+    mati_mul_mat_no_alias(res.v, mat_a, mat_b, 2);
+    return res;
+}
+
+/** vec<n> dst = mat<n*n> a * vec<n> b */
+static vec2i mat22i_mul_vec_v(const int *mat_a, const int *vec_b) {
+    vec2i res;
+    mati_mul_vec_no_alias(res.v, mat_a, vec_b, 2);
+    return res;
+}
+
+/** vec<n> dst = vec<n> a * mat<n*n> b */
+static vec2i vec2i_mul_mat_v(const int *vec_a, const int *mat_b) {
+    vec2i res;
+    veci_mul_mat_no_alias(res.v, vec_a, mat_b, 2);
+    return res;
+}
+
+/** returns = det mat<2*2> mat22 */
+static int mat22i_determinant_v(const int *mat) {
+    return mati_determinant22(mat);
+}
+
+/** mat<2*2> dst = inv(mat<2*2> mat22) */
+static mat22i mat22i_invert_v(const int *mat) {
+    mat22i res;
+    mati_invert22_no_alias(res.v, mat);
+    return res;
+}
 
 
 //

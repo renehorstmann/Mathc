@@ -11,6 +11,143 @@
 
 
 //
+// mat22
+//
+
+/** vec<n> dst = mat<n*n>[row][:] */
+#define mat22_get_row_v(mat, row) _Generic((mat), \
+float *: mat22f_get_row_v, \
+const float *: mat22f_get_row_v, \
+double *: mat22d_get_row_v, \
+const double *: mat22d_get_row_v, \
+int *: mat22i_get_row_v, \
+const int *: mat22i_get_row_v, \
+default: "type_error" \
+) ((mat), (row))
+
+/** vec<n> dst = mat<n*n>[:][col] */
+#define mat22_get_col_v(mat, col) _Generic((mat), \
+float *: mat22f_get_col_v, \
+const float *: mat22f_get_col_v, \
+double *: mat22d_get_col_v, \
+const double *: mat22d_get_col_v, \
+int *: mat22i_get_col_v, \
+const int *: mat22i_get_col_v, \
+default: "type_error" \
+) ((mat), (col))
+
+/** mat<n*n>[row][:] dst = vec<n>, returns in_out_mat */
+#define mat22_set_row_v(mat, vec, row) _Generic((mat), \
+float *: mat22f_set_row_v, \
+const float *: mat22f_set_row_v, \
+double *: mat22d_set_row_v, \
+const double *: mat22d_set_row_v, \
+int *: mat22i_set_row_v, \
+const int *: mat22i_set_row_v, \
+default: "type_error" \
+) ((mat), (vec), (row))
+
+/** mat<n*n>[:][col] dst = vec<n>, returns in_out_mat */
+#define mat22_set_col_v(mat, vec, col) _Generic((mat), \
+float *: mat22f_set_col_v, \
+const float *: mat22f_set_col_v, \
+double *: mat22d_set_col_v, \
+const double *: mat22d_set_col_v, \
+int *: mat22i_set_col_v, \
+const int *: mat22i_set_col_v, \
+default: "type_error" \
+) ((mat), (vec), (col))
+
+/** mat<n*n>[row][:] dst = scalar, returns in_out_mat */
+#define mat22_row_set_sca_v(mat, scalar, row) _Generic((mat), \
+float *: mat22f_row_set_sca_v, \
+const float *: mat22f_row_set_sca_v, \
+double *: mat22d_row_set_sca_v, \
+const double *: mat22d_row_set_sca_v, \
+int *: mat22i_row_set_sca_v, \
+const int *: mat22i_row_set_sca_v, \
+default: "type_error" \
+) ((mat), (scalar), (row))
+
+/** mat<n*n>[:][col] dst = scalar, returns in_out_mat */
+#define mat22_col_set_sca_v(mat, scalar, col) _Generic((mat), \
+float *: mat22f_col_set_sca_v, \
+const float *: mat22f_col_set_sca_v, \
+double *: mat22d_col_set_sca_v, \
+const double *: mat22d_col_set_sca_v, \
+int *: mat22i_col_set_sca_v, \
+const int *: mat22i_col_set_sca_v, \
+default: "type_error" \
+) ((mat), (scalar), (col))
+
+/** mat<n*n> dst = mat<n*n>^t */
+#define mat22_transpose_v(mat) _Generic((mat), \
+float *: mat22f_transpose_v, \
+const float *: mat22f_transpose_v, \
+double *: mat22d_transpose_v, \
+const double *: mat22d_transpose_v, \
+int *: mat22i_transpose_v, \
+const int *: mat22i_transpose_v, \
+default: "type_error" \
+) ((mat))
+
+/** mat<n*n> dst = mat<n*n> a * mat<n*n> b */
+#define mat22_mul_mat_v(mat_a, mat_b) _Generic((mat_a), \
+float *: mat22f_mul_mat_v, \
+const float *: mat22f_mul_mat_v, \
+double *: mat22d_mul_mat_v, \
+const double *: mat22d_mul_mat_v, \
+int *: mat22i_mul_mat_v, \
+const int *: mat22i_mul_mat_v, \
+default: "type_error" \
+) ((mat_a), (mat_b))
+
+/** vec<n> dst = mat<n*n> a * vec<n> b */
+#define mat22_mul_vec_v(mat_a, vec_b) _Generic((mat_a), \
+float *: mat22f_mul_vec_v, \
+const float *: mat22f_mul_vec_v, \
+double *: mat22d_mul_vec_v, \
+const double *: mat22d_mul_vec_v, \
+int *: mat22i_mul_vec_v, \
+const int *: mat22i_mul_vec_v, \
+default: "type_error" \
+) ((mat_a), (vec_b))
+
+/** vec<n> dst = mat<n*n> a * vec<n> b */
+#define vec2_mul_mat_v(vec_a, mat_b) _Generic((vec_a), \
+float *: vec2f_mul_mat_v, \
+const float *: vec2f_mul_mat_v, \
+double *: vec2d_mul_mat_v, \
+const double *: vec2d_mul_mat_v, \
+int *: vec2i_mul_mat_v, \
+const int *: vec2i_mul_mat_v, \
+default: "type_error" \
+) ((vec_a), (mat_b))
+
+/** returns = det mat<2*2> mat22 */
+#define mat22_determinant_v(mat) _Generic((mat), \
+float *: mat22f_determinant_v, \
+const float *: mat22f_determinant_v, \
+double *: mat22d_determinant_v, \
+const double *: mat22d_determinant_v, \
+int *: mat22i_determinant_v, \
+const int *: mat22i_determinant_v, \
+default: "type_error" \
+) ((mat))
+
+/** mat<2*2> dst = inv(mat<2*2> mat22) */
+#define mat22_invert_v(mat) _Generic((mat), \
+float *: mat22f_invert_v, \
+const float *: mat22f_invert_v, \
+double *: mat22d_invert_v, \
+const double *: mat22d_invert_v, \
+int *: mat22i_invert_v, \
+const int *: mat22i_invert_v, \
+default: "type_error" \
+) ((mat))
+
+
+//
 // mat33
 //
 

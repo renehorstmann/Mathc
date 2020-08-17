@@ -49,7 +49,8 @@ int main() {
 
 ## mat
 The header file [mat.h](include/mathc/mat.h) includes all files in the mat dir.
-It works like vec, but adds squared matrix calculations.v
+It works like vec, but adds squared matrix calculations.v.
+The matrices are in column major order, so ```matrix[col][row]```.
 ```c
 #include <stdio.h>
 #include "mathc/mat.h"
@@ -150,6 +151,7 @@ typedef struct vec3f {
 ## Author
 
 * **René Horstmann**
+* Copied some function implementations of: [cglm](https://github.com/recp/cglm)
 
 ## License
 

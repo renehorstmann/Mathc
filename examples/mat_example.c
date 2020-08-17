@@ -21,10 +21,10 @@ int main() {
         printf("col[%d] = {%f %f %f %f}\n", c, col.v[0], col.v[1], col.v[2], col.v[3]);
     }
 
-    // Homogeneous coordinates transformation (calcs: vec_b = vec_b @ mat_b)
-    // there is also the function/macro mat_mul_vec (calcs: vec_b = mat_b @ vec_b)
+    // Homogeneous coordinates transformation (calcs: vec_b = mat_b @ vec:b)
+    // there is also the function/macro vec_mul_mat (calcs: vec_b = vec_b @ mat_b)
     vec4d vec_b = {{10, 20, 30, 1}};
-    vec_b = vec_mul_mat(vec_b, mat_b);
+    vec_b = mat_mul_vec(mat_b, vec_b);
     printf("vec = {%f %f %f %f}\n", vec_b.v[0], vec_b.v[1], vec_b.v[2], vec_b.v[3]);
 
     // with the Mat macros, raw pointers can be casted to the given type.
@@ -47,10 +47,10 @@ int main() {
 
     // output:
     // -210.000000
-    // col[0] = {1.000000 0.000000 0.000000 -100.000000}
-    // col[1] = {0.000000 -1.000000 0.000000 200.000000}
-    // col[2] = {0.000000 0.000000 -1.000000 300.000000}
-    // col[3] = {-0.000000 0.000000 0.000000 1.000000}
+    // col[0] = {1.000000 -0.000000 0.000000 -0.000000}
+    // col[1] = {-0.000000 -1.000000 -0.000000 0.000000}
+    // col[2] = {0.000000 -0.000000 -1.000000 -0.000000}
+    // col[3] = {-100.000000 200.000000 300.000000 1.000000}
     // vec = {-90.000000 180.000000 270.000000 1.000000}
     // row[0] = {1 0 0}
     // row[1] = {0 1 0}
