@@ -98,7 +98,7 @@ static int ivec2_norm_inf_v(const int *ivec) {
 }
 
 /** dst = from + (to - from) * t */
-static ivec2 ivec2_lerp_v(const int *from, const int *to,  t) {
+static ivec2 ivec2_lerp_v(const int *from, const int *to, float t) {
     ivec2 res;
     ivecN_lerp(res.v, from, to, t, 2);
     return res;
