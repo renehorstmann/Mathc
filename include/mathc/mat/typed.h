@@ -43,28 +43,28 @@ static vec2f mat22f_get_col(mat22f mat, int col) {
     return res;
 }
 
-/** mat<n*n>[row][:] dst = vec<n>, returns in_out_mat */
-static mat22f mat22f_set_row(mat22f in_out_mat, vec2f vec, int row) {
-    matf_set_row(in_out_mat.v, vec.v, row, 2);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = vec<n>, returns mat */
+static mat22f mat22f_set_row(mat22f mat, vec2f vec, int row) {
+    matf_set_row(mat.v, vec.v, row, 2);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = vec<n>, returns in_out_mat */
-static mat22f mat22f_set_col(mat22f in_out_mat, vec2f vec, int col) {
-    matf_set_col(in_out_mat.v, vec.v, col, 2);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = vec<n>, returns mat */
+static mat22f mat22f_set_col(mat22f mat, vec2f vec, int col) {
+    matf_set_col(mat.v, vec.v, col, 2);
+    return mat;
 }
 
-/** mat<n*n>[row][:] dst = scalar, returns in_out_mat */
-static mat22f mat22f_row_set_sca(mat22f in_out_mat, float scalar, int row) {
-    matf_row_set_sca(in_out_mat.v, scalar, row, 2);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = scalar, returns mat */
+static mat22f mat22f_row_set_sca(mat22f mat, float scalar, int row) {
+    matf_row_set_sca(mat.v, scalar, row, 2);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = scalar, returns in_out_mat */
-static mat22f mat22f_col_set_sca(mat22f in_out_mat, float scalar, int col) {
-    matf_col_set_sca(in_out_mat.v, scalar, col, 2);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = scalar, returns mat */
+static mat22f mat22f_col_set_sca(mat22f mat, float scalar, int col) {
+    matf_col_set_sca(mat.v, scalar, col, 2);
+    return mat;
 }
 
 /** mat<n*n> dst = mat<n*n>^t */
@@ -133,28 +133,28 @@ static vec3f mat33f_get_col(mat33f mat, int col) {
     return res;
 }
 
-/** mat<n*n>[row][:] dst = vec<n>, returns in_out_mat */
-static mat33f mat33f_set_row(mat33f in_out_mat, vec3f vec, int row) {
-    matf_set_row(in_out_mat.v, vec.v, row, 3);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = vec<n>, returns mat */
+static mat33f mat33f_set_row(mat33f mat, vec3f vec, int row) {
+    matf_set_row(mat.v, vec.v, row, 3);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = vec<n>, returns in_out_mat */
-static mat33f mat33f_set_col(mat33f in_out_mat, vec3f vec, int col) {
-    matf_set_col(in_out_mat.v, vec.v, col, 3);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = vec<n>, returns mat */
+static mat33f mat33f_set_col(mat33f mat, vec3f vec, int col) {
+    matf_set_col(mat.v, vec.v, col, 3);
+    return mat;
 }
 
-/** mat<n*n>[row][:] dst = scalar, returns in_out_mat */
-static mat33f mat33f_row_set_sca(mat33f in_out_mat, float scalar, int row) {
-    matf_row_set_sca(in_out_mat.v, scalar, row, 3);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = scalar, returns mat */
+static mat33f mat33f_row_set_sca(mat33f mat, float scalar, int row) {
+    matf_row_set_sca(mat.v, scalar, row, 3);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = scalar, returns in_out_mat */
-static mat33f mat33f_col_set_sca(mat33f in_out_mat, float scalar, int col) {
-    matf_col_set_sca(in_out_mat.v, scalar, col, 3);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = scalar, returns mat */
+static mat33f mat33f_col_set_sca(mat33f mat, float scalar, int col) {
+    matf_col_set_sca(mat.v, scalar, col, 3);
+    return mat;
 }
 
 /** mat<n*n> dst = mat<n*n>^t */
@@ -223,28 +223,28 @@ static vec4f mat44f_get_col(mat44f mat, int col) {
     return res;
 }
 
-/** mat<n*n>[row][:] dst = vec<n>, returns in_out_mat */
-static mat44f mat44f_set_row(mat44f in_out_mat, vec4f vec, int row) {
-    matf_set_row(in_out_mat.v, vec.v, row, 4);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = vec<n>, returns mat */
+static mat44f mat44f_set_row(mat44f mat, vec4f vec, int row) {
+    matf_set_row(mat.v, vec.v, row, 4);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = vec<n>, returns in_out_mat */
-static mat44f mat44f_set_col(mat44f in_out_mat, vec4f vec, int col) {
-    matf_set_col(in_out_mat.v, vec.v, col, 4);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = vec<n>, returns mat */
+static mat44f mat44f_set_col(mat44f mat, vec4f vec, int col) {
+    matf_set_col(mat.v, vec.v, col, 4);
+    return mat;
 }
 
-/** mat<n*n>[row][:] dst = scalar, returns in_out_mat */
-static mat44f mat44f_row_set_sca(mat44f in_out_mat, float scalar, int row) {
-    matf_row_set_sca(in_out_mat.v, scalar, row, 4);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = scalar, returns mat */
+static mat44f mat44f_row_set_sca(mat44f mat, float scalar, int row) {
+    matf_row_set_sca(mat.v, scalar, row, 4);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = scalar, returns in_out_mat */
-static mat44f mat44f_col_set_sca(mat44f in_out_mat, float scalar, int col) {
-    matf_col_set_sca(in_out_mat.v, scalar, col, 4);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = scalar, returns mat */
+static mat44f mat44f_col_set_sca(mat44f mat, float scalar, int col) {
+    matf_col_set_sca(mat.v, scalar, col, 4);
+    return mat;
 }
 
 /** mat<n*n> dst = mat<n*n>^t */
@@ -287,6 +287,25 @@ static mat44f mat44f_invert(mat44f mat) {
     return res;
 }
 
+/** returns the rotation part [:3, :3] */
+static mat33f mat44f_get_rotation(mat44f mat) {
+    mat33f res;
+    for(int c=0; c<3; c++) {
+        for(int r=0; r<3; r++) 
+            res.m[c][r] = mat.m[c][r];
+    }
+    return res;
+}
+
+/** sets the rotation part [:3, :3] */
+static mat44f mat44f_set_rotation(mat44f mat, mat33f rotation) {
+    for(int c=0; c<3; c++) {
+        for(int r=0; r<3; r++) 
+            mat.m[c][r] = rotation.m[c][r];
+    }
+    return mat;
+}
+
 
 
 //
@@ -314,28 +333,28 @@ static vec2d mat22d_get_col(mat22d mat, int col) {
     return res;
 }
 
-/** mat<n*n>[row][:] dst = vec<n>, returns in_out_mat */
-static mat22d mat22d_set_row(mat22d in_out_mat, vec2d vec, int row) {
-    matd_set_row(in_out_mat.v, vec.v, row, 2);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = vec<n>, returns mat */
+static mat22d mat22d_set_row(mat22d mat, vec2d vec, int row) {
+    matd_set_row(mat.v, vec.v, row, 2);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = vec<n>, returns in_out_mat */
-static mat22d mat22d_set_col(mat22d in_out_mat, vec2d vec, int col) {
-    matd_set_col(in_out_mat.v, vec.v, col, 2);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = vec<n>, returns mat */
+static mat22d mat22d_set_col(mat22d mat, vec2d vec, int col) {
+    matd_set_col(mat.v, vec.v, col, 2);
+    return mat;
 }
 
-/** mat<n*n>[row][:] dst = scalar, returns in_out_mat */
-static mat22d mat22d_row_set_sca(mat22d in_out_mat, double scalar, int row) {
-    matd_row_set_sca(in_out_mat.v, scalar, row, 2);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = scalar, returns mat */
+static mat22d mat22d_row_set_sca(mat22d mat, double scalar, int row) {
+    matd_row_set_sca(mat.v, scalar, row, 2);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = scalar, returns in_out_mat */
-static mat22d mat22d_col_set_sca(mat22d in_out_mat, double scalar, int col) {
-    matd_col_set_sca(in_out_mat.v, scalar, col, 2);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = scalar, returns mat */
+static mat22d mat22d_col_set_sca(mat22d mat, double scalar, int col) {
+    matd_col_set_sca(mat.v, scalar, col, 2);
+    return mat;
 }
 
 /** mat<n*n> dst = mat<n*n>^t */
@@ -406,28 +425,28 @@ static vec3d mat33d_get_col(mat33d mat, int col) {
     return res;
 }
 
-/** mat<n*n>[row][:] dst = vec<n>, returns in_out_mat */
-static mat33d mat33d_set_row(mat33d in_out_mat, vec3d vec, int row) {
-    matd_set_row(in_out_mat.v, vec.v, row, 3);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = vec<n>, returns mat */
+static mat33d mat33d_set_row(mat33d mat, vec3d vec, int row) {
+    matd_set_row(mat.v, vec.v, row, 3);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = vec<n>, returns in_out_mat */
-static mat33d mat33d_set_col(mat33d in_out_mat, vec3d vec, int col) {
-    matd_set_col(in_out_mat.v, vec.v, col, 3);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = vec<n>, returns mat */
+static mat33d mat33d_set_col(mat33d mat, vec3d vec, int col) {
+    matd_set_col(mat.v, vec.v, col, 3);
+    return mat;
 }
 
-/** mat<n*n>[row][:] dst = scalar, returns in_out_mat */
-static mat33d mat33d_row_set_sca(mat33d in_out_mat, double scalar, int row) {
-    matd_row_set_sca(in_out_mat.v, scalar, row, 3);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = scalar, returns mat */
+static mat33d mat33d_row_set_sca(mat33d mat, double scalar, int row) {
+    matd_row_set_sca(mat.v, scalar, row, 3);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = scalar, returns in_out_mat */
-static mat33d mat33d_col_set_sca(mat33d in_out_mat, double scalar, int col) {
-    matd_col_set_sca(in_out_mat.v, scalar, col, 3);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = scalar, returns mat */
+static mat33d mat33d_col_set_sca(mat33d mat, double scalar, int col) {
+    matd_col_set_sca(mat.v, scalar, col, 3);
+    return mat;
 }
 
 /** mat<n*n> dst = mat<n*n>^t */
@@ -496,28 +515,28 @@ static vec4d mat44d_get_col(mat44d mat, int col) {
     return res;
 }
 
-/** mat<n*n>[row][:] dst = vec<n>, returns in_out_mat */
-static mat44d mat44d_set_row(mat44d in_out_mat, vec4d vec, int row) {
-    matd_set_row(in_out_mat.v, vec.v, row, 4);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = vec<n>, returns mat */
+static mat44d mat44d_set_row(mat44d mat, vec4d vec, int row) {
+    matd_set_row(mat.v, vec.v, row, 4);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = vec<n>, returns in_out_mat */
-static mat44d mat44d_set_col(mat44d in_out_mat, vec4d vec, int col) {
-    matd_set_col(in_out_mat.v, vec.v, col, 4);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = vec<n>, returns mat */
+static mat44d mat44d_set_col(mat44d mat, vec4d vec, int col) {
+    matd_set_col(mat.v, vec.v, col, 4);
+    return mat;
 }
 
-/** mat<n*n>[row][:] dst = scalar, returns in_out_mat */
-static mat44d mat44d_row_set_sca(mat44d in_out_mat, double scalar, int row) {
-    matd_row_set_sca(in_out_mat.v, scalar, row, 4);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = scalar, returns mat */
+static mat44d mat44d_row_set_sca(mat44d mat, double scalar, int row) {
+    matd_row_set_sca(mat.v, scalar, row, 4);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = scalar, returns in_out_mat */
-static mat44d mat44d_col_set_sca(mat44d in_out_mat, double scalar, int col) {
-    matd_col_set_sca(in_out_mat.v, scalar, col, 4);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = scalar, returns mat */
+static mat44d mat44d_col_set_sca(mat44d mat, double scalar, int col) {
+    matd_col_set_sca(mat.v, scalar, col, 4);
+    return mat;
 }
 
 /** mat<n*n> dst = mat<n*n>^t */
@@ -560,6 +579,25 @@ static mat44d mat44d_invert(mat44d mat) {
     return res;
 }
 
+/** returns the rotation part [:3, :3] */
+static mat33d mat44d_get_rotation(mat44d mat) {
+    mat33d res;
+    for(int c=0; c<3; c++) {
+        for(int r=0; r<3; r++)
+            res.m[c][r] = mat.m[c][r];
+    }
+    return res;
+}
+
+/** sets the rotation part [:3, :3] */
+static mat44d mat44d_set_rotation(mat44d mat, mat33d rotation) {
+    for(int c=0; c<3; c++) {
+        for(int r=0; r<3; r++)
+            mat.m[c][r] = rotation.m[c][r];
+    }
+    return mat;
+}
+
 
 //
 // mat22i
@@ -586,28 +624,28 @@ static vec2i mat22i_get_col(mat22i mat, int col) {
     return res;
 }
 
-/** mat<n*n>[row][:] dst = vec<n>, returns in_out_mat */
-static mat22i mat22i_set_row(mat22i in_out_mat, vec2i vec, int row) {
-    mati_set_row(in_out_mat.v, vec.v, row, 2);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = vec<n>, returns mat */
+static mat22i mat22i_set_row(mat22i mat, vec2i vec, int row) {
+    mati_set_row(mat.v, vec.v, row, 2);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = vec<n>, returns in_out_mat */
-static mat22i mat22i_set_col(mat22i in_out_mat, vec2i vec, int col) {
-    mati_set_col(in_out_mat.v, vec.v, col, 2);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = vec<n>, returns mat */
+static mat22i mat22i_set_col(mat22i mat, vec2i vec, int col) {
+    mati_set_col(mat.v, vec.v, col, 2);
+    return mat;
 }
 
-/** mat<n*n>[row][:] dst = scalar, returns in_out_mat */
-static mat22i mat22i_row_set_sca(mat22i in_out_mat, int scalar, int row) {
-    mati_row_set_sca(in_out_mat.v, scalar, row, 2);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = scalar, returns mat */
+static mat22i mat22i_row_set_sca(mat22i mat, int scalar, int row) {
+    mati_row_set_sca(mat.v, scalar, row, 2);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = scalar, returns in_out_mat */
-static mat22i mat22i_col_set_sca(mat22i in_out_mat, int scalar, int col) {
-    mati_col_set_sca(in_out_mat.v, scalar, col, 2);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = scalar, returns mat */
+static mat22i mat22i_col_set_sca(mat22i mat, int scalar, int col) {
+    mati_col_set_sca(mat.v, scalar, col, 2);
+    return mat;
 }
 
 /** mat<n*n> dst = mat<n*n>^t */
@@ -676,28 +714,28 @@ static vec3i mat33i_get_col(mat33i mat, int col) {
     return res;
 }
 
-/** mat<n*n>[row][:] dst = vec<n>, returns in_out_mat */
-static mat33i mat33i_set_row(mat33i in_out_mat, vec3i vec, int row) {
-    mati_set_row(in_out_mat.v, vec.v, row, 3);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = vec<n>, returns mat */
+static mat33i mat33i_set_row(mat33i mat, vec3i vec, int row) {
+    mati_set_row(mat.v, vec.v, row, 3);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = vec<n>, returns in_out_mat */
-static mat33i mat33i_set_col(mat33i in_out_mat, vec3i vec, int col) {
-    mati_set_col(in_out_mat.v, vec.v, col, 3);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = vec<n>, returns mat */
+static mat33i mat33i_set_col(mat33i mat, vec3i vec, int col) {
+    mati_set_col(mat.v, vec.v, col, 3);
+    return mat;
 }
 
-/** mat<n*n>[row][:] dst = scalar, returns in_out_mat */
-static mat33i mat33i_row_set_sca(mat33i in_out_mat, int scalar, int row) {
-    mati_row_set_sca(in_out_mat.v, scalar, row, 3);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = scalar, returns mat */
+static mat33i mat33i_row_set_sca(mat33i mat, int scalar, int row) {
+    mati_row_set_sca(mat.v, scalar, row, 3);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = scalar, returns in_out_mat */
-static mat33i mat33i_col_set_sca(mat33i in_out_mat, int scalar, int col) {
-    mati_col_set_sca(in_out_mat.v, scalar, col, 3);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = scalar, returns mat */
+static mat33i mat33i_col_set_sca(mat33i mat, int scalar, int col) {
+    mati_col_set_sca(mat.v, scalar, col, 3);
+    return mat;
 }
 
 /** mat<n*n> dst = mat<n*n>^t */
@@ -766,28 +804,28 @@ static vec4i mat44i_get_col(mat44i mat, int col) {
     return res;
 }
 
-/** mat<n*n>[row][:] dst = vec<n>, returns in_out_mat */
-static mat44i mat44i_set_row(mat44i in_out_mat, vec4i vec, int row) {
-    mati_set_row(in_out_mat.v, vec.v, row, 4);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = vec<n>, returns mat */
+static mat44i mat44i_set_row(mat44i mat, vec4i vec, int row) {
+    mati_set_row(mat.v, vec.v, row, 4);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = vec<n>, returns in_out_mat */
-static mat44i mat44i_set_col(mat44i in_out_mat, vec4i vec, int col) {
-    mati_set_col(in_out_mat.v, vec.v, col, 4);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = vec<n>, returns mat */
+static mat44i mat44i_set_col(mat44i mat, vec4i vec, int col) {
+    mati_set_col(mat.v, vec.v, col, 4);
+    return mat;
 }
 
-/** mat<n*n>[row][:] dst = scalar, returns in_out_mat */
-static mat44i mat44i_row_set_sca(mat44i in_out_mat, int scalar, int row) {
-    mati_row_set_sca(in_out_mat.v, scalar, row, 4);
-    return in_out_mat;
+/** mat<n*n>[row][:] dst = scalar, returns mat */
+static mat44i mat44i_row_set_sca(mat44i mat, int scalar, int row) {
+    mati_row_set_sca(mat.v, scalar, row, 4);
+    return mat;
 }
 
-/** mat<n*n>[:][col] dst = scalar, returns in_out_mat */
-static mat44i mat44i_col_set_sca(mat44i in_out_mat, int scalar, int col) {
-    mati_col_set_sca(in_out_mat.v, scalar, col, 4);
-    return in_out_mat;
+/** mat<n*n>[:][col] dst = scalar, returns mat */
+static mat44i mat44i_col_set_sca(mat44i mat, int scalar, int col) {
+    mati_col_set_sca(mat.v, scalar, col, 4);
+    return mat;
 }
 
 /** mat<n*n> dst = mat<n*n>^t */
@@ -828,6 +866,25 @@ static mat44i mat44i_invert(mat44i mat) {
     mat44i res;
     mati_invert44_no_alias(res.v, mat.v);
     return res;
+}
+
+/** returns the rotation part [:3, :3] */
+static mat33i mat44i_get_rotation(mat44i mat) {
+    mat33i res;
+    for(int c=0; c<3; c++) {
+        for(int r=0; r<3; r++)
+            res.m[c][r] = mat.m[c][r];
+    }
+    return res;
+}
+
+/** sets the rotation part [:3, :3] */
+static mat44i mat44i_set_rotation(mat44i mat, mat33i rotation) {
+    for(int c=0; c<3; c++) {
+        for(int r=0; r<3; r++)
+            mat.m[c][r] = rotation.m[c][r];
+    }
+    return mat;
 }
 
 #endif //MATHC_MAT_TYPED_H

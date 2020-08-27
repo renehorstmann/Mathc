@@ -444,6 +444,10 @@ _Static_assert(sizeof(mat44i) == sizeof(int) * 16, "[Mathc] wrong expected size"
 #define ConstMat44i(mat) (*(const mat44i *) (mat))
 
 
+// quaternion type
+typedef vec4f quatf;
+typedef vec4d quatd;
+
 
 // initializer
 
@@ -467,5 +471,8 @@ _Static_assert(sizeof(mat44i) == sizeof(int) * 16, "[Mathc] wrong expected size"
 #define MAT44_INIT_ZERO {{0, 0, 0, 0,  0, 0, 0, 0,  0, 0, 0, 0,  0, 0, 0, 0}}
 #define MAT44_INIT_ONE  {{1, 1, 1, 1,  1, 1, 1, 1,  1, 1, 1, 1,  1, 1, 1, 1}}
 #define MAT44_INIT_EYE  {{1, 0, 0, 0,  0, 1, 0, 0,  0, 0, 1, 0,  0, 0, 0, 1}}
+
+// xyzw
+#define QUAT4_INIT_EYE {{0, 0, 0, 1}}
 
 #endif //MATHC_TYPES_H

@@ -208,6 +208,17 @@ const double *: vec2d_normalize_v, \
 default: "type_error" \
 ) ((vec))
 
+/** linear interpolation between from and to via t */
+#define vec2_lerp_v(from, to, t) _Generic((from), \
+float *: vec2f_lerp_v, \
+const float *: vec2f_lerp_v, \
+double *: vec2d_lerp_v, \
+const double *: vec2d_lerp_v, \
+int *: vec2i_lerp_v, \
+const int *: vec2i_lerp_v, \
+default: "type_error" \
+) ((from), (to), (t))
+
 
 
 
@@ -420,6 +431,17 @@ const double *: vec3d_normalize_v, \
 default: "type_error" \
 ) ((vec))
 
+/** linear interpolation between from and to via t */
+#define vec3_lerp_v(from, to, t) _Generic((from), \
+float *: vec3f_lerp_v, \
+const float *: vec3f_lerp_v, \
+double *: vec3d_lerp_v, \
+const double *: vec3d_lerp_v, \
+int *: vec3i_lerp_v, \
+const int *: vec3i_lerp_v, \
+default: "type_error" \
+) ((from), (to), (t))
+
 
 
 
@@ -631,6 +653,17 @@ double *: vec4d_normalize_v, \
 const double *: vec4d_normalize_v, \
 default: "type_error" \
 ) ((vec))
+
+/** linear interpolation between from and to via t */
+#define vec4_lerp_v(from, to, t) _Generic((from), \
+float *: vec4f_lerp_v, \
+const float *: vec4f_lerp_v, \
+double *: vec4d_lerp_v, \
+const double *: vec4d_lerp_v, \
+int *: vec4i_lerp_v, \
+const int *: vec4i_lerp_v, \
+default: "type_error" \
+) ((from), (to), (t))
 
 
 #endif //MATHC_VEC_GENERIC_V_H

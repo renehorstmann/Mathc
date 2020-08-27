@@ -5,5 +5,6 @@
 #include "io.h"
 #include "vec.h"
 #include "mat.h"
+#include "quat.h"
 
 #endif //MATHC_MATHC_H

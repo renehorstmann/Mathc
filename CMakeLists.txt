@@ -24,6 +24,10 @@ add_executable(mat examples/mat_example.c)
 target_include_directories(mat PUBLIC include)
 target_link_libraries(mat m)
 
+add_executable(quat examples/quat_example.c)
+target_include_directories(quat PUBLIC include)
+target_link_libraries(quat m)
+
 
 add_library(performance_test_lib SHARED examples/performance_test_lib.c)
 target_include_directories(performance_test_lib PUBLIC include)

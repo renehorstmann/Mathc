@@ -267,5 +267,19 @@ vec4d: vec4d_normalize, \
 default: "type_error" \
 ) ((vec))
 
+/** linear interpolation between from and to via t */
+#define vec_lerp(from, to, t) _Generic((from), \
+vec2f: vec2f_lerp, \
+vec3f: vec3f_lerp, \
+vec4f: vec4f_lerp, \
+vec2d: vec2d_lerp, \
+vec3d: vec3d_lerp, \
+vec4d: vec4d_lerp, \
+vec2i: vec2i_lerp, \
+vec3i: vec3i_lerp, \
+vec4i: vec4i_lerp, \
+default: "type_error" \
+) ((from), (to), (t))
+
 
 #endif //MATHC_VEC_GENERIC_H

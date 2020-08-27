@@ -114,6 +114,13 @@ static vec2f vec2f_normalize_v(const float *vec) {
     return res;
 }
 
+/** linear interpolation between from and to via t */
+static vec2f vec2f_lerp_v(const float *vec_from, const float *vec_to, float t) {
+    vec2f res;
+    vecf_lerp(res.v, vec_from, vec_to, t, 2);
+    return res;
+}
+
 //
 // vec3f
 //
@@ -214,6 +221,13 @@ static vec3f vec3f_normalize_unsafe_v(const float *vec) {
 static vec3f vec3f_normalize_v(const float *vec) {
     vec3f res;
     vecf_normalize(res.v, vec, 3);
+    return res;
+}
+
+/** linear interpolation between from and to via t */
+static vec3f vec3f_lerp_v(const float *vec_from, const float *vec_to, float t) {
+    vec3f res;
+    vecf_lerp(res.v, vec_from, vec_to, t, 3);
     return res;
 }
 
@@ -322,6 +336,13 @@ static vec4f vec4f_normalize_v(const float *vec) {
     return res;
 }
 
+/** linear interpolation between from and to via t */
+static vec4f vec4f_lerp_v(const float *vec_from, const float *vec_to, float t) {
+    vec4f res;
+    vecf_lerp(res.v, vec_from, vec_to, t, 4);
+    return res;
+}
+
 
 //
 // vec2d
@@ -416,6 +437,13 @@ static vec2d vec2d_normalize_unsafe_v(const double *vec) {
 static vec2d vec2d_normalize_v(const double *vec) {
     vec2d res;
     vecd_normalize(res.v, vec, 2);
+    return res;
+}
+
+/** linear interpolation between from and to via t */
+static vec2d vec2d_lerp_v(const double *vec_from, const double *vec_to, double t) {
+    vec2d res;
+    vecd_lerp(res.v, vec_from, vec_to, t, 2);
     return res;
 }
 
@@ -520,6 +548,13 @@ static vec3d vec3d_normalize_unsafe_v(const double *vec) {
 static vec3d vec3d_normalize_v(const double *vec) {
     vec3d res;
     vecd_normalize(res.v, vec, 3);
+    return res;
+}
+
+/** linear interpolation between from and to via t */
+static vec3d vec3d_lerp_v(const double *vec_from, const double *vec_to, double t) {
+    vec3d res;
+    vecd_lerp(res.v, vec_from, vec_to, t, 3);
     return res;
 }
 
@@ -628,6 +663,13 @@ static vec4d vec4d_normalize_v(const double *vec) {
     return res;
 }
 
+/** linear interpolation between from and to via t */
+static vec4d vec4d_lerp_v(const double *vec_from, const double *vec_to, double t) {
+    vec4d res;
+    vecd_lerp(res.v, vec_from, vec_to, t, 4);
+    return res;
+}
+
 
 //
 // vec2i
@@ -709,6 +751,13 @@ static int vec2i_dot_v(const int *vec_a, const int *vec_b) {
 /** returns norm2 of a int vector */
 static double vec2i_norm_v(const int *vec) {
     return veci_norm(vec, 2);
+}
+
+/** linear interpolation between from and to via t */
+static vec2i vec2i_lerp_v(const int *vec_from, const int *vec_to, float t) {
+    vec2i res;
+    veci_lerp(res.v, vec_from, vec_to, t, 2);
+    return res;
 }
 
 
@@ -801,6 +850,13 @@ static double vec3i_norm_v(const int *vec) {
     return veci_norm(vec, 3);
 }
 
+/** linear interpolation between from and to via t */
+static vec3i vec3i_lerp_v(const int *vec_from, const int *vec_to, float t) {
+    vec3i res;
+    veci_lerp(res.v, vec_from, vec_to, t, 3);
+    return res;
+}
+
 
 
 //
@@ -890,6 +946,13 @@ static vec4i vec4i_cross_v(const int *vec_a, const int *vec_b) {
 /** returns norm2 of a int vector */
 static double vec4i_norm_v(const int *vec) {
     return veci_norm(vec, 4);
+}
+
+/** linear interpolation between from and to via t */
+static vec4i vec4i_lerp_v(const int *vec_from, const int *vec_to, float t) {
+    vec4i res;
+    veci_lerp(res.v, vec_from, vec_to, t, 4);
+    return res;
 }
 
 

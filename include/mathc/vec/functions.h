@@ -127,6 +127,12 @@ static void vecf_normalize(float *dst_vec, const float *vec, int n) {
     vecf_scale_sca(dst_vec, vec, 1.0f / (norm > 0 ? norm : 1), n);
 }
 
+/** linear interpolation between from and to via t */
+static void vecf_lerp(float *dst_vec, const float *vec_from, const float *vec_to, float t, int n) {
+    for(int i=0; i<n; i++)
+        dst_vec[i] = vec_from[i] + (vec_to[i] - vec_from[i]) * t;
+}
+
 
 //
 // vecd = double
@@ -238,6 +244,12 @@ static void vecd_normalize(double *dst_vec, const double *vec, int n) {
     vecd_scale_sca(dst_vec, vec, 1.0 / (norm > 0 ? norm : 1), n);
 }
 
+/** linear interpolation between from and to via t */
+static void vecd_lerp(double *dst_vec, const double *vec_from, const double *vec_to, double t, int n) {
+    for(int i=0; i<n; i++)
+        dst_vec[i] = vec_from[i] + (vec_to[i] - vec_from[i]) * t;
+}
+
 
 //
 // veci = int
@@ -336,6 +348,12 @@ static void veci_cross(int *dst_vec, const int *vec_a, const int *vec_b, int n) 
 /** returns norm2 of an int vector */
 static double veci_norm(const int *vec, int n) {
     return sqrt(veci_dot(vec, vec, n));
+}
+
+/** linear interpolation between from and to via t */
+static void veci_lerp(int *dst_vec, const int *vec_from, const int *vec_to, float t, int n) {
+    for(int i=0; i<n; i++)
+        dst_vec[i] = (int) (vec_from[i] + (vec_to[i] - vec_from[i]) * t);
 }
 
 

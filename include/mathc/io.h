@@ -332,6 +332,41 @@ static void mat44i_print(mat44i matrix) {
 }
 
 
+//
+// quat
+//
+
+static void quatf_print_f(quatf quat, FILE *ostream) {
+    fprintf(ostream, "quatf: " MATHC_PRINT_COLOR "(");
+    for (int v = 0; v < 4; v++) {
+        if (quat.v[v] < MATHC_PRINT_MAX_TO_SHORT)
+            fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, quat.v[v]);
+        else
+            fprintf(ostream, " %g", quat.v[v]);
+    }
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+}
+
+static void quatf_print(quatf quat) {
+    quatf_print_f(quat, stdout);
+}
+
+static void quatd_print_f(quatd quat, FILE *ostream) {
+    fprintf(ostream, "quatd: " MATHC_PRINT_COLOR "(");
+    for (int v = 0; v < 4; v++) {
+        if (quat.v[v] < MATHC_PRINT_MAX_TO_SHORT)
+            fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, quat.v[v]);
+        else
+            fprintf(ostream, " %g", quat.v[v]);
+    }
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+}
+
+static void quatd_print(quatd quat) {
+    quatd_print_f(quat, stdout);
+}
+
+
 // generic
 #define vec_print(vec) _Generic((vec), \
 vec2f: vec2f_print, \
@@ -510,5 +545,22 @@ int *: mat44i_print_f, \
 const int *: mat44i_print_f, \
 default: "type_error" \
 ) ((vec), (file))
+
+
+//
+// quat
+//
+
+#define quat_print(quat) _Generic((quat), \
+quatf: quatf_print, \
+quatd: quatd_print, \
+default: "type_error" \
+) ((quat))
+
+#define quat_print_f(quat, file) _Generic((quat), \
+quatf: quatf_print, \
+quatd: quatd_print, \
+default: "type_error" \
+) ((quat), (file))
 
 #endif //MATHC_IO_H
