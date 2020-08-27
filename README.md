@@ -1,5 +1,6 @@
 # Mathc
-A simple math header only library for C
+A simple and clean math header only library for C.
+Works very well with glsl.
 
 ## Getting Started
 Copy the header files into your project and have fun.
