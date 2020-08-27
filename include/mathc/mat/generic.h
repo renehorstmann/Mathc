@@ -177,4 +177,26 @@ mat44i: mat44i_invert, \
 default: "type_error" \
 ) ((mat))
 
+/** returns the rotation part [:2, :2] */
+#define mat_get_rotation(mat) _Generic((mat), \
+mat33f: mat33f_get_rotation, \
+mat44f: mat44f_get_rotation, \
+mat33d: mat33d_get_rotation, \
+mat44d: mat44d_get_rotation, \
+mat33i: mat33i_get_rotation, \
+mat44i: mat44i_get_rotation, \
+default: "type_error" \
+) ((mat))
+
+/** sets the rotation part [:2, :2] */
+#define mat_set_rotation(mat, rotation) _Generic((mat), \
+mat33f: mat33f_set_rotation, \
+mat44f: mat44f_set_rotation, \
+mat33d: mat33d_set_rotation, \
+mat44d: mat44d_set_rotation, \
+mat33i: mat33i_set_rotation, \
+mat44i: mat44i_set_rotation, \
+default: "type_error" \
+) ((mat), (rotation))
+
 #endif //MATHC_MAT_GENERIC_H

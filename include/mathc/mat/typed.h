@@ -197,6 +197,25 @@ static mat33f mat33f_invert(mat33f mat) {
     return res;
 }
 
+/** returns the rotation part [:2, :2] */
+static mat22f mat33f_get_rotation(mat33f mat) {
+    mat22f res;
+    for(int c=0; c<2; c++) {
+        for(int r=0; r<2; r++)
+            res.m[c][r] = mat.m[c][r];
+    }
+    return res;
+}
+
+/** sets the rotation part [:2, :2] */
+static mat33f mat33f_set_rotation(mat33f mat, mat22f rotation) {
+    for(int c=0; c<2; c++) {
+        for(int r=0; r<2; r++)
+            mat.m[c][r] = rotation.m[c][r];
+    }
+    return mat;
+}
+
 
 //
 // mat44f
@@ -489,6 +508,25 @@ static mat33d mat33d_invert(mat33d mat) {
     return res;
 }
 
+/** returns the rotation part [:2, :2] */
+static mat22d mat33d_get_rotation(mat33d mat) {
+    mat22d res;
+    for(int c=0; c<2; c++) {
+        for(int r=0; r<2; r++)
+            res.m[c][r] = mat.m[c][r];
+    }
+    return res;
+}
+
+/** sets the rotation part [:2, :2] */
+static mat33d mat33d_set_rotation(mat33d mat, mat22d rotation) {
+    for(int c=0; c<2; c++) {
+        for(int r=0; r<2; r++)
+            mat.m[c][r] = rotation.m[c][r];
+    }
+    return mat;
+}
+
 
 //
 // mat44d
@@ -776,6 +814,25 @@ static mat33i mat33i_invert(mat33i mat) {
     mat33i res;
     mati_invert33_no_alias(res.v, mat.v);
     return res;
+}
+
+/** returns the rotation part [:2, :2] */
+static mat22i mat33i_get_rotation(mat33i mat) {
+    mat22i res;
+    for(int c=0; c<2; c++) {
+        for(int r=0; r<2; r++)
+            res.m[c][r] = mat.m[c][r];
+    }
+    return res;
+}
+
+/** sets the rotation part [:2, :2] */
+static mat33i mat33i_set_rotation(mat33i mat, mat22i rotation) {
+    for(int c=0; c<2; c++) {
+        for(int r=0; r<2; r++)
+            mat.m[c][r] = rotation.m[c][r];
+    }
+    return mat;
 }
 
 
