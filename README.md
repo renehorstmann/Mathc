@@ -6,147 +6,196 @@ Copy the header files into your project and have fun.
 The libraries are written in C(11) (tested on GCC 7.4.0)
 
 ### Libraries
-* vec: functions, typed function and generic macros for vector math
-* mat: functions, typed function and generic macros for matrix math
-* mathc: includes vec.h and mat.h
+* vec: for vector math
+* mat: for matrix math
+* quat: for quaternion math
 
 ## vec
 The header file [vec.h](include/mathc/vec.h) includes all files in the vec dir.
-These files contains functions, typed function and generic macros for vector math.
+These files contains functions and typed functions for vector math.
 With the typed function, its possible to write readable math code in C.
 ```c
-#include <stdio.h>
-#include "mathc/vec.h"
+#include "mathc/mathc.h"
+
+// see below main
+static vec3 foo(vec4 a, vec2 b);
 
 int main() {
+    vec4 a = {{1, 2, 3, 4}};
+    a = vec4_scale_sca(a, 10);  // a = a * 10
+    vec4_print(a);
 
-    // vector float base functions that are sizeless
-    float vec_a[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    float res[10];
-    vecf_scale_vec(res, vec_a, vec_a, 10);
-    float norm = vecf_norm(res, 10);
-    printf("%f\n", norm);
+    // access data:
+    printf("x: %f = %f = %f\n",
+           a.x,         // or y, z, w
+           a.v0,        // vector data 0 - 3
+           a.v[0]);     // raw float * vector
 
-    // double typed with generic macros (vec_add also works for vec3f, vec4i, ...)
-    vec3d vec_b = {{-1.23, -2.34, -3.45}};
-    vec_b = vec_add(vec_b, 10);
-    double sum = vec_sum(vec_b);
-    printf("%f\n", sum);
+   // get sub data;
+   vec2_print(a.yz);    // or xy, zw, xyz, yzw
 
-    // with the Vec macros, raw pointers can be casted to the given type.
-    // the typed_v functions allow the use of raw pointers as parameters.
-    int vec_c[3] = {100, 200, 300};
-    Vec3i(vec_c) = vec_add(Vec3i(vec_c), 5);
-    int sum_c = vec3_sum_v(vec_c);
-    printf("%d\n", sum_c);
+    vec3 b = foo((vec4) {{1.1f, 2.2f, 3.3f, 0}}, a.zw);
+    vec3_print(b);
 
-    // output:
-    // 123.826492
-    // 22.980000
-    // 615
+
+    vec3 x = VEC3_INIT_UNIT_X;
+    vec3 y = VEC3_INIT_UNIT_Y;
+    vec3 z = vec3_cross(x, y);
+    vec3_print(z);
+
+
+    float data[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+
+    // typeless functions:
+    // (dst, a, b, n) for dst = a + b
+    vecN_add_sca(data, data, -1, 8);
+
+    // copy to a type:
+    vec4 copy = Vec4(data);
+    vec4_print(copy);
+
+    // cast and change some values
+    Vec2(data+4) = vec2_set(-1);
+    Vec2(data+6) = vec2_set(-3);
+    vec4_print(Vec4(data+4));
+
+    // use the _v functions to pass raw vectors
+    vec2 c = vec2_neg_v(data);
+    // instead of c = vec2_neg(Vec2(data));
+    vec2_print(c);
+
+    // have a look into mathc/vec/vec*.h for more functions. For example:
+    //      norm, norm_p, norm_1, norm_inf
+    //      normalize
+    //      lerp
+    //      dot
+
+    // There are also variants for double int int:
+    // dvec*
+    // ivec*
+}
+
+
+// a function would take a copy, unless it takes a pointer of a vec type
+static vec3 foo(vec4 a, vec2 b) {
+    return vec3_div_sca(a.xyz, b.y);
 }
 ```
 
 ## mat
 The header file [mat.h](include/mathc/mat.h) includes all files in the mat dir.
-It works like vec, but adds squared matrix calculations.v.
+It works like vec, but adds squared matrix calculations.
 The matrices are in column major order, so ```matrix[col][row]```.
 ```c
-#include <stdio.h>
-#include "mathc/mat.h"
+#include "mathc/mathc.h"
 
 int main() {
+    // column major order
+    // a = | 0, 2 |
+    //     | 1, 3 |
+    mat2 a = {{0, 1, 2, 3}};
+    float det = mat2_det(a);    // determinant
+    printf("det: %f\n", det);
 
-    // matrix float base functions that are sizeless
-    float mat_a[] = {1, 2, 3, 40, 50, 60, 0, -1, 5};
-    float det = matf_determinant33(mat_a);
-    printf("%f\n", det);
+    // access data and subdata
+    printf("a11: %f = %f = %f = %f = %f\n",
+           a.m11,           // col 1, row 1
+           a.v3,            // vector data 3
+           a.m[1][1],       // as C matrix
+           a.v[3],          // raw float * vector
+           a.col[1].y);     // first column as a vec2
 
-    // double typed with generic macros (mat_invert also works for mat33f, mat44i, ...)
-    mat44d mat_b = {{
-                            1, 0, 0, 0,
-                            0, -1, 0, 0,
-                            0, 0, -1, 0,
-                            100, 200, 300, 1
-                    }};
-    mat_b = mat_invert(mat_b);
-    for(int c=0; c < 4; c++) {
-        vec4d col = mat_get_col(mat_b, c);
-        printf("col[%d] = {%f %f %f %f}\n", c, col.v[0], col.v[1], col.v[2], col.v[3]);
-    }
+   // a.row is not available, because its column major order
+   vec2 row = mat2_get_row(a, 1);
+   vec2_print(row);
 
-    // Homogeneous coordinates transformation (calcs: vec_b = vec_b @ mat_b)
-    // there is also the function/macro mat_mul_vec (calcs: vec_b = mat_b @ vec_b)
-    vec4d vec_b = {{10, 20, 30, 1}};
-    vec_b = vec_mul_mat(vec_b, mat_b);
-    printf("vec = {%f %f %f %f}\n", vec_b.v[0], vec_b.v[1], vec_b.v[2], vec_b.v[3]);
+    // use vector functions:
+    // (dst, a, b, n) for dst = a + b
+    vecN_scale_sca(a.v, a.v, 10, 4);
+    mat2_print(a);
 
-    // with the Mat macros, raw pointers can be casted to the given type.
-    // the typed_v functions allow the use of raw pointers as parameters.
-    int mat_c[9];
-    Mat33i(mat_c) = mat33i_eye();
-    for(int r=0; r < 3; r++) {
-        vec3i row = mat33_get_row_v(mat_c, r);
-        printf("row[%d] = {%d %d %d}\n", r, row.v[0], row.v[1], row.v[2]);
-    }
 
-    // output:
-    // -210.000000
-    // col[0] = {1.000000 0.000000 0.000000 -100.000000}
-    // col[1] = {0.000000 -1.000000 0.000000 200.000000}
-    // col[2] = {0.000000 0.000000 -1.000000 300.000000}
-    // col[3] = {-0.000000 0.000000 0.000000 1.000000}
-    // vec = {-90.000000 180.000000 270.000000 1.000000}
-    // row[0] = {1 0 0}
-    // row[1] = {0 1 0}
-    // row[2] = {0 0 1}
+    mat4 M = MAT4_INIT_EYE;
+    // or M = mat4_eye();
+
+    // affine transformation (translation in x)
+    M.col[3].x = 10;
+    vec4 res = mat4_mul_vec(M, (vec4){{1.1f, 2.2f, 3.3f, 1}});
+    // for points: w=1, for vectors w=0
+    vec4_print(res);
+
+    // back transformation
+    res = mat4_mul_vec(mat4_inv(M), res);
+    vec4_print(res);
+
+
+    // build an affine rotation matrix:
+    M = mat4_eye();
+    vec4 angle_axis = {{0, 0, 1, M_PI/2}};    // quarter turn via z axis
+    mat3 rotation = mat3_rotation_from_angle_axis(angle_axis);
+    M = mat4_set_upper_left3(M, rotation);
+    mat4_print(M);
+
+    float data[4] = {10, 20, 30, 40};
+    // as with vec, mats can be casted from a raw vector
+    mat2 copy = Mat2(data);
+    mat2_print(copy);
+
+    // have a look into mathc/mat/mat*.h for more functions. For example:
+    //      set_, get_ | row, col
+    //      set_, get_ block
+    //      vec_mul_mat
+
+    // There are also variants for double int int:
+    // dmat*
+    // imat*
 }
 ```
 
-## How it works
-The header file [types.h](include/mathc/types.h) defines all types for the typed macros.
-In C, its not trivial to copy a vector, because vectors are just pointers that need function for copying.
-The Mathc library uses structs and unions to wrap these typed vectors. So C can copy them with the = operator.
-The macro Vec3f will only cast the pointer into a pointer to the vec3f struct and dereference it.
+## quat
+The header file [quat.h](include/mathc/quat.h) includes all files in the quat dir.
+A quat is a simple typedef for a vec4: ```{qx, qy, qz, qw}```.
 ```c
-typedef struct vec3f {
-    float v[3];
-} vec3f;
+#include "mathc/mathc.h"
 
-/** casts a float * to a dereferenced vec3f */
-#define Vec3f(vec) (*(vec3f *) (vec))
+int main() {
+    // a quat is a typedef to vec4
+    quat a = QUAT4_INIT_EYE;
+    quat b = quat_from_angle_axis((vec4) {{0, 0, 1, M_PI_2}});
+    quat_print(b);
 
-/** casts a float * to a dereferenced const vec3f */
-#define ConstVec3f(vec) (*(const vec3f *) (vec))
+    // slerp is a more suitable function to interpolate rotations
+    // sperical lerp
+    quat c = quat_slerp(a, b, 0.5f);
+    quat_print(c);
+
+    vec4 angle_axis = quat_to_angle_axis(c);
+    vec4_print(angle_axis);
+
+    mat3 rot = quat_to_rotation_matrix(c);
+    mat3_print(rot);
+
+    // have a look into mathc/vec/vec*.h for more functions for quat math. For example:
+    //      norm, norm_p, norm_1, norm_inf
+    //      normalize
+    //      lerp
+    //      dot
+
+    // There is also the variant for double:
+    // dquat
+}
 ```
 
 ## Performance
 It seems that there will be an overhead due to the casts and copying. 
 The [performance test](examples/performance_test_lib.c) shows that the overhead is only noticeable in debug mode of the compiler.
+In Optimising mode, my compiler generated a better result than a manual, not copying example.
 
 ## Running the examples
 The top directory of this project contains a CmakeLists.txt file, which sets up the examples for each library
 
 ## Todo:
-- Fork functions from cglm to this style. LookAt, ortho, perspective, quat, rotation axis, ...
-- structs with anonym unions:
-```c
-typedef struct vec3f {
-    union {
-        float raw[3];
-        struct {
-            float x, y, z;
-        };
-        struct {
-            float r, g, b;
-        };
-        vec2f xy;
-        vec2f rg;
-        // ...
-    };
-} vec3f
-
-```
+- Fork functions from cglm to this style. LookAt, ortho, perspective, ...
 
 ## Author
 

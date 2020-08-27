@@ -1,7 +1,7 @@
 #ifndef MATHC_TYPES_H
 #define MATHC_TYPES_H
 
-typedef union vec2f {
+typedef union vec2 {
     float v[2];
     struct {
         float v0, v1;
@@ -9,20 +9,20 @@ typedef union vec2f {
     struct {
         float x, y;
     };
-} vec2f;
-_Static_assert(sizeof(vec2f) == sizeof(float) * 2, "[Mathc] wrong expected size");
+} vec2;
+_Static_assert(sizeof(vec2) == sizeof(float) * 2, "[Mathc] wrong expected size");
 
-/** casts a float * to a dereferenced vec2f */
-#define Vec2f(vec) (*(vec2f *) (vec))
+/** casts a float * to a dereferenced vec2 */
+#define Vec2(vec) (*(vec2 *) (vec))
 
-/** casts a float * to a dereferenced const vec2f */
-#define ConstVec2f(vec) (*(const vec2f *) (vec))
+/** casts a float * to a dereferenced const vec2 */
+#define ConstVec2(vec) (*(const vec2 *) (vec))
 
 
-typedef union mat22f {
+typedef union mat2 {
     float v[4];
     float m[2][2];
-    vec2f col[2];
+    vec2 col[2];
     struct {
         float v0, v1;
         float v2, v3;
@@ -31,44 +31,44 @@ typedef union mat22f {
         float m00, m01;
         float m10, m11;
     };
-} mat22f;
-_Static_assert(sizeof(mat22f) == sizeof(float) * 4, "[Mathc] wrong expected size");
+} mat2;
+_Static_assert(sizeof(mat2) == sizeof(float) * 4, "[Mathc] wrong expected size");
 
-/** casts a float * to a dereferenced mat22f */
-#define Mat22f(mat) (*(mat22f *) (mat))
+/** casts a float * to a dereferenced mat2 */
+#define Mat2(mat) (*(mat2 *) (mat))
 
-/** casts a float * to a dereferenced const mat22f */
-#define ConstMat22f(mat) (*(const mat22f *) (mat))
+/** casts a float * to a dereferenced const mat2 */
+#define ConstMat2(mat) (*(const mat2 *) (mat))
 
-typedef union vec3f {
+typedef union vec3 {
     float v[3];
     struct {
         float v0, v1, v2;
     };
-    vec2f xy;
+    vec2 xy;
     struct {
         float x;
         union {
             struct {
                 float y, z;
             };
-            vec2f yz;
+            vec2 yz;
         };
     };
-} vec3f;
-_Static_assert(sizeof(vec3f) == sizeof(float) * 3, "[Mathc] wrong expected size");
+} vec3;
+_Static_assert(sizeof(vec3) == sizeof(float) * 3, "[Mathc] wrong expected size");
 
-/** casts a float * to a dereferenced vec3f */
-#define Vec3f(vec) (*(vec3f *) (vec))
+/** casts a float * to a dereferenced vec3 */
+#define Vec3(vec) (*(vec3 *) (vec))
 
-/** casts a float * to a dereferenced const vec3f */
-#define ConstVec3f(vec) (*(const vec3f *) (vec))
+/** casts a float * to a dereferenced const vec3 */
+#define ConstVec3(vec) (*(const vec3 *) (vec))
 
 
-typedef union mat33f {
+typedef union mat3 {
     float v[9];
     float m[3][3];
-    vec3f col[3];
+    vec3 col[3];
     struct {
         float v0, v1, v2;
         float v3, v4, v5;
@@ -79,23 +79,23 @@ typedef union mat33f {
         float m10, m11, m12;
         float m20, m21, m22;
     };
-} mat33f;
-_Static_assert(sizeof(mat33f) == sizeof(float) * 9, "[Mathc] wrong expected size");
+} mat3;
+_Static_assert(sizeof(mat3) == sizeof(float) * 9, "[Mathc] wrong expected size");
 
-/** casts a float * to a dereferenced mat33f */
-#define Mat33f(mat) (*(mat33f *) (mat))
+/** casts a float * to a dereferenced mat3 */
+#define Mat3(mat) (*(mat3 *) (mat))
 
-/** casts a float * to a dereferenced const mat33f */
-#define ConstMat33f(mat) (*(const mat33f *) (mat))
+/** casts a float * to a dereferenced const mat3 */
+#define ConstMat3(mat) (*(const mat3 *) (mat))
 
 
-typedef union vec4f {
+typedef union vec4 {
     float v[4];
     struct {
         float v0, v1, v2, v3;
     };
-    vec2f xy;
-    vec3f xyz;
+    vec2 xy;
+    vec3 xyz;
     struct {
         float x;
         union {
@@ -105,27 +105,27 @@ typedef union vec4f {
                     struct {
                         float z, w;
                     };
-                    vec2f zw;
+                    vec2 zw;
                 };
             };
-            vec2f yz;
-            vec3f yzw;
+            vec2 yz;
+            vec3 yzw;
         };
     };
-} vec4f;
-_Static_assert(sizeof(vec4f) == sizeof(float) * 4, "[Mathc] wrong expected size");
+} vec4;
+_Static_assert(sizeof(vec4) == sizeof(float) * 4, "[Mathc] wrong expected size");
 
-/** casts a float * to a dereferenced vec4f */
-#define Vec4f(vec) (*(vec4f *) (vec))
+/** casts a float * to a dereferenced vec4 */
+#define Vec4(vec) (*(vec4 *) (vec))
 
-/** casts a float * to a dereferenced const vec4f */
-#define ConstVec4f(vec) (*(const vec4f *) (vec))
+/** casts a float * to a dereferenced const vec4 */
+#define ConstVec4(vec) (*(const vec4 *) (vec))
 
 
-typedef union mat44f {
+typedef union mat4 {
     float v[16];
     float m[4][4];
-    vec4f col[4];
+    vec4 col[4];
     struct {
         float v0, v1, v2, v3;
         float v4, v5, v6, v7;
@@ -138,18 +138,17 @@ typedef union mat44f {
         float m20, m21, m22, m23;
         float m30, m31, m32, m33;
     };
-} mat44f;
-_Static_assert(sizeof(mat44f) == sizeof(float) * 16, "[Mathc] wrong expected size");
+} mat4;
+_Static_assert(sizeof(mat4) == sizeof(float) * 16, "[Mathc] wrong expected size");
 
-/** casts a float * to a dereferenced mat44f */
-#define Mat44f(mat) (*(mat44f *) (mat))
+/** casts a float * to a dereferenced mat4 */
+#define Mat4(mat) (*(mat4 *) (mat))
 
-/** casts a float * to a dereferenced const mat44f */
-#define ConstMat44f(mat) (*(const mat44f *) (mat))
+/** casts a float * to a dereferenced const mat4 */
+#define ConstMat4(mat) (*(const mat4 *) (mat))
 
 
-
-typedef union vec2d {
+typedef union dvec2 {
     double v[2];
     struct {
         double v0, v1;
@@ -157,20 +156,20 @@ typedef union vec2d {
     struct {
         double x, y;
     };
-} vec2d;
-_Static_assert(sizeof(vec2d) == sizeof(double) * 2, "[Mathc] wrong expected size");
+} dvec2;
+_Static_assert(sizeof(dvec2) == sizeof(double) * 2, "[Mathc] wrong expected size");
 
-/** casts a double * to a dereferenced vec2d */
-#define Vec2d(vec) (*(vec2d *) (vec))
+/** casts a double * to a dereferenced dvec2 */
+#define DVec2(vec) (*(dvec2 *) (vec))
 
-/** casts a double * to a dereferenced const vec2d */
-#define ConstVec2d(vec) (*(const vec2d *) (vec))
+/** casts a double * to a dereferenced const dvec2 */
+#define ConstDVec2(vec) (*(const dvec2 *) (vec))
 
 
-typedef union mat22d {
+typedef union dmat2 {
     double v[4];
     double m[2][2];
-    vec2d col[2];
+    dvec2 col[2];
     struct {
         double v0, v1;
         double v2, v3;
@@ -179,44 +178,44 @@ typedef union mat22d {
         double m00, m01;
         double m10, m11;
     };
-} mat22d;
-_Static_assert(sizeof(mat22d) == sizeof(double) * 4, "[Mathc] wrong expected size");
+} dmat2;
+_Static_assert(sizeof(dmat2) == sizeof(double) * 4, "[Mathc] wrong expected size");
 
-/** casts a double * to a dereferenced mat22d */
-#define Mat22d(mat) (*(mat22d *) (mat))
+/** casts a double * to a dereferenced dmat2 */
+#define DMat2(mat) (*(dmat2 *) (mat))
 
-/** casts a double * to a dereferenced const mat22d */
-#define ConstMat22d(mat) (*(const mat22d *) (mat))
+/** casts a double * to a dereferenced const dmat2 */
+#define ConstDMat2(mat) (*(const dmat2 *) (mat))
 
-typedef union vec3d {
+typedef union dvec3 {
     double v[3];
     struct {
         double v0, v1, v2;
     };
-    vec2d xy;
+    dvec2 xy;
     struct {
         double x;
         union {
             struct {
                 double y, z;
             };
-            vec2d yz;
+            dvec2 yz;
         };
     };
-} vec3d;
-_Static_assert(sizeof(vec3d) == sizeof(double) * 3, "[Mathc] wrong expected size");
+} dvec3;
+_Static_assert(sizeof(dvec3) == sizeof(double) * 3, "[Mathc] wrong expected size");
 
-/** casts a double * to a dereferenced vec3d */
-#define Vec3d(vec) (*(vec3d *) (vec))
+/** casts a double * to a dereferenced dvec3 */
+#define DVec3(vec) (*(dvec3 *) (vec))
 
-/** casts a double * to a dereferenced const vec3d */
-#define ConstVec3d(vec) (*(const vec3d *) (vec))
+/** casts a double * to a dereferenced const dvec3 */
+#define ConstDVec3(vec) (*(const dvec3 *) (vec))
 
 
-typedef union mat33d {
+typedef union dmat3 {
     double v[9];
     double m[3][3];
-    vec3d col[3];
+    dvec3 col[3];
     struct {
         double v0, v1, v2;
         double v3, v4, v5;
@@ -227,23 +226,23 @@ typedef union mat33d {
         double m10, m11, m12;
         double m20, m21, m22;
     };
-} mat33d;
-_Static_assert(sizeof(mat33d) == sizeof(double) * 9, "[Mathc] wrong expected size");
+} dmat3;
+_Static_assert(sizeof(dmat3) == sizeof(double) * 9, "[Mathc] wrong expected size");
 
-/** casts a double * to a dereferenced mat33d */
-#define Mat33d(mat) (*(mat33d *) (mat))
+/** casts a double * to a dereferenced dmat3 */
+#define DMat3(mat) (*(dmat3 *) (mat))
 
-/** casts a double * to a dereferenced const mat33d */
-#define ConstMat33d(mat) (*(const mat33d *) (mat))
+/** casts a double * to a dereferenced const dmat3 */
+#define ConstDMat3(mat) (*(const dmat3 *) (mat))
 
 
-typedef union vec4d {
+typedef union dvec4 {
     double v[4];
     struct {
         double v0, v1, v2, v3;
     };
-    vec2d xy;
-    vec3d xyz;
+    dvec2 xy;
+    dvec3 xyz;
     struct {
         double x;
         union {
@@ -253,27 +252,27 @@ typedef union vec4d {
                     struct {
                         double z, w;
                     };
-                    vec2d zw;
+                    dvec2 zw;
                 };
             };
-            vec2d yz;
-            vec3d yzw;
+            dvec2 yz;
+            dvec3 yzw;
         };
     };
-} vec4d;
-_Static_assert(sizeof(vec4d) == sizeof(double) * 4, "[Mathc] wrong expected size");
+} dvec4;
+_Static_assert(sizeof(dvec4) == sizeof(double) * 4, "[Mathc] wrong expected size");
 
-/** casts a double * to a dereferenced vec4d */
-#define Vec4d(vec) (*(vec4d *) (vec))
+/** casts a double * to a dereferenced dvec4 */
+#define DVec4(vec) (*(dvec4 *) (vec))
 
-/** casts a double * to a dereferenced const vec4d */
-#define ConstVec4d(vec) (*(const vec4d *) (vec))
+/** casts a double * to a dereferenced const dvec4 */
+#define ConstDVec4(vec) (*(const dvec4 *) (vec))
 
 
-typedef union mat44d {
+typedef union dmat4 {
     double v[16];
     double m[4][4];
-    vec4d col[4];
+    dvec4 col[4];
     struct {
         double v0, v1, v2, v3;
         double v4, v5, v6, v7;
@@ -286,18 +285,17 @@ typedef union mat44d {
         double m20, m21, m22, m23;
         double m30, m31, m32, m33;
     };
-} mat44d;
-_Static_assert(sizeof(mat44d) == sizeof(double) * 16, "[Mathc] wrong expected size");
+} dmat4;
+_Static_assert(sizeof(dmat4) == sizeof(double) * 16, "[Mathc] wrong expected size");
 
-/** casts a double * to a dereferenced mat44d */
-#define Mat44d(mat) (*(mat44d *) (mat))
+/** casts a double * to a dereferenced dmat4 */
+#define DMat4(mat) (*(dmat4 *) (mat))
 
-/** casts a double * to a dereferenced const mat44d */
-#define ConstMat44d(mat) (*(const mat44d *) (mat))
+/** casts a double * to a dereferenced const dmat4 */
+#define ConstDMat4(mat) (*(const dmat4 *) (mat))
 
 
-
-typedef union vec2i {
+typedef union ivec2 {
     int v[2];
     struct {
         int v0, v1;
@@ -305,20 +303,20 @@ typedef union vec2i {
     struct {
         int x, y;
     };
-} vec2i;
-_Static_assert(sizeof(vec2i) == sizeof(int) * 2, "[Mathc] wrong expected size");
+} ivec2;
+_Static_assert(sizeof(ivec2) == sizeof(int) * 2, "[Mathc] wrong expected size");
 
-/** casts a int * to a dereferenced vec2i */
-#define Vec2i(vec) (*(vec2i *) (vec))
+/** casts a int * to a dereferenced ivec2 */
+#define IVec2(vec) (*(ivec2 *) (vec))
 
-/** casts a int * to a dereferenced const vec2i */
-#define ConstVec2i(vec) (*(const vec2i *) (vec))
+/** casts a int * to a dereferenced const ivec2 */
+#define ConstIVec2(vec) (*(const ivec2 *) (vec))
 
 
-typedef union mat22i {
+typedef union imat2 {
     int v[4];
     int m[2][2];
-    vec2i col[2];
+    ivec2 col[2];
     struct {
         int v0, v1;
         int v2, v3;
@@ -327,44 +325,44 @@ typedef union mat22i {
         int m00, m01;
         int m10, m11;
     };
-} mat22i;
-_Static_assert(sizeof(mat22i) == sizeof(int) * 4, "[Mathc] wrong expected size");
+} imat2;
+_Static_assert(sizeof(imat2) == sizeof(int) * 4, "[Mathc] wrong expected size");
 
-/** casts a int * to a dereferenced mat22i */
-#define Mat22i(mat) (*(mat22i *) (mat))
+/** casts a int * to a dereferenced imat2 */
+#define IMat2(mat) (*(imat2 *) (mat))
 
-/** casts a int * to a dereferenced const mat22i */
-#define ConstMat22i(mat) (*(const mat22i *) (mat))
+/** casts a int * to a dereferenced const imat2 */
+#define ConstIMat2(mat) (*(const imat2 *) (mat))
 
-typedef union vec3i {
+typedef union ivec3 {
     int v[3];
     struct {
         int v0, v1, v2;
     };
-    vec2i xy;
+    ivec2 xy;
     struct {
         int x;
         union {
             struct {
                 int y, z;
             };
-            vec2i yz;
+            ivec2 yz;
         };
     };
-} vec3i;
-_Static_assert(sizeof(vec3i) == sizeof(int) * 3, "[Mathc] wrong expected size");
+} ivec3;
+_Static_assert(sizeof(ivec3) == sizeof(int) * 3, "[Mathc] wrong expected size");
 
-/** casts a int * to a dereferenced vec3i */
-#define Vec3i(vec) (*(vec3i *) (vec))
+/** casts a int * to a dereferenced ivec3 */
+#define IVec3(vec) (*(ivec3 *) (vec))
 
-/** casts a int * to a dereferenced const vec3i */
-#define ConstVec3i(vec) (*(const vec3i *) (vec))
+/** casts a int * to a dereferenced const ivec3 */
+#define ConstIVec3(vec) (*(const ivec3 *) (vec))
 
 
-typedef union mat33i {
+typedef union imat3 {
     int v[9];
     int m[3][3];
-    vec3i col[3];
+    ivec3 col[3];
     struct {
         int v0, v1, v2;
         int v3, v4, v5;
@@ -375,23 +373,23 @@ typedef union mat33i {
         int m10, m11, m12;
         int m20, m21, m22;
     };
-} mat33i;
-_Static_assert(sizeof(mat33i) == sizeof(int) * 9, "[Mathc] wrong expected size");
+} imat3;
+_Static_assert(sizeof(imat3) == sizeof(int) * 9, "[Mathc] wrong expected size");
 
-/** casts a int * to a dereferenced mat33i */
-#define Mat33i(mat) (*(mat33i *) (mat))
+/** casts a int * to a dereferenced imat3 */
+#define IMat3(mat) (*(imat3 *) (mat))
 
-/** casts a int * to a dereferenced const mat33i */
-#define ConstMat33i(mat) (*(const mat33i *) (mat))
+/** casts a int * to a dereferenced const imat3 */
+#define IConstMat3(mat) (*(const imat3 *) (mat))
 
 
-typedef union vec4i {
+typedef union ivec4 {
     int v[4];
     struct {
         int v0, v1, v2, v3;
     };
-    vec2i xy;
-    vec3i xyz;
+    ivec2 xy;
+    ivec3 xyz;
     struct {
         int x;
         union {
@@ -401,27 +399,27 @@ typedef union vec4i {
                     struct {
                         int z, w;
                     };
-                    vec2i zw;
+                    ivec2 zw;
                 };
             };
-            vec2i yz;
-            vec3i yzw;
+            ivec2 yz;
+            ivec3 yzw;
         };
     };
-} vec4i;
-_Static_assert(sizeof(vec4i) == sizeof(int) * 4, "[Mathc] wrong expected size");
+} ivec4;
+_Static_assert(sizeof(ivec4) == sizeof(int) * 4, "[Mathc] wrong expected size");
 
-/** casts a int * to a dereferenced vec4i */
-#define Vec4i(vec) (*(vec4i *) (vec))
+/** casts a int * to a dereferenced ivec4 */
+#define IVec4(vec) (*(ivec4 *) (vec))
 
-/** casts a int * to a dereferenced const vec4i */
-#define ConstVec4i(vec) (*(const vec4i *) (vec))
+/** casts a int * to a dereferenced const ivec4 */
+#define ConstIVec4(vec) (*(const ivec4 *) (vec))
 
 
-typedef union mat44i {
+typedef union imat4 {
     int v[16];
     int m[4][4];
-    vec4i col[4];
+    ivec4 col[4];
     struct {
         int v0, v1, v2, v3;
         int v4, v5, v6, v7;
@@ -434,43 +432,56 @@ typedef union mat44i {
         int m20, m21, m22, m23;
         int m30, m31, m32, m33;
     };
-} mat44i;
-_Static_assert(sizeof(mat44i) == sizeof(int) * 16, "[Mathc] wrong expected size");
+} imat4;
+_Static_assert(sizeof(imat4) == sizeof(int) * 16, "[Mathc] wrong expected size");
 
-/** casts a int * to a dereferenced mat44i */
-#define Mat44i(mat) (*(mat44i *) (mat))
+/** casts a int * to a dereferenced imat4 */
+#define IMat4(mat) (*(imat4 *) (mat))
 
-/** casts a int * to a dereferenced const mat44i */
-#define ConstMat44i(mat) (*(const mat44i *) (mat))
+/** casts a int * to a dereferenced const imat4 */
+#define ConstIMat4(mat) (*(const imat4 *) (mat))
 
 
 // quaternion type
-typedef vec4f quatf;
-typedef vec4d quatd;
+typedef vec4 quat;
+#define Quat Vec4
+#define ConstQuat ConstVec4
+typedef dvec4 dquat;
+#define DQuat DVec4
+#define ConstDQuat ConstDVec4
 
 
 // initializer
 
-#define VEC2_INIT_ZERO {{0, 0}}
-#define VEC2_INIT_ONE  {{1, 1}}
+#define VEC2_INIT_ZERO   {{0, 0}}
+#define VEC2_INIT_ONE    {{1, 1}}
+#define VEC2_INIT_UNIT_X {{1, 0}};
+#define VEC2_INIT_UNIT_Y {{0, 1}};
 
-#define VEC3_INIT_ZERO {{0, 0, 0}}
-#define VEC3_INIT_ONE  {{1, 1, 1}}
+#define VEC3_INIT_ZERO   {{0, 0, 0}}
+#define VEC3_INIT_ONE    {{1, 1, 1}}
+#define VEC3_INIT_UNIT_X {{1, 0, 0}};
+#define VEC3_INIT_UNIT_Y {{0, 1, 0}};
+#define VEC3_INIT_UNIT_Z {{0, 0, 1}};
 
-#define VEC4_INIT_ZERO {{0, 0, 0, 0}}
-#define VEC4_INIT_ONE  {{1, 1, 1, 1}}
+#define VEC4_INIT_ZERO   {{0, 0, 0, 0}}
+#define VEC4_INIT_ONE    {{1, 1, 1, 1}}
+#define VEC4_INIT_UNIT_X {{1, 0, 0, 0}};
+#define VEC4_INIT_UNIT_Y {{0, 1, 0, 0}};
+#define VEC4_INIT_UNIT_Z {{0, 0, 1, 0}};
+#define VEC4_INIT_UNIT_W {{0, 0, 0, 1}};
 
-#define MAT22_INIT_ZERO {{0, 0,  0, 0}}
-#define MAT22_INIT_ONE  {{1, 1,  1, 1}}
-#define MAT22_INIT_EYE  {{1, 0,  0, 1}}
+#define MAT2_INIT_ZERO   {{0, 0,  0, 0}}
+#define MAT2_INIT_ONE    {{1, 1,  1, 1}}
+#define MAT2_INIT_EYE    {{1, 0,  0, 1}}
 
-#define MAT33_INIT_ZERO {{0, 0, 0,  0, 0, 0,  0, 0, 0}}
-#define MAT33_INIT_ONE  {{1, 1, 1,  1, 1, 1,  1, 1, 1}}
-#define MAT33_INIT_EYE  {{1, 0, 0,  0, 1, 0,  0, 0, 1}}
+#define MAT3_INIT_ZERO   {{0, 0, 0,  0, 0, 0,  0, 0, 0}}
+#define MAT3_INIT_ONE    {{1, 1, 1,  1, 1, 1,  1, 1, 1}}
+#define MAT3_INIT_EYE    {{1, 0, 0,  0, 1, 0,  0, 0, 1}}
 
-#define MAT44_INIT_ZERO {{0, 0, 0, 0,  0, 0, 0, 0,  0, 0, 0, 0,  0, 0, 0, 0}}
-#define MAT44_INIT_ONE  {{1, 1, 1, 1,  1, 1, 1, 1,  1, 1, 1, 1,  1, 1, 1, 1}}
-#define MAT44_INIT_EYE  {{1, 0, 0, 0,  0, 1, 0, 0,  0, 0, 1, 0,  0, 0, 0, 1}}
+#define MAT4_INIT_ZERO   {{0, 0, 0, 0,  0, 0, 0, 0,  0, 0, 0, 0,  0, 0, 0, 0}}
+#define MAT4_INIT_ONE    {{1, 1, 1, 1,  1, 1, 1, 1,  1, 1, 1, 1,  1, 1, 1, 1}}
+#define MAT4_INIT_EYE    {{1, 0, 0, 0,  0, 1, 0, 0,  0, 0, 1, 0,  0, 0, 0, 1}}
 
 // xyzw
 #define QUAT4_INIT_EYE {{0, 0, 0, 1}}

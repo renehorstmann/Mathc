@@ -1,54 +1,65 @@
-#include <stdio.h>
-#include "mathc/vec.h"
-#include "mathc/io.h"
+#include "mathc/mathc.h"
+
+// see below main
+static vec3 foo(vec4 a, vec2 b);
 
 int main() {
+    vec4 a = {{1, 2, 3, 4}};
+    a = vec4_scale_sca(a, 10);  // a = a * 10
+    vec4_print(a);
 
-    // vector float base functions that are sizeless
-    float vec_a[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    float res[10];
-    vecf_scale_vec(res, vec_a, vec_a, 10);
-    float norm = vecf_norm(res, 10);
-    printf("%f\n", norm);
+    // access data:
+    printf("x: %f = %f = %f\n",
+           a.x,         // or y, z, w
+           a.v0,        // vector data 0 - 3
+           a.v[0]);     // raw float * vector
 
-    // double typed with generic macros (vec_add also works for vec3f, vec4i, ...)
-    vec3d vec_b = {{-1.23, -2.34, -3.45}};
-    vec_b = vec_add(vec_b, 10);
-    double sum = vec_sum(vec_b);
-    printf("%f\n", sum);
+   // get sub data;
+   vec2_print(a.yz);    // or xy, zw, xyz, yzw
 
-    // with the Vec macros, raw pointers can be casted to the given type.
-    // the typed_v functions allow the use of raw pointers as parameters.
-    int vec_c[3] = {100, 200, 300};
-    Vec3i(vec_c) = vec_add(Vec3i(vec_c), 5);
-    int sum_c = vec3_sum_v(vec_c);
-    printf("%d\n", sum_c);
+    vec3 b = foo((vec4) {{1.1f, 2.2f, 3.3f, 0}}, a.zw);
+    vec3_print(b);
 
 
-    // the fourth element of a vec4 is not effected, if wrapped into vec3
-    float vec_d_a[4] = {5, 4, 3, 1};
-    float vec_d_b[4] = {1, 1, 1, 1};
-    float vec_d_res[4] = {0, 0, 0, 2.34f};
-    Vec3f(vec_d_res) = vec3_sub_v(vec_d_a, vec_d_b);
-    printf("%f %f %f %f\n", vec_d_res[0], vec_d_res[1], vec_d_res[2], vec_d_res[3]);
+    vec3 x = VEC3_INIT_UNIT_X;
+    vec3 y = VEC3_INIT_UNIT_Y;
+    vec3 z = vec3_cross(x, y);
+    vec3_print(z);
 
-    puts("accessing...");
-    vec4f v = {{1, 2, 3, 4}};
-    printf("%f %f %f %f\n", v.x, v.y, v.z, v.w);
-    printf("%f %f %f %f\n", v.v0, v.v1, v.v2, v.v3);
-    printf("%f %f %f %f\n", v.v[0], v.v[1], v.v[2], v.v[3]);
-    printf("%f %f %f %f\n", v.xy.v0, v.yz.v0, v.zw.v0, v.yzw.v2);
-    vec_print(v);
 
-    // output:
-    // 123.826492
-    // 22.980000
-    // 615
-    // 4.000000 3.000000 2.000000 2.340000
-    // accessing...
-    // 1.000000 2.000000 3.000000 4.000000
-    // 1.000000 2.000000 3.000000 4.000000
-    // 1.000000 2.000000 3.000000 4.000000
-    // 1.000000 2.000000 3.000000 4.000000
-    // vec4f: ( 1.00000 2.00000 3.00000 4.00000 )
+    float data[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+
+    // typeless functions:
+    // (dst, a, b, n) for dst = a + b
+    vecN_add_sca(data, data, -1, 8);
+
+    // copy to a type:
+    vec4 copy = Vec4(data);
+    vec4_print(copy);
+
+    // cast and change some values
+    Vec2(data+4) = vec2_set(-1);
+    Vec2(data+6) = vec2_set(-3);
+    vec4_print(Vec4(data+4));
+
+    // use the _v functions to pass raw vectors
+    vec2 c = vec2_neg_v(data);
+    // instead of c = vec2_neg(Vec2(data));
+    vec2_print(c);
+
+    // have a look into mathc/vec/vec*.h for more functions. For example:
+    //      norm, norm_p, norm_1, norm_inf
+    //      normalize
+    //      lerp
+    //      dot
+
+    // There are also variants for double int int:
+    // dvec*
+    // ivec*
+}
+
+
+// a function would take a copy, unless it takes a pointer of a vec type
+static vec3 foo(vec4 a, vec2 b) {
+    return vec3_div_sca(a.xyz, b.y);
 }

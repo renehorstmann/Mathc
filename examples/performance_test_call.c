@@ -3,7 +3,7 @@
 #include <time.h>
 
 // see performance_test_lib.c
-float performance_manuel(const float *vectors_a, const float *vectors_b, int n);
+float performance_manual(const float *vectors_a, const float *vectors_b, int n);
 float performance_mathc1(const float *vectors_a, const float *vectors_b, int n);
 float performance_mathc2(const float *vectors_a, const float *vectors_b, int n);
 float performance_mathc3(const float *vectors_a, const float *vectors_b, int n);
@@ -33,10 +33,10 @@ int main(int argc, char **argv) {
     }
 
     // let the cpu run...
-    performance_manuel(vec_a, vec_b, n);
+    performance_manual(vec_a, vec_b, n);
 
     double time = monotonic();
-    float res_manual = performance_manuel(vec_a, vec_b, n);
+    float res_manual = performance_manual(vec_a, vec_b, n);
     double time_manuel = monotonic() - time;
 
     time = monotonic();
