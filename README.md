@@ -156,7 +156,7 @@ _Static_assert(sizeof(vec3) == sizeof(float) * 3,
 ```
 In addition to v, v0-2, xyz, a vec3 lets you access subdata vec2:
 ```c
-vec3 a {{1, 2, 3}};
+vec3 a = {{1, 2, 3}};
 vec2 b = a.yz;
 assert(b.v0 == 2 && b.v1 == 3);
 ```
