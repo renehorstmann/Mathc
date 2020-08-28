@@ -4,6 +4,14 @@
 #include "math.h"
 
 
+/** macro to cast a vector into a float vector */
+#define vecN_cast_into(dst_vec, vec, n) \
+{ \
+    for(int i=0; i<(n); i++) \
+        (dst_vec)[i] = (float) (vec)[i]; \
+}
+
+
 /** dst = vec */
 static void vecN_copy(float *dst_vec, const float *vec, int n) {
     for (int i = 0; i < n; i++)

@@ -11,27 +11,43 @@ static quat quat_eye() {
     return (quat) QUAT4_INIT_EYE;
 }
 
+
 /** dst = -x, -y, -z, w */
-static quat quat_conjugate(quat q) {
+static quat quat_conj(quat q) {
     return (quat) {{-q.x, -q.y, -q.z, q.w}};
 }
+/** dst = -x, -y, -z, w */
+static quat quat_conj_v(const float *q) {
+    return quat_conj(Quat(q));
+}
+
 
 /** dst = inv(quat) */
-static quat quat_invert(quat q) {
-    quat conj = quat_conjugate(q);
+static quat quat_inv(quat q) {
+    quat conj = quat_conj(q);
     return vec4_scale_sca(conj, 1.0f / vec4_dot(q, q));
 }
+/** dst = inv(quat) */
+static quat quat_inv_v(const float *q) {
+    return quat_inv(Quat(q));
+}
+
 
 /** dst = a @ b Hamilton Product */
-static quat quat_mul(quat a, quat b) {
+static quat quat_mul(quat q_a, quat q_b) {
     // from cglm/quat/glm_quat_mul
     quat res;
-    res.v[0] = a.v[3] * b.v[0] + a.v[0] * b.v[3] + a.v[1] * b.v[2] - a.v[2] * b.v[1];
-    res.v[1] = a.v[3] * b.v[1] - a.v[0] * b.v[2] + a.v[1] * b.v[3] + a.v[2] * b.v[0];
-    res.v[2] = a.v[3] * b.v[2] + a.v[0] * b.v[1] - a.v[1] * b.v[0] + a.v[2] * b.v[3];
-    res.v[3] = a.v[3] * b.v[3] - a.v[0] * b.v[0] - a.v[1] * b.v[1] - a.v[2] * b.v[2];
+    res.v[0] = q_a.v[3] * q_b.v[0] + q_a.v[0] * q_b.v[3] + q_a.v[1] * q_b.v[2] - q_a.v[2] * q_b.v[1];
+    res.v[1] = q_a.v[3] * q_b.v[1] - q_a.v[0] * q_b.v[2] + q_a.v[1] * q_b.v[3] + q_a.v[2] * q_b.v[0];
+    res.v[2] = q_a.v[3] * q_b.v[2] + q_a.v[0] * q_b.v[1] - q_a.v[1] * q_b.v[0] + q_a.v[2] * q_b.v[3];
+    res.v[3] = q_a.v[3] * q_b.v[3] - q_a.v[0] * q_b.v[0] - q_a.v[1] * q_b.v[1] - q_a.v[2] * q_b.v[2];
     return res;
 }
+/** dst = a @ b Hamilton Product */
+static quat quat_mul_v(const float *q_a, const float *q_b) {
+    return quat_mul(Quat(q_a), Quat(q_b));
+}
+
 
 /** angle_axis = xyz + w=angle in rad */
 static quat quat_from_angle_axis(vec4 angle_axis) {
@@ -47,6 +63,11 @@ static quat quat_from_angle_axis(vec4 angle_axis) {
     res.w = c;
     return res;
 }
+/** angle_axis = xyz + w=angle in rad */
+static quat quat_from_angle_axis_v(const float *angle_axis) {
+    return quat_from_angle_axis(Quat(angle_axis));
+}
+
 
 /** angle_axis = xyz + w=angle in rad */
 static vec4 quat_to_angle_axis(quat q) {
@@ -64,6 +85,11 @@ static vec4 quat_to_angle_axis(quat q) {
     angle_axis.w = angle;
     return angle_axis;
 }
+/** angle_axis = xyz + w=angle in rad */
+static vec4 quat_to_angle_axis_v(const float *q) {
+    return quat_to_angle_axis(Quat(q));
+}
+
 
 static mat3 quat_to_rotation_matrix(quat q) {
     // from cglm/quat/glm_quat_mat3
@@ -102,6 +128,10 @@ static mat3 quat_to_rotation_matrix(quat q) {
     res.m[0][2] = xz - wy;
     return res;
 }
+static mat3 quat_to_rotation_matrix_v(const float *q) {
+    return quat_to_rotation_matrix(Quat(q));
+}
+
 
 static quat quat_from_rotation_matrix(mat3 mat) {
     // from cglm/mat3/glm_mat3_quat
@@ -144,32 +174,40 @@ static quat quat_from_rotation_matrix(mat3 mat) {
 
     return res;
 }
+static quat quat_from_rotation_matrix_v(const float *mat_3) {
+    return quat_from_rotation_matrix(Mat3(mat_3));
+}
 
-static quat quat_slerp(quat from, quat to, float t) {
-    // from cglm/quat/glm_quat_slerp
-    float cos_theta = vec4_dot(from, to);
+
+static quat quat_slerp(quat q_from, quat q_to, float t) {
+    // q_from cglm/quat/glm_quat_slerp
+    float cos_theta = vec4_dot(q_from, q_to);
 
     if (fabsf(cos_theta) >= 1.0f)
-        return from;
+        return q_from;
 
     if (cos_theta < 0.0f) {
-        from = vec4_neg(from);
+        q_from = vec4_neg(q_from);
         cos_theta = -cos_theta;
     }
 
     float sin_theta = sqrtf(1.0f - cos_theta * cos_theta);
 
-    /* LERP to avoid zero division */
+    /* LERP q_to avoid zero division */
     if (fabsf(sin_theta) < 0.001f)
-        return vec4_lerp(from, to, t);
+        return vec4_lerp(q_from, q_to, t);
 
     /* SLERP */
     float angle = acosf(cos_theta);
-    quat q1 = vec4_scale_sca(from, sinf((1.0f - t) * angle));
-    quat q2 = vec4_scale_sca(to, sinf(t * angle));
+    quat q1 = vec4_scale_sca(q_from, sinf((1.0f - t) * angle));
+    quat q2 = vec4_scale_sca(q_to, sinf(t * angle));
 
     q1 = vec4_add_vec(q1, q2);
     return vec4_scale_sca(q1, 1.0f / sin_theta);
 }
+static quat quat_slerp_v(const float *q_from, const float *q_to, float t) {
+    return quat_slerp(Quat(q_from), Quat(q_to), t);
+}
+
 
 #endif //MATHC_QUAT_QUAT_H

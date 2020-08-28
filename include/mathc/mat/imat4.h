@@ -13,86 +13,142 @@ static imat4 imat4_eye() {
     return res;
 }
 
-/** dst = imat[row][:] */
-static ivec4 imat4_get_row(imat4 imat, int row) {
+
+/** dst = mat[row][:] */
+static ivec4 imat4_get_row(imat4 mat, int row) {
     ivec4 res;
-    imatN_get_row(res.v, imat.v, row, 4);
+    imatN_get_row(res.v, mat.v, row, 4);
     return res;
 }
+/** dst = mat[row][:] */
+static ivec4 imat4_get_row_v(const int *mat, int row) {
+    return imat4_get_row(IMat4(mat), row);
+}
 
-/** dst = imat[:][col] */
-static ivec4 imat4_get_col(imat4 imat, int col) {
+
+/** dst = mat[:][col] */
+static ivec4 imat4_get_col(imat4 mat, int col) {
     ivec4 res;
-    imatN_get_col(res.v, imat.v, col, 4);
+    imatN_get_col(res.v, mat.v, col, 4);
     return res;
 }
-
-/** dst = imat; dst[row][:] = ivec */
-static imat4 imat4_set_row(imat4 imat, ivec4 ivec, int row) {
-    imatN_set_row(imat.v, ivec.v, row, 4);
-    return imat;
+/** dst = mat[:][col] */
+static ivec4 imat4_get_col_v(const int *mat, int col) {
+    return imat4_get_col(IMat4(mat), col);
 }
 
-/** dst = imat; dst[:][col] = ivec */
-static imat4 imat4_set_col(imat4 imat, ivec4 ivec, int col) {
-    imatN_set_col(imat.v, ivec.v, col, 4);
-    return imat;
+
+/** dst = mat; dst[row][:] = vec */
+static imat4 imat4_set_row(imat4 mat, ivec4 vec, int row) {
+    imatN_set_row(mat.v, vec.v, row, 4);
+    return mat;
+}
+/** dst = mat; dst[row][:] = vec */
+static imat4 imat4_set_row_v(const int *mat, const int *vec, int row) {
+    return imat4_set_row(IMat4(mat), IVec4(vec), row);
 }
 
-/** dst = imat; dst[row][:] = scalar */
-static imat4 imat4_row_set_sca(imat4 imat, int scalar, int row) {
-    imatN_row_set_sca(imat.v, scalar, row, 4);
-    return imat;
+
+/** dst = mat; dst[:][col] = vec */
+static imat4 imat4_set_col(imat4 mat, ivec4 vec, int col) {
+    imatN_set_col(mat.v, vec.v, col, 4);
+    return mat;
+}
+/** dst = mat; dst[:][col] = vec */
+static imat4 imat4_set_col_v(const int *mat, const int *vec, int col) {
+    return imat4_set_col(IMat4(mat), IVec4(vec), col);
 }
 
-/** dst = imat; dst[:][col] = scalar */
-static imat4 imat4_col_set_sca(imat4 imat, int scalar, int col) {
-    imatN_col_set_sca(imat.v, scalar, col, 4);
-    return imat;
+
+/** dst = mat; dst[row][:] = scalar */
+static imat4 imat4_row_set_sca(imat4 mat, int scalar, int row) {
+    imatN_row_set_sca(mat.v, scalar, row, 4);
+    return mat;
 }
+/** dst = mat; dst[row][:] = scalar */
+static imat4 imat4_row_set_sca_v(const int *mat, int scalar, int row) {
+    return imat4_row_set_sca(IMat4(mat), scalar, row);
+}
+
+
+/** dst = mat; dst[:][col] = scalar */
+static imat4 imat4_col_set_sca(imat4 mat, int scalar, int col) {
+    imatN_col_set_sca(mat.v, scalar, col, 4);
+    return mat;
+}
+/** dst = mat; dst[:][col] = scalar */
+static imat4 imat4_col_set_sca_v(const int *mat, int scalar, int col) {
+    return imat4_col_set_sca(IMat4(mat), scalar, col);
+}
+
 
 /** returns sum of diagonal form upper left to lower right */
-static int imat4_trace(imat4 imat) {
-    return imatN_trace(imat.v, 4);
+static int imat4_trace(imat4 mat) {
+    return imatN_trace(mat.v, 4);
+}
+/** returns sum of diagonal form upper left to lower right */
+static int imat4_trace_v(const int *mat) {
+    return imat4_trace(IMat4(mat));
 }
 
-/** dst = imat^t */
-static imat4 imat4_transpose(imat4 imat) {
+
+/** dst = mat^t */
+static imat4 imat4_transpose(imat4 mat) {
     imat4 res;
-    imatN_transpose_no_alias(res.v, imat.v, 4);
+    imatN_transpose_no_alias(res.v, mat.v, 4);
     return res;
 }
+/** dst = mat^t */
+static imat4 imat4_transpose_v(const int *mat) {
+    return imat4_transpose(IMat4(mat));
+}
+
 
 /** dst = a @ b */
-static imat4 imat4_mul_imat(imat4 imat_a, imat4 imat_b) {
+static imat4 imat4_mul_mat(imat4 mat_a, imat4 mat_b) {
     imat4 res;
-    imatN_mul_imat_no_alias(res.v, imat_a.v, imat_b.v, 4);
+    imatN_mul_mat_no_alias(res.v, mat_a.v, mat_b.v, 4);
     return res;
 }
+/** dst = a @ b */
+static imat4 imat4_mul_mat_v(const int *mat_a, const int *mat_b) {
+    return imat4_mul_mat(IMat4(mat_a), IMat4(mat_b));
+}
+
 
 /** dst = a @ b */
-static ivec4 imat4_mul_ivec(imat4 imat_a, ivec4 ivec_b) {
+static ivec4 imat4_mul_vec(imat4 mat_a, ivec4 vec_b) {
     ivec4 res;
-    imatN_mul_ivec_no_alias(res.v, imat_a.v, ivec_b.v, 4);
+    imatN_mul_vec_no_alias(res.v, mat_a.v, vec_b.v, 4);
     return res;
 }
+/** dst = a @ b */
+static ivec4 imat4_mul_vec_v(const int *mat_a, const int *vec_b) {
+    return imat4_mul_vec(IMat4(mat_a), IVec4(vec_b));
+}
+
 
 /** dst = a @ b */
-static ivec4 ivec4_mul_imat(ivec4 ivec_a, imat4 imat_b) {
+static ivec4 ivec4_mul_mat(ivec4 vec_a, imat4 mat_b) {
     ivec4 res;
-    ivecN_mul_imat_no_alias(res.v, ivec_a.v, imat_b.v, 4);
+    ivecN_mul_mat_no_alias(res.v, vec_a.v, mat_b.v, 4);
     return res;
 }
+/** dst = a @ b */
+static ivec4 ivec4_mul_mat_v(const int *vec_a, const int *mat_b) {
+    return ivec4_mul_mat(IVec4(vec_a), IMat4(mat_b));
+}
 
-/** returns = determinant imat */
-static int imat4_det(imat4 imat) {
+
+/** returns = determinant mat */
+static int imat4_det(imat4 mat) {
     // from cglm/imat4.h/glm_imat4_det
     /* [square] det(A) = det(At) */
     int t[6];
-    int a = imat.m[0][0], b = imat.m[0][1], c = imat.m[0][2], d = imat.m[0][3],
-            e = imat.m[1][0], f = imat.m[1][1], g = imat.m[1][2], h = imat.m[1][3],
-            i = imat.m[2][0], j = imat.m[2][1], k = imat.m[2][2], l = imat.m[2][3],
-            m = imat.m[3][0], n = imat.m[3][1], o = imat.m[3][2], p = imat.m[3][3];
+    int a = mat.m[0][0], b = mat.m[0][1], c = mat.m[0][2], d = mat.m[0][3],
+            e = mat.m[1][0], f = mat.m[1][1], g = mat.m[1][2], h = mat.m[1][3],
+            i = mat.m[2][0], j = mat.m[2][1], k = mat.m[2][2], l = mat.m[2][3],
+            m = mat.m[3][0], n = mat.m[3][1], o = mat.m[3][2], p = mat.m[3][3];
 
     t[0] = k * p - o * l;
     t[1] = j * p - n * l;
@@ -106,15 +162,20 @@ static int imat4_det(imat4 imat) {
            + c * (e * t[1] - f * t[3] + h * t[5])
            - d * (e * t[2] - f * t[4] + g * t[5]);
 }
+/** returns = determinant mat */
+static int imat4_det_v(const int *mat) {
+    return imat4_det(IMat4(mat));
+}
 
-/** dst = inverted imat */
-static imat4 imat4_inv(imat4 imat) {
+
+/** dst = inverted mat */
+static imat4 imat4_inv(imat4 mat) {
     // from cglm/imat4.h/glm_imat4_inv
     int t[6];
-    int a = imat.m[0][0], b = imat.m[0][1], c = imat.m[0][2], d = imat.m[0][3],
-            e = imat.m[1][0], f = imat.m[1][1], g = imat.m[1][2], h = imat.m[1][3],
-            i = imat.m[2][0], j = imat.m[2][1], k = imat.m[2][2], l = imat.m[2][3],
-            m = imat.m[3][0], n = imat.m[3][1], o = imat.m[3][2], p = imat.m[3][3];
+    int a = mat.m[0][0], b = mat.m[0][1], c = mat.m[0][2], d = mat.m[0][3];
+    int e = mat.m[1][0], f = mat.m[1][1], g = mat.m[1][2], h = mat.m[1][3];
+    int i = mat.m[2][0], j = mat.m[2][1], k = mat.m[2][2], l = mat.m[2][3];
+    int m = mat.m[3][0], n = mat.m[3][1], o = mat.m[3][2], p = mat.m[3][3];
 
     t[0] = k * p - o * l; t[1] = j * p - n * l; t[2] = j * o - n * k;
     t[3] = i * p - m * l; t[4] = i * o - m * k; t[5] = i * n - m * j;
@@ -152,52 +213,96 @@ static imat4 imat4_inv(imat4 imat) {
     ivecN_scale_sca(res.v, res.v, inv_det, 16);
     return res;
 }
+/** dst = inverted mat */
+static imat4 imat4_inv_v(const int *mat) {
+    return imat4_inv(IMat4(mat));
+}
 
 
-/** dst = imat[col:col+2, row:row+2] */
-static imat2 imat4_get_block2(imat4 imat, int row, int col) {
+/** dst = mat[col:col+2, row:row+2] */
+static imat2 imat4_get_block2(imat4 mat, int row, int col) {
     imat2 res;
-    imatN_get_block(res.v, imat.v, row, col, 2, 4);
+    imatN_get_block(res.v, mat.v, row, col, 2, 4);
     return res;
 }
-
-/** dst = imat; dst[col:col+2, row:row+2] = block */
-static imat4 imat4_set_block2(imat4 imat, imat2 block, int row, int col) {
-    imatN_set_block(imat.v, block.v, row, col, 2, 4);
-    return imat;
+/** dst = mat[col:col+2, row:row+2] */
+static imat2 imat4_get_block2_v(const int *mat, int row, int col) {
+    return imat4_get_block2(IMat4(mat), row, col);
 }
 
-/** dst = imat[col:col+2, row:row+2] */
-static imat3 imat4_get_block3(imat4 imat, int row, int col) {
+
+/** dst = mat; dst[col:col+2, row:row+2] = block */
+static imat4 imat4_set_block2(imat4 mat, imat2 block_2, int row, int col) {
+    imatN_set_block(mat.v, block_2.v, row, col, 2, 4);
+    return mat;
+}
+/** dst = mat; dst[col:col+2, row:row+2] = block */
+static imat4 imat4_set_block2_v(const int *mat, const int *block_2, int row, int col) {
+    return imat4_set_block2(IMat4(mat), IMat2(block_2), row, col);
+}
+
+
+/** dst = mat[col:col+2, row:row+2] */
+static imat3 imat4_get_block3(imat4 mat, int row, int col) {
     imat3 res;
-    imatN_get_block(res.v, imat.v, row, col, 3, 4);
+    imatN_get_block(res.v, mat.v, row, col, 3, 4);
     return res;
 }
-
-/** dst = imat; dst[col:col+2, row:row+2] = block */
-static imat4 imat4_set_block3(imat4 imat, imat3 block, int row, int col) {
-    imatN_set_block(imat.v, block.v, row, col, 3, 4);
-    return imat;
+/** dst = mat[col:col+2, row:row+2] */
+static imat3 imat4_get_block3_v(const int *mat, int row, int col) {
+    return imat4_get_block3(IMat4(mat), row, col);
 }
 
-/** dst = imat[:2, :2] */
-static imat2 imat4_get_upper_left2(imat4 imat) {
-    return imat4_get_block2(imat, 0, 0);
+
+/** dst = mat; dst[col:col+2, row:row+2] = block */
+static imat4 imat4_set_block3(imat4 mat, imat3 block_3, int row, int col) {
+    imatN_set_block(mat.v, block_3.v, row, col, 3, 4);
+    return mat;
+}
+/** dst = mat; dst[col:col+2, row:row+2] = block */
+static imat4 imat4_set_block3_v(const int *mat, const int *block_3, int row, int col) {
+    return imat4_set_block3(IMat4(mat), IMat3(block_3), row, col);
 }
 
-/** dst = imat; dst[:2, :2] = block */
-static imat4 imat4_set_upper_left2(imat4 imat, imat2 block) {
-    return imat4_set_block2(imat, block, 0, 0);
+
+/** dst = mat[:2, :2] */
+static imat2 imat4_get_upper_left2(imat4 mat) {
+    return imat4_get_block2(mat, 0, 0);
+}
+/** dst = mat[:2, :2] */
+static imat2 imat4_get_upper_left2_v(const int *mat) {
+    return imat4_get_upper_left2(IMat4(mat));
 }
 
-/** dst = imat[:3, :3] */
-static imat3 imat4_get_upper_left3(imat4 imat) {
-    return imat4_get_block3(imat, 0, 0);
+
+/** dst = mat; dst[:2, :2] = block */
+static imat4 imat4_set_upper_left2(imat4 mat, imat2 block_2) {
+    return imat4_set_block2(mat, block_2, 0, 0);
+}
+/** dst = mat; dst[:2, :2] = block */
+static imat4 imat4_set_upper_left2_v(const int *mat, const int *block_2) {
+    return imat4_set_upper_left2(IMat4(mat), IMat2(block_2));
 }
 
-/** dst = imat; dst[:3, :3] = block */
-static imat4 imat4_set_upper_left3(imat4 imat, imat3 block) {
-    return imat4_set_block3(imat, block, 0, 0);
+
+/** dst = mat[:3, :3] */
+static imat3 imat4_get_upper_left3(imat4 mat) {
+    return imat4_get_block3(mat, 0, 0);
 }
+/** dst = mat[:3, :3] */
+static imat3 imat4_get_upper_left3_v(const int *mat) {
+    return imat4_get_upper_left3(IMat4(mat));
+}
+
+
+/** dst = mat; dst[:3, :3] = block */
+static imat4 imat4_set_upper_left3(imat4 mat, imat3 block_3) {
+    return imat4_set_block3(mat, block_3, 0, 0);
+}
+/** dst = mat; dst[:3, :3] = block */
+static imat4 imat4_set_upper_left3_v(const int *mat, const int *block_3) {
+    return imat4_set_upper_left3(IMat4(mat), IMat3(block_3));
+}
+
 
 #endif //MATHC_MAT_IMAT4_H

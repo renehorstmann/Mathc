@@ -20,6 +20,7 @@ int main() {
     // have a look into mathc/vec/vec*.h for more functions for quat math. For example:
     //      norm, norm_p, norm_1, norm_inf
     //      normalize
+    //      inv
     //      lerp
     //      dot
 

@@ -16,9 +16,9 @@ int main() {
            a.v[3],          // raw float * vector
            a.col[1].y);     // first column as a vec2
 
-   // a.row is not available, because its column major order
-   vec2 row = mat2_get_row(a, 1);
-   vec2_print(row);
+    // a.row is not available, because its column major order
+    vec2 row = mat2_get_row(a, 1);
+    vec2_print(row);
 
     // use vector functions:
     // (dst, a, b, n) for dst = a + b

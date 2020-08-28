@@ -13,130 +13,225 @@ static dmat3 dmat3_eye() {
     return res;
 }
 
-/** dst = dmat[row][:] */
-static dvec3 dmat3_get_row(dmat3 dmat, int row) {
+
+/** dst = mat[row][:] */
+static dvec3 dmat3_get_row(dmat3 mat, int row) {
     dvec3 res;
-    dmatN_get_row(res.v, dmat.v, row, 3);
+    dmatN_get_row(res.v, mat.v, row, 3);
     return res;
 }
+/** dst = mat[row][:] */
+static dvec3 dmat3_get_row_v(const double *mat, int row) {
+    return dmat3_get_row(DMat3(mat), row);
+}
 
-/** dst = dmat[:][col] */
-static dvec3 dmat3_get_col(dmat3 dmat, int col) {
+
+/** dst = mat[:][col] */
+static dvec3 dmat3_get_col(dmat3 mat, int col) {
     dvec3 res;
-    dmatN_get_col(res.v, dmat.v, col, 3);
+    dmatN_get_col(res.v, mat.v, col, 3);
     return res;
 }
-
-/** dst = dmat; dst[row][:] = dvec */
-static dmat3 dmat3_set_row(dmat3 dmat, dvec3 dvec, int row) {
-    dmatN_set_row(dmat.v, dvec.v, row, 3);
-    return dmat;
+/** dst = mat[:][col] */
+static dvec3 dmat3_get_col_v(const double *mat, int col) {
+    return dmat3_get_col(DMat3(mat), col);
 }
 
-/** dst = dmat; dst[:][col] = dvec */
-static dmat3 dmat3_set_col(dmat3 dmat, dvec3 dvec, int col) {
-    dmatN_set_col(dmat.v, dvec.v, col, 3);
-    return dmat;
+
+/** dst = mat; dst[row][:] = vec */
+static dmat3 dmat3_set_row(dmat3 mat, dvec3 vec, int row) {
+    dmatN_set_row(mat.v, vec.v, row, 3);
+    return mat;
+}
+/** dst = mat; dst[row][:] = vec */
+static dmat3 dmat3_set_row_v(const double *mat, const double *vec, int row) {
+    return dmat3_set_row(DMat3(mat), DVec3(vec), row);
 }
 
-/** dst = dmat; dst[row][:] = scalar */
-static dmat3 dmat3_row_set_sca(dmat3 dmat, double scalar, int row) {
-    dmatN_row_set_sca(dmat.v, scalar, row, 3);
-    return dmat;
+
+/** dst = mat; dst[:][col] = vec */
+static dmat3 dmat3_set_col(dmat3 mat, dvec3 vec, int col) {
+    dmatN_set_col(mat.v, vec.v, col, 3);
+    return mat;
+}
+/** dst = mat; dst[:][col] = vec */
+static dmat3 dmat3_set_col_v(const double *mat, const double *vec, int col) {
+    return dmat3_set_col(DMat3(mat), DVec3(vec), col);
 }
 
-/** dst = dmat; dst[:][col] = scalar */
-static dmat3 dmat3_col_set_sca(dmat3 dmat, double scalar, int col) {
-    dmatN_col_set_sca(dmat.v, scalar, col, 3);
-    return dmat;
+
+/** dst = mat; dst[row][:] = scalar */
+static dmat3 dmat3_row_set_sca(dmat3 mat, double scalar, int row) {
+    dmatN_row_set_sca(mat.v, scalar, row, 3);
+    return mat;
 }
+/** dst = mat; dst[row][:] = scalar */
+static dmat3 dmat3_row_set_sca_v(const double *mat, double scalar, int row) {
+    return dmat3_row_set_sca(DMat3(mat), scalar, row);
+}
+
+
+/** dst = mat; dst[:][col] = scalar */
+static dmat3 dmat3_col_set_sca(dmat3 mat, double scalar, int col) {
+    dmatN_col_set_sca(mat.v, scalar, col, 3);
+    return mat;
+}
+/** dst = mat; dst[:][col] = scalar */
+static dmat3 dmat3_col_set_sca_v(const double *mat, double scalar, int col) {
+    return dmat3_col_set_sca(DMat3(mat), scalar, col);
+}
+
 
 /** returns sum of diagonal form upper left to lower right */
-static double dmat3_trace(dmat3 dmat) {
-    return dmatN_trace(dmat.v, 3);
+static double dmat3_trace(dmat3 mat) {
+    return dmatN_trace(mat.v, 3);
+}
+/** returns sum of diagonal form upper left to lower right */
+static double dmat3_trace_v(const double *mat) {
+    return dmat3_trace(DMat3(mat));
 }
 
-/** dst = dmat^t */
-static dmat3 dmat3_transpose(dmat3 dmat) {
+
+/** dst = mat^t */
+static dmat3 dmat3_transpose(dmat3 mat) {
     dmat3 res;
-    dmatN_transpose_no_alias(res.v, dmat.v, 3);
+    dmatN_transpose_no_alias(res.v, mat.v, 3);
     return res;
 }
+/** dst = mat^t */
+static dmat3 dmat3_transpose_v(const double *mat) {
+    return dmat3_transpose(DMat3(mat));
+}
+
 
 /** dst = a @ b */
-static dmat3 dmat3_mul_dmat(dmat3 dmat_a, dmat3 dmat_b) {
+static dmat3 dmat3_mul_mat(dmat3 mat_a, dmat3 mat_b) {
     dmat3 res;
-    dmatN_mul_dmat_no_alias(res.v, dmat_a.v, dmat_b.v, 3);
+    dmatN_mul_mat_no_alias(res.v, mat_a.v, mat_b.v, 3);
     return res;
 }
+/** dst = a @ b */
+static dmat3 dmat3_mul_mat_v(const double *mat_a, const double *mat_b) {
+    return dmat3_mul_mat(DMat3(mat_a), DMat3(mat_b));
+}
+
 
 /** dst = a @ b */
-static dvec3 dmat3_mul_dvec(dmat3 dmat_a, dvec3 dvec_b) {
+static dvec3 dmat3_mul_vec(dmat3 mat_a, dvec3 vec_b) {
     dvec3 res;
-    dmatN_mul_dvec_no_alias(res.v, dmat_a.v, dvec_b.v, 3);
+    dmatN_mul_vec_no_alias(res.v, mat_a.v, vec_b.v, 3);
     return res;
 }
+/** dst = a @ b */
+static dvec3 dmat3_mul_vec_v(const double *mat_a, const double *vec_b) {
+    return dmat3_mul_vec(DMat3(mat_a), DVec3(vec_b));
+}
+
 
 /** dst = a @ b */
-static dvec3 dvec3_mul_dmat(dvec3 dvec_a, dmat3 dmat_b) {
+static dvec3 dvec3_mul_mat(dvec3 vec_a, dmat3 mat_b) {
     dvec3 res;
-    dvecN_mul_dmat_no_alias(res.v, dvec_a.v, dmat_b.v, 3);
+    dvecN_mul_mat_no_alias(res.v, vec_a.v, mat_b.v, 3);
     return res;
 }
+/** dst = a @ b */
+static dvec3 dvec3_mul_mat_v(const double *vec_a, const double *mat_b) {
+    return dvec3_mul_mat(DVec3(vec_a), DMat3(mat_b));
+}
 
-/** returns = determinant dmat */
-static double dmat3_det(dmat3 dmat) {
+
+/** returns = determinant mat */
+static double dmat3_det(dmat3 mat) {
     // from cglm/dmat3.h/glm_dmat3_det
-    double a = dmat.m[0][0], b = dmat.m[0][1], c = dmat.m[0][2];
-    double d = dmat.m[1][0], e = dmat.m[1][1], f = dmat.m[1][2];
-    double g = dmat.m[2][0], h = dmat.m[2][1], i = dmat.m[2][2];
+    double a = mat.m[0][0], b = mat.m[0][1], c = mat.m[0][2];
+    double d = mat.m[1][0], e = mat.m[1][1], f = mat.m[1][2];
+    double g = mat.m[2][0], h = mat.m[2][1], i = mat.m[2][2];
 
     return a * (e * i - h * f) - d * (b * i - c * h) + g * (b * f - c * e);
 }
+/** returns = determinant mat */
+static double dmat3_det_v(const double *mat) {
+    return dmat3_det(DMat3(mat));
+}
 
-/** dst = inverted dmat */
-static dmat3 dmat3_inv(dmat3 dmat) {
-    // from cglm/dmat3.h/glm_dmat3_inv
-    double a = dmat.m[0][0], b = dmat.m[0][1];
-    double c = dmat.m[1][0], d = dmat.m[1][1];
-    double det = 1.0 / (a * d - b * c);
+
+/** dst = inverted mat */
+static dmat3 dmat3_inv(dmat3 mat) {
+    // from cglm/mat3.h/glm_mat3_inv
+    double a = mat.m[0][0], b = mat.m[0][1], c = mat.m[0][2];
+    double d = mat.m[1][0], e = mat.m[1][1], f = mat.m[1][2];
+    double g = mat.m[2][0], h = mat.m[2][1], i = mat.m[2][2];
 
     dmat3 res;
-    res.m[0][0] =  d * det;
-    res.m[0][1] = -b * det;
-    res.m[1][0] = -c * det;
-    res.m[1][1] =  a * det;
+    res.m[0][0] =   e * i - f * h;
+    res.m[0][1] = -(b * i - h * c);
+    res.m[0][2] =   b * f - e * c;
+    res.m[1][0] = -(d * i - g * f);
+    res.m[1][1] =   a * i - c * g;
+    res.m[1][2] = -(a * f - d * c);
+    res.m[2][0] =   d * h - g * e;
+    res.m[2][1] = -(a * h - g * b);
+    res.m[2][2] =   a * e - b * d;
+
+    double inv_det = 1.0 / (a * res.m[0][0] + b * res.m[1][0] + c * res.m[2][0]);
+
+    dvecN_scale_sca(res.v, res.v, inv_det, 9);
     return res;
 }
+/** dst = inverted mat */
+static dmat3 dmat3_inv_v(const double *mat) {
+    return dmat3_inv(DMat3(mat));
+}
 
-/** dst = dmat[col:col+2, row:row+2] */
-static dmat2 dmat3_get_block2(dmat3 dmat, int row, int col) {
+
+/** dst = mat[col:col+2, row:row+2] */
+static dmat2 dmat3_get_block2(dmat3 mat, int row, int col) {
     dmat2 res;
-    dmatN_get_block(res.v, dmat.v, row, col, 2, 3);
+    dmatN_get_block(res.v, mat.v, row, col, 2, 3);
     return res;
 }
-
-/** dst = dmat; dst[col:col+2, row:row+2] = block */
-static dmat3 dmat3_set_block2(dmat3 dmat, dmat2 block, int row, int col) {
-    dmatN_set_block(dmat.v, block.v, row, col, 2, 3);
-    return dmat;
+/** dst = mat[col:col+2, row:row+2] */
+static dmat2 dmat3_get_block2_v(const double *mat, int row, int col) {
+    return dmat3_get_block2(DMat3(mat), row, col);
 }
 
-/** dst = dmat[:2, :2] */
-static dmat2 dmat3_get_upper_left(dmat3 dmat) {
-    return dmat3_get_block2(dmat, 0, 0);
+
+/** dst = mat; dst[col:col+2, row:row+2] = block */
+static dmat3 dmat3_set_block2(dmat3 mat, dmat2 block_2, int row, int col) {
+    dmatN_set_block(mat.v, block_2.v, row, col, 2, 3);
+    return mat;
+}
+/** dst = mat; dst[col:col+2, row:row+2] = block */
+static dmat3 dmat3_set_block2_v(const double *mat, const double *block_2, int row, int col) {
+    return dmat3_set_block2(DMat3(mat), DMat2(block_2), row, col);
 }
 
-/** dst = dmat; dst[:2, :2] = block */
-static dmat3 dmat3_set_upper_left(dmat3 dmat, dmat2 block) {
-    return dmat3_set_block2(dmat, block, 0, 0);
+
+/** dst = mat[:2, :2] */
+static dmat2 dmat3_get_upper_left(dmat3 mat) {
+    return dmat3_get_block2(mat, 0, 0);
 }
+/** dst = mat[:2, :2] */
+static dmat2 dmat3_get_upper_left_v(const double *mat) {
+    return dmat3_get_upper_left(DMat3(mat));
+}
+
+
+/** dst = mat; dst[:2, :2] = block */
+static dmat3 dmat3_set_upper_left(dmat3 mat, dmat2 block_2) {
+    return dmat3_set_block2(mat, block_2, 0, 0);
+}
+/** dst = mat; dst[:2, :2] = block */
+static dmat3 dmat3_set_upper_left_v(const double *mat, const double *block_2) {
+    return dmat3_set_upper_left(DMat3(mat), DMat2(block_2));
+}
+
 
 /** angle_axis as xyz = axis and w = angle [rad] */
 static dmat3 dmat3_rotation_from_angle_axis(dvec4 angle_axis) {
     // from cglm/affine/glm_rotate_make
-    double c = cos(angle_axis.w);
-    double s = sin(angle_axis.w);
+    double c = cosf(angle_axis.w);
+    double s = sinf(angle_axis.w);
 
     dvec3 axis = dvec3_normalize(angle_axis.xyz);
     dvec3 v = dvec3_scale_sca(axis, 1.0f - c);
@@ -152,5 +247,10 @@ static dmat3 dmat3_rotation_from_angle_axis(dvec4 angle_axis) {
     res.m[0][2] -= vs.y;   res.m[1][2] += vs.x;   res.m[2][2] += c;
     return res;
 }
+/** angle_axis as xyz = axis and w = angle [rad] */
+static dmat3 dmat3_rotation_from_angle_axis_v(const double *angle_axis) {
+    return dmat3_rotation_from_angle_axis(DVec4(angle_axis));
+}
+
 
 #endif //MATHC_MAT_DMAT3_H

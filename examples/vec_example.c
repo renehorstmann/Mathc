@@ -2,6 +2,7 @@
 
 // see below main
 static vec3 foo(vec4 a, vec2 b);
+static void bar(float *vertices, int n);
 
 int main() {
     vec4 a = {{1, 2, 3, 4}};
@@ -14,8 +15,8 @@ int main() {
            a.v0,        // vector data 0 - 3
            a.v[0]);     // raw float * vector
 
-   // get sub data;
-   vec2_print(a.yz);    // or xy, zw, xyz, yzw
+    // get sub data;
+    vec2_print(a.yz);    // or xy, zw, xyz, yzw
 
     vec3 b = foo((vec4) {{1.1f, 2.2f, 3.3f, 0}}, a.zw);
     vec3_print(b);
@@ -46,6 +47,11 @@ int main() {
     vec2 c = vec2_neg_v(data);
     // instead of c = vec2_neg(Vec2(data));
     vec2_print(c);
+    
+    float vertices[12];                    // (4 vertices * xyz = 12 floats)
+    vecN_set(vertices, 10, 12);   // set every float to 10
+    bar(vertices, 4);                   // call function below
+    vec3_print(Vec3(vertices));            // print first vertex
 
     // have a look into mathc/vec/vec*.h for more functions. For example:
     //      norm, norm_p, norm_1, norm_inf
@@ -62,4 +68,19 @@ int main() {
 // a function would take a copy, unless it takes a pointer of a vec type
 static vec3 foo(vec4 a, vec2 b) {
     return vec3_div_sca(a.xyz, b.y);
+}
+
+// example function to use Mathc types in a function, taking raw data
+static void bar(float *vertices, int n) {
+    for(int i=0; i<n; i++) {
+        // reference instead of copy:
+        vec3 *vertex = (vec3 *) &vertices[i*3];
+        *vertex = vec3_normalize(*vertex);
+        // ...
+        
+        // or:
+        float *vertex_p = &vertices[i*3];
+        Vec3(vertex_p) = vec3_normalize_v(vertex_p);
+        // ...
+    }
 }
