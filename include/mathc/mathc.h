@@ -8,5 +8,6 @@
 #include "quat.h"
 
 #include "utils/camera.h"
+#include "utils/dcamera.h"
 
 #endif //MATHC_MATHC_H
