@@ -57,7 +57,7 @@ int main() {
     //      set_, get_ block
     //      vec_mul_mat
 
-    // There are also variants for double int int:
+    // There are also variants for double and int:
     // dmat*
     // imat*
 }

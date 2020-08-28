@@ -59,7 +59,7 @@ int main() {
     //      lerp
     //      dot
 
-    // There are also variants for double int int:
+    // There are also variants for double and int:
     // dvec*
     // ivec*
 }

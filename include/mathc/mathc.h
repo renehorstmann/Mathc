@@ -7,4 +7,6 @@
 #include "mat.h"
 #include "quat.h"
 
+#include "utils/camera.h"
+
 #endif //MATHC_MATHC_H

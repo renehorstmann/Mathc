@@ -8,6 +8,10 @@ set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -march=native)  # march=native for best perfo
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-long-long -pedantic -Wno-unused-function")
 
 
+add_executable(example examples/example.c)
+target_include_directories(example PUBLIC include)
+target_link_libraries(example m)
+
 add_executable(vec examples/vec_example.c)
 target_include_directories(vec PUBLIC include)
 target_link_libraries(vec m)
