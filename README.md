@@ -9,6 +9,7 @@ The libraries are written in C(11) (tested on GCC 7.4.0)
 * vec: for vector math
 * mat: for matrix math
 * quat: for quaternion math
+* utils: for some useful functions
 
 
 ### Example usage
