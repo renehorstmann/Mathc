@@ -42,6 +42,21 @@ vec3 transform_vector(mat4 M, vec3 vector) {
     return mat4_mul_vec(M, hvector).xyz;
 }
 
+typedef struct Sphere_s {
+    float x, y, z, radius;
+} Sphere_s;
+
+/** Test collision between spheres */
+bool sphere_collision(Sphere_s a, Sphere_s b) {
+    // _v functions take const float * and treats them as vec3
+    vec3 dist = vec3_sub_vev_v(&b.x, &a.x);
+
+    // norm(dist) < a.r+b.r
+    // powf(,2) is much faster than sqrt
+    return vec3_dot(dist, dist) < powf(a.r + b.r, 2);
+}
+
+
 /** calculates the angle between vector a and b */
 float vec_angle(vec3 a, vec3 b) {
     // Safe to override (copies)
