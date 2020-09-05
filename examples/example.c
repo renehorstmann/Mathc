@@ -1,5 +1,5 @@
 #include <stdbool.h>
-#include "mathc/mathc.h"
+#include "mathc/float.h"
 
 
 /** Transform a 3d point with a transformation matrix M */

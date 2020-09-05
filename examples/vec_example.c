@@ -1,4 +1,4 @@
-#include "mathc/mathc.h"
+#include "mathc/float.h"
 
 // see below main
 static vec3 foo(vec4 a, vec2 b);

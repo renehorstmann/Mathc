@@ -1,4 +1,4 @@
-#include "mathc/mathc.h"
+#include "mathc/float.h"
 
 int main() {
     // column major order

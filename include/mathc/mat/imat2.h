@@ -2,7 +2,7 @@
 #define MATHC_MAT_IMAT2_H
 
 #include "imatn.h"
-#include "../types.h"
+#include "../types/itypes.h"
 
 
 /** dst = r==c ? 1 : 0 (identity)  */

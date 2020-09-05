@@ -2,7 +2,7 @@
 #define MATHC_MAT_MAT3_H
 
 #include "matn.h"
-#include "../types.h"
+#include "../types/types.h"
 #include "../vec/vec3.h"
 
 

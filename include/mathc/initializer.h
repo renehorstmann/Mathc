@@ -1,11 +1,5 @@
-#ifndef MATHC_TYPES_H
-#define MATHC_TYPES_H
-
-#include "types/types.h"
-#include "types/dtypes.h"
-#include "types/itypes.h"
-#include "types/btypes.h"
-
+#ifndef MATHC_INITIALIZER_H
+#define MATHC_INITIALIZER_H
 
 // initializer
 
@@ -42,4 +36,4 @@
 // xyzw
 #define QUAT4_INIT_EYE {{0, 0, 0, 1}}
 
-#endif //MATHC_TYPES_H
+#endif //MATHC_INITIALIZER_H
