@@ -2,8 +2,8 @@
 #define MATHC_QUAT_DQUAT_H
 
 #include "math.h"
-#include "../types.h"
-#include "../vec.h"
+#include "../types/dtypes.h"
+#include "../vec/dvec4.h"
 
 
 /** dquat = [0, 0, 0, 1] */
@@ -179,34 +179,34 @@ static dquat dquat_from_rotation_matrix_v(const double *mat_3) {
 }
 
 
-static dquat dquat_slerp(dquat q_from, dquat q_to, double t) {
-    // q_from cglm/dquat/glm_dquat_slerp
-    double cos_theta = dvec4_dot(q_from, q_to);
+static dquat dquat_slerp(dquat q_a, dquat q_b, double t) {
+    // q_a cglm/dquat/glm_dquat_slerp
+    double cos_theta = dvec4_dot(q_a, q_b);
 
     if (fabs(cos_theta) >= 1.0)
-        return q_from;
+        return q_a;
 
     if (cos_theta < 0.0) {
-        q_from = dvec4_neg(q_from);
+        q_a = dvec4_neg(q_a);
         cos_theta = -cos_theta;
     }
 
     double sin_theta = sqrtf(1.0 - cos_theta * cos_theta);
 
-    /* LERP q_to avoid zero division */
+    /* LERP q_b avoid zero division */
     if (fabs(sin_theta) < 0.001f)
-        return dvec4_lerp(q_from, q_to, t);
+        return dvec4_mix(q_a, q_b, t);
 
     /* SLERP */
     double angle = acos(cos_theta);
-    dquat q1 = dvec4_scale_sca(q_from, sin((1.0 - t) * angle));
-    dquat q2 = dvec4_scale_sca(q_to, sin(t * angle));
+    dquat q1 = dvec4_scale_sca(q_a, sin((1.0 - t) * angle));
+    dquat q2 = dvec4_scale_sca(q_b, sin(t * angle));
 
     q1 = dvec4_add_vec(q1, q2);
     return dvec4_scale_sca(q1, 1.0 / sin_theta);
 }
-static dquat dquat_slerp_v(const double *q_from, const double *q_to, double t) {
-    return dquat_slerp(DQuat(q_from), DQuat(q_to), t);
+static dquat dquat_slerp_v(const double *q_a, const double *q_b, double t) {
+    return dquat_slerp(DQuat(q_a), DQuat(q_b), t);
 }
 
 

@@ -2,8 +2,8 @@
 #define MATHC_QUAT_QUAT_H
 
 #include "math.h"
-#include "../types.h"
-#include "../vec.h"
+#include "../types/types.h"
+#include "../vec/vec4.h"
 
 
 /** quat = [0, 0, 0, 1] */
@@ -179,34 +179,34 @@ static quat quat_from_rotation_matrix_v(const float *mat_3) {
 }
 
 
-static quat quat_slerp(quat q_from, quat q_to, float t) {
-    // q_from cglm/quat/glm_quat_slerp
-    float cos_theta = vec4_dot(q_from, q_to);
+static quat quat_slerp(quat q_a, quat q_b, float t) {
+    // from cglm/quat/glm_quat_slerp
+    float cos_theta = vec4_dot(q_a, q_b);
 
     if (fabsf(cos_theta) >= 1.0f)
-        return q_from;
+        return q_a;
 
     if (cos_theta < 0.0f) {
-        q_from = vec4_neg(q_from);
+        q_a = vec4_neg(q_a);
         cos_theta = -cos_theta;
     }
 
     float sin_theta = sqrtf(1.0f - cos_theta * cos_theta);
 
-    /* LERP q_to avoid zero division */
+    /* LERP q_b avoid zero division */
     if (fabsf(sin_theta) < 0.001f)
-        return vec4_lerp(q_from, q_to, t);
+        return vec4_mix(q_a, q_b, t);
 
     /* SLERP */
     float angle = acosf(cos_theta);
-    quat q1 = vec4_scale_sca(q_from, sinf((1.0f - t) * angle));
-    quat q2 = vec4_scale_sca(q_to, sinf(t * angle));
+    quat q1 = vec4_scale_sca(q_a, sinf((1.0f - t) * angle));
+    quat q2 = vec4_scale_sca(q_b, sinf(t * angle));
 
     q1 = vec4_add_vec(q1, q2);
     return vec4_scale_sca(q1, 1.0f / sin_theta);
 }
-static quat quat_slerp_v(const float *q_from, const float *q_to, float t) {
-    return quat_slerp(Quat(q_from), Quat(q_to), t);
+static quat quat_slerp_v(const float *q_a, const float *q_b, float t) {
+    return quat_slerp(Quat(q_a), Quat(q_b), t);
 }
 
 

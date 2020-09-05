@@ -2,7 +2,8 @@
 #define MATHC_VEC_IVEC4_H
 
 #include "ivecn.h"
-#include "../types.h"
+#include "../types/itypes.h"
+#include "../types/btypes.h"
 
 
 /** dst = scalar */
@@ -121,6 +122,126 @@ static ivec4 ivec4_div_sca_v(const int *vec_a, int scalar_b) {
 }
 
 
+/** dst = abs(x) */
+static ivec4 ivec4_abs(ivec4 vec_x) {
+    ivec4 res;
+    ivecN_abs(res.v, vec_x.v, 4);
+    return res;
+}
+/** dst = abs(x) */
+static ivec4 ivec4_abs_v(const int *vec_x) {
+    return ivec4_abs(IVec4(vec_x));
+}
+
+
+/** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
+static ivec4 ivec4_sign(ivec4 vec_x) {
+    ivec4 res;
+    ivecN_sign(res.v, vec_x.v, 4);
+    return res;
+}
+/** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
+static ivec4 ivec4_sign_v(const int *vec_x) {
+    return ivec4_sign(IVec4(vec_x));
+}
+
+
+/** dst = x % y */
+static ivec4 ivec4_mod(ivec4 vec_x, int y) {
+    ivec4 res;
+    ivecN_mod(res.v, vec_x.v, y, 4);
+    return res;
+}
+/** dst = x % y */
+static ivec4 ivec4_mod_v(const int *vec_x, int y) {
+    return ivec4_mod(IVec4(vec_x), y);
+}
+
+
+/** dst = x % y */
+static ivec4 ivec4_modv(ivec4 vec_x, ivec4 vec_y) {
+    ivec4 res;
+    ivecN_modv(res.v, vec_x.v, vec_y.v, 4);
+    return res;
+}
+/** dst = x % y */
+static ivec4 ivec4_modv_v(const int *vec_x, const int *vec_y) {
+    return ivec4_modv(IVec4(vec_x), IVec4(vec_y));
+}
+
+
+/** dst = a < b ? a : b */
+static ivec4 ivec4_min(ivec4 vec_x, int y) {
+    ivec4 res;
+    ivecN_min(res.v, vec_x.v, y, 4);
+    return res;
+}
+/** dst = a < b ? a : b */
+static ivec4 ivec4_min_v(const int *vec_x, int y) {
+    return ivec4_min(IVec4(vec_x), y);
+}
+
+
+/** dst = a < b ? a : b */
+static ivec4 ivec4_minv(ivec4 vec_x, ivec4 vec_y) {
+    ivec4 res;
+    ivecN_minv(res.v, vec_x.v, vec_y.v, 4);
+    return res;
+}
+/** dst = a < b ? a : b */
+static ivec4 ivec4_minv_v(const int *vec_x, const int *vec_y) {
+    return ivec4_minv(IVec4(vec_x), IVec4(vec_y));
+}
+
+
+/** dst = a > b ? a : b */
+static ivec4 ivec4_max(ivec4 vec_x, int y) {
+    ivec4 res;
+    ivecN_max(res.v, vec_x.v, y, 4);
+    return res;
+}
+/** dst = a > b ? a : b */
+static ivec4 ivec4_max_v(const int *vec_x, int y) {
+    return ivec4_max(IVec4(vec_x), y);
+}
+
+
+/** dst = a > b ? a : b */
+static ivec4 ivec4_maxv(ivec4 vec_x, ivec4 vec_y) {
+    ivec4 res;
+    ivecN_maxv(res.v, vec_x.v, vec_y.v, 4);
+    return res;
+}
+/** dst = a > b ? a : b */
+static ivec4 ivec4_maxv_v(const int *vec_x, const int *vec_y) {
+    return ivec4_maxv(IVec4(vec_x), IVec4(vec_y));
+}
+
+
+/** dst = x < min ? min : (x > max ? max : x) */
+static ivec4 ivec4_clamp(ivec4 vec_x, int min, int max) {
+    ivec4 res;
+    ivecN_clamp(res.v, vec_x.v, min, max, 4);
+    return res;
+}
+/** dst = x < min ? min : (x > max ? max : x) */
+static ivec4 ivec4_clamp_v(const int *vec_x, int min, int max) {
+    return ivec4_clamp(IVec4(vec_x), min, max);
+}
+
+
+/** dst = x < min ? min : (x > max ? max : x) */
+static ivec4 ivec4_clampv(ivec4 vec_x, ivec4 vec_min, ivec4 vec_max) {
+    ivec4 res;
+    ivecN_clampv(res.v, vec_x.v, vec_min.v, vec_max.v, 4);
+    return res;
+}
+/** dst = x < min ? min : (x > max ? max : x) */
+static ivec4 ivec4_clampv_v(const int *vec_x, const int *vec_min, const int *vec_max) {
+    return ivec4_clampv(IVec4(vec_x), IVec4(vec_min), IVec4(vec_max));
+}
+
+
 /** returns vec[0] + vec[1] + ... + vec[n-1] */
 static int ivec4_sum(ivec4 vec) {
     return ivecN_sum(vec.v, 4);
@@ -181,16 +302,102 @@ static int ivec4_norm_inf_v(const int *vec) {
 }
 
 
-/** dst = from + (to - from) * t */
-static ivec4 ivec4_lerp(ivec4 vec_from, ivec4 vec_to, float t) {
-    ivec4 res;
-    ivecN_lerp(res.v, vec_from.v, vec_to.v, t, 4);
+/** returns length of a vector, see ivecN_norm. Just here to match glsl */
+static float ivec4_length(ivec4 vec) {
+    return ivecN_length(vec.v, 4);
+}
+/** returns length of a vector, see ivecN_norm. Just here to match glsl */
+static float ivec4_length_v(const int *vec) {
+    return ivec4_length(IVec4(vec));
+}
+
+
+/** returns norm(b-a) */
+static float ivec4_distance(ivec4 vec_a, ivec4 vec_b) {
+    return ivecN_distance(vec_a.v, vec_b.v, 4);
+}
+/** returns norm(b-a) */
+static float ivec4_distance_v(const int *vec_a, const int *vec_b) {
+    return ivec4_distance(IVec4(vec_a), IVec4(vec_b));
+}
+
+
+/** dst = a < b */
+static bvec4 ivec4_less_than(ivec4 vec_a, ivec4 vec_b) {
+    bvec4 res;
+    ivecN_less_than(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
-/** dst = from + (to - from) * t */
-static ivec4 ivec4_lerp_v(const int *vec_from, const int *vec_to, float t) {
-    return ivec4_lerp(IVec4(vec_from), IVec4(vec_to), t);
+/** dst = a < b */
+static bvec4 ivec4_less_than_v(const int *vec_a, const int *vec_b) {
+    return ivec4_less_than(IVec4(vec_a), IVec4(vec_b));
 }
+
+
+/** dst = a <= b */
+static bvec4 ivec4_less_than_equal(ivec4 vec_a, ivec4 vec_b) {
+    bvec4 res;
+    ivecN_less_than_equal(res.v, vec_a.v, vec_b.v, 4);
+    return res;
+}
+/** dst = a <= b */
+static bvec4 ivec4_less_than_equal_v(const int *vec_a, const int *vec_b) {
+    return ivec4_less_than_equal(IVec4(vec_a), IVec4(vec_b));
+}
+
+
+/** dst = a > b */
+static bvec4 ivec4_greater_than(ivec4 vec_a, ivec4 vec_b) {
+    bvec4 res;
+    ivecN_greater_than(res.v, vec_a.v, vec_b.v, 4);
+    return res;
+}
+/** dst = a > b */
+static bvec4 ivec4_greater_than_v(const int *vec_a, const int *vec_b) {
+    return ivec4_greater_than(IVec4(vec_a), IVec4(vec_b));
+}
+
+
+/** dst = a >= b */
+static bvec4 ivec4_greater_than_equal(ivec4 vec_a, ivec4 vec_b) {
+    bvec4 res;
+    ivecN_greater_than_equal(res.v, vec_a.v, vec_b.v, 4);
+    return res;
+}
+/** dst = a >= b */
+static bvec4 ivec4_greater_than_equal_v(const int *vec_a, const int *vec_b) {
+    return ivec4_greater_than_equal(IVec4(vec_a), IVec4(vec_b));
+}
+
+
+/** dst = a == b */
+static bvec4 ivec4_equal(ivec4 vec_a, ivec4 vec_b) {
+    bvec4 res;
+    ivecN_equal(res.v, vec_a.v, vec_b.v, 4);
+    return res;
+}
+/** dst = a == b */
+static bvec4 ivec4_equal_v(const int *vec_a, const int *vec_b) {
+    return ivec4_equal(IVec4(vec_a), IVec4(vec_b));
+}
+
+
+/** dst = a != b */
+static bvec4 ivec4_not_equal(ivec4 vec_a, ivec4 vec_b) {
+    bvec4 res;
+    ivecN_not_equal(res.v, vec_a.v, vec_b.v, 4);
+    return res;
+}
+/** dst = a != b */
+static bvec4 ivec4_not_equal_v(const int *vec_a, const int *vec_b) {
+    return ivec4_not_equal(IVec4(vec_a), IVec4(vec_b));
+}
+
+
+
+//
+// in addition to vec2:
+//
 
 
 /** dst = a x b , dst.w = 0 */

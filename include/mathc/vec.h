@@ -16,4 +16,9 @@
 #include "vec/ivec3.h"
 #include "vec/ivec4.h"
 
+#include "vec/bvecn.h"
+#include "vec/bvec2.h"
+#include "vec/bvec3.h"
+#include "vec/bvec4.h"
+
 #endif //MATHC_VEC_H

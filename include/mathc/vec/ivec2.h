@@ -2,7 +2,8 @@
 #define MATHC_VEC_IVEC2_H
 
 #include "ivecn.h"
-#include "../types.h"
+#include "../types/itypes.h"
+#include "../types/btypes.h"
 
 
 /** dst = scalar */
@@ -120,6 +121,125 @@ static ivec2 ivec2_div_sca_v(const int *vec_a, int scalar_b) {
     return ivec2_div_sca(IVec2(vec_a), scalar_b);
 }
 
+/** dst = abs(x) */
+static ivec2 ivec2_abs(ivec2 vec_x) {
+    ivec2 res;
+    ivecN_abs(res.v, vec_x.v, 2);
+    return res;
+}
+/** dst = abs(x) */
+static ivec2 ivec2_abs_v(const int *vec_x) {
+    return ivec2_abs(IVec2(vec_x));
+}
+
+
+/** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
+static ivec2 ivec2_sign(ivec2 vec_x) {
+    ivec2 res;
+    ivecN_sign(res.v, vec_x.v, 2);
+    return res;
+}
+/** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
+static ivec2 ivec2_sign_v(const int *vec_x) {
+    return ivec2_sign(IVec2(vec_x));
+}
+
+
+/** dst = x % y */
+static ivec2 ivec2_mod(ivec2 vec_x, int y) {
+    ivec2 res;
+    ivecN_mod(res.v, vec_x.v, y, 2);
+    return res;
+}
+/** dst = x % y */
+static ivec2 ivec2_mod_v(const int *vec_x, int y) {
+    return ivec2_mod(IVec2(vec_x), y);
+}
+
+
+/** dst = x % y */
+static ivec2 ivec2_modv(ivec2 vec_x, ivec2 vec_y) {
+    ivec2 res;
+    ivecN_modv(res.v, vec_x.v, vec_y.v, 2);
+    return res;
+}
+/** dst = x % y */
+static ivec2 ivec2_modv_v(const int *vec_x, const int *vec_y) {
+    return ivec2_modv(IVec2(vec_x), IVec2(vec_y));
+}
+
+
+/** dst = a < b ? a : b */
+static ivec2 ivec2_min(ivec2 vec_x, int y) {
+    ivec2 res;
+    ivecN_min(res.v, vec_x.v, y, 2);
+    return res;
+}
+/** dst = a < b ? a : b */
+static ivec2 ivec2_min_v(const int *vec_x, int y) {
+    return ivec2_min(IVec2(vec_x), y);
+}
+
+
+/** dst = a < b ? a : b */
+static ivec2 ivec2_minv(ivec2 vec_x, ivec2 vec_y) {
+    ivec2 res;
+    ivecN_minv(res.v, vec_x.v, vec_y.v, 2);
+    return res;
+}
+/** dst = a < b ? a : b */
+static ivec2 ivec2_minv_v(const int *vec_x, const int *vec_y) {
+    return ivec2_minv(IVec2(vec_x), IVec2(vec_y));
+}
+
+
+/** dst = a > b ? a : b */
+static ivec2 ivec2_max(ivec2 vec_x, int y) {
+    ivec2 res;
+    ivecN_max(res.v, vec_x.v, y, 2);
+    return res;
+}
+/** dst = a > b ? a : b */
+static ivec2 ivec2_max_v(const int *vec_x, int y) {
+    return ivec2_max(IVec2(vec_x), y);
+}
+
+
+/** dst = a > b ? a : b */
+static ivec2 ivec2_maxv(ivec2 vec_x, ivec2 vec_y) {
+    ivec2 res;
+    ivecN_maxv(res.v, vec_x.v, vec_y.v, 2);
+    return res;
+}
+/** dst = a > b ? a : b */
+static ivec2 ivec2_maxv_v(const int *vec_x, const int *vec_y) {
+    return ivec2_maxv(IVec2(vec_x), IVec2(vec_y));
+}
+
+
+/** dst = x < min ? min : (x > max ? max : x) */
+static ivec2 ivec2_clamp(ivec2 vec_x, int min, int max) {
+    ivec2 res;
+    ivecN_clamp(res.v, vec_x.v, min, max, 2);
+    return res;
+}
+/** dst = x < min ? min : (x > max ? max : x) */
+static ivec2 ivec2_clamp_v(const int *vec_x, int min, int max) {
+    return ivec2_clamp(IVec2(vec_x), min, max);
+}
+
+
+/** dst = x < min ? min : (x > max ? max : x) */
+static ivec2 ivec2_clampv(ivec2 vec_x, ivec2 vec_min, ivec2 vec_max) {
+    ivec2 res;
+    ivecN_clampv(res.v, vec_x.v, vec_min.v, vec_max.v, 2);
+    return res;
+}
+/** dst = x < min ? min : (x > max ? max : x) */
+static ivec2 ivec2_clampv_v(const int *vec_x, const int *vec_min, const int *vec_max) {
+    return ivec2_clampv(IVec2(vec_x), IVec2(vec_min), IVec2(vec_max));
+}
+
 
 /** returns vec[0] + vec[1] + ... + vec[n-1] */
 static int ivec2_sum(ivec2 vec) {
@@ -181,16 +301,95 @@ static int ivec2_norm_inf_v(const int *vec) {
 }
 
 
-/** dst = from + (to - from) * t */
-static ivec2 ivec2_lerp(ivec2 vec_from, ivec2 vec_to, float t) {
-    ivec2 res;
-    ivecN_lerp(res.v, vec_from.v, vec_to.v, t, 2);
-    return res;
+/** returns length of a vector, see ivecN_norm. Just here to match glsl */
+static float ivec2_length(ivec2 vec) {
+    return ivecN_length(vec.v, 2);
 }
-/** dst = from + (to - from) * t */
-static ivec2 ivec2_lerp_v(const int *vec_from, const int *vec_to, float t) {
-    return ivec2_lerp(IVec2(vec_from), IVec2(vec_to), t);
+/** returns length of a vector, see ivecN_norm. Just here to match glsl */
+static float ivec2_length_v(const int *vec) {
+    return ivec2_length(IVec2(vec));
 }
 
+
+/** returns norm(b-a) */
+static int ivec2_distance(ivec2 vec_a, ivec2 vec_b) {
+    return ivecN_distance(vec_a.v, vec_b.v, 2);
+}
+/** returns norm(b-a) */
+static int ivec2_distance_v(const int *vec_a, const int *vec_b) {
+    return ivec2_distance(IVec2(vec_a), IVec2(vec_b));
+}
+
+
+/** dst = a < b */
+static bvec2 ivec2_less_than(ivec2 vec_a, ivec2 vec_b) {
+    bvec2 res;
+    ivecN_less_than(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+/** dst = a < b */
+static bvec2 ivec2_less_than_v(const int *vec_a, const int *vec_b) {
+    return ivec2_less_than(IVec2(vec_a), IVec2(vec_b));
+}
+
+
+/** dst = a <= b */
+static bvec2 ivec2_less_than_equal(ivec2 vec_a, ivec2 vec_b) {
+    bvec2 res;
+    ivecN_less_than_equal(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+/** dst = a <= b */
+static bvec2 ivec2_less_than_equal_v(const int *vec_a, const int *vec_b) {
+    return ivec2_less_than_equal(IVec2(vec_a), IVec2(vec_b));
+}
+
+
+/** dst = a > b */
+static bvec2 ivec2_greater_than(ivec2 vec_a, ivec2 vec_b) {
+    bvec2 res;
+    ivecN_greater_than(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+/** dst = a > b */
+static bvec2 ivec2_greater_than_v(const int *vec_a, const int *vec_b) {
+    return ivec2_greater_than(IVec2(vec_a), IVec2(vec_b));
+}
+
+
+/** dst = a >= b */
+static bvec2 ivec2_greater_than_equal(ivec2 vec_a, ivec2 vec_b) {
+    bvec2 res;
+    ivecN_greater_than_equal(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+/** dst = a >= b */
+static bvec2 ivec2_greater_than_equal_v(const int *vec_a, const int *vec_b) {
+    return ivec2_greater_than_equal(IVec2(vec_a), IVec2(vec_b));
+}
+
+
+/** dst = a == b */
+static bvec2 ivec2_equal(ivec2 vec_a, ivec2 vec_b) {
+    bvec2 res;
+    ivecN_equal(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+/** dst = a == b */
+static bvec2 ivec2_equal_v(const int *vec_a, const int *vec_b) {
+    return ivec2_equal(IVec2(vec_a), IVec2(vec_b));
+}
+
+
+/** dst = a != b */
+static bvec2 ivec2_not_equal(ivec2 vec_a, ivec2 vec_b) {
+    bvec2 res;
+    ivecN_not_equal(res.v, vec_a.v, vec_b.v, 2);
+    return res;
+}
+/** dst = a != b */
+static bvec2 ivec2_not_equal_v(const int *vec_a, const int *vec_b) {
+    return ivec2_not_equal(IVec2(vec_a), IVec2(vec_b));
+}
 
 #endif //MATHC_VEC_IVEC2_H

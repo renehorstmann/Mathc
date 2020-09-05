@@ -332,6 +332,47 @@ static void imat4_print(imat4 matrix) {
 }
 
 
+// 
+// b = bool
+//
+
+static void bvec2_print_f(bvec2 vec, FILE *ostream) {
+    fprintf(ostream, "bvec2: " MATHC_PRINT_COLOR "(");
+    for (int v = 0; v < 2; v++) {
+        fprintf(ostream, " %d", vec.v[v]);
+    }
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+}
+
+static void bvec2_print(bvec2 vec) {
+    bvec2_print_f(vec, stdout);
+}
+
+static void bvec3_print_f(bvec3 vec, FILE *ostream) {
+    fprintf(ostream, "bvec3: " MATHC_PRINT_COLOR "(");
+    for (int v = 0; v < 3; v++) {
+        fprintf(ostream, " %i", vec.v[v]);
+    }
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+}
+
+static void bvec3_print(bvec3 vec) {
+    bvec3_print_f(vec, stdout);
+}
+
+static void bvec4_print_f(bvec4 vec, FILE *ostream) {
+    fprintf(ostream, "bvec4: " MATHC_PRINT_COLOR "(");
+    for (int v = 0; v < 4; v++) {
+        fprintf(ostream, " %i", vec.v[v]);
+    }
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+}
+
+static void bvec4_print(bvec4 vec) {
+    bvec4_print_f(vec, stdout);
+}
+
+
 //
 // quat
 //

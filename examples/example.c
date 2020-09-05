@@ -38,7 +38,7 @@ bool sphere_collision(Sphere_s a, Sphere_s b) {
 
     // norm(dist) < a.r+b.r
     // powf(,2) is much faster than sqrt
-    return vec3_dot(dist, dist) < powf(a.r + b.r, 2);
+    return vec3_dot(dist, dist) < powf(a.radius + b.radius, 2);
 }
 
 /** calculates the angle between vector a and b */

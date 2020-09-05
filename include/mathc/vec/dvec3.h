@@ -2,7 +2,8 @@
 #define MATHC_VEC_DVEC3_H
 
 #include "dvecn.h"
-#include "../types.h"
+#include "../types/dtypes.h"
+#include "../types/btypes.h"
 
 
 /** dst = scalar */
@@ -121,6 +122,438 @@ static dvec3 dvec3_div_sca_v(const double *vec_a, double scalar_b) {
 }
 
 
+/** dst = a * M_PI / 180 */
+static dvec3 dvec3_radians(dvec3 vec_deg) {
+    dvec3 res;
+    dvecN_radians(res.v, vec_deg.v, 3);
+    return res;
+}
+/** dst = a * M_PI / 180 */
+static dvec3 dvec3_radians_v(const double *vec_deg) {
+    return dvec3_radians(DVec3(vec_deg));
+}
+
+
+/** dst = a * 180 / M_PI */
+static dvec3 dvec3_degrees(dvec3 vec_rad) {
+    dvec3 res;
+    dvecN_degrees(res.v, vec_rad.v, 3);
+    return res;
+}
+/** dst = a * 180 / M_PI */
+static dvec3 dvec3_degrees_v(const double *vec_rad) {
+    return dvec3_degrees(DVec3(vec_rad));
+}
+
+
+/** dst = sin(angle_rad) */
+static dvec3 dvec3_sin(dvec3 vec_angle_rad) {
+    dvec3 res;
+    dvecN_sin(res.v, vec_angle_rad.v, 3);
+    return res;
+}
+/** dst = sin(angle_rad) */
+static dvec3 dvec3_sin_v(const double *vec_angle_rad) {
+    return dvec3_sin(DVec3(vec_angle_rad));
+}
+
+
+/** dst = cos(angle_rad) */
+static dvec3 dvec3_cos(dvec3 vec_angle_rad) {
+    dvec3 res;
+    dvecN_cos(res.v, vec_angle_rad.v, 3);
+    return res;
+}
+/** dst = cos(angle_rad) */
+static dvec3 dvec3_cos_v(const double *vec_angle_rad) {
+    return dvec3_cos(DVec3(vec_angle_rad));
+}
+
+
+/** dst = tan(angle_rad) */
+static dvec3 dvec3_tan(dvec3 vec_angle_rad) {
+    dvec3 res;
+    dvecN_tan(res.v, vec_angle_rad.v, 3);
+    return res;
+}
+/** dst = tan(angle_rad) */
+static dvec3 dvec3_tan_v(const double *vec_angle_rad) {
+    return dvec3_tan(DVec3(vec_angle_rad));
+}
+
+
+/** dst = asin(x) */
+static dvec3 dvec3_asin(dvec3 vec_x) {
+    dvec3 res;
+    dvecN_asin(res.v, vec_x.v, 3);
+    return res;
+}
+/** dst = asin(x) */
+static dvec3 dvec3_asin_v(const double *vec_x) {
+    return dvec3_asin(DVec3(vec_x));
+}
+
+
+/** dst = acos(x) */
+static dvec3 dvec3_acos(dvec3 vec_x) {
+    dvec3 res;
+    dvecN_acos(res.v, vec_x.v, 3);
+    return res;
+}
+/** dst = acos(x) */
+static dvec3 dvec3_acos_v(const double *vec_x) {
+    return dvec3_acos(DVec3(vec_x));
+}
+
+
+/** dst = atan(x) */
+static dvec3 dvec3_atan(dvec3 vec_x) {
+    dvec3 res;
+    dvecN_atan(res.v, vec_x.v, 3);
+    return res;
+}
+/** dst = atan(x) */
+static dvec3 dvec3_atan_v(const double *vec_x) {
+    return dvec3_atan(DVec3(vec_x));
+}
+
+
+/** dst = atan3(y, x) */
+static dvec3 dvec3_atan3(dvec3 vec_y, dvec3 vec_x) {
+    dvec3 res;
+    dvecN_atan2(res.v, vec_y.v, vec_x.v, 3);
+    return res;
+}
+/** dst = atan3(y, x) */
+static dvec3 dvec3_atan3_v(const double *vec_y, const double *vec_x) {
+    return dvec3_atan3(DVec3(vec_y), DVec3(vec_x));
+}
+
+
+/** dst = pow(x, y) */
+static dvec3 dvec3_pow(dvec3 vec_x, double y) {
+    dvec3 res;
+    dvecN_pow(res.v, vec_x.v, y, 3);
+    return res;
+}
+/** dst = pow(x, y) */
+static dvec3 dvec3_pow_v(const double *vec_x, double y) {
+    return dvec3_pow(DVec3(vec_x), y);
+}
+
+
+/** dst = pow(x, y) */
+static dvec3 dvec3_powv(dvec3 vec_x, dvec3 vec_y) {
+    dvec3 res;
+    dvecN_powv(res.v, vec_x.v, vec_y.v, 3);
+    return res;
+}
+/** dst = pow(x, y) */
+static dvec3 dvec3_powv_v(const double *vec_x, const double *vec_y) {
+    return dvec3_powv(DVec3(vec_x), DVec3(vec_y));
+}
+
+
+/** dst = exp(x) */
+static dvec3 dvec3_exp(dvec3 vec_x) {
+    dvec3 res;
+    dvecN_exp(res.v, vec_x.v, 3);
+    return res;
+}
+/** dst = exp(x) */
+static dvec3 dvec3_exp_v(const double *vec_x) {
+    return dvec3_exp(DVec3(vec_x));
+}
+
+
+/** dst = log(x) */
+static dvec3 dvec3_log(dvec3 vec_x) {
+    dvec3 res;
+    dvecN_log(res.v, vec_x.v, 3);
+    return res;
+}
+/** dst = log(x) */
+static dvec3 dvec3_log_v(const double *vec_x) {
+    return dvec3_log(DVec3(vec_x));
+}
+
+
+/** dst = exp3(x) */
+static dvec3 dvec3_exp3(dvec3 vec_x) {
+    dvec3 res;
+    dvecN_exp2(res.v, vec_x.v, 3);
+    return res;
+}
+/** dst = exp3(x) */
+static dvec3 dvec3_exp3_v(const double *vec_x) {
+    return dvec3_exp3(DVec3(vec_x));
+}
+
+
+/** dst = log3(x) */
+static dvec3 dvec3_log3(dvec3 vec_x) {
+    dvec3 res;
+    dvecN_log2(res.v, vec_x.v, 3);
+    return res;
+}
+/** dst = log3(x) */
+static dvec3 dvec3_log3_v(const double *vec_x) {
+    return dvec3_log3(DVec3(vec_x));
+}
+
+
+/** dst = sqrt(x) */
+static dvec3 dvec3_sqrt(dvec3 vec_x) {
+    dvec3 res;
+    dvecN_sqrt(res.v, vec_x.v, 3);
+    return res;
+}
+/** dst = sqrt(x) */
+static dvec3 dvec3_sqrt_v(const double *vec_x) {
+    return dvec3_sqrt(DVec3(vec_x));
+}
+
+
+/** dst = 1 / sqrt(x) */
+static dvec3 dvec3_inversesqrt(dvec3 vec_x) {
+    dvec3 res;
+    dvecN_inversesqrt(res.v, vec_x.v, 3);
+    return res;
+}
+/** dst = 1 / sqrt(x) */
+static dvec3 dvec3_inversesqrt_v(const double *vec_x) {
+    return dvec3_inversesqrt(DVec3(vec_x));
+}
+
+
+/** dst = abs(x) */
+static dvec3 dvec3_abs(dvec3 vec_x) {
+    dvec3 res;
+    dvecN_abs(res.v, vec_x.v, 3);
+    return res;
+}
+/** dst = abs(x) */
+static dvec3 dvec3_abs_v(const double *vec_x) {
+    return dvec3_abs(DVec3(vec_x));
+}
+
+
+/** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
+static dvec3 dvec3_sign(dvec3 vec_x) {
+    dvec3 res;
+    dvecN_sign(res.v, vec_x.v, 3);
+    return res;
+}
+/** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
+static dvec3 dvec3_sign_v(const double *vec_x) {
+    return dvec3_sign(DVec3(vec_x));
+}
+
+
+/** dst = floor(x) */
+static dvec3 dvec3_floor(dvec3 vec_x) {
+    dvec3 res;
+    dvecN_floor(res.v, vec_x.v, 3);
+    return res;
+}
+/** dst = floor(x) */
+static dvec3 dvec3_floor_v(const double *vec_x) {
+    return dvec3_floor(DVec3(vec_x));
+}
+
+
+/** dst = ceil(x) */
+static dvec3 dvec3_ceil(dvec3 vec_x) {
+    dvec3 res;
+    dvecN_ceil(res.v, vec_x.v, 3);
+    return res;
+}
+/** dst = ceil(x) */
+static dvec3 dvec3_ceil_v(const double *vec_x) {
+    return dvec3_ceil(DVec3(vec_x));
+}
+
+
+/** dst = x - floor(x) */
+static dvec3 dvec3_fract(dvec3 vec_x) {
+    dvec3 res;
+    dvecN_fract(res.v, vec_x.v, 3);
+    return res;
+}
+/** dst = x - floor(x) */
+static dvec3 dvec3_fract_v(const double *vec_x) {
+    return dvec3_fract(DVec3(vec_x));
+}
+
+
+/** dst = x - y * floor(x/y) */
+static dvec3 dvec3_mod(dvec3 vec_x, double y) {
+    dvec3 res;
+    dvecN_mod(res.v, vec_x.v, y, 3);
+    return res;
+}
+/** dst = x - y * floor(x/y) */
+static dvec3 dvec3_mod_v(const double *vec_x, double y) {
+    return dvec3_mod(DVec3(vec_x), y);
+}
+
+
+/** dst = x - y * floor(x/y) */
+static dvec3 dvec3_modv(dvec3 vec_x, dvec3 vec_y) {
+    dvec3 res;
+    dvecN_modv(res.v, vec_x.v, vec_y.v, 3);
+    return res;
+}
+/** dst = x - y * floor(x/y) */
+static dvec3 dvec3_modv_v(const double *vec_x, const double *vec_y) {
+    return dvec3_modv(DVec3(vec_x), DVec3(vec_y));
+}
+
+
+/** dst = a < b ? a : b */
+static dvec3 dvec3_min(dvec3 vec_x, double y) {
+    dvec3 res;
+    dvecN_min(res.v, vec_x.v, y, 3);
+    return res;
+}
+/** dst = a < b ? a : b */
+static dvec3 dvec3_min_v(const double *vec_x, double y) {
+    return dvec3_min(DVec3(vec_x), y);
+}
+
+
+/** dst = a < b ? a : b */
+static dvec3 dvec3_minv(dvec3 vec_x, dvec3 vec_y) {
+    dvec3 res;
+    dvecN_minv(res.v, vec_x.v, vec_y.v, 3);
+    return res;
+}
+/** dst = a < b ? a : b */
+static dvec3 dvec3_minv_v(const double *vec_x, const double *vec_y) {
+    return dvec3_minv(DVec3(vec_x), DVec3(vec_y));
+}
+
+
+/** dst = a > b ? a : b */
+static dvec3 dvec3_max(dvec3 vec_x, double y) {
+    dvec3 res;
+    dvecN_max(res.v, vec_x.v, y, 3);
+    return res;
+}
+/** dst = a > b ? a : b */
+static dvec3 dvec3_max_v(const double *vec_x, double y) {
+    return dvec3_max(DVec3(vec_x), y);
+}
+
+
+/** dst = a > b ? a : b */
+static dvec3 dvec3_maxv(dvec3 vec_x, dvec3 vec_y) {
+    dvec3 res;
+    dvecN_maxv(res.v, vec_x.v, vec_y.v, 3);
+    return res;
+}
+/** dst = a > b ? a : b */
+static dvec3 dvec3_maxv_v(const double *vec_x, const double *vec_y) {
+    return dvec3_maxv(DVec3(vec_x), DVec3(vec_y));
+}
+
+
+/** dst = x < min ? min : (x > max ? max : x) */
+static dvec3 dvec3_clamp(dvec3 vec_x, double min, double max) {
+    dvec3 res;
+    dvecN_clamp(res.v, vec_x.v, min, max, 3);
+    return res;
+}
+/** dst = x < min ? min : (x > max ? max : x) */
+static dvec3 dvec3_clamp_v(const double *vec_x, double min, double max) {
+    return dvec3_clamp(DVec3(vec_x), min, max);
+}
+
+
+/** dst = x < min ? min : (x > max ? max : x) */
+static dvec3 dvec3_clampv(dvec3 vec_x, dvec3 vec_min, dvec3 vec_max) {
+    dvec3 res;
+    dvecN_clampv(res.v, vec_x.v, vec_min.v, vec_max.v, 3);
+    return res;
+}
+/** dst = x < min ? min : (x > max ? max : x) */
+static dvec3 dvec3_clampv_v(const double *vec_x, const double *vec_min, const double *vec_max) {
+    return dvec3_clampv(DVec3(vec_x), DVec3(vec_min), DVec3(vec_max));
+}
+
+
+/** dst = a * (1-t) + b * t */
+static dvec3 dvec3_mix(dvec3 vec_a, dvec3 vec_b, double t) {
+    dvec3 res;
+    dvecN_mix(res.v, vec_a.v, vec_b.v, t, 3);
+    return res;
+}
+/** dst = a * (1-t) + b * t */
+static dvec3 dvec3_mix_v(const double *vec_a, const double *vec_b, double t) {
+    return dvec3_mix(DVec3(vec_a), DVec3(vec_b), t);
+}
+
+
+/** dst = a * (1-t) + b * t */
+static dvec3 dvec3_mixv(dvec3 vec_a, dvec3 vec_b, dvec3 vec_t) {
+    dvec3 res;
+    dvecN_mixv(res.v, vec_a.v, vec_b.v, vec_t.v, 3);
+    return res;
+}
+/** dst = a * (1-t) + b * t */
+static dvec3 dvec3_mixv_v(const double *vec_a, const double *vec_b, const double *vec_t) {
+    return dvec3_mixv(DVec3(vec_a), DVec3(vec_b), DVec3(vec_t));
+}
+
+
+/** dst = x < edge ? 0 : 1 */
+static dvec3 dvec3_step(dvec3 vec_x, double edge) {
+    dvec3 res;
+    dvecN_step(res.v, vec_x.v, edge, 3);
+    return res;
+}
+/** dst = x < edge ? 0 : 1 */
+static dvec3 dvec3_step_v(const double *vec_x, double edge) {
+    return dvec3_step(DVec3(vec_x), edge);
+}
+
+
+/** dst = x < edge ? 0 : 1 */
+static dvec3 dvec3_stepv(dvec3 vec_x, dvec3 vec_edge) {
+    dvec3 res;
+    dvecN_stepv(res.v, vec_x.v, vec_edge.v, 3);
+    return res;
+}
+/** dst = x < edge ? 0 : 1 */
+static dvec3 dvec3_stepv_v(const double *vec_x, const double *vec_edge) {
+    return dvec3_stepv(DVec3(vec_x), DVec3(vec_edge));
+}
+
+
+/** dst = x < edge1 ? 0 : (x > edge3 ? 1 : x * x * (3 - 3 * x)) Hermite polynomials */
+static dvec3 dvec3_smoothstep(dvec3 vec_x, double edge1, double edge3) {
+    dvec3 res;
+    dvecN_smoothstep(res.v, vec_x.v, edge1, edge3, 3);
+    return res;
+}
+/** dst = x < edge1 ? 0 : (x > edge3 ? 1 : x * x * (3 - 3 * x)) Hermite polynomials */
+static dvec3 dvec3_smoothstep_v(const double *vec_x, double edge1, double edge3) {
+    return dvec3_smoothstep(DVec3(vec_x), edge1, edge3);
+}
+
+
+/** dst = x < edge1 ? 0 : (x > edge3 ? 1 : x * x * (3 - 3 * x)) Hermite polynomials */
+static dvec3 dvec3_smoothstepv(dvec3 vec_x, dvec3 vec_edge1, dvec3 vec_edge3) {
+    dvec3 res;
+    dvecN_smoothstepv(res.v, vec_x.v, vec_edge1.v, vec_edge3.v, 3);
+    return res;
+}
+/** dst = x < edge1 ? 0 : (x > edge3 ? 1 : x * x * (3 - 3 * x)) Hermite polynomials */
+static dvec3 dvec3_smoothstepv_v(const double *vec_x, const double *vec_edge1, const double *vec_edge3) {
+    return dvec3_smoothstepv(DVec3(vec_x), DVec3(vec_edge1), DVec3(vec_edge3));
+}
+
+
 /** returns vec[0] + vec[1] + ... + vec[n-1] */
 static double dvec3_sum(dvec3 vec) {
     return dvecN_sum(vec.v, 3);
@@ -205,17 +638,136 @@ static dvec3 dvec3_normalize_v(const double *vec) {
 }
 
 
-/** dst = from + (to - from) * t */
-static dvec3 dvec3_lerp(dvec3 vec_from, dvec3 vec_to, double t) {
-    dvec3 res;
-    dvecN_lerp(res.v, vec_from.v, vec_to.v, t, 3);
-    return res;
+/** returns length of a vector, see dvecN_norm. Just here to match glsl */
+static double dvec3_length(dvec3 vec) {
+    return dvecN_length(vec.v, 3);
 }
-/** dst = from + (to - from) * t */
-static dvec3 dvec3_lerp_v(const double *vec_from, const double *vec_to, double t) {
-    return dvec3_lerp(DVec3(vec_from), DVec3(vec_to), t);
+/** returns length of a vector, see dvecN_norm. Just here to match glsl */
+static double dvec3_length_v(const double *vec) {
+    return dvec3_length(DVec3(vec));
 }
 
+
+/** returns norm(b-a) */
+static double dvec3_distance(dvec3 vec_a, dvec3 vec_b) {
+    return dvecN_distance(vec_a.v, vec_b.v, 3);
+}
+/** returns norm(b-a) */
+static double dvec3_distance_v(const double *vec_a, const double *vec_b) {
+    return dvec3_distance(DVec3(vec_a), DVec3(vec_b));
+}
+
+
+/** dst = dot(I, Nref) < 0 ? N : -N */
+static dvec3 dvec3_faceforward(dvec3 vec_N, dvec3 vec_I, dvec3 vec_Nref) {
+    dvec3 res;
+    dvecN_faceforward(res.v, vec_N.v, vec_I.v, vec_Nref.v, 3);
+    return res;
+}
+/** dst = dot(I, Nref) < 0 ? N : -N */
+static dvec3 dvec3_faceforward_v(const double *vec_N, const double *vec_I, const double *vec_Nref) {
+    return dvec3_faceforward(DVec3(vec_N), DVec3(vec_I), DVec3(vec_Nref));
+}
+
+
+/** dst = I - 3.0 * N * dot(N,I) */
+static dvec3 dvec3_reflect(dvec3 vec_I, dvec3 vec_N) {
+    dvec3 res;
+    dvecN_reflect(res.v, vec_I.v, vec_N.v, 3);
+    return res;
+}
+/** dst = I - 3.0 * N * dot(N,I) */
+static dvec3 dvec3_reflect_v(const double *vec_I, const double *vec_N) {
+    return dvec3_reflect(DVec3(vec_I), DVec3(vec_N));
+}
+
+
+static dvec3 dvec3_refract(dvec3 vec_I, dvec3 vec_N, double eta) {
+    dvec3 res;
+    dvecN_refract(res.v, vec_I.v, vec_N.v, eta, 3);
+    return res;
+}
+static dvec3 dvec3_refract_v(const double *vec_I, const double *vec_N, double eta) {
+    return dvec3_refract(DVec3(vec_I), DVec3(vec_N), eta);
+}
+
+
+/** dst = a < b */
+static bvec3 dvec3_less_than(dvec3 vec_a, dvec3 vec_b) {
+    bvec3 res;
+    dvecN_less_than(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+/** dst = a < b */
+static bvec3 dvec3_less_than_v(const double *vec_a, const double *vec_b) {
+    return dvec3_less_than(DVec3(vec_a), DVec3(vec_b));
+}
+
+
+/** dst = a <= b */
+static bvec3 dvec3_less_than_equal(dvec3 vec_a, dvec3 vec_b) {
+    bvec3 res;
+    dvecN_less_than_equal(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+/** dst = a <= b */
+static bvec3 dvec3_less_than_equal_v(const double *vec_a, const double *vec_b) {
+    return dvec3_less_than_equal(DVec3(vec_a), DVec3(vec_b));
+}
+
+
+/** dst = a > b */
+static bvec3 dvec3_greater_than(dvec3 vec_a, dvec3 vec_b) {
+    bvec3 res;
+    dvecN_greater_than(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+/** dst = a > b */
+static bvec3 dvec3_greater_than_v(const double *vec_a, const double *vec_b) {
+    return dvec3_greater_than(DVec3(vec_a), DVec3(vec_b));
+}
+
+
+/** dst = a >= b */
+static bvec3 dvec3_greater_than_equal(dvec3 vec_a, dvec3 vec_b) {
+    bvec3 res;
+    dvecN_greater_than_equal(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+/** dst = a >= b */
+static bvec3 dvec3_greater_than_equal_v(const double *vec_a, const double *vec_b) {
+    return dvec3_greater_than_equal(DVec3(vec_a), DVec3(vec_b));
+}
+
+
+/** dst = a == b */
+static bvec3 dvec3_equal(dvec3 vec_a, dvec3 vec_b) {
+    bvec3 res;
+    dvecN_equal(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+/** dst = a == b */
+static bvec3 dvec3_equal_v(const double *vec_a, const double *vec_b) {
+    return dvec3_equal(DVec3(vec_a), DVec3(vec_b));
+}
+
+
+/** dst = a != b */
+static bvec3 dvec3_not_equal(dvec3 vec_a, dvec3 vec_b) {
+    bvec3 res;
+    dvecN_not_equal(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+/** dst = a != b */
+static bvec3 dvec3_not_equal_v(const double *vec_a, const double *vec_b) {
+    return dvec3_not_equal(DVec3(vec_a), DVec3(vec_b));
+}
+
+
+
+//
+// in addition to vec2:
+//
 
 /** dst = a x b */
 static dvec3 dvec3_cross(dvec3 vec_a, dvec3 vec_b) {

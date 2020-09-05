@@ -1,7 +1,8 @@
 #ifndef MATHC_VEC_IVECN_H
 #define MATHC_VEC_IVECN_H
 
-#include "stdlib.h"     //abs
+#include "stdlib.h"     // abs
+#include "stdbool.h"
 #include "math.h"
 
 
@@ -79,6 +80,66 @@ static void ivecN_div_sca(int *dst_vec, const int *vec_a, int scalar_b, int n) {
         dst_vec[i] = vec_a[i] / scalar_b;
 }
 
+/** dst = abs(x) */
+static void ivecN_abs(int *dst_vec, const int *vec_x, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = abs(vec_x[i]);
+}
+
+/** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
+static void ivecN_sign(int *dst_vec, const int *vec_x, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_x[i] > 0 ? 1 : (vec_x[i] < 0 ? -1 : 0);
+}
+
+/** dst = x % y */
+static void ivecN_mod(int *dst_vec, const int *vec_x, int y, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_x[i] % y;
+}
+
+/** dst = x % y */
+static void ivecN_modv(int *dst_vec, const int *vec_x, const int *vec_y, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_x[i] % vec_y[i];
+}
+
+/** dst = a < b ? a : b */
+static void ivecN_min(int *dst_vec, const int *vec_a, int b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] < b ? vec_a[i] : b;
+}
+
+/** dst = a < b ? a : b */
+static void ivecN_minv(int *dst_vec, const int *vec_a, const int *vec_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] < vec_b[i] ? vec_a[i] : vec_b[i];
+}
+
+/** dst = a > b ? a : b */
+static void ivecN_max(int *dst_vec, const int *vec_a, int b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] > b ? vec_a[i] : b;
+}
+
+/** dst = a > b ? a : b */
+static void ivecN_maxv(int *dst_vec, const int *vec_a, const int *vec_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] > vec_b[i] ? vec_a[i] : vec_b[i];
+}
+
+/** dst = x < min ? min : (x > max ? max : x) */
+static void ivecN_clamp(int *dst_vec, const int *vec_x, int min, int max, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_x[i] < min ? min : (vec_x[i] > max ? max : vec_x[i]);
+}
+
+/** dst = x < min ? min : (x > max ? max : x) */
+static void ivecN_clampv(int *dst_vec, const int *vec_x, const int *vec_min, const int *vec_max, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_x[i] < vec_min[i] ? vec_min[i] : (vec_x[i] > vec_max[i] ? vec_max[i] : vec_x[i]);
+}
+
 /** returns vec[0] + vec[1] + ... + vec[n-1] */
 static int ivecN_sum(const int *vec, int n) {
     int sum = 0;
@@ -104,7 +165,7 @@ static float ivecN_norm(const int *vec, int n) {
 static float ivecN_norm_p(const int *vec, float p, int n) {
     float sum = 0;
     for (int i = 0; i < n; i++) {
-        sum += powf(fabsf((float) vec[i]), p);
+        sum += powf(abs(vec[i]), p);
     }
     return powf(sum, 1.0f / p);
 }
@@ -128,10 +189,52 @@ static int ivecN_norm_inf(const int *vec, int n) {
     return max;
 }
 
-/** dst = from + (to - from) * t */
-static void ivecN_lerp(int *dst_vec, const int *vec_from, const int *vec_to, float t, int n) {
+/** returns length of a vector, see ivecN_norm. Just here to match glsl */
+static float ivecN_length(const int *vec, int n) {
+    return ivecN_norm(vec, n);
+}
+
+/** returns norm(b-a) */
+static float ivecN_distance(const int *vec_a, const int *vec_b, int n) {
+    int delta[n];
+    ivecN_sub_vec(delta, vec_b, vec_a, n);
+    return ivecN_norm(delta, n);
+}
+
+/** dst = a < b */
+static void ivecN_less_than(bool *dst_vec, const int *vec_a, const int *vec_b, int n) {
     for (int i = 0; i < n; i++)
-        dst_vec[i] = (int) (vec_from[i] + (vec_to[i] - vec_from[i]) * t);
+        dst_vec[i] = vec_a[i] < vec_b[i];
+}
+
+/** dst = a <= b */
+static void ivecN_less_than_equal(bool *dst_vec, const int *vec_a, const int *vec_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] <= vec_b[i];
+}
+
+/** dst = a > b */
+static void ivecN_greater_than(bool *dst_vec, const int *vec_a, const int *vec_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] > vec_b[i];
+}
+
+/** dst = a >= b */
+static void ivecN_greater_than_equal(bool *dst_vec, const int *vec_a, const int *vec_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] >= vec_b[i];
+}
+
+/** dst = a == b */
+static void ivecN_equal(bool *dst_vec, const int *vec_a, const int *vec_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] == vec_b[i];
+}
+
+/** dst = a != b */
+static void ivecN_not_equal(bool *dst_vec, const int *vec_a, const int *vec_b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] != vec_b[i];
 }
 
 #endif //MATHC_VEC_IVECN_H
