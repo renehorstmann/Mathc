@@ -3,17 +3,11 @@
 
 #include "initializer.h"
 
-#include "io/dio.h"
+#include "io/double.h"
 
-#include "vec/dvecn.h"
-#include "vec/dvec2.h"
-#include "vec/dvec3.h"
-#include "vec/dvec4.h"
+#include "vec/double.h"
 
-#include "mat/dmatn.h"
-#include "mat/dmat2.h"
-#include "mat/dmat3.h"
-#include "mat/dmat4.h"
+#include "mat/double.h"
 
 #include "quat/dquat.h"
 

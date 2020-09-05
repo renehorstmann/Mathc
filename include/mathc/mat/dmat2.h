@@ -2,7 +2,7 @@
 #define MATHC_MAT_DMAT2_H
 
 #include "dmatn.h"
-#include "../types/dtypes.h"
+#include "../types/double.h"
 
 
 /** dst = r==c ? 1 : 0 (identity)  */

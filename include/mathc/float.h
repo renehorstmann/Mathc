@@ -3,17 +3,11 @@
 
 #include "initializer.h"
 
-#include "io/io.h"
+#include "mathc/io/float.h"
 
-#include "vec/vecn.h"
-#include "vec/vec2.h"
-#include "vec/vec3.h"
-#include "vec/vec4.h"
+#include "vec/float.h"
 
-#include "mat/matn.h"
-#include "mat/mat2.h"
-#include "mat/mat3.h"
-#include "mat/mat4.h"
+#include "mat/float.h"
 
 #include "quat/quat.h"
 

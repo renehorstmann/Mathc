@@ -1,5 +1,5 @@
-#ifndef MATHC_TYPES_BTYPES_H
-#define MATHC_TYPES_BTYPES_H
+#ifndef MATHC_TYPES_BOOL_H
+#define MATHC_TYPES_BOOL_H
 
 #include "stdbool.h"
 
@@ -79,4 +79,4 @@ _Static_assert(sizeof(bvec4) == sizeof(bool) * 4, "[Mathc] wrong expected size")
 #define ConstBVec4(bvec) (*(const bvec4 *) (bvec))
 
 
-#endif //MATHC_TYPES_BTYPES_H
+#endif //MATHC_TYPES_BOOL_H

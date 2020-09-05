@@ -1,8 +1,8 @@
-#ifndef MATHC_IO_IO_H
-#define MATHC_IO_IO_H
+#ifndef MATHC_IO_FLOAT_H
+#define MATHC_IO_FLOAT_H
 
 #include <stdio.h>
-#include "../types/types.h"
+#include "../types/float.h"
 
 //
 // from cglm/io.h
@@ -148,4 +148,4 @@ static void quat_print(quat quat) {
     quat_print_f(quat, stdout);
 }
 
-#endif //MATHC_IO_IO_H
+#endif //MATHC_IO_FLOAT_H

@@ -1,5 +1,5 @@
-#ifndef MATHC_TYPES_ITYPES_H
-#define MATHC_TYPES_ITYPES_H
+#ifndef MATHC_TYPES_INT_H
+#define MATHC_TYPES_INT_H
 
 
 typedef union ivec2 {
@@ -149,4 +149,4 @@ _Static_assert(sizeof(imat4) == sizeof(int) * 16, "[Mathc] wrong expected size")
 #define ConstIMat4(mat) (*(const imat4 *) (mat))
 
 
-#endif //MATHC_TYPES_ITYPES_H
+#endif //MATHC_TYPES_INT_H

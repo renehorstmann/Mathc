@@ -1,8 +1,8 @@
-#ifndef MATHC_IO_BIO_H
-#define MATHC_IO_BIO_H
+#ifndef MATHC_IO_BOOL_H
+#define MATHC_IO_BOOL_H
 
 #include <stdio.h>
-#include "../types/btypes.h"
+#include "../types/bool.h"
 
 //
 // from cglm/io.h
@@ -60,4 +60,4 @@ static void bvec4_print(bvec4 vec) {
     bvec4_print_f(vec, stdout);
 }
 
-#endif //MATHC_IO_BIO_H
+#endif //MATHC_IO_BOOL_H

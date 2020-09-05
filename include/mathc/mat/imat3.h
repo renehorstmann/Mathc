@@ -2,7 +2,7 @@
 #define MATHC_MAT_IMAT3_H
 
 #include "imatn.h"
-#include "../types/itypes.h"
+#include "../types/int.h"
 #include "../vec/ivec3.h"
 
 

@@ -2,8 +2,8 @@
 #define MATHC_VEC_IVEC4_H
 
 #include "ivecn.h"
-#include "../types/itypes.h"
-#include "../types/btypes.h"
+#include "../types/int.h"
+#include "../types/bool.h"
 
 
 /** dst = scalar */

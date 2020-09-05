@@ -1,8 +1,8 @@
-#ifndef MATHC_IO_DIO_H
-#define MATHC_IO_DIO_H
+#ifndef MATHC_IO_DOUBLE_H
+#define MATHC_IO_DOUBLE_H
 
 #include <stdio.h>
-#include "../types/dtypes.h"
+#include "../types/double.h"
 
 //
 // from cglm/io.h
@@ -147,4 +147,4 @@ static void dquat_print(dquat quat) {
     dquat_print_f(quat, stdout);
 }
 
-#endif //MATHC_IO_DIO_H
+#endif //MATHC_IO_DOUBLE_H

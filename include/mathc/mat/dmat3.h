@@ -2,7 +2,7 @@
 #define MATHC_MAT_DMAT3_H
 
 #include "dmatn.h"
-#include "../types/dtypes.h"
+#include "../types/double.h"
 #include "../vec/dvec3.h"
 
 

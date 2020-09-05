@@ -1,8 +1,8 @@
-#ifndef MATHC_IO_IIO_H
-#define MATHC_IO_IIO_H
+#ifndef MATHC_IO_INT_H
+#define MATHC_IO_INT_H
 
 #include <stdio.h>
-#include "../types/itypes.h"
+#include "../types/int.h"
 
 //
 // from cglm/io.h
@@ -111,4 +111,4 @@ static void imat4_print(imat4 matrix) {
 }
 
 
-#endif //MATHC_IO_IIO_H
+#endif //MATHC_IO_INT_H

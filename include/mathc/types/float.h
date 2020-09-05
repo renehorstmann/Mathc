@@ -1,5 +1,5 @@
-#ifndef MATHC_TYPES_TYPES_H
-#define MATHC_TYPES_TYPES_H
+#ifndef MATHC_TYPES_FLOAT_H
+#define MATHC_TYPES_FLOAT_H
 
 
 typedef union vec2 {
@@ -154,4 +154,4 @@ typedef vec4 quat;
 #define Quat Vec4
 #define ConstQuat ConstVec4
 
-#endif //MATHC_TYPES_TYPES_H
+#endif //MATHC_TYPES_FLOAT_H

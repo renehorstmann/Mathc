@@ -2,7 +2,7 @@
 #define MATHC_QUAT_QUAT_H
 
 #include "math.h"
-#include "../types/types.h"
+#include "../types/float.h"
 #include "../vec/vec4.h"
 
 

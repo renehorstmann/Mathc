@@ -3,11 +3,8 @@
 
 #include "initializer.h"
 
-#include "io/bio.h"
+#include "io/bool.h"
 
-#include "vec/bvecn.h"
-#include "vec/bvec2.h"
-#include "vec/bvec3.h"
-#include "vec/bvec4.h"
+#include "vec/bool.h"
 
 #endif //MATHC_BOOL_H

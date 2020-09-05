@@ -1,5 +1,5 @@
-#ifndef MATHC_TYPES_DTYPES_H
-#define MATHC_TYPES_DTYPES_H
+#ifndef MATHC_TYPES_DOUBLE_H
+#define MATHC_TYPES_DOUBLE_H
 
 
 typedef union dvec2 {
@@ -155,4 +155,4 @@ typedef dvec4 dquat;
 #define DQuat DVec4
 #define ConstDQuat ConstDVec4
 
-#endif //MATHC_TYPES_DTYPES_H
+#endif //MATHC_TYPES_DOUBLE_H

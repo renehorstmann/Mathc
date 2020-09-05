@@ -2,7 +2,7 @@
 #define MATHC_VEC_BVEC4_H
 
 #include "bvecn.h"
-#include "../types/btypes.h"
+#include "../types/bool.h"
 
 
 /** dst = scalar */
