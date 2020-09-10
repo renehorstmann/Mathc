@@ -9,7 +9,5 @@
 
 #include "mat/float.h"
 
-#include "utils/float.h"
-
 
 #endif //MATHC_FLOAT_H
