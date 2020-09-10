@@ -3,6 +3,7 @@
 
 #include "../vec/vec3.h"
 #include "../mat/mat3.h"
+#include "../mat/mat4.h"
 
 
 /** creates a rotation matrix from angle_axis as xyz = axis and w = angle [rad] */
@@ -36,9 +37,9 @@ static mat3 mat3_rotation_from_dir_z(vec3 dir_z) {
     vec3 z = vec3_normalize(dir_z);
 
     // align rotation x to unit x (if unit x ~= dir_z, align to unit y)
-    vec3 align_x = VEC3_INIT_UNIT_X;
+    vec3 align_x = vec3_unit_x();
     if(vec3_dot(z, align_x) > 0.9f)
-        align_x = (vec3) VEC3_INIT_UNIT_Y;
+        align_x = vec3_unit_y();
 
     vec3 y = vec3_normalize(vec3_cross(z, align_x));
 
@@ -53,6 +54,19 @@ static mat3 mat3_rotation_from_dir_z(vec3 dir_z) {
 /** creates a rotation matrix aligned to x (or y if dir_z~=x), so that the z axis is dir_z */
 static mat3 mat3_rotation_from_dir_z_v(const float *dir_z) {
     return mat3_rotation_from_dir_z(Vec3(dir_z));
+}
+
+
+/** uses mat3_rotation_from_dir with ray_dir and sets the pose translation to ray_start */
+static mat4 mat4_pose_from_ray(vec3 ray_start, vec3 ray_dir) {
+    mat4 pose = mat4_eye();
+    pose = mat4_set_upper_left3(pose, mat3_rotation_from_dir_z(ray_dir));
+    pose.col[3].xyz = ray_start;
+
+}
+/** uses mat3_rotation_from_dir with ray_dir and sets the pose translation to ray_start */
+static mat4 mat4_pose_from_ray_v(const float *ray_start, const float *ray_dir) {
+    return mat4_pose_from_ray(Vec3(ray_start), Vec3(ray_dir));
 }
 
 
