@@ -75,9 +75,9 @@ static bool dintersection_plane_line_v(double *out_pos, const double *plane_hess
 
 
 /** returns t (line_pos + line_dir * t), or NAN if not intersecting */
-static double dintersection_triangle_line(dvec3 line_pos, dvec3 line_dir,
-                                        dvec3 v0, dvec3 v1, dvec3 v2,
-                                        bool culling) {
+static double dintersection_triangle_line(dvec3 v0, dvec3 v1, dvec3 v2,
+                                          dvec3 line_pos, dvec3 line_dir,
+                                          bool culling) {
     dvec3 v0v1 = dvec3_sub_vec(v1, v0);
     dvec3 v0v2 = dvec3_sub_vec(v2, v0);
     dvec3 pvec = dvec3_cross(line_dir, v0v2);
@@ -106,10 +106,10 @@ static double dintersection_triangle_line(dvec3 line_pos, dvec3 line_dir,
     return dvec3_dot(v0v2, qvec) * inv_det;
 }
 /** returns t (line_pos + line_dir * t), or NAN if not intersecting */
-static double dintersection_triangle_line_v(const double *line_pos, const double *line_dir,
-                                          const double *v0, const double *v1, const double *v2,
-                                          bool culling) {
-    return dintersection_triangle_line(DVec3(line_pos), DVec3(line_dir), DVec3(v0), DVec3(v1), DVec3(v2), culling);
+static double dintersection_triangle_line_v(const double *v0, const double *v1, const double *v2,
+                                            const double *line_pos, const double *line_dir,
+                                            bool culling) {
+    return dintersection_triangle_line(DVec3(v0), DVec3(v1), DVec3(v2), DVec3(line_pos), DVec3(line_dir), culling);
 }
 
 

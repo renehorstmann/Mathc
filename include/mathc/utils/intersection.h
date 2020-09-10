@@ -75,8 +75,8 @@ static bool intersection_plane_line_v(float *out_pos, const float *plane_hessian
 
 
 /** returns t (line_pos + line_dir * t), or NAN if not intersecting */
-static float intersection_triangle_line(vec3 line_pos, vec3 line_dir,
-                                        vec3 v0, vec3 v1, vec3 v2,
+static float intersection_triangle_line(vec3 v0, vec3 v1, vec3 v2,
+                                        vec3 line_pos, vec3 line_dir,
                                         bool culling) {
     vec3 v0v1 = vec3_sub_vec(v1, v0);
     vec3 v0v2 = vec3_sub_vec(v2, v0);
@@ -106,10 +106,10 @@ static float intersection_triangle_line(vec3 line_pos, vec3 line_dir,
     return vec3_dot(v0v2, qvec) * inv_det;
 }
 /** returns t (line_pos + line_dir * t), or NAN if not intersecting */
-static float intersection_triangle_line_v(const float *line_pos, const float *line_dir,
-                                          const float *v0, const float *v1, const float *v2,
+static float intersection_triangle_line_v(const float *v0, const float *v1, const float *v2,
+                                          const float *line_pos, const float *line_dir,
                                           bool culling) {
-    return intersection_triangle_line(Vec3(line_pos), Vec3(line_dir), Vec3(v0), Vec3(v1), Vec3(v2), culling);
+    return intersection_triangle_line(Vec3(v0), Vec3(v1), Vec3(v2), Vec3(line_pos), Vec3(line_dir), culling);
 }
 
 
