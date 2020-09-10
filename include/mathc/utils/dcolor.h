@@ -4,7 +4,7 @@
 #include "../vec/dvec3.h"
 
 // rgb[0:1] hsv[0:360, 0:1, 0:1]
-dvec3 dvec3_rgb2hsv(dvec3 rgb) {
+static dvec3 dvec3_rgb2hsv(dvec3 rgb) {
     dvec3 hsv;
     double min, max, delta;
 
@@ -50,7 +50,7 @@ dvec3 dvec3_rgb2hsv(dvec3 rgb) {
 }
 
 // rgb[0:1] hsv[0:360, 0:1, 0:1]
-dvec3 dvec3_hsv2rgb(dvec3 hsv) {
+static dvec3 dvec3_hsv2rgb(dvec3 hsv) {
     dvec3 rgb;
     double hh, p, q, t, ff;
     long i;

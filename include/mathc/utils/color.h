@@ -4,7 +4,7 @@
 #include "../vec/vec3.h"
 
 // rgb[0:1] hsv[0:360, 0:1, 0:1]
-vec3 vec3_rgb2hsv(vec3 rgb) {
+static vec3 vec3_rgb2hsv(vec3 rgb) {
     vec3 hsv;
     float min, max, delta;
 
@@ -50,7 +50,7 @@ vec3 vec3_rgb2hsv(vec3 rgb) {
 }
 
 // rgb[0:1] hsv[0:360, 0:1, 0:1]
-vec3 vec3_hsv2rgb(vec3 hsv) {
+static vec3 vec3_hsv2rgb(vec3 hsv) {
     vec3 rgb;
     float hh, p, q, t, ff;
     long i;
