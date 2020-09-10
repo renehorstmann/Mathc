@@ -4,5 +4,6 @@
 #include "dquat.h"
 #include "dcamera.h"
 #include "drotation.h"
+#include "dintersection.h"
 
 #endif //MATHC_UTILS_DOUBLE_H

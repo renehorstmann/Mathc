@@ -4,5 +4,6 @@
 #include "quat.h"
 #include "camera.h"
 #include "rotation.h"
+#include "intersection.h"
 
 #endif //MATHC_UTILS_FLOAT_H
