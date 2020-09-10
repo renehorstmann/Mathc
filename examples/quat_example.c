@@ -1,4 +1,5 @@
 #include "mathc/float.h"
+#include "mathc/utils/quat.h"
 
 int main() {
     // a quat is a typedef to vec4
