@@ -227,30 +227,4 @@ static dmat3 dmat3_set_upper_left_v(const double *mat, const double *block_2) {
 }
 
 
-/** angle_axis as xyz = axis and w = angle [rad] */
-static dmat3 dmat3_rotation_from_angle_axis(dvec4 angle_axis) {
-    // from cglm/affine/glm_rotate_make
-    double c = cosf(angle_axis.w);
-    double s = sinf(angle_axis.w);
-
-    dvec3 axis = dvec3_normalize(angle_axis.xyz);
-    dvec3 v = dvec3_scale_sca(axis, 1.0f - c);
-    dvec3 vs = dvec3_scale_sca(axis, s);
-
-    dmat3 res;
-    res.col[0] = dvec3_scale_sca(axis, v.x);
-    res.col[1] = dvec3_scale_sca(axis, v.y);
-    res.col[2] = dvec3_scale_sca(axis, v.z);
-
-    res.m[0][0] += c;      res.m[1][0] -= vs.z;   res.m[2][0] += vs.y;
-    res.m[0][1] += vs.z;   res.m[1][1] += c;      res.m[2][1] -= vs.x;
-    res.m[0][2] -= vs.y;   res.m[1][2] += vs.x;   res.m[2][2] += c;
-    return res;
-}
-/** angle_axis as xyz = axis and w = angle [rad] */
-static dmat3 dmat3_rotation_from_angle_axis_v(const double *angle_axis) {
-    return dmat3_rotation_from_angle_axis(DVec4(angle_axis));
-}
-
-
 #endif //MATHC_MAT_DMAT3_H
