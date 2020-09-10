@@ -5,5 +5,6 @@
 #include "dcamera.h"
 #include "drotation.h"
 #include "dintersection.h"
+#include "dcolor.h"
 
 #endif //MATHC_UTILS_DOUBLE_H
