@@ -38,7 +38,7 @@ static dmat3 dmat3_rotation_from_dir_z(dvec3 dir_z) {
 
     // align rotation x to unit x (if unit x ~= dir_z, align to unit y)
     dvec3 align_x = dvec3_unit_x();
-    if(dvec3_dot(z, align_x) > 0.9)
+    if(fabs(dvec3_dot(z, align_x)) > 0.9)
         align_x = dvec3_unit_y();
 
     dvec3 y = dvec3_normalize(dvec3_cross(z, align_x));

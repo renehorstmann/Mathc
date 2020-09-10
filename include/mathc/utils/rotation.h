@@ -38,7 +38,7 @@ static mat3 mat3_rotation_from_dir_z(vec3 dir_z) {
 
     // align rotation x to unit x (if unit x ~= dir_z, align to unit y)
     vec3 align_x = vec3_unit_x();
-    if(vec3_dot(z, align_x) > 0.9f)
+    if(fabsf(vec3_dot(z, align_x)) > 0.9f)
         align_x = vec3_unit_y();
 
     vec3 y = vec3_normalize(vec3_cross(z, align_x));
