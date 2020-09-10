@@ -24,6 +24,10 @@ add_executable(quat examples/quat_example.c)
 target_include_directories(quat PUBLIC include)
 target_link_libraries(quat m)
 
+add_executable(utils examples/utils_example.c)
+target_include_directories(utils PUBLIC include)
+target_link_libraries(utils m)
+
 
 add_library(performance_test_lib SHARED examples/performance_test_lib.c)
 target_include_directories(performance_test_lib PUBLIC include)
