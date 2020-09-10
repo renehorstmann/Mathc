@@ -6,6 +6,27 @@
 #include "../types/bool.h"
 
 
+/** dst = unit_x */
+static ivec4 ivec4_unit_x() {
+    return (ivec4) VEC4_INIT_UNIT_X;
+}
+
+/** dst = unit_y */
+static ivec4 ivec4_unit_y() {
+    return (ivec4) VEC4_INIT_UNIT_Y;
+}
+
+/** dst = unit_z */
+static ivec4 ivec4_unit_z() {
+    return (ivec4) VEC4_INIT_UNIT_Z;
+}
+
+/** dst = unit_w */
+static ivec4 ivec4_unit_w() {
+    return (ivec4) VEC4_INIT_UNIT_W;
+}
+
+
 /** dst = scalar */
 static ivec4 ivec4_set(int scalar) {
     ivec4 res;

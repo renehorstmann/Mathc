@@ -6,6 +6,27 @@
 #include "../types/bool.h"
 
 
+/** dst = unit_x */
+static vec4 vec4_unit_x() {
+    return (vec4) VEC4_INIT_UNIT_X;
+}
+
+/** dst = unit_y */
+static vec4 vec4_unit_y() {
+    return (vec4) VEC4_INIT_UNIT_Y;
+}
+
+/** dst = unit_z */
+static vec4 vec4_unit_z() {
+    return (vec4) VEC4_INIT_UNIT_Z;
+}
+
+/** dst = unit_w */
+static vec4 vec4_unit_w() {
+    return (vec4) VEC4_INIT_UNIT_W;
+}
+
+
 /** dst = scalar */
 static vec4 vec4_set(float scalar) {
     vec4 res;

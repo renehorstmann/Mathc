@@ -6,6 +6,22 @@
 #include "../types/bool.h"
 
 
+/** dst = unit_x */
+static vec3 vec3_unit_x() {
+    return (vec3) VEC3_INIT_UNIT_X;
+}
+
+/** dst = unit_y */
+static vec3 vec3_unit_y() {
+    return (vec3) VEC3_INIT_UNIT_Y;
+}
+
+/** dst = unit_z */
+static vec3 vec3_unit_z() {
+    return (vec3) VEC3_INIT_UNIT_Z;
+}
+
+
 /** dst = scalar */
 static vec3 vec3_set(float scalar) {
     vec3 res;

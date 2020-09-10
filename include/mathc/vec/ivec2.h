@@ -6,6 +6,17 @@
 #include "../types/bool.h"
 
 
+/** dst = unit_x */
+static ivec2 ivec2_unit_x() {
+    return (ivec2) VEC2_INIT_UNIT_X;
+}
+
+/** dst = unit_y */
+static ivec2 ivec2_unit_y() {
+    return (ivec2) VEC2_INIT_UNIT_Y;
+}
+
+
 /** dst = scalar */
 static ivec2 ivec2_set(int scalar) {
     ivec2 res;

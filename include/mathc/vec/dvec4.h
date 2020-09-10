@@ -6,6 +6,27 @@
 #include "../types/bool.h"
 
 
+/** dst = unit_x */
+static dvec4 dvec4_unit_x() {
+    return (dvec4) VEC4_INIT_UNIT_X;
+}
+
+/** dst = unit_y */
+static dvec4 dvec4_unit_y() {
+    return (dvec4) VEC4_INIT_UNIT_Y;
+}
+
+/** dst = unit_z */
+static dvec4 dvec4_unit_z() {
+    return (dvec4) VEC4_INIT_UNIT_Z;
+}
+
+/** dst = unit_w */
+static dvec4 dvec4_unit_w() {
+    return (dvec4) VEC4_INIT_UNIT_W;
+}
+
+
 /** dst = scalar */
 static dvec4 dvec4_set(double scalar) {
     dvec4 res;
