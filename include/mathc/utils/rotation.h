@@ -62,7 +62,7 @@ static mat4 mat4_pose_from_ray(vec3 ray_start, vec3 ray_dir) {
     mat4 pose = mat4_eye();
     pose = mat4_set_upper_left3(pose, mat3_rotation_from_dir_z(ray_dir));
     pose.col[3].xyz = ray_start;
-
+    return pose;
 }
 /** uses mat3_rotation_from_dir with ray_dir and sets the pose translation to ray_start */
 static mat4 mat4_pose_from_ray_v(const float *ray_start, const float *ray_dir) {

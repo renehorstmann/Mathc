@@ -62,7 +62,7 @@ static dmat4 dmat4_pose_from_ray(dvec3 ray_start, dvec3 ray_dir) {
     dmat4 pose = dmat4_eye();
     pose = dmat4_set_upper_left3(pose, dmat3_rotation_from_dir_z(ray_dir));
     pose.col[3].xyz = ray_start;
-
+    return pose;
 }
 /** uses dmat3_rotation_from_dir with ray_dir and sets the pose translation to ray_start */
 static dmat4 dmat4_pose_from_ray_v(const float *ray_start, const float *ray_dir) {
