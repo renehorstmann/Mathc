@@ -2,7 +2,7 @@
 #define MATHC_TYPES_INT_H
 
 #ifndef __cplusplus
-#define _Static_assert static_assert
+#define static_assert _Static_assert
 #endif
 
 
