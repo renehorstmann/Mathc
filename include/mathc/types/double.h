@@ -1,6 +1,10 @@
 #ifndef MATHC_TYPES_DOUBLE_H
 #define MATHC_TYPES_DOUBLE_H
 
+#ifndef __cplusplus
+#define _Static_assert static_assert
+#endif
+
 
 typedef union dvec2 {
     double v[2];
@@ -11,7 +15,7 @@ typedef union dvec2 {
         double x, y;
     };
 } dvec2;
-_Static_assert(sizeof(dvec2) == sizeof(double) * 2, "[Mathc] wrong expected size");
+static_assert(sizeof(dvec2) == sizeof(double) * 2, "[Mathc] wrong expected size");
 
 /** casts a double * to a dereferenced dvec2 */
 #define DVec2(vec) (*(dvec2 *) (vec))
@@ -33,7 +37,7 @@ typedef union dmat2 {
         double m10, m11;
     };
 } dmat2;
-_Static_assert(sizeof(dmat2) == sizeof(double) * 4, "[Mathc] wrong expected size");
+static_assert(sizeof(dmat2) == sizeof(double) * 4, "[Mathc] wrong expected size");
 
 /** casts a double * to a dereferenced dmat2 */
 #define DMat2(mat) (*(dmat2 *) (mat))
@@ -57,7 +61,7 @@ typedef union dvec3 {
         };
     };
 } dvec3;
-_Static_assert(sizeof(dvec3) == sizeof(double) * 3, "[Mathc] wrong expected size");
+static_assert(sizeof(dvec3) == sizeof(double) * 3, "[Mathc] wrong expected size");
 
 /** casts a double * to a dereferenced dvec3 */
 #define DVec3(vec) (*(dvec3 *) (vec))
@@ -81,7 +85,7 @@ typedef union dmat3 {
         double m20, m21, m22;
     };
 } dmat3;
-_Static_assert(sizeof(dmat3) == sizeof(double) * 9, "[Mathc] wrong expected size");
+static_assert(sizeof(dmat3) == sizeof(double) * 9, "[Mathc] wrong expected size");
 
 /** casts a double * to a dereferenced dmat3 */
 #define DMat3(mat) (*(dmat3 *) (mat))
@@ -114,7 +118,7 @@ typedef union dvec4 {
         };
     };
 } dvec4;
-_Static_assert(sizeof(dvec4) == sizeof(double) * 4, "[Mathc] wrong expected size");
+static_assert(sizeof(dvec4) == sizeof(double) * 4, "[Mathc] wrong expected size");
 
 /** casts a double * to a dereferenced dvec4 */
 #define DVec4(vec) (*(dvec4 *) (vec))
@@ -140,7 +144,7 @@ typedef union dmat4 {
         double m30, m31, m32, m33;
     };
 } dmat4;
-_Static_assert(sizeof(dmat4) == sizeof(double) * 16, "[Mathc] wrong expected size");
+static_assert(sizeof(dmat4) == sizeof(double) * 16, "[Mathc] wrong expected size");
 
 /** casts a double * to a dereferenced dmat4 */
 #define DMat4(mat) (*(dmat4 *) (mat))

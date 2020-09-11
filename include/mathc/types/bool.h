@@ -1,6 +1,10 @@
 #ifndef MATHC_TYPES_BOOL_H
 #define MATHC_TYPES_BOOL_H
 
+#ifndef __cplusplus
+#define _Static_assert static_assert
+#endif
+
 #include "stdbool.h"
 
 
@@ -13,7 +17,7 @@ typedef union bvec2 {
         bool x, y;
     };
 } bvec2;
-_Static_assert(sizeof(bvec2) == sizeof(bool) * 2, "[Mathc] wrong expected size");
+static_assert(sizeof(bvec2) == sizeof(bool) * 2, "[Mathc] wrong expected size");
 
 /** casts a bool * to a dereferenced bvec2 */
 #define BVec2(bvec) (*(bvec2 *) (bvec))
@@ -37,7 +41,7 @@ typedef union bvec3 {
         };
     };
 } bvec3;
-_Static_assert(sizeof(bvec3) == sizeof(bool) * 3, "[Mathc] wrong expected size");
+static_assert(sizeof(bvec3) == sizeof(bool) * 3, "[Mathc] wrong expected size");
 
 /** casts a bool * to a dereferenced bvec3 */
 #define BVec3(bvec) (*(bvec3 *) (bvec))
@@ -70,7 +74,7 @@ typedef union bvec4 {
         };
     };
 } bvec4;
-_Static_assert(sizeof(bvec4) == sizeof(bool) * 4, "[Mathc] wrong expected size");
+static_assert(sizeof(bvec4) == sizeof(bool) * 4, "[Mathc] wrong expected size");
 
 /** casts a bool * to a dereferenced bvec4 */
 #define BVec4(bvec) (*(bvec4 *) (bvec))

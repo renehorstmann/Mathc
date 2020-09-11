@@ -6,4 +6,7 @@
 #include "double.h"
 #include "int.h"
 
+#include "utils/float.h"
+#include "utils/double.h"
+
 #endif //MATHC_MATHC_H

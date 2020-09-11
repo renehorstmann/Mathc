@@ -3,7 +3,8 @@ A simple and clean, glsl like, math header only library for C.
 
 ## Getting Started
 Copy the header files into your project and have fun.
-The libraries are written in C(11) (tested on GCC 7.4.0)
+The libraries are written in C(11) (tested on GCC 9.3.0).
+Cxx11 should also work (also tested with GCC 9.3.0).
 
 ### Libraries
 * vec: for vector math
