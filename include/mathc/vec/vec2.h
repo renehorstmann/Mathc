@@ -774,4 +774,28 @@ static bvec2 vec2_not_equal_v(const float *vec_a, const float *vec_b) {
     return vec2_not_equal(Vec2(vec_a), Vec2(vec_b));
 }
 
+
+/** dst = a == b (+-eps) */
+static bvec2 vec2_equal_eps(vec2 vec_a, vec2 vec_b, float eps) {
+    bvec2 res;
+    vecN_equal_eps(res.v, vec_a.v, vec_b.v, eps, 2);
+    return res;
+}
+/** dst = a == b (+-eps) */
+static bvec2 vec2_equal_eps_v(const float *vec_a, const float *vec_b, float eps) {
+    return vec2_equal_eps(Vec2(vec_a), Vec2(vec_b), eps);
+}
+
+
+/** dst = a != b (+-eps) */
+static bvec2 vec2_not_equal_eps(vec2 vec_a, vec2 vec_b, float eps) {
+    bvec2 res;
+    vecN_not_equal_eps(res.v, vec_a.v, vec_b.v, eps, 2);
+    return res;
+}
+/** dst = a != b (+-eps) */
+static bvec2 vec2_not_equal_eps_v(const float *vec_a, const float *vec_b, float eps) {
+    return vec2_not_equal_eps(Vec2(vec_a), Vec2(vec_b), eps);
+}
+
 #endif //MATHC_VEC_VEC2_H

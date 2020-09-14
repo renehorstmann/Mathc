@@ -780,6 +780,30 @@ static bvec3 dvec3_not_equal_v(const double *vec_a, const double *vec_b) {
 }
 
 
+/** dst = a == b (+-eps) */
+static bvec3 dvec3_equal_eps(dvec3 vec_a, dvec3 vec_b, double eps) {
+    bvec3 res;
+    dvecN_equal_eps(res.v, vec_a.v, vec_b.v, eps, 3);
+    return res;
+}
+/** dst = a == b (+-eps) */
+static bvec3 dvec3_equal_eps_v(const double *vec_a, const double *vec_b, double eps) {
+    return dvec3_equal_eps(DVec3(vec_a), DVec3(vec_b), eps);
+}
+
+
+/** dst = a != b (+-eps) */
+static bvec3 dvec3_not_equal_eps(dvec3 vec_a, dvec3 vec_b, double eps) {
+    bvec3 res;
+    dvecN_not_equal_eps(res.v, vec_a.v, vec_b.v, eps, 3);
+    return res;
+}
+/** dst = a != b (+-eps) */
+static bvec3 dvec3_not_equal_eps_v(const double *vec_a, const double *vec_b, double eps) {
+    return dvec3_not_equal_eps(DVec3(vec_a), DVec3(vec_b), eps);
+}
+
+
 
 //
 // in addition to vec2:

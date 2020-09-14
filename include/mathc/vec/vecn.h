@@ -434,4 +434,16 @@ static void vecN_not_equal(bool *dst_vec, const float *vec_a, const float *vec_b
         dst_vec[i] = vec_a[i] != vec_b[i];
 }
 
+/** dst = a == b (+-eps) */
+static void vecN_equal_eps(bool *dst_vec, const float *vec_a, const float *vec_b, float eps, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = fabsf(vec_a[i] - vec_b[i]) <= eps;
+}
+
+/** dst = a != b (+-eps) */
+static void vecN_not_equal_eps(bool *dst_vec, const float *vec_a, const float *vec_b, float eps, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = fabsf(vec_a[i] - vec_b[i]) > eps;
+}
+
 #endif //MATHC_VEC_VECN_H

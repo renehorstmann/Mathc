@@ -785,6 +785,30 @@ static bvec4 dvec4_not_equal_v(const double *vec_a, const double *vec_b) {
 }
 
 
+/** dst = a == b (+-eps) */
+static bvec4 dvec4_equal_eps(dvec4 vec_a, dvec4 vec_b, double eps) {
+    bvec4 res;
+    dvecN_equal_eps(res.v, vec_a.v, vec_b.v, eps, 4);
+    return res;
+}
+/** dst = a == b (+-eps) */
+static bvec4 dvec4_equal_eps_v(const double *vec_a, const double *vec_b, double eps) {
+    return dvec4_equal_eps(DVec4(vec_a), DVec4(vec_b), eps);
+}
+
+
+/** dst = a != b (+-eps) */
+static bvec4 dvec4_not_equal_eps(dvec4 vec_a, dvec4 vec_b, double eps) {
+    bvec4 res;
+    dvecN_not_equal_eps(res.v, vec_a.v, vec_b.v, eps, 4);
+    return res;
+}
+/** dst = a != b (+-eps) */
+static bvec4 dvec4_not_equal_eps_v(const double *vec_a, const double *vec_b, double eps) {
+    return dvec4_not_equal_eps(DVec4(vec_a), DVec4(vec_b), eps);
+}
+
+
 
 //
 // in addition to vec2:
