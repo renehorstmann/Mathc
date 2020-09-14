@@ -8,22 +8,22 @@
 
 /** dst = unit_x */
 static ivec4 ivec4_unit_x() {
-    return (ivec4) VEC4_INIT_UNIT_X;
+    return (ivec4) {{1, 0, 0, 0}};
 }
 
 /** dst = unit_y */
 static ivec4 ivec4_unit_y() {
-    return (ivec4) VEC4_INIT_UNIT_Y;
+    return (ivec4) {{0, 1, 0, 0}};
 }
 
 /** dst = unit_z */
 static ivec4 ivec4_unit_z() {
-    return (ivec4) VEC4_INIT_UNIT_Z;
+    return (ivec4) {{0, 0, 1, 0}};
 }
 
 /** dst = unit_w */
 static ivec4 ivec4_unit_w() {
-    return (ivec4) VEC4_INIT_UNIT_W;
+    return (ivec4) {{0, 0, 0, 1}};
 }
 
 

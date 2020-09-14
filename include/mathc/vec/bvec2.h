@@ -7,12 +7,12 @@
 
 /** dst = unit_x */
 static bvec2 bvec2_unit_x() {
-    return (bvec2) VEC2_INIT_UNIT_X;
+    return (bvec2) {{true, false}};
 }
 
 /** dst = unit_y */
 static bvec2 bvec2_unit_y() {
-    return (bvec2) VEC2_INIT_UNIT_Y;
+    return (bvec2) {{false, true}};
 }
 
 

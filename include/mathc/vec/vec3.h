@@ -8,17 +8,17 @@
 
 /** dst = unit_x */
 static vec3 vec3_unit_x() {
-    return (vec3) VEC3_INIT_UNIT_X;
+    return (vec3) {{1, 0, 0}};
 }
 
 /** dst = unit_y */
 static vec3 vec3_unit_y() {
-    return (vec3) VEC3_INIT_UNIT_Y;
+    return (vec3) {{0, 1, 0}};
 }
 
 /** dst = unit_z */
 static vec3 vec3_unit_z() {
-    return (vec3) VEC3_INIT_UNIT_Z;
+    return (vec3) {{0, 0, 1}};
 }
 
 

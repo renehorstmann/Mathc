@@ -8,12 +8,12 @@
 
 /** dst = unit_x */
 static vec2 vec2_unit_x() {
-    return (vec2) VEC2_INIT_UNIT_X;
+    return (vec2) {{1, 0}};
 }
 
 /** dst = unit_y */
 static vec2 vec2_unit_y() {
-    return (vec2) VEC2_INIT_UNIT_Y;
+    return (vec2) {{0, 1}};
 }
 
 

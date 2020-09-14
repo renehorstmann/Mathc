@@ -8,12 +8,12 @@
 
 /** dst = unit_x */
 static ivec2 ivec2_unit_x() {
-    return (ivec2) VEC2_INIT_UNIT_X;
+    return (ivec2) {{1, 0}};
 }
 
 /** dst = unit_y */
 static ivec2 ivec2_unit_y() {
-    return (ivec2) VEC2_INIT_UNIT_Y;
+    return (ivec2) {{0, 1}};
 }
 
 
