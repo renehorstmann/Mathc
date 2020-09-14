@@ -210,7 +210,7 @@ static mat4 mat4_inv(mat4 mat) {
     float inv_det = 1.0f / (a * res.m[0][0] + b * res.m[1][0]
                   + c * res.m[2][0] + d * res.m[3][0]);
 
-    vecN_scale_sca(res.v, res.v, inv_det, 16);
+    vecN_scale(res.v, res.v, inv_det, 16);
     return res;
 }
 /** dst = inverted mat */

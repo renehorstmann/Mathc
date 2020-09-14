@@ -55,14 +55,14 @@ static ivec3 ivec3_add_vec_v(const int *vec_a, const int *vec_b) {
 
 
 /** dst = a + b */
-static ivec3 ivec3_add_sca(ivec3 vec_a, int scalar_b) {
+static ivec3 ivec3_add(ivec3 vec_a, int scalar_b) {
     ivec3 res;
-    ivecN_add_sca(res.v, vec_a.v, scalar_b, 3);
+    ivecN_add(res.v, vec_a.v, scalar_b, 3);
     return res;
 }
 /** dst = a + b */
-static ivec3 ivec3_add_sca_v(const int *vec_a, int scalar_b) {
-    return ivec3_add_sca(IVec3(vec_a), scalar_b);
+static ivec3 ivec3_add_v(const int *vec_a, int scalar_b) {
+    return ivec3_add(IVec3(vec_a), scalar_b);
 }
 
 
@@ -79,14 +79,14 @@ static ivec3 ivec3_sub_vec_v(const int *vec_a, const int *vec_b) {
 
 
 /** dst = a - b */
-static ivec3 ivec3_sub_sca(ivec3 vec_a, int scalar_b) {
+static ivec3 ivec3_sub(ivec3 vec_a, int scalar_b) {
     ivec3 res;
-    ivecN_sub_sca(res.v, vec_a.v, scalar_b, 3);
+    ivecN_sub(res.v, vec_a.v, scalar_b, 3);
     return res;
 }
 /** dst = a - b */
-static ivec3 ivec3_sub_sca_v(const int *vec_a, int scalar_b) {
-    return ivec3_sub_sca(IVec3(vec_a), scalar_b);
+static ivec3 ivec3_sub_v(const int *vec_a, int scalar_b) {
+    return ivec3_sub(IVec3(vec_a), scalar_b);
 }
 
 
@@ -103,14 +103,14 @@ static ivec3 ivec3_scale_vec_v(const int *vec_a, const int *vec_b) {
 
 
 /** dst = a * b */
-static ivec3 ivec3_scale_sca(ivec3 vec_a, int scalar_b) {
+static ivec3 ivec3_scale(ivec3 vec_a, int scalar_b) {
     ivec3 res;
-    ivecN_scale_sca(res.v, vec_a.v, scalar_b, 3);
+    ivecN_scale(res.v, vec_a.v, scalar_b, 3);
     return res;
 }
 /** dst = a * b */
-static ivec3 ivec3_scale_sca_v(const int *vec_a, int scalar_b) {
-    return ivec3_scale_sca(IVec3(vec_a), scalar_b);
+static ivec3 ivec3_scale_v(const int *vec_a, int scalar_b) {
+    return ivec3_scale(IVec3(vec_a), scalar_b);
 }
 
 
@@ -127,14 +127,14 @@ static ivec3 ivec3_div_vec_v(const int *vec_a, const int *vec_b) {
 
 
 /** dst = a / b */
-static ivec3 ivec3_div_sca(ivec3 vec_a, int scalar_b) {
+static ivec3 ivec3_div(ivec3 vec_a, int scalar_b) {
     ivec3 res;
-    ivecN_div_sca(res.v, vec_a.v, scalar_b, 3);
+    ivecN_div(res.v, vec_a.v, scalar_b, 3);
     return res;
 }
 /** dst = a / b */
-static ivec3 ivec3_div_sca_v(const int *vec_a, int scalar_b) {
-    return ivec3_div_sca(IVec3(vec_a), scalar_b);
+static ivec3 ivec3_div_v(const int *vec_a, int scalar_b) {
+    return ivec3_div(IVec3(vec_a), scalar_b);
 }
 
 
@@ -175,14 +175,14 @@ static ivec3 ivec3_mod_v(const int *vec_x, int y) {
 
 
 /** dst = x % y */
-static ivec3 ivec3_modv(ivec3 vec_x, ivec3 vec_y) {
+static ivec3 ivec3_mod_vec(ivec3 vec_x, ivec3 vec_y) {
     ivec3 res;
-    ivecN_modv(res.v, vec_x.v, vec_y.v, 3);
+    ivecN_mod_vec(res.v, vec_x.v, vec_y.v, 3);
     return res;
 }
 /** dst = x % y */
-static ivec3 ivec3_modv_v(const int *vec_x, const int *vec_y) {
-    return ivec3_modv(IVec3(vec_x), IVec3(vec_y));
+static ivec3 ivec3_mod_vec_v(const int *vec_x, const int *vec_y) {
+    return ivec3_mod_vec(IVec3(vec_x), IVec3(vec_y));
 }
 
 
@@ -199,14 +199,14 @@ static ivec3 ivec3_min_v(const int *vec_x, int y) {
 
 
 /** dst = a < b ? a : b */
-static ivec3 ivec3_minv(ivec3 vec_x, ivec3 vec_y) {
+static ivec3 ivec3_min_vec(ivec3 vec_x, ivec3 vec_y) {
     ivec3 res;
-    ivecN_minv(res.v, vec_x.v, vec_y.v, 3);
+    ivecN_min_vec(res.v, vec_x.v, vec_y.v, 3);
     return res;
 }
 /** dst = a < b ? a : b */
-static ivec3 ivec3_minv_v(const int *vec_x, const int *vec_y) {
-    return ivec3_minv(IVec3(vec_x), IVec3(vec_y));
+static ivec3 ivec3_min_vec_v(const int *vec_x, const int *vec_y) {
+    return ivec3_min_vec(IVec3(vec_x), IVec3(vec_y));
 }
 
 
@@ -223,14 +223,14 @@ static ivec3 ivec3_max_v(const int *vec_x, int y) {
 
 
 /** dst = a > b ? a : b */
-static ivec3 ivec3_maxv(ivec3 vec_x, ivec3 vec_y) {
+static ivec3 ivec3_max_vec(ivec3 vec_x, ivec3 vec_y) {
     ivec3 res;
-    ivecN_maxv(res.v, vec_x.v, vec_y.v, 3);
+    ivecN_max_vec(res.v, vec_x.v, vec_y.v, 3);
     return res;
 }
 /** dst = a > b ? a : b */
-static ivec3 ivec3_maxv_v(const int *vec_x, const int *vec_y) {
-    return ivec3_maxv(IVec3(vec_x), IVec3(vec_y));
+static ivec3 ivec3_max_vec_v(const int *vec_x, const int *vec_y) {
+    return ivec3_max_vec(IVec3(vec_x), IVec3(vec_y));
 }
 
 
@@ -247,14 +247,14 @@ static ivec3 ivec3_clamp_v(const int *vec_x, int min, int max) {
 
 
 /** dst = x < min ? min : (x > max ? max : x) */
-static ivec3 ivec3_clampv(ivec3 vec_x, ivec3 vec_min, ivec3 vec_max) {
+static ivec3 ivec3_clamp_vec(ivec3 vec_x, ivec3 vec_min, ivec3 vec_max) {
     ivec3 res;
-    ivecN_clampv(res.v, vec_x.v, vec_min.v, vec_max.v, 3);
+    ivecN_clamp_vec(res.v, vec_x.v, vec_min.v, vec_max.v, 3);
     return res;
 }
 /** dst = x < min ? min : (x > max ? max : x) */
-static ivec3 ivec3_clampv_v(const int *vec_x, const int *vec_min, const int *vec_max) {
-    return ivec3_clampv(IVec3(vec_x), IVec3(vec_min), IVec3(vec_max));
+static ivec3 ivec3_clamp_vec_v(const int *vec_x, const int *vec_min, const int *vec_max) {
+    return ivec3_clamp_vec(IVec3(vec_x), IVec3(vec_min), IVec3(vec_max));
 }
 
 
@@ -339,74 +339,146 @@ static float ivec3_distance_v(const int *vec_a, const int *vec_b) {
 
 
 /** dst = a < b */
-static bvec3 ivec3_less_than(ivec3 vec_a, ivec3 vec_b) {
+static bvec3 ivec3_less_than(ivec3 vec_a, int b) {
     bvec3 res;
-    ivecN_less_than(res.v, vec_a.v, vec_b.v, 3);
+    ivecN_less_than(res.v, vec_a.v, b, 3);
     return res;
 }
 /** dst = a < b */
-static bvec3 ivec3_less_than_v(const int *vec_a, const int *vec_b) {
-    return ivec3_less_than(IVec3(vec_a), IVec3(vec_b));
+static bvec3 ivec3_less_than_v(const int *vec_a, int b) {
+    return ivec3_less_than(IVec3(vec_a), b);
+}
+
+
+/** dst = a < b */
+static bvec3 ivec3_less_than_vec(ivec3 vec_a, ivec3 vec_b) {
+    bvec3 res;
+    ivecN_less_than_vec(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+/** dst = a < b */
+static bvec3 ivec3_less_than_vec_v(const int *vec_a, const int *vec_b) {
+    return ivec3_less_than_vec(IVec3(vec_a), IVec3(vec_b));
 }
 
 
 /** dst = a <= b */
-static bvec3 ivec3_less_than_equal(ivec3 vec_a, ivec3 vec_b) {
+static bvec3 ivec3_less_than_equal(ivec3 vec_a, int b) {
     bvec3 res;
-    ivecN_less_than_equal(res.v, vec_a.v, vec_b.v, 3);
+    ivecN_less_than_equal(res.v, vec_a.v, b, 3);
     return res;
 }
 /** dst = a <= b */
-static bvec3 ivec3_less_than_equal_v(const int *vec_a, const int *vec_b) {
-    return ivec3_less_than_equal(IVec3(vec_a), IVec3(vec_b));
+static bvec3 ivec3_less_than_equal_v(const int *vec_a, int b) {
+    return ivec3_less_than_equal(IVec3(vec_a), b);
+}
+
+
+/** dst = a <= b */
+static bvec3 ivec3_less_than_equal_vec(ivec3 vec_a, ivec3 vec_b) {
+    bvec3 res;
+    ivecN_less_than_equal_vec(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+/** dst = a <= b */
+static bvec3 ivec3_less_than_equal_vec_v(const int *vec_a, const int *vec_b) {
+    return ivec3_less_than_equal_vec(IVec3(vec_a), IVec3(vec_b));
 }
 
 
 /** dst = a > b */
-static bvec3 ivec3_greater_than(ivec3 vec_a, ivec3 vec_b) {
+static bvec3 ivec3_greater_than(ivec3 vec_a, int b) {
     bvec3 res;
-    ivecN_greater_than(res.v, vec_a.v, vec_b.v, 3);
+    ivecN_greater_than(res.v, vec_a.v, b, 3);
     return res;
 }
 /** dst = a > b */
-static bvec3 ivec3_greater_than_v(const int *vec_a, const int *vec_b) {
-    return ivec3_greater_than(IVec3(vec_a), IVec3(vec_b));
+static bvec3 ivec3_greater_than_v(const int *vec_a, int b) {
+    return ivec3_greater_than(IVec3(vec_a), b);
+}
+
+
+/** dst = a > b */
+static bvec3 ivec3_greater_than_vec(ivec3 vec_a, ivec3 vec_b) {
+    bvec3 res;
+    ivecN_greater_than_vec(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+/** dst = a > b */
+static bvec3 ivec3_greater_than_vec_v(const int *vec_a, const int *vec_b) {
+    return ivec3_greater_than_vec(IVec3(vec_a), IVec3(vec_b));
 }
 
 
 /** dst = a >= b */
-static bvec3 ivec3_greater_than_equal(ivec3 vec_a, ivec3 vec_b) {
+static bvec3 ivec3_greater_than_equal(ivec3 vec_a, int b) {
     bvec3 res;
-    ivecN_greater_than_equal(res.v, vec_a.v, vec_b.v, 3);
+    ivecN_greater_than_equal(res.v, vec_a.v, b, 3);
     return res;
 }
 /** dst = a >= b */
-static bvec3 ivec3_greater_than_equal_v(const int *vec_a, const int *vec_b) {
-    return ivec3_greater_than_equal(IVec3(vec_a), IVec3(vec_b));
+static bvec3 ivec3_greater_than_equal_v(const int *vec_a, int b) {
+    return ivec3_greater_than_equal(IVec3(vec_a), b);
+}
+
+
+/** dst = a >= b */
+static bvec3 ivec3_greater_than_equal_vec(ivec3 vec_a, ivec3 vec_b) {
+    bvec3 res;
+    ivecN_greater_than_equal_vec(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+/** dst = a >= b */
+static bvec3 ivec3_greater_than_equal_vec_v(const int *vec_a, const int *vec_b) {
+    return ivec3_greater_than_equal_vec(IVec3(vec_a), IVec3(vec_b));
 }
 
 
 /** dst = a == b */
-static bvec3 ivec3_equal(ivec3 vec_a, ivec3 vec_b) {
+static bvec3 ivec3_equal(ivec3 vec_a, int b) {
     bvec3 res;
-    ivecN_equal(res.v, vec_a.v, vec_b.v, 3);
+    ivecN_equal(res.v, vec_a.v, b, 3);
     return res;
 }
 /** dst = a == b */
-static bvec3 ivec3_equal_v(const int *vec_a, const int *vec_b) {
-    return ivec3_equal(IVec3(vec_a), IVec3(vec_b));
+static bvec3 ivec3_equal_v(const int *vec_a, int b) {
+    return ivec3_equal(IVec3(vec_a), b);
+}
+
+
+/** dst = a == b */
+static bvec3 ivec3_equal_vec(ivec3 vec_a, ivec3 vec_b) {
+    bvec3 res;
+    ivecN_equal_vec(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+/** dst = a == b */
+static bvec3 ivec3_equal_vec_v(const int *vec_a, const int *vec_b) {
+    return ivec3_equal_vec(IVec3(vec_a), IVec3(vec_b));
 }
 
 
 /** dst = a != b */
-static bvec3 ivec3_not_equal(ivec3 vec_a, ivec3 vec_b) {
+static bvec3 ivec3_not_equal(ivec3 vec_a, int b) {
     bvec3 res;
-    ivecN_not_equal(res.v, vec_a.v, vec_b.v, 3);
+    ivecN_not_equal(res.v, vec_a.v, b, 3);
     return res;
 }
 /** dst = a != b */
-static bvec3 ivec3_not_equal_v(const int *vec_a, const int *vec_b) {
-    return ivec3_not_equal(IVec3(vec_a), IVec3(vec_b));
+static bvec3 ivec3_not_equal_v(const int *vec_a, int b) {
+    return ivec3_not_equal(IVec3(vec_a), b);
+}
+
+
+/** dst = a != b */
+static bvec3 ivec3_not_equal_vec(ivec3 vec_a, ivec3 vec_b) {
+    bvec3 res;
+    ivecN_not_equal_vec(res.v, vec_a.v, vec_b.v, 3);
+    return res;
+}
+/** dst = a != b */
+static bvec3 ivec3_not_equal_vec_v(const int *vec_a, const int *vec_b) {
+    return ivec3_not_equal_vec(IVec3(vec_a), IVec3(vec_b));
 }
 
 

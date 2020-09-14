@@ -6,7 +6,7 @@ static void bar(float *vertices, int n);
 
 int main() {
     vec4 a = {{1, 2, 3, 4}};
-    a = vec4_scale_sca(a, 10);  // a = a * 10
+    a = vec4_scale(a, 10);  // a = a * 10
     vec4_print(a);
 
     // access data:
@@ -32,7 +32,7 @@ int main() {
 
     // typeless functions:
     // (dst, a, b, n) for dst = a + b
-    vecN_add_sca(data, data, -1, 8);
+    vecN_add(data, data, -1, 8);
 
     // copy to a type:
     vec4 copy = Vec4(data);
@@ -67,8 +67,9 @@ int main() {
 
 // a function would take a copy, unless it takes a pointer of a vec type
 static vec3 foo(vec4 a, vec2 b) {
-    return vec3_div_sca(a.xyz, b.y);
+    return vec3_div(a.xyz, b.y);
 }
+
 
 // example function to use Mathc types in a function, taking raw data
 static void bar(float *vertices, int n) {

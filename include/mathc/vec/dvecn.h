@@ -38,7 +38,7 @@ static void dvecN_add_vec(double *dst_vec, const double *vec_a, const double *ve
 }
 
 /** dst = a + b */
-static void dvecN_add_sca(double *dst_vec, const double *vec_a, double scalar_b, int n) {
+static void dvecN_add(double *dst_vec, const double *vec_a, double scalar_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] + scalar_b;
 }
@@ -50,7 +50,7 @@ static void dvecN_sub_vec(double *dst_vec, const double *vec_a, const double *ve
 }
 
 /** dst = a - b */
-static void dvecN_sub_sca(double *dst_vec, const double *vec_a, double scalar_b, int n) {
+static void dvecN_sub(double *dst_vec, const double *vec_a, double scalar_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] - scalar_b;
 }
@@ -62,7 +62,7 @@ static void dvecN_scale_vec(double *dst_vec, const double *vec_a, const double *
 }
 
 /** dst = a * b */
-static void dvecN_scale_sca(double *dst_vec, const double *vec_a, double scalar_b, int n) {
+static void dvecN_scale(double *dst_vec, const double *vec_a, double scalar_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] * scalar_b;
 }
@@ -74,7 +74,7 @@ static void dvecN_div_vec(double *dst_vec, const double *vec_a, const double *ve
 }
 
 /** dst = a / b */
-static void dvecN_div_sca(double *dst_vec, const double *vec_a, double scalar_b, int n) {
+static void dvecN_div(double *dst_vec, const double *vec_a, double scalar_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] / scalar_b;
 }
@@ -140,7 +140,7 @@ static void dvecN_pow(double *dst_vec, const double *vec_x, double y, int n) {
 }
 
 /** dst = pow(x, y) */
-static void dvecN_powv(double *dst_vec, const double *vec_x, const double *vec_y, int n) {
+static void dvecN_pow_vec(double *dst_vec, const double *vec_x, const double *vec_y, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = pow(vec_x[i], vec_y[i]);
 }
@@ -218,7 +218,7 @@ static void dvecN_mod(double *dst_vec, const double *vec_x, double y, int n) {
 }
 
 /** dst = x - y * floor(x/y) */
-static void dvecN_modv(double *dst_vec, const double *vec_x, const double *vec_y, int n) {
+static void dvecN_mod_vec(double *dst_vec, const double *vec_x, const double *vec_y, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_x[i] - vec_y[i] * floor(vec_x[i] / vec_y[i]);
 }
@@ -230,7 +230,7 @@ static void dvecN_min(double *dst_vec, const double *vec_a, double b, int n) {
 }
 
 /** dst = a < b ? a : b */
-static void dvecN_minv(double *dst_vec, const double *vec_a, const double *vec_b, int n) {
+static void dvecN_min_vec(double *dst_vec, const double *vec_a, const double *vec_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] < vec_b[i] ? vec_a[i] : vec_b[i];
 }
@@ -242,7 +242,7 @@ static void dvecN_max(double *dst_vec, const double *vec_a, double b, int n) {
 }
 
 /** dst = a > b ? a : b */
-static void dvecN_maxv(double *dst_vec, const double *vec_a, const double *vec_b, int n) {
+static void dvecN_max_vec(double *dst_vec, const double *vec_a, const double *vec_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] > vec_b[i] ? vec_a[i] : vec_b[i];
 }
@@ -254,7 +254,7 @@ static void dvecN_clamp(double *dst_vec, const double *vec_x, double min, double
 }
 
 /** dst = x < min ? min : (x > max ? max : x) */
-static void dvecN_clampv(double *dst_vec, const double *vec_x, const double *vec_min, const double *vec_max, int n) {
+static void dvecN_clamp_vec(double *dst_vec, const double *vec_x, const double *vec_min, const double *vec_max, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_x[i] < vec_min[i] ? vec_min[i] : (vec_x[i] > vec_max[i] ? vec_max[i] : vec_x[i]);
 }
@@ -266,7 +266,7 @@ static void dvecN_mix(double *dst_vec, const double *vec_a, const double *vec_b,
 }
 
 /** dst = a * (1-t) + b * t */
-static void dvecN_mixv(double *dst_vec, const double *vec_a, const double *vec_b, const double *vec_t, int n) {
+static void dvecN_mix_vec(double *dst_vec, const double *vec_a, const double *vec_b, const double *vec_t, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] * (1.0 - vec_t[i]) + vec_b[i] * vec_t[i];
 }
@@ -278,7 +278,7 @@ static void dvecN_step(double *dst_vec, const double *vec_x, double edge, int n)
 }
 
 /** dst = x < edge ? 0 : 1 */
-static void dvecN_stepv(double *dst_vec, const double *vec_x, const double *vec_edge, int n) {
+static void dvecN_step_vec(double *dst_vec, const double *vec_x, const double *vec_edge, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_x[i] < vec_edge[i] ? 0.0 : 1.0;
 }
@@ -293,7 +293,7 @@ static void dvecN_smoothstep(double *dst_vec, const double *vec_x, double edge1,
 
 /** dst = x < edge1 ? 0 : (x > edge2 ? 1 : x * x * (3 - 2 * x)) Hermite polynomials */
 static void
-dvecN_smoothstepv(double *dst_vec, const double *vec_x, const double *vec_edge1, const double *vec_edge2, int n) {
+dvecN_smoothstep_vec(double *dst_vec, const double *vec_x, const double *vec_edge1, const double *vec_edge2, int n) {
     for (int i = 0; i < n; i++) {
         double x = vec_x[i];
         dst_vec[i] = x < vec_edge1[i] ? 0.0 : (x > vec_edge2[i] ? 1.0 : x * x * (3 - 2 * x));
@@ -351,13 +351,13 @@ static double dvecN_norm_inf(const double *vec, int n) {
 
 /** dst = vec / norm(vec) */
 static void dvecN_normalize_unsafe(double *dst_vec, const double *vec, int n) {
-    dvecN_scale_sca(dst_vec, vec, 1.0 / dvecN_norm(vec, n), n);
+    dvecN_scale(dst_vec, vec, 1.0 / dvecN_norm(vec, n), n);
 }
 
 /** dst = vec / (norm(vec) > 0 ? norm(vec) : 1) */
 static void dvecN_normalize(double *dst_vec, const double *vec, int n) {
     double norm = dvecN_norm(vec, n);
-    dvecN_scale_sca(dst_vec, vec, 1.0 / (norm > 0 ? norm : 1), n);
+    dvecN_scale(dst_vec, vec, 1.0 / (norm > 0 ? norm : 1), n);
 }
 
 /** returns length of a vector, see dvecN_norm. Just here to match glsl */
@@ -382,7 +382,7 @@ static void dvecN_faceforward(double *dst_vec, const double *vec_N, const double
 
 /** dst = I - 2.0 * N * dot(N,I) */
 static void dvecN_reflect(double *dst_vec, const double *vec_I, const double *vec_N, int n) {
-    dvecN_scale_sca(dst_vec, vec_N, 2.0 * dvecN_dot(vec_N, vec_I, n), n);
+    dvecN_scale(dst_vec, vec_N, 2.0 * dvecN_dot(vec_N, vec_I, n), n);
     dvecN_sub_vec(dst_vec, vec_I, dst_vec, n);
 }
 
@@ -391,59 +391,119 @@ static void dvecN_refract(double *dst_vec, const double *vec_I, const double *ve
     dvecN_neg(dst_vec, vec_I, n);
     double cosi = dvecN_dot(dst_vec, vec_N, n);
     double cost2 = 1.0 - eta * eta * (1.0 - cosi * cosi);
-    dvecN_scale_sca(dst_vec, vec_N, eta * cosi - sqrt(fabs(cost2)), n);
+    dvecN_scale(dst_vec, vec_N, eta * cosi - sqrt(fabs(cost2)), n);
     double t[3];
-    dvecN_scale_sca(t, vec_I, eta, n);
+    dvecN_scale(t, vec_I, eta, n);
     dvecN_add_vec(t, t, dst_vec, n);
-    dvecN_scale_sca(dst_vec, t, cost2 > 0, n);
+    dvecN_scale(dst_vec, t, cost2 > 0, n);
 }
 
 /** dst = a < b */
-static void dvecN_less_than(bool *dst_vec, const double *vec_a, const double *vec_b, int n) {
+static void dvecN_less_than(bool *dst_vec, const double *vec_a, double b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] < b;
+}
+
+/** dst = a < b */
+static void dvecN_less_than_vec(bool *dst_vec, const double *vec_a, const double *vec_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] < vec_b[i];
 }
 
 /** dst = a <= b */
-static void dvecN_less_than_equal(bool *dst_vec, const double *vec_a, const double *vec_b, int n) {
+static void dvecN_less_than_equal(bool *dst_vec, const double *vec_a, double b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] <= b;
+}
+
+/** dst = a <= b */
+static void dvecN_less_than_equal_vec(bool *dst_vec, const double *vec_a, const double *vec_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] <= vec_b[i];
 }
 
 /** dst = a > b */
-static void dvecN_greater_than(bool *dst_vec, const double *vec_a, const double *vec_b, int n) {
+static void dvecN_greater_than(bool *dst_vec, const double *vec_a, double b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] > b;
+}
+
+/** dst = a > b */
+static void dvecN_greater_than_vec(bool *dst_vec, const double *vec_a, const double *vec_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] > vec_b[i];
 }
 
 /** dst = a >= b */
-static void dvecN_greater_than_equal(bool *dst_vec, const double *vec_a, const double *vec_b, int n) {
+static void dvecN_greater_than_equal(bool *dst_vec, const double *vec_a, double b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] >= b;
+}
+
+/** dst = a >= b */
+static void dvecN_greater_than_equal_vec(bool *dst_vec, const double *vec_a, const double *vec_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] >= vec_b[i];
 }
 
 /** dst = a == b */
-static void dvecN_equal(bool *dst_vec, const double *vec_a, const double *vec_b, int n) {
+static void dvecN_equal(bool *dst_vec, const double *vec_a, double b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] == b;
+}
+
+/** dst = a == b */
+static void dvecN_equal_vec(bool *dst_vec, const double *vec_a, const double *vec_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] == vec_b[i];
 }
 
 /** dst = a != b */
-static void dvecN_not_equal(bool *dst_vec, const double *vec_a, const double *vec_b, int n) {
+static void dvecN_not_equal(bool *dst_vec, const double *vec_a, double b, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = vec_a[i] != b;
+}
+
+/** dst = a != b */
+static void dvecN_not_equal_vec(bool *dst_vec, const double *vec_a, const double *vec_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] != vec_b[i];
 }
 
 /** dst = a == b (+-eps) */
-static void dvecN_equal_eps(bool *dst_vec, const double *vec_a, const double *vec_b, double eps, int n) {
+static void dvecN_equal_eps(bool *dst_vec, const double *vec_a, double b, double eps, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = fabs(vec_a[i] - b) <= eps;
+}
+
+/** dst = a == b (+-eps) */
+static void dvecN_equal_eps_vec(bool *dst_vec, const double *vec_a, const double *vec_b, double eps, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = fabs(vec_a[i] - vec_b[i]) <= eps;
 }
 
 /** dst = a != b (+-eps) */
-static void dvecN_not_equal_eps(bool *dst_vec, const double *vec_a, const double *vec_b, double eps, int n) {
+static void dvecN_not_equal_eps(bool *dst_vec, const double *vec_a, double b, double eps, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = fabs(vec_a[i] - b) > eps;
+}
+
+/** dst = a != b (+-eps) */
+static void dvecN_not_equal_eps_vec(bool *dst_vec, const double *vec_a, const double *vec_b, double eps, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = fabs(vec_a[i] - vec_b[i]) > eps;
+}
+
+/** dst = isnan(vec) */
+static void dvecN_isnan(bool *dst_vec, const double *vec, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = isnan(vec[i]);
+}
+
+/** dst = isnan(vec) */
+static void dvecN_not_isnan(bool *dst_vec, const double *vec, int n) {
+    for (int i = 0; i < n; i++)
+        dst_vec[i] = !isnan(vec[i]);
 }
 
 #endif //MATHC_VEC_DVECN_H

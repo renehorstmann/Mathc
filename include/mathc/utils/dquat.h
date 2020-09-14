@@ -26,7 +26,7 @@ static dquat dquat_conj_v(const double *q) {
 /** dst = inv(dquat) */
 static dquat dquat_inv(dquat q) {
     dquat conj = dquat_conj(q);
-    return dvec4_scale_sca(conj, 1.0 / dvec4_dot(q, q));
+    return dvec4_scale(conj, 1.0 / dvec4_dot(q, q));
 }
 /** dst = inv(dquat) */
 static dquat dquat_inv_v(const double *q) {
@@ -60,7 +60,7 @@ static dquat dquat_from_angle_axis(dvec4 angle_axis) {
     dvec3 axis = dvec3_normalize(angle_axis.xyz);
 
     dquat res;
-    res.xyz = dvec3_scale_sca(axis, s);
+    res.xyz = dvec3_scale(axis, s);
     res.w = c;
     return res;
 }
@@ -200,11 +200,11 @@ static dquat dquat_slerp(dquat q_a, dquat q_b, double t) {
 
     /* SLERP */
     double angle = acos(cos_theta);
-    dquat q1 = dvec4_scale_sca(q_a, sin((1.0 - t) * angle));
-    dquat q2 = dvec4_scale_sca(q_b, sin(t * angle));
+    dquat q1 = dvec4_scale(q_a, sin((1.0 - t) * angle));
+    dquat q2 = dvec4_scale(q_b, sin(t * angle));
 
     q1 = dvec4_add_vec(q1, q2);
-    return dvec4_scale_sca(q1, 1.0 / sin_theta);
+    return dvec4_scale(q1, 1.0 / sin_theta);
 }
 static dquat dquat_slerp_v(const double *q_a, const double *q_b, double t) {
     return dquat_slerp(DQuat(q_a), DQuat(q_b), t);

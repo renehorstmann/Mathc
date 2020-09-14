@@ -57,11 +57,11 @@ static bool intersection_plane_line(vec3 *out_pos, vec4 plane_hessian,
     if (fabsf(plane_line_dot) < INTERSECTION_EPSILON)
         return false;
 
-    vec3 plane_point = vec3_scale_sca(plane_hessian.xyz, -plane_hessian.w);
+    vec3 plane_point = vec3_scale(plane_hessian.xyz, -plane_hessian.w);
     vec3 w = vec3_sub_vec(line_pos, plane_point);
     float si = -vec3_dot(plane_hessian.xyz, w) / plane_line_dot;
 
-    vec3 si_dir = vec3_scale_sca(line_dir, si);
+    vec3 si_dir = vec3_scale(line_dir, si);
 
     // pos = w + si_dir + plane_point
     *out_pos = vec3_add_vec(vec3_add_vec(w, si_dir), plane_point);

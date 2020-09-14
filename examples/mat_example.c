@@ -1,4 +1,5 @@
 #include "mathc/float.h"
+#include "mathc/utils/rotation.h"
 
 int main() {
     // column major order
@@ -22,7 +23,7 @@ int main() {
 
     // use vector functions:
     // (dst, a, b, n) for dst = a + b
-    vecN_scale_sca(a.v, a.v, 10, 4);
+    vecN_scale(a.v, a.v, 10, 4);
     mat2_print(a);
 
 

@@ -13,13 +13,13 @@ static mat3 mat3_rotation_from_angle_axis(vec4 angle_axis) {
     float s = sinf(angle_axis.w);
 
     vec3 axis = vec3_normalize(angle_axis.xyz);
-    vec3 v = vec3_scale_sca(axis, 1.0f - c);
-    vec3 vs = vec3_scale_sca(axis, s);
+    vec3 v = vec3_scale(axis, 1.0f - c);
+    vec3 vs = vec3_scale(axis, s);
 
     mat3 res;
-    res.col[0] = vec3_scale_sca(axis, v.x);
-    res.col[1] = vec3_scale_sca(axis, v.y);
-    res.col[2] = vec3_scale_sca(axis, v.z);
+    res.col[0] = vec3_scale(axis, v.x);
+    res.col[1] = vec3_scale(axis, v.y);
+    res.col[2] = vec3_scale(axis, v.z);
 
     res.m[0][0] += c;      res.m[1][0] -= vs.z;   res.m[2][0] += vs.y;
     res.m[0][1] += vs.z;   res.m[1][1] += c;      res.m[2][1] -= vs.x;

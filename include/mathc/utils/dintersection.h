@@ -57,11 +57,11 @@ static bool dintersection_plane_line(dvec3 *out_pos, dvec4 plane_hessian,
     if (fabs(plane_line_dot) < DINTERSECTION_EPSILON)
         return false;
 
-    dvec3 plane_point = dvec3_scale_sca(plane_hessian.xyz, -plane_hessian.w);
+    dvec3 plane_point = dvec3_scale(plane_hessian.xyz, -plane_hessian.w);
     dvec3 w = dvec3_sub_vec(line_pos, plane_point);
     double si = -dvec3_dot(plane_hessian.xyz, w) / plane_line_dot;
 
-    dvec3 si_dir = dvec3_scale_sca(line_dir, si);
+    dvec3 si_dir = dvec3_scale(line_dir, si);
 
     // pos = w + si_dir + plane_point
     *out_pos = dvec3_add_vec(dvec3_add_vec(w, si_dir), plane_point);

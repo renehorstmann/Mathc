@@ -26,7 +26,7 @@ static quat quat_conj_v(const float *q) {
 /** dst = inv(quat) */
 static quat quat_inv(quat q) {
     quat conj = quat_conj(q);
-    return vec4_scale_sca(conj, 1.0f / vec4_dot(q, q));
+    return vec4_scale(conj, 1.0f / vec4_dot(q, q));
 }
 /** dst = inv(quat) */
 static quat quat_inv_v(const float *q) {
@@ -60,7 +60,7 @@ static quat quat_from_angle_axis(vec4 angle_axis) {
     vec3 axis = vec3_normalize(angle_axis.xyz);
 
     quat res;
-    res.xyz = vec3_scale_sca(axis, s);
+    res.xyz = vec3_scale(axis, s);
     res.w = c;
     return res;
 }
@@ -200,11 +200,11 @@ static quat quat_slerp(quat q_a, quat q_b, float t) {
 
     /* SLERP */
     float angle = acosf(cos_theta);
-    quat q1 = vec4_scale_sca(q_a, sinf((1.0f - t) * angle));
-    quat q2 = vec4_scale_sca(q_b, sinf(t * angle));
+    quat q1 = vec4_scale(q_a, sinf((1.0f - t) * angle));
+    quat q2 = vec4_scale(q_b, sinf(t * angle));
 
     q1 = vec4_add_vec(q1, q2);
-    return vec4_scale_sca(q1, 1.0f / sin_theta);
+    return vec4_scale(q1, 1.0f / sin_theta);
 }
 static quat quat_slerp_v(const float *q_a, const float *q_b, float t) {
     return quat_slerp(Quat(q_a), Quat(q_b), t);

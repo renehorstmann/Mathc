@@ -20,7 +20,7 @@ float performance_mathc1(const float *vectors_a, const float *vectors_b, int n) 
         vec3 vec_a = Vec3(&vectors_a[i*3]);
         vec3 vec_b = Vec3(&vectors_b[i*3]);
 
-        vec_a = vec3_scale_sca(vec_a, 10);
+        vec_a = vec3_scale(vec_a, 10);
         vec_b = vec3_neg(vec_b);
 
         result += vec3_dot(vec_a, vec_b);
@@ -35,7 +35,7 @@ float performance_mathc2(const float *vectors_a, const float *vectors_b, int n) 
         const vec3 *vec_a = (const vec3 *) &vectors_a[i*3];
         const vec3 *vec_b = (const vec3 *) &vectors_b[i*3];
 
-        vec3 a = vec3_scale_sca(*vec_a, 10);
+        vec3 a = vec3_scale(*vec_a, 10);
         vec3 b = vec3_neg(*vec_b);
 
         result += vec3_dot(a, b);
@@ -50,7 +50,7 @@ float performance_mathc3(const float *vectors_a, const float *vectors_b, int n) 
         const float *vec_a = &vectors_a[i * 3];
         const float *vec_b = &vectors_b[i * 3];
 
-        vec3 a = vec3_scale_sca_v(vec_a, 10);
+        vec3 a = vec3_scale_v(vec_a, 10);
         vec3 b = vec3_neg_v(vec_b);
 
         result += vec3_dot(a, b);
