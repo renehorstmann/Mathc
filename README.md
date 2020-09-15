@@ -201,7 +201,7 @@ typedef union vec2 {
         float x, y;
     };
 } vec2;
-_Static_assert(sizeof(vec2) == sizeof(float) * 2, 
+static_assert(sizeof(vec2) == sizeof(float) * 2, 
                "[Mathc] wrong expected size");
 ```
 
