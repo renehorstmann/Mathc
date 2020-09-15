@@ -3,19 +3,400 @@ A simple and clean, glsl like, math header only library for C.
 
 ## Getting Started
 Copy the header files into your project and have fun.
-The libraries are written in C(11) (tested on GCC 9.3.0).
-Cxx11 should also work (also tested with GCC 9.3.0).
+The libraries are written in C11 (tested on GCC 9.3.0).
+C++11 should also work (also tested with GCC 9.3.0).
 
-### Libraries
-* vec: for vector math
-* mat: for matrix math
-* quat: for quaternion math
-* utils: for some useful functions
+## Content
+- types: vector and matrix types (vec3, mat4, ...)
+- io: debug print for the types
+- vec: vector math
+- mat: matrix math
+- utils: some useful functions
 
+
+## The Types
+There are multiple types for different sizes and value types:
+- vec2, vec3, vec4 for float vectors
+- mat2, mat3, mat4 for float square matrices
+- ivec2, ivec3, ivec4, imat2, imat3, imat4 for int vectors / square matrices
+- dvec2, dvec3, dvec4, dmat2, dmat3, dmat4 for double vectors / square matrices
+- bvec2, bvec3, bvec4 for bool vectors
+
+### Vector type usage:
+```c
+#include "string.h" // for memcpy
+#include "mathc/mathc.h"
+int main() {
+    vec3 a = {{1, 2, 3}};
+
+    vec3 b;
+    b.x = 10;
+    b.y = 20;
+    b.z = 30;
+
+    vec3 c;
+    c.x = a.x + b.x;
+    c.y = a.y + b.y;
+    c.z = a.z + b.z;
+
+    // or by index:
+    c.v0 = a.v0 + b.v0;
+    c.v1 = a.v1 + b.v1;
+    c.v2 = a.v2 + b.v2;
+
+    // or by raw float *:
+    c.v[0] = a.v[0] + b.v[0];
+    c.v[1] = a.v[1] + b.v[1];
+    c.v[2] = a.v[2] + b.v[2];
+
+    // copies c into copy1
+    vec3 copy1 = c;
+    vec3_print(copy1);  // mathc/io
+
+    // copies c into copy2, by a memcpy and the raw pointer
+    vec3 copy2;
+    memcpy(copy2.v, c.v, sizeof(vec3));
+    vec3_print(copy2);
+
+
+    vec3 rgb = {{0, 1, 0.5}};
+    
+    vec4 rgba;
+    
+    // .xyz returns a vec3
+    rgba.xyz = rgb;
+    
+    // .w is the 4. component (xyzw)
+    rgba.w = 1;
+    
+    // copies gb (vec2)
+    vec2 gb = rgba.yz;
+    vec2_print(gb);
+}
+```
+
+### Vector type casting:
+All types can be casted from raw pointers.
+Functions, that operates on the types, normally have the type as prefix: vec3_*
+```c
+#include "mathc/mathc.h"
+
+// use the types from raw pointers
+void foo1(float *result3, const float *vector3) {
+    // tmp = vector3 * 1000
+    // Vec3() casts a raw pointer into a vec3
+    vec3 tmp = vec3_scale(Vec3(vector3), 1000);
+
+    // tmp = tmp + 50
+    tmp = vec3_add(tmp, 50);
+
+    // cast result3 into a vec3 and copy tmp into it
+    Vec3(result3) = tmp;
+}
+
+// like foo1, but without tmp
+void foo2(float *result3, const float *vector3) {
+    // result3 = (vector3 * 1000) + 50
+    // the *_v functions take raw float pointers, instead of vec3
+    //    can be used instead of vec3_scale(Vec3(vector3), 1000)
+    Vec3(result3) = vec3_add(
+            vec3_scale_v(vector3, 1000),
+            50);
+}
+
+// add foo functionality
+vec3 vec3_scale_add(vec3 vector, float scale, float add) {
+    return vec3_add(vec3_scale(vector, scale), add);
+}
+
+int main() {
+    float vec_raw[3] = {1, 2, 3};
+    float res_raw[3];
+    foo1(res_raw, vec_raw);
+    vec3_print(Vec3(res_raw));
+
+    vec3 vec = {{1, 2, 3}};
+    vec3 res;
+    foo2(res.v, vec.v);
+    vec3_print(res);
+
+    res = vec3_scale_add(vec, 1000, 50);
+    vec3_print(res);
+}
+```
+
+### Matrix type:
+The matrices are stored in column major order.
+```c
+#include "mathc/mathc.h"
+int main() {
+
+    // 180° via Z matrix (X points to -X, Y to -Y)
+    mat3 rotation_matrix = {{
+        -1, 0, 0,   // X
+        0, -1, 0,   // Y
+        0, 0, 1     // Z
+    }};
+
+    // identity matrix
+    rotation_matrix = mat3_eye();
+
+    // Access via matrix position
+    rotation_matrix.m00 = -1;
+    rotation_matrix.m11 = -1;
+
+    // or by the raw pointer as matrix[3][3]
+    rotation_matrix.m[0][0] = -1;
+    rotation_matrix.m[1][1] = -1;
+
+    // or as vector[9] position
+    rotation_matrix.v0 = -1;
+    rotation_matrix.v4 = -1;
+
+    // or by the raw pointer as vector[9]
+    rotation_matrix.v[0] = -1;
+    rotation_matrix.v[4] = -1;
+
+    // or by each column as vec3[3]
+    rotation_matrix.col[0].x = -1;      // x column, value x
+    rotation_matrix.col[1].y = -1;      // y column, value y
+
+    mat3_print(rotation_matrix);
+
+    // eye by col vectors
+    vec3 x = vec3_unit_x();
+    vec3 y = vec3_unit_y();
+    vec3 z = vec3_unit_z();
+    rotation_matrix.col[0] = x;
+    rotation_matrix.col[1] = y;
+    rotation_matrix.col[2] = z;
+
+    mat3_print(rotation_matrix);
+    
+    // casts are like vector casts:
+    float rot_mat_raw[9];
+    Mat3(rot_mat_raw) = rotation_matrix;
+}
+```
+
+
+### Type implementation
+Vectors and matrices are defined as unions.
+With this convention (instead of passing pointers), 
+vectors and matrices can be copied with the ```operator=``` in C.
+In addition to this, the compiler can generate errors,
+if a program wants to pass a vec3 where a vec4 is needed.
+The copying seems like an overhead, but the compiler can optimize this out.
+Not only that, he can do better because he knows more about the data.
+
+
+The vec2 is defined as:
+```c
+typedef union vec2 {
+    float v[2];
+    struct {
+        float v0, v1;
+    };
+    struct {
+        float x, y;
+    };
+} vec2;
+_Static_assert(sizeof(vec2) == sizeof(float) * 2, 
+               "[Mathc] wrong expected size");
+```
+
+
+There are different options to access the data in the vec2:
+```c
+vec2 a = {{1, 2}};
+printf("a.x = %f = %f = %f\n",
+    a.v[0],     // raw vector data
+    a.v0,       // vector data 0-1
+    a.x         // x, y
+);
+```
+
+
+The type vec3 can do a little bit more:
+```c
+typedef union vec3 {
+    float v[3];
+    struct {
+        float v0, v1, v2;
+    };
+    vec2 xy;
+    struct {
+        float x;
+        union {
+            struct {
+                float y, z;
+            };
+            vec2 yz;
+        };
+    };
+} vec3;
+static_assert(sizeof(vec3) == sizeof(float) * 3, 
+               "[Mathc] wrong expected size");
+```
+
+
+In addition to v, v0-2, xyz, a vec3 lets you access subdata vec2:
+```c
+vec3 a = {{1, 2, 3}};
+vec2 b = a.yz;
+assert(b.v0 == 2 && b.v1 == 3);
+```
+
+
+vec4 has subdata for both, vec2 and vec3 (.xy, .xyz).
+There are also variants for int, double and bool with i, d and b prefix.
+
+
+## Basic functions
+There are a lot of functions to use with the types:
+- vec*_unit*
+- vec*_set
+- vec*_neg
+- vec*_add
+- vec*_add_vec
+- vec*_sub
+- vec*_sub_vec
+- vec*_scale
+- vec*_scale_vec
+- vec*_div
+- vec*_div_vec
+- vec*_radians
+- vec*_degrees
+- vec*_sin
+- vec*_cos
+- vec*_tan
+- vec*_asin
+- vec*_acos
+- vec*_atan
+- vec*_atan2
+- vec*_pow
+- vec*_pow_vec
+- vec*_exp
+- vec*_log
+- vec*_exp2
+- vec*_log2
+- vec*_sqrt
+- vec*_inversesqrt
+- vec*_abs
+- vec*_sign
+- vec*_floor
+- vec*_ceil
+- vec*_fract
+- vec*_mod
+- vec*_mod_vec
+- vec*_min
+- vec*_min_vec
+- vec*_max
+- vec*_max_vec
+- vec*_clamp
+- vec*_clamp_vec
+- vec*_mix
+- vec*_mix_vec
+- vec*_step
+- vec*_step_vec
+- vec*_smoothstep
+- vec*_smoothstep_vec
+- vec*_sum
+- vec*_dot
+- vec*_norm
+- vec*_norm_p
+- vec*_norm_1
+- vec*_norm_inf
+- vec*_normalize
+- vec*_length
+- vec*_distance
+- vec*_faceforward
+- vec*_reflect
+- vec*_refract
+- vec*_less_than
+- vec*_less_than_vec
+- vec*_less_than_equal_vec
+- vec*_...
+- vec*_isnan
+- vec*_cross
+
+
+Special bool vector functions:
+- bvec*_not
+- bvec*_or
+- bvec*_and
+- bvec*_...
+- bvec*_any
+- bvec*_all
+
+
+Matrix functions:
+- mat*_eye
+- mat*_get_row
+- mat*_get_col
+- mat*_set_row
+- mat*_set_col
+- mat*_trace
+- mat*_transpose
+- mat*_mul_mat
+- mat*_mul_vec
+- mat*_det
+- mat*_inv
+- mat*_get_block*
+- mat*_set_block*
+- mat*_get_upper_left*
+- mat*_set_upper_left*
+
+### Typeless functions
+Most functions have their base function as vecN_* or matN_*.
+These functions take raw pointers as in and output and the size as last parameter:
+```c
+#include "mathc/mathc.h"
+
+int main() {
+    float a[7];
+    float res[7];
+    vecN_scale(res, a, 1000, 7);
+    vecN_add(res, res, 50, 7);
+}
+```
+
+### Utils functions
+Within the sub folder utils/ are some additional libraries:
+- [camera.h](include/mathc/utils/camera.h): for camera matrices for view and projection
+- [color.h](include/mathc/utils/color.h): for rgb hsv conversions
+- [intersection.h](include/mathc/utils/intersection.h): for plane, line, triangle intersections
+- [rotation.h](include/mathc/utils/rotation.h): for angle axis to matrix rotations
+- [quat.h](include/mathc/utils/quat.h): for Quaternion math
+
+All these libraries should have a d* prefix for double versions
+
+## Import system
+Import everything from Mathc:
+```#include "mathc/mathc.h"```
+
+Import float related functions, except of utils:
+```#include "mathc/float.h"```
+
+Import float related utils functions:
+```#include "mathc/utils/float.h"```
+
+Import only float vector functions:
+```#include "mathc/vec/float.h"```
+
+Import only float typeless vector functions:
+```#include "mathc/vec/vecn.h"```
+
+Import only float vector4 functions:
+```#include "mathc/vec/vec4.h"```
+
+Same for bool, double and int.
+
+Only importing a subset (like mathc/float.h), speeds up the compilation process
 
 ### Example usage
 ```c
-#include <stdbool.h>
+// includes all of mathc
 #include "mathc/mathc.h"
 
 
@@ -55,9 +436,8 @@ bool sphere_collision(Sphere_s a, Sphere_s b) {
 
     // norm(dist) < a.r+b.r
     // powf(,2) is much faster than sqrt
-    return vec3_dot(dist, dist) < powf(a.r + b.r, 2);
+    return vec3_dot(dist, dist) < powf(a.radius + b.radius, 2);
 }
-
 
 /** calculates the angle between vector a and b */
 float vec_angle(vec3 a, vec3 b) {
@@ -102,12 +482,33 @@ mat4 create_camera_VP(vec3 eye, vec3 dir, vec3 up, bool orhto) {
     return mat4_mul_mat(P, V);
 }
 
+bool axles_in_limits(vec3 axles) {
+
+    // lower, upper limits in degree
+    vec3 limits_deg[2] = {
+            {{-5, 10, 0}},
+            {{50, 170, 90}}
+    };
+
+    vec3 limits[2] = {
+            vec3_radians(limits_deg[0]),
+            vec3_radians(limits_deg[1])
+    };
+
+    bvec3 in_lower_limit = vec3_greater_than_equal_vec(axles, limits[0]);
+    bvec3 in_upper_limit = vec3_less_than_equal_vec(axles, limits[1]);
+    bvec3 in_limit = bvec3_and(in_lower_limit, in_upper_limit);
+
+    // returns true if all axles are in limits
+    return bvec3_all(in_limit);
+}
+
 int main() {
     mat4 pose = ray_to_pose((vec3) {{100, 100, 50}}, (vec3) {{0, 0, 1}});
     vec3 point = {{10, 20, 30}};
     point = transform_point(mat4_inv(pose), point);
     vec3_print(point);
-    
+
     mat4 VP = create_camera_VP((vec3) {{10, 20, 30}},
                                vec3_neg((vec3) VEC3_INIT_UNIT_Z),
                                (vec3) VEC3_INIT_UNIT_Y,
@@ -115,264 +516,10 @@ int main() {
     vec3 normal = {{0, 1, 0}};
     normal = transform_vector(VP, normal);
     vec3_print(normal);
-}
-```
 
-### The types
-Vectors and matrices are defined as structs.
-With this convention (instead of passing pointers), 
-vectors and matrices can be copied with the ```operator=``` in C.
-In addition to this, the compiler can generate errors,
-if a program wants to pass a vec3 where a vec4 is needed.
-The copying seems like an overhead, but the compiler can optimize this out.
-Not only that, he can do better because he knows more about the data.
-<br>
-The vec2 is defined as:
-```c
-typedef union vec2 {
-    float v[2];
-    struct {
-        float v0, v1;
-    };
-    struct {
-        float x, y;
-    };
-} vec2;
-_Static_assert(sizeof(vec2) == sizeof(float) * 2, 
-               "[Mathc] wrong expected size");
-```
-There are different options to access the data in the vec2:
-```c
-vec2 a = {{1, 2}};
-printf("a.x = %f = %f = %f\n",
-    a.v[0],     // raw vector data
-    a.v0,       // vector data 0-1
-    a.x         // x, y
-);
-```
-The type vec3 can do a little bit more:
-```c
-typedef union vec3 {
-    float v[3];
-    struct {
-        float v0, v1, v2;
-    };
-    vec2 xy;
-    struct {
-        float x;
-        union {
-            struct {
-                float y, z;
-            };
-            vec2 yz;
-        };
-    };
-} vec3;
-_Static_assert(sizeof(vec3) == sizeof(float) * 3, 
-               "[Mathc] wrong expected size");
-```
-In addition to v, v0-2, xyz, a vec3 lets you access subdata vec2:
-```c
-vec3 a = {{1, 2, 3}};
-vec2 b = a.yz;
-assert(b.v0 == 2 && b.v1 == 3);
-```
-vec4 has subdata for both, vec2 and vec3 (.xy, .xyz)
+    printf("angle: %f\n", vec_angle(vec3_unit_x(), vec3_unit_y()));
 
-## vec
-The header file [vec.h](include/mathc/vec.h) includes all files in the vec dir.
-These files contains functions and typed functions for vector math.
-With the typed function, its possible to write readable math code in C.
-```c
-#include "mathc/mathc.h"
-
-// see below main
-static vec3 foo(vec4 a, vec2 b);
-static void bar(float *vertices, int n);
-
-int main() {
-    vec4 a = {{1, 2, 3, 4}};
-    a = vec4_scale_sca(a, 10);  // a = a * 10
-    vec4_print(a);
-
-    // access data:
-    printf("x: %f = %f = %f\n",
-           a.x,         // or y, z, w
-           a.v0,        // vector data 0 - 3
-           a.v[0]);     // raw float * vector
-
-    // get sub data;
-    vec2_print(a.yz);    // or xy, zw, xyz, yzw
-
-    vec3 b = foo((vec4) {{1.1f, 2.2f, 3.3f, 0}}, a.zw);
-    vec3_print(b);
-
-
-    vec3 x = VEC3_INIT_UNIT_X;
-    vec3 y = VEC3_INIT_UNIT_Y;
-    vec3 z = vec3_cross(x, y);
-    vec3_print(z);
-
-
-    float data[8] = {1, 2, 3, 4, 5, 6, 7, 8};
-
-    // typeless functions:
-    // (dst, a, b, n) for dst = a + b
-    vecN_add_sca(data, data, -1, 8);
-
-    // copy to a type:
-    vec4 copy = Vec4(data);
-    vec4_print(copy);
-
-    // cast and change some values
-    Vec2(data+4) = vec2_set(-1);
-    Vec2(data+6) = vec2_set(-3);
-    vec4_print(Vec4(data+4));
-
-    // use the _v functions to pass raw vectors
-    vec2 c = vec2_neg_v(data);
-    // instead of c = vec2_neg(Vec2(data));
-    vec2_print(c);
-    
-    float vertices[12];                    // (4 vertices * xyz = 12 floats)
-    vecN_set(vertices, 10, 12);   // set every float to 10
-    bar(vertices, 4);                   // call function below
-    vec3_print(Vec3(vertices));            // print first vertex
-
-    // have a look into mathc/vec/vec*.h for more functions. For example:
-    //      norm, norm_p, norm_1, norm_inf
-    //      normalize
-    //      lerp
-    //      dot
-
-    // There are also variants for double and int:
-    // dvec*
-    // ivec*
-}
-
-
-// a function would take a copy, unless it takes a pointer of a vec type
-static vec3 foo(vec4 a, vec2 b) {
-    return vec3_div_sca(a.xyz, b.y);
-}
-
-// example function to use Mathc types in a function, taking raw data
-static void bar(float *vertices, int n) {
-    for(int i=0; i<n; i++) {
-        // reference instead of copy:
-        vec3 *vertex = (vec3 *) &vertices[i*3];
-        *vertex = vec3_normalize(*vertex);
-        // ...
-        
-        // or:
-        float *vertex_p = &vertices[i*3];
-        Vec3(vertex_p) = vec3_normalize_v(vertex_p);
-        // ...
-    }
-}
-```
-
-## mat
-The header file [mat.h](include/mathc/mat.h) includes all files in the mat dir.
-It works like vec, but adds squared matrix calculations.
-The matrices are in column major order, so ```matrix[col][row]```.
-```c
-#include "mathc/mathc.h"
-
-int main() {
-    // column major order
-    // a = | 0, 2 |
-    //     | 1, 3 |
-    mat2 a = {{0, 1, 2, 3}};
-    float det = mat2_det(a);    // determinant
-    printf("det: %f\n", det);
-
-    // access data and subdata
-    printf("a11: %f = %f = %f = %f = %f\n",
-           a.m11,           // col 1, row 1
-           a.v3,            // vector data 3
-           a.m[1][1],       // as C matrix
-           a.v[3],          // raw float * vector
-           a.col[1].y);     // first column as a vec2
-
-    // a.row is not available, because its column major order
-    vec2 row = mat2_get_row(a, 1);
-    vec2_print(row);
-
-    // use vector functions:
-    // (dst, a, b, n) for dst = a + b
-    vecN_scale_sca(a.v, a.v, 10, 4);
-    mat2_print(a);
-
-
-    mat4 M = MAT4_INIT_EYE;
-    // or M = mat4_eye();
-
-    // affine transformation (translation in x)
-    M.col[3].x = 10;
-    vec4 res = mat4_mul_vec(M, (vec4){{1.1f, 2.2f, 3.3f, 1}});
-    // for points: w=1, for vectors w=0
-    vec4_print(res);
-
-    // back transformation
-    res = mat4_mul_vec(mat4_inv(M), res);
-    vec4_print(res);
-
-
-    // build an affine rotation matrix:
-    M = mat4_eye();
-    vec4 angle_axis = {{0, 0, 1, M_PI/2}};    // quarter turn via z axis
-    mat3 rotation = mat3_rotation_from_angle_axis(angle_axis);
-    M = mat4_set_upper_left3(M, rotation);
-    mat4_print(M);
-
-    float data[4] = {10, 20, 30, 40};
-    // as with vec, mats can be casted from a raw vector
-    mat2 copy = Mat2(data);
-    mat2_print(copy);
-
-    // have a look into mathc/mat/mat*.h for more functions. For example:
-    //      set_, get_ | row, col
-    //      set_, get_ block
-    //      vec_mul_mat
-
-    // There are also variants for double and int:
-    // dmat*
-    // imat*
-}
-```
-
-## quat
-The header file [quat.h](include/mathc/quat.h) includes all files in the quat dir.
-A quat is a simple typedef for a vec4: ```{qx, qy, qz, qw}```.
-```c
-#include "mathc/mathc.h"
-
-int main() {
-    // a quat is a typedef to vec4
-    quat a = QUAT4_INIT_EYE;
-    quat b = quat_from_angle_axis((vec4) {{0, 0, 1, M_PI_2}});
-    quat_print(b);
-
-    // slerp is a more suitable function to interpolate rotations
-    // sperical lerp
-    quat c = quat_slerp(a, b, 0.5f);
-    quat_print(c);
-
-    vec4 angle_axis = quat_to_angle_axis(c);
-    vec4_print(angle_axis);
-
-    mat3 rot = quat_to_rotation_matrix(c);
-    mat3_print(rot);
-
-    // have a look into mathc/vec/vec*.h for more functions for quat math. For example:
-    //      norm, norm_p, norm_1, norm_inf
-    //      normalize
-    //      lerp
-    //      dot
-
-    // There is also the variant for double:
-    // dquat
+    printf("in_limits: %d\n", axles_in_limits((vec3) {{0, M_PI_2, M_PI_4}}));
 }
 ```
 
@@ -383,9 +530,6 @@ In Optimising mode, my compiler generated a better result than a manual, not cop
 
 ## Running the examples
 The top directory of this project contains a CmakeLists.txt file, which sets up the examples for each library
-
-## Todo:
-- Add some intersection and collision functions
 
 ## Author
 

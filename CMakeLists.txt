@@ -8,25 +8,25 @@ set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -march=native)  # march=native for best perfo
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-long-long -pedantic -Wno-unused-function")
 
 
+add_executable(vector_type_usage examples/vector_type_usage.c)
+target_include_directories(vector_type_usage PUBLIC include)
+target_link_libraries(vector_type_usage m)
+
+add_executable(vector_type_casting examples/vector_type_casting.c)
+target_include_directories(vector_type_casting PUBLIC include)
+target_link_libraries(vector_type_casting m)
+
+add_executable(matrix_type examples/matrix_type.c)
+target_include_directories(matrix_type PUBLIC include)
+target_link_libraries(matrix_type m)
+
+add_executable(typeless_functions examples/typeless_functions.c)
+target_include_directories(typeless_functions PUBLIC include)
+target_link_libraries(typeless_functions m)
+
 add_executable(example examples/example.c)
 target_include_directories(example PUBLIC include)
 target_link_libraries(example m)
-
-add_executable(vec examples/vec_example.c)
-target_include_directories(vec PUBLIC include)
-target_link_libraries(vec m)
-
-add_executable(mat examples/mat_example.c)
-target_include_directories(mat PUBLIC include)
-target_link_libraries(mat m)
-
-add_executable(quat examples/quat_example.c)
-target_include_directories(quat PUBLIC include)
-target_link_libraries(quat m)
-
-add_executable(utils examples/utils_example.c)
-target_include_directories(utils PUBLIC include)
-target_link_libraries(utils m)
 
 add_executable(cpp_test examples/cpp_test.cpp)
 target_include_directories(cpp_test PUBLIC include)
