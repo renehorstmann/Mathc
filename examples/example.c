@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include "mathc/float.h"
 #include "mathc/utils/float.h"
+#include "mathc/bool.h"
 
 
 /** Transform a 3d point with a transformation matrix M */
@@ -85,6 +86,27 @@ mat4 create_camera_VP(vec3 eye, vec3 dir, vec3 up, bool orhto) {
     return mat4_mul_mat(P, V);
 }
 
+bool axles_in_limits(vec3 axles) {
+
+    // lower, upper limits in degree
+    vec3 limits_deg[2] = {
+            {{-5, 10, 0}},
+            {{50, 170, 90}}
+    };
+
+    vec3 limits[2] = {
+            vec3_radians(limits_deg[0]),
+            vec3_radians(limits_deg[1])
+    };
+
+    bvec3 in_lower_limit = vec3_greater_than_equal_vec(axles, limits[0]);
+    bvec3 in_upper_limit = vec3_less_than_equal_vec(axles, limits[1]);
+    bvec3 in_limit = bvec3_and(in_lower_limit, in_upper_limit);
+
+    // returns true if all axles are in limits
+    return bvec3_all(in_limit);
+}
+
 int main() {
     mat4 pose = ray_to_pose((vec3) {{100, 100, 50}}, (vec3) {{0, 0, 1}});
     vec3 point = {{10, 20, 30}};
@@ -98,4 +120,8 @@ int main() {
     vec3 normal = {{0, 1, 0}};
     normal = transform_vector(VP, normal);
     vec3_print(normal);
+
+    printf("angle: %f\n", vec_angle(vec3_unit_x(), vec3_unit_y()));
+
+    printf("in_limits: %d\n", axles_in_limits((vec3) {{0, M_PI_2, M_PI_4}}));
 }
