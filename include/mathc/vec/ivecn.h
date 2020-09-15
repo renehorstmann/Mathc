@@ -1,9 +1,16 @@
 #ifndef MATHC_VEC_IVECN_H
 #define MATHC_VEC_IVECN_H
 
+#ifndef MATHC_MAX_SIZE
+#ifdef __STDC_NO_VLA__
+#define MATHC_MAX_SIZE 16
+#endif
+#endif
+
 #include "stdlib.h"     // abs
 #include "stdbool.h"
 #include "math.h"
+#include "assert.h"
 
 
 /** macro to cast a vector into a int vector */
@@ -196,9 +203,14 @@ static float ivecN_length(const int *vec, int n) {
 
 /** returns norm(b-a) */
 static float ivecN_distance(const int *vec_a, const int *vec_b, int n) {
-    int delta[n];
-    ivecN_sub_vec(delta, vec_b, vec_a, n);
-    return ivecN_norm(delta, n);
+#ifdef MATHC_MAX_SIZE
+    assert(n <= MATHC_MAX_SIZE);
+    int tmp[MATHC_MAX_SIZE];
+#else
+    int tmp[n];
+#endif
+    ivecN_sub_vec(tmp, vec_b, vec_a, n);
+    return ivecN_norm(tmp, n);
 }
 
 /** dst = a < b */

@@ -1,8 +1,15 @@
 #ifndef MATHC_VEC_DVECN_H
 #define MATHC_VEC_DVECN_H
 
+#ifndef MATHC_MAX_SIZE
+#ifdef __STDC_NO_VLA__
+#define MATHC_MAX_SIZE 16
+#endif
+#endif
+
 #include "stdbool.h"
 #include "math.h"
+#include "assert.h"
 
 
 /** macro to cast a vector into a double vector */
@@ -367,9 +374,14 @@ static double dvecN_length(const double *vec, int n) {
 
 /** returns norm(b-a) */
 static double dvecN_distance(const double *vec_a, const double *vec_b, int n) {
-    double delta[n];
-    dvecN_sub_vec(delta, vec_b, vec_a, n);
-    return dvecN_norm(delta, n);
+#ifdef MATHC_MAX_SIZE
+    assert(n <= MATHC_MAX_SIZE);
+    double tmp[MATHC_MAX_SIZE];
+#else
+    double tmp[n];
+#endif
+    dvecN_sub_vec(tmp, vec_b, vec_a, n);
+    return dvecN_norm(tmp, n);
 }
 
 /** dst = dot(I, Nref) < 0 ? N : -N */

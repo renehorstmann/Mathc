@@ -6,6 +6,12 @@
 #define restrict __restrict
 #endif
 
+#ifndef MATHC_MAX_SIZE
+#ifdef __STDC_NO_VLA__
+#define MATHC_MAX_SIZE 16
+#endif
+#endif
+
 #include "math.h"
 #include "assert.h"
 
@@ -79,7 +85,12 @@ static void dmatN_transpose_no_alias(double *restrict dst_mat, const double *res
 
 /** dst = mat^t */
 static void dmatN_transpose(double *dst_mat, const double *mat, int n) {
+#ifdef MATHC_MAX_SIZE
+    assert(n <= MATHC_MAX_SIZE);
+    double tmp[MATHC_MAX_SIZE * MATHC_MAX_SIZE];
+#else
     double tmp[n * n];
+#endif
     dmatN_transpose_no_alias(tmp, mat, n);
     for (int i = 0; i < n * n; i++)
         dst_mat[i] = tmp[i];
@@ -99,7 +110,12 @@ static void dmatN_mul_mat_no_alias(double *restrict dst_mat, const double *restr
 
 /** dst = a @ b */
 static void dmatN_mul_mat(double *dst_mat, const double *mat_a, const double *mat_b, int n) {
+#ifdef MATHC_MAX_SIZE
+    assert(n <= MATHC_MAX_SIZE);
+    double tmp[MATHC_MAX_SIZE * MATHC_MAX_SIZE];
+#else
     double tmp[n * n];
+#endif
     dmatN_mul_mat_no_alias(tmp, mat_a, mat_b, n);
     for (int i = 0; i < n * n; i++)
         dst_mat[i] = tmp[i];
@@ -118,7 +134,12 @@ static void dmatN_mul_vec_no_alias(double *restrict dst_vec, const double *restr
 
 /** dst = a @ b */
 static void dmatN_mul_vec(double *dst_vec, const double *mat_a, const double *vec_b, int n) {
+#ifdef MATHC_MAX_SIZE
+    assert(n <= MATHC_MAX_SIZE);
+    double tmp[MATHC_MAX_SIZE];
+#else
     double tmp[n];
+#endif
     dmatN_mul_vec_no_alias(tmp, mat_a, vec_b, n);
     for (int i = 0; i < n; i++)
         dst_vec[i] = tmp[i];
@@ -137,7 +158,12 @@ static void dvecN_mul_mat_no_alias(double *restrict dst_vec, const double *restr
 
 /** dst = a @ b */
 static void dvecN_mul_mat(double *dst_vec, const double *vec_a, const double *mat_b, int n) {
+#ifdef MATHC_MAX_SIZE
+    assert(n <= MATHC_MAX_SIZE);
+    double tmp[MATHC_MAX_SIZE];
+#else
     double tmp[n];
+#endif
     dvecN_mul_mat_no_alias(tmp, vec_a, mat_b, n);
     for (int i = 0; i < n; i++)
         dst_vec[i] = tmp[i];
