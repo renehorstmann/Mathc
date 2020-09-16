@@ -1,5 +1,11 @@
-// includes all of mathc
-#include "mathc/mathc.h"
+// includes float related vector and matrix functions
+#include "mathc/float.h"
+
+// includes all float related utils functions
+#include "mathc/utils/float.h"
+
+// includes bool related vector functions
+#include "mathc/bool.h"
 
 
 /** Transform a 3d point with a transformation matrix M */
@@ -103,6 +109,10 @@ bool axles_in_limits(vec3 axles) {
 
     // returns true if all axles are in limits
     return bvec3_all(in_limit);
+}
+
+bool vec_equals(vec3 a, vec3 b) {
+    return bvec3_all(vec3_equal_eps_vec(a, b, 0.01f));
 }
 
 int main() {
