@@ -53,14 +53,14 @@ static void dmatN_set_col(double *dst_mat, const double *vec, int col, int n) {
 }
 
 /** dst[row][:] = scalar */
-static void dmatN_row_set_sca(double *dst_mat, double scalar, int row, int n) {
+static void dmatN_set_row_sca(double *dst_mat, double scalar, int row, int n) {
     assert(row >= 0 && row < n);
     for (int c = 0; c < n; c++)
         dst_mat[c * n + row] = scalar;
 }
 
 /** dst[:][col] = scalar */
-static void dmatN_col_set_sca(double *dst_mat, double scalar, int col, int n) {
+static void dmatN_set_col_sca(double *dst_mat, double scalar, int col, int n) {
     assert(col >= 0 && col < n);
     for (int r = 0; r < n; r++)
         dst_mat[col * n + r] = scalar;

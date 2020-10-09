@@ -48,6 +48,15 @@ static imat4 imat4_set_row_v(const int *mat, const int *vec, int row) {
     return imat4_set_row(IMat4(mat), IVec4(vec), row);
 }
 
+/** mat[row][:] = vec; dst = mat */
+static imat4 imat4_set_this_row(imat4 *mat, ivec4 vec, int row) {
+    imatN_set_row(mat->v, vec.v, row, 4);
+    return *mat;
+}
+/** mat[row][:] = vec; dst = mat */
+static imat4 imat4_set_this_row_v(int *mat, const int *vec, int row) {
+    return imat4_set_this_row((imat4*) mat, IVec4(vec), row);
+}
 
 /** dst = mat; dst[:][col] = vec */
 static imat4 imat4_set_col(imat4 mat, ivec4 vec, int col) {
@@ -59,26 +68,56 @@ static imat4 imat4_set_col_v(const int *mat, const int *vec, int col) {
     return imat4_set_col(IMat4(mat), IVec4(vec), col);
 }
 
+/** mat[:][col] = vec; dst = mat */
+static imat4 imat4_set_this_col(imat4 *mat, ivec4 vec, int col) {
+    imatN_set_col(mat->v, vec.v, col, 4);
+    return *mat;
+}
+/** mat[:][col] = vec; dst = mat */
+static imat4 imat4_set_this_col_v(int *mat, const int *vec, int col) {
+    return imat4_set_this_col((imat4*) mat, IVec4(vec), col);
+}
+
 
 /** dst = mat; dst[row][:] = scalar */
-static imat4 imat4_row_set_sca(imat4 mat, int scalar, int row) {
-    imatN_row_set_sca(mat.v, scalar, row, 4);
+static imat4 imat4_set_row_sca(imat4 mat, int scalar, int row) {
+    imatN_set_row_sca(mat.v, scalar, row, 4);
     return mat;
 }
 /** dst = mat; dst[row][:] = scalar */
-static imat4 imat4_row_set_sca_v(const int *mat, int scalar, int row) {
-    return imat4_row_set_sca(IMat4(mat), scalar, row);
+static imat4 imat4_set_row_sca_v(const int *mat, int scalar, int row) {
+    return imat4_set_row_sca(IMat4(mat), scalar, row);
+}
+
+/** mat[row][:] = scalar; dst = mat */
+static imat4 imat4_set_this_row_sca(imat4 *mat, int scalar, int row) {
+    imatN_set_row_sca(mat->v, scalar, row, 4);
+    return *mat;
+}
+/** mat[row][:] = scalar; dst = mat */
+static imat4 imat4_set_this_row_sca_v(int *mat, int scalar, int row) {
+    return imat4_set_this_row_sca((imat4*) mat, scalar, row);
 }
 
 
 /** dst = mat; dst[:][col] = scalar */
-static imat4 imat4_col_set_sca(imat4 mat, int scalar, int col) {
-    imatN_col_set_sca(mat.v, scalar, col, 4);
+static imat4 imat4_set_col_sca(imat4 mat, int scalar, int col) {
+    imatN_set_col_sca(mat.v, scalar, col, 4);
     return mat;
 }
 /** dst = mat; dst[:][col] = scalar */
-static imat4 imat4_col_set_sca_v(const int *mat, int scalar, int col) {
-    return imat4_col_set_sca(IMat4(mat), scalar, col);
+static imat4 imat4_set_col_sca_v(const int *mat, int scalar, int col) {
+    return imat4_set_col_sca(IMat4(mat), scalar, col);
+}
+
+/** mat[:][col] = scalar; dst = mat */
+static imat4 imat4_set_this_col_sca(imat4 *mat, int scalar, int col) {
+    imatN_set_col_sca(mat->v, scalar, col, 4);
+    return *mat;
+}
+/** mat[:][col] = scalar; dst = mat */
+static imat4 imat4_set_this_col_sca_v(int *mat, int scalar, int col) {
+    return imat4_set_this_col_sca((imat4*) mat, scalar, col);
 }
 
 
@@ -242,6 +281,17 @@ static imat4 imat4_set_block2_v(const int *mat, const int *block_2, int row, int
 }
 
 
+/** mat[col:col+2, row:row+2] = block; dst = mat */
+static imat4 imat4_set_this_block2(imat4 *mat, imat2 block_2, int row, int col) {
+    imatN_set_block(mat->v, block_2.v, row, col, 2, 4);
+    return *mat;
+}
+/** mat[col:col+2, row:row+2] = block; dst = mat */
+static imat4 imat4_set_this_block2_v(int *mat, const int *block_2, int row, int col) {
+    return imat4_set_this_block2((imat4 *) mat, IMat2(block_2), row, col);
+}
+
+
 /** dst = mat[col:col+2, row:row+2] */
 static imat3 imat4_get_block3(imat4 mat, int row, int col) {
     imat3 res;
@@ -264,6 +314,16 @@ static imat4 imat4_set_block3_v(const int *mat, const int *block_3, int row, int
     return imat4_set_block3(IMat4(mat), IMat3(block_3), row, col);
 }
 
+/** mat[col:col+2, row:row+2] = block; dst = mat */
+static imat4 imat4_set_this_block3(imat4 *mat, imat3 block_3, int row, int col) {
+    imatN_set_block(mat->v, block_3.v, row, col, 3, 4);
+    return *mat;
+}
+/** mat[col:col+2, row:row+2] = block; dst = mat */
+static imat4 imat4_set_this_block3_v(int *mat, const int *block_3, int row, int col) {
+    return imat4_set_this_block3((imat4 *) mat, IMat3(block_3), row, col);
+}
+
 
 /** dst = mat[:2, :2] */
 static imat2 imat4_get_upper_left2(imat4 mat) {
@@ -282,6 +342,15 @@ static imat4 imat4_set_upper_left2(imat4 mat, imat2 block_2) {
 /** dst = mat; dst[:2, :2] = block */
 static imat4 imat4_set_upper_left2_v(const int *mat, const int *block_2) {
     return imat4_set_upper_left2(IMat4(mat), IMat2(block_2));
+}
+
+/** mat[:2, :2] = block; dst = mat */
+static imat4 imat4_set_this_upper_left2(imat4 *mat, imat2 block_2) {
+    return imat4_set_this_block2(mat, block_2, 0, 0);
+}
+/** mat[:2, :2] = block; dst = mat */
+static imat4 imat4_set_this_upper_left2_v(int *mat, const int *block_2) {
+    return imat4_set_this_upper_left2((imat4 *) mat, IMat2(block_2));
 }
 
 
@@ -304,5 +373,13 @@ static imat4 imat4_set_upper_left3_v(const int *mat, const int *block_3) {
     return imat4_set_upper_left3(IMat4(mat), IMat3(block_3));
 }
 
+/** mat[:3, :3] = block; dst = mat */
+static imat4 imat4_set_this_upper_left3(imat4 *mat, imat3 block_3) {
+    return imat4_set_this_block3(mat, block_3, 0, 0);
+}
+/** mat[:3, :3] = block; dst = mat */
+static imat4 imat4_set_this_upper_left3_v(int *mat, const int *block_3) {
+    return imat4_set_this_upper_left3((imat4 *) mat, IMat3(block_3));
+}
 
 #endif //MATHC_MAT_IMAT4_H

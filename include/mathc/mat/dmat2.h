@@ -47,6 +47,15 @@ static dmat2 dmat2_set_row_v(const double *mat, const double *vec, int row) {
     return dmat2_set_row(DMat2(mat), DVec2(vec), row);
 }
 
+/** mat[row][:] = vec; dst = mat */
+static dmat2 dmat2_set_this_row(dmat2 *mat, dvec2 vec, int row) {
+    dmatN_set_row(mat->v, vec.v, row, 2);
+    return *mat;
+}
+/** mat[row][:] = vec; dst = mat */
+static dmat2 dmat2_set_this_row_v(double *mat, const double *vec, int row) {
+    return dmat2_set_this_row((dmat2*) mat, DVec2(vec), row);
+}
 
 /** dst = mat; dst[:][col] = vec */
 static dmat2 dmat2_set_col(dmat2 mat, dvec2 vec, int col) {
@@ -58,26 +67,56 @@ static dmat2 dmat2_set_col_v(const double *mat, const double *vec, int col) {
     return dmat2_set_col(DMat2(mat), DVec2(vec), col);
 }
 
+/** mat[:][col] = vec; dst = mat */
+static dmat2 dmat2_set_this_col(dmat2 *mat, dvec2 vec, int col) {
+    dmatN_set_col(mat->v, vec.v, col, 2);
+    return *mat;
+}
+/** mat[:][col] = vec; dst = mat */
+static dmat2 dmat2_set_this_col_v(double *mat, const double *vec, int col) {
+    return dmat2_set_this_col((dmat2*) mat, DVec2(vec), col);
+}
+
 
 /** dst = mat; dst[row][:] = scalar */
-static dmat2 dmat2_row_set_sca(dmat2 mat, double scalar, int row) {
-    dmatN_row_set_sca(mat.v, scalar, row, 2);
+static dmat2 dmat2_set_row_sca(dmat2 mat, double scalar, int row) {
+    dmatN_set_row_sca(mat.v, scalar, row, 2);
     return mat;
 }
 /** dst = mat; dst[row][:] = scalar */
-static dmat2 dmat2_row_set_sca_v(const double *mat, double scalar, int row) {
-    return dmat2_row_set_sca(DMat2(mat), scalar, row);
+static dmat2 dmat2_set_row_sca_v(const double *mat, double scalar, int row) {
+    return dmat2_set_row_sca(DMat2(mat), scalar, row);
+}
+
+/** mat[row][:] = scalar; dst = mat */
+static dmat2 dmat2_set_this_row_sca(dmat2 *mat, double scalar, int row) {
+    dmatN_set_row_sca(mat->v, scalar, row, 2);
+    return *mat;
+}
+/** mat[row][:] = scalar; dst = mat */
+static dmat2 dmat2_set_this_row_sca_v(double *mat, double scalar, int row) {
+    return dmat2_set_this_row_sca((dmat2*) mat, scalar, row);
 }
 
 
 /** dst = mat; dst[:][col] = scalar */
-static dmat2 dmat2_col_set_sca(dmat2 mat, double scalar, int col) {
-    dmatN_col_set_sca(mat.v, scalar, col, 2);
+static dmat2 dmat2_set_col_sca(dmat2 mat, double scalar, int col) {
+    dmatN_set_col_sca(mat.v, scalar, col, 2);
     return mat;
 }
 /** dst = mat; dst[:][col] = scalar */
-static dmat2 dmat2_col_set_sca_v(const double *mat, double scalar, int col) {
-    return dmat2_col_set_sca(DMat2(mat), scalar, col);
+static dmat2 dmat2_set_col_sca_v(const double *mat, double scalar, int col) {
+    return dmat2_set_col_sca(DMat2(mat), scalar, col);
+}
+
+/** mat[:][col] = scalar; dst = mat */
+static dmat2 dmat2_set_this_col_sca(dmat2 *mat, double scalar, int col) {
+    dmatN_set_col_sca(mat->v, scalar, col, 2);
+    return *mat;
+}
+/** mat[:][col] = scalar; dst = mat */
+static dmat2 dmat2_set_this_col_sca_v(double *mat, double scalar, int col) {
+    return dmat2_set_this_col_sca((dmat2*) mat, scalar, col);
 }
 
 

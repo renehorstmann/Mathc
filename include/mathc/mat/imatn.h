@@ -53,14 +53,14 @@ static void imatN_set_col(int *dst_mat, const int *vec, int col, int n) {
 }
 
 /** dst[row][:] = scalar */
-static void imatN_row_set_sca(int *dst_mat, int scalar, int row, int n) {
+static void imatN_set_row_sca(int *dst_mat, int scalar, int row, int n) {
     assert(row >= 0 && row < n);
     for (int c = 0; c < n; c++)
         dst_mat[c * n + row] = scalar;
 }
 
 /** dst[:][col] = scalar */
-static void imatN_col_set_sca(int *dst_mat, int scalar, int col, int n) {
+static void imatN_set_col_sca(int *dst_mat, int scalar, int col, int n) {
     assert(col >= 0 && col < n);
     for (int r = 0; r < n; r++)
         dst_mat[col * n + r] = scalar;
