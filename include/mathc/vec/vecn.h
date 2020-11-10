@@ -14,10 +14,10 @@
 
 /** macro to cast a vector into a float vector */
 #define vecN_cast_into(dst_vec, vec, n) \
-{ \
-    for(int i=0; i<(n); i++) \
-        (dst_vec)[i] = (float) (vec)[i]; \
-}
+do { \
+    for(int vecN_cast_into_i_=0; vecN_cast_into_i_<(n); vecN_cast_into_i_++) \
+        (dst_vec)[vecN_cast_into_i_] = (float) (vec)[vecN_cast_into_i_]; \
+} while(0)
 
 
 /** dst = vec */

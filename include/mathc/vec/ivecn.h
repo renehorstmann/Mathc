@@ -15,10 +15,10 @@
 
 /** macro to cast a vector into a int vector */
 #define ivecN_cast_into(dst_vec, vec, n) \
-{ \
-    for(int i=0; i<(n); i++) \
-        (dst_vec)[i] = (int) (vec)[i]; \
-}
+do { \
+    for(int ivecN_cast_into_i_=0; ivecN_cast_into_i_<(n); ivecN_cast_into_i_++) \
+        (dst_vec)[ivecN_cast_into_i_] = (int) (vec)[ivecN_cast_into_i_]; \
+} while(0)
 
 
 /** dst = vec */

@@ -14,10 +14,10 @@
 
 /** macro to cast a vector into a double vector */
 #define dvecN_cast_into(dst_vec, vec, n) \
-{ \
-    for(int i=0; i<(n); i++) \
-        (dst_vec)[i] = (double) (vec)[i]; \
-}
+do { \
+    for(int dvecN_cast_into_i_=0; dvecN_cast_into_i_<(n); dvecN_cast_into_i_++) \
+        (dst_vec)[dvecN_cast_into_i_] = (double) (vec)[dvecN_cast_into_i_]; \
+} while(0)
 
 
 /** dst = vec */
