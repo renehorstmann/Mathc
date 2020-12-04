@@ -26,16 +26,18 @@
 
 
 static void ivec2_print_f(ivec2 vec, FILE *ostream) {
-    fprintf(ostream, "ivec2: " MATHC_PRINT_COLOR "(");
+    fprintf(ostream, "(ivec2) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 2; v++) {
+        if(v>0)
+            fputc(',', ostream);
         fprintf(ostream, " %d", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+    fprintf(ostream, " }}" MATHC_PRINT_COLOR_RESET);
 }
 
 static void ivec2_println_f(ivec2 vec, FILE *ostream) {
     ivec2_print_f(vec, ostream);
-    fprintf(ostream, "\n");
+    fputc('\n', ostream);
 }
 
 static void ivec2_print(ivec2 vec) {
@@ -46,34 +48,60 @@ static void ivec2_println(ivec2 vec) {
     ivec2_println_f(vec, stdout);
 }
 
+
 static void imat2_println_f(imat2 mat, FILE *ostream) {
     fprintf(ostream, "imat2: " MATHC_PRINT_COLOR "\n");
-    for (int c = 0; c < 2; c++) {
+    for (int r = 0; r < 2; r++) {
         fprintf(ostream, "  |");
-        for (int r = 0; r < 2; r++)
-            fprintf(ostream, " %i", mat.m[r][c]);
+        for (int c = 0; c < 2; c++)
+            fprintf(ostream, " %d", mat.m[c][r]);
 
         fprintf(ostream, " |\n");
     }
-    fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
+    fprintf(ostream, MATHC_PRINT_COLOR_RESET);
 }
 
-static void imat2_println(imat2 matrix) {
-    imat2_println_f(matrix, stdout);
+static void imat2_println(imat2 imat) {
+    imat2_println_f(imat, stdout);
+}
+
+static void imat2_print_repr_f(imat2 mat, FILE *ostream) {
+    fprintf(ostream, "(imat2)" MATHC_PRINT_COLOR " {{");
+    for (int v = 0; v < 4; v++) {
+        if(v>0)
+            fputc(',', ostream);
+        fprintf(ostream, " %d", mat.v[v]);
+    }
+    fprintf(ostream, " }}" MATHC_PRINT_COLOR_RESET);
+}
+
+static void imat2_println_repr_f(imat2 mat, FILE *ostream) {
+    imat2_print_repr_f(mat, ostream);
+    fputc('\n', ostream);
+}
+
+static void imat2_print_repr(imat2 mat) {
+    imat2_print_repr_f(mat, stdout);
+}
+
+static void imat2_println_repr(imat2 mat) {
+    imat2_println_repr_f(mat, stdout);
 }
 
 
 static void ivec3_print_f(ivec3 vec, FILE *ostream) {
-    fprintf(ostream, "ivec3: " MATHC_PRINT_COLOR "(");
+    fprintf(ostream, "(ivec3) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 3; v++) {
-        fprintf(ostream, " %i", vec.v[v]);
+        if(v>0)
+            fputc(',', ostream);
+        fprintf(ostream, " %d", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+    fprintf(ostream, " }}" MATHC_PRINT_COLOR_RESET);
 }
 
 static void ivec3_println_f(ivec3 vec, FILE *ostream) {
     ivec3_print_f(vec, ostream);
-    fprintf(ostream, "\n");
+    fputc('\n', ostream);
 }
 
 static void ivec3_print(ivec3 vec) {
@@ -86,31 +114,56 @@ static void ivec3_println(ivec3 vec) {
 
 static void imat3_println_f(imat3 mat, FILE *ostream) {
     fprintf(ostream, "imat3: " MATHC_PRINT_COLOR "\n");
-    for (int c = 0; c < 3; c++) {
+    for (int r = 0; r < 3; r++) {
         fprintf(ostream, "  |");
-        for (int r = 0; r < 3; r++)
-            fprintf(ostream, " %i", mat.m[r][c]);
+        for (int c = 0; c < 3; c++)
+            fprintf(ostream, " %d", mat.m[c][r]);
 
         fprintf(ostream, " |\n");
     }
-    fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
+    fprintf(ostream, MATHC_PRINT_COLOR_RESET);
 }
 
-static void imat3_println(imat3 matrix) {
-    imat3_println_f(matrix, stdout);
+static void imat3_println(imat3 imat) {
+    imat3_println_f(imat, stdout);
+}
+
+static void imat3_print_repr_f(imat3 mat, FILE *ostream) {
+    fprintf(ostream, "(imat3)" MATHC_PRINT_COLOR " {{");
+    for (int v = 0; v < 9; v++) {
+        if(v>0)
+            fputc(',', ostream);
+        fprintf(ostream, " %d", mat.v[v]);
+    }
+    fprintf(ostream, " }}" MATHC_PRINT_COLOR_RESET);
+}
+
+static void imat3_println_repr_f(imat3 mat, FILE *ostream) {
+    imat3_print_repr_f(mat, ostream);
+    fputc('\n', ostream);
+}
+
+static void imat3_print_repr(imat3 mat) {
+    imat3_print_repr_f(mat, stdout);
+}
+
+static void imat3_println_repr(imat3 mat) {
+    imat3_println_repr_f(mat, stdout);
 }
 
 static void ivec4_print_f(ivec4 vec, FILE *ostream) {
-    fprintf(ostream, "ivec4: " MATHC_PRINT_COLOR "(");
+    fprintf(ostream, "(ivec4) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 4; v++) {
-        fprintf(ostream, " %i", vec.v[v]);
+        if(v>0)
+            fputc(',', ostream);
+        fprintf(ostream, " %d", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+    fprintf(ostream, " }}" MATHC_PRINT_COLOR_RESET);
 }
 
 static void ivec4_println_f(ivec4 vec, FILE *ostream) {
     ivec4_print_f(vec, ostream);
-    fprintf(ostream, "\n");
+    fputc('\n', ostream);
 }
 
 static void ivec4_print(ivec4 vec) {
@@ -123,18 +176,41 @@ static void ivec4_println(ivec4 vec) {
 
 static void imat4_println_f(imat4 mat, FILE *ostream) {
     fprintf(ostream, "imat4: " MATHC_PRINT_COLOR "\n");
-    for (int c = 0; c < 4; c++) {
+    for (int r = 0; r < 4; r++) {
         fprintf(ostream, "  |");
-        for (int r = 0; r < 4; r++)
-            fprintf(ostream, " %d", mat.m[r][c]);
+        for (int c = 0; c < 4; c++)
+            fprintf(ostream, " %d", mat.m[c][r]);
 
         fprintf(ostream, " |\n");
     }
-    fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
+    fprintf(ostream, MATHC_PRINT_COLOR_RESET);
 }
 
-static void imat4_println(imat4 matrix) {
-    imat4_println_f(matrix, stdout);
+static void imat4_println(imat4 imat) {
+    imat4_println_f(imat, stdout);
+}
+
+static void imat4_print_repr_f(imat4 mat, FILE *ostream) {
+    fprintf(ostream, "(imat4)" MATHC_PRINT_COLOR " {{");
+    for (int v = 0; v < 16; v++) {
+        if(v>0)
+            fputc(',', ostream);
+        fprintf(ostream, " %d", mat.v[v]);
+    }
+    fprintf(ostream, " }}" MATHC_PRINT_COLOR_RESET);
+}
+
+static void imat4_println_repr_f(imat4 mat, FILE *ostream) {
+    imat4_print_repr_f(mat, ostream);
+    fputc('\n', ostream);
+}
+
+static void imat4_print_repr(imat4 mat) {
+    imat4_print_repr_f(mat, stdout);
+}
+
+static void imat4_println_repr(imat4 mat) {
+    imat4_println_repr_f(mat, stdout);
 }
 
 

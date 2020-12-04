@@ -25,16 +25,18 @@
 #endif
 
 static void bvec2_print_f(bvec2 vec, FILE *ostream) {
-    fprintf(ostream, "bvec2: " MATHC_PRINT_COLOR "(");
-    for (int v = 0; v < 2; v++) {
-        fprintf(ostream, " %d", vec.v[v]);
+    fprintf(ostream, "(bvec2) " MATHC_PRINT_COLOR "{{");
+    for(int v=0; v<2; v++) {
+        if(v>0)
+            fputc(',', ostream);
+        fprintf(ostream, " %i", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+    fprintf(ostream, " }}" MATHC_PRINT_COLOR_RESET);
 }
 
 static void bvec2_println_f(bvec2 vec, FILE *ostream) {
     bvec2_print_f(vec, ostream);
-    fprintf(ostream, "\n");
+    fputc('\n', ostream);
 }
 
 static void bvec2_print(bvec2 vec) {
@@ -46,16 +48,18 @@ static void bvec2_println(bvec2 vec) {
 }
 
 static void bvec3_print_f(bvec3 vec, FILE *ostream) {
-    fprintf(ostream, "bvec3: " MATHC_PRINT_COLOR "(");
-    for (int v = 0; v < 3; v++) {
+    fprintf(ostream, "(bvec3) " MATHC_PRINT_COLOR "{{");
+    for(int v=0; v<3; v++) {
+        if(v>0)
+            fputc(',', ostream);
         fprintf(ostream, " %i", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+    fprintf(ostream, " }}" MATHC_PRINT_COLOR_RESET);
 }
 
 static void bvec3_println_f(bvec3 vec, FILE *ostream) {
     bvec3_print_f(vec, ostream);
-    fprintf(ostream, "\n");
+    fputc('\n', ostream);
 }
 
 static void bvec3_print(bvec3 vec) {
@@ -67,16 +71,18 @@ static void bvec3_println(bvec3 vec) {
 }
 
 static void bvec4_print_f(bvec4 vec, FILE *ostream) {
-    fprintf(ostream, "bvec4: " MATHC_PRINT_COLOR "(");
-    for (int v = 0; v < 4; v++) {
+    fprintf(ostream, "(bvec4) " MATHC_PRINT_COLOR "{{");
+    for(int v=0; v<4; v++) {
+        if(v>0)
+            fputc(',', ostream);
         fprintf(ostream, " %i", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+    fprintf(ostream, " }}" MATHC_PRINT_COLOR_RESET);
 }
 
 static void bvec4_println_f(bvec4 vec, FILE *ostream) {
     bvec4_print_f(vec, ostream);
-    fprintf(ostream, "\n");
+    fputc('\n', ostream);
 }
 
 static void bvec4_print(bvec4 vec) {
