@@ -38,7 +38,7 @@ static void vec2_print_f(vec2 vec, FILE *ostream) {
 
 static void vec2_println_f(vec2 vec, FILE *ostream) {
     vec2_print_f(vec, ostream);
-    fputs("", ostream);
+    fprintf(ostream, "\n");
 }
 
 static void vec2_print(vec2 vec) {
@@ -82,7 +82,7 @@ static void vec3_print_f(vec3 vec, FILE *ostream) {
 
 static void vec3_println_f(vec3 vec, FILE *ostream) {
     vec3_print_f(vec, ostream);
-    fputs("", ostream);
+    fprintf(ostream, "\n");
 }
 
 static void vec3_print(vec3 vec) {
@@ -125,7 +125,7 @@ static void vec4_print_f(vec4 vec, FILE *ostream) {
 
 static void vec4_println_f(vec4 vec, FILE *ostream) {
     vec4_print_f(vec, ostream);
-    fputs("", ostream);
+    fprintf(ostream, "\n");
 }
 
 static void vec4_print(vec4 vec) {
@@ -173,7 +173,7 @@ static void quat_print_f(quat quat, FILE *ostream) {
 
 static void quat_println_f(quat quat, FILE *ostream) {
     quat_print_f(quat, ostream);
-    fputs("", ostream);
+    fprintf(ostream, "\n");
 }
 
 static void quat_print(quat quat) {

@@ -4,6 +4,7 @@
 #include "math.h"
 #include "../initializer.h"
 #include "../types/double.h"
+#include "../vec/dvec3.h"
 #include "../vec/dvec4.h"
 
 
@@ -92,7 +93,7 @@ static dvec4 dquat_to_angle_axis_v(const double *q) {
 }
 
 
-static mat3 dquat_to_rotation_matrix(dquat q) {
+static dmat3 dquat_to_rotation_matrix(dquat q) {
     // from cglm/dquat/glm_dquat_mat3
     double norm = dvec4_norm(q);
     double s = norm > 0.0 ? 2.0 / norm : 0.0;
@@ -115,7 +116,7 @@ static mat3 dquat_to_rotation_matrix(dquat q) {
     xz = s * x * z;
     wz = s * w * z;
 
-    mat3 res;
+    dmat3 res;
     res.m[0][0] = 1.0 - yy - zz;
     res.m[1][1] = 1.0 - xx - zz;
     res.m[2][2] = 1.0 - xx - yy;
@@ -129,12 +130,12 @@ static mat3 dquat_to_rotation_matrix(dquat q) {
     res.m[0][2] = xz - wy;
     return res;
 }
-static mat3 dquat_to_rotation_matrix_v(const double *q) {
+static dmat3 dquat_to_rotation_matrix_v(const double *q) {
     return dquat_to_rotation_matrix(DQuat(q));
 }
 
 
-static dquat dquat_from_rotation_matrix(mat3 mat) {
+static dquat dquat_from_rotation_matrix(dmat3 mat) {
     // from cglm/mat3/glm_mat3_dquat
     dquat res;
     double trace, r, rinv;
@@ -146,37 +147,37 @@ static dquat dquat_from_rotation_matrix(mat3 mat) {
         res.v[0] = rinv * (mat.m[1][2] - mat.m[2][1]);
         res.v[1] = rinv * (mat.m[2][0] - mat.m[0][2]);
         res.v[2] = rinv * (mat.m[0][1] - mat.m[1][0]);
-        res.v[3] = r * 0.5f;
+        res.v[3] = r * 0.5;
     } else if (mat.m[0][0] >= mat.m[1][1] && mat.m[0][0] >= mat.m[2][2]) {
         r = sqrtf(1.0 - mat.m[1][1] - mat.m[2][2] + mat.m[0][0]);
         rinv = 0.5f / r;
 
-        res.v[0] = r * 0.5f;
+        res.v[0] = r * 0.5;
         res.v[1] = rinv * (mat.m[0][1] + mat.m[1][0]);
         res.v[2] = rinv * (mat.m[0][2] + mat.m[2][0]);
         res.v[3] = rinv * (mat.m[1][2] - mat.m[2][1]);
     } else if (mat.m[1][1] >= mat.m[2][2]) {
         r = sqrtf(1.0 - mat.m[0][0] - mat.m[2][2] + mat.m[1][1]);
-        rinv = 0.5f / r;
+        rinv = 0.5 / r;
 
         res.v[0] = rinv * (mat.m[0][1] + mat.m[1][0]);
-        res.v[1] = r * 0.5f;
+        res.v[1] = r * 0.5;
         res.v[2] = rinv * (mat.m[1][2] + mat.m[2][1]);
         res.v[3] = rinv * (mat.m[2][0] - mat.m[0][2]);
     } else {
         r = sqrtf(1.0 - mat.m[0][0] - mat.m[1][1] + mat.m[2][2]);
-        rinv = 0.5f / r;
+        rinv = 0.5 / r;
 
         res.v[0] = rinv * (mat.m[0][2] + mat.m[2][0]);
         res.v[1] = rinv * (mat.m[1][2] + mat.m[2][1]);
-        res.v[2] = r * 0.5f;
+        res.v[2] = r * 0.5;
         res.v[3] = rinv * (mat.m[0][1] - mat.m[1][0]);
     }
 
     return res;
 }
 static dquat dquat_from_rotation_matrix_v(const double *mat_3) {
-    return dquat_from_rotation_matrix(Mat3(mat_3));
+    return dquat_from_rotation_matrix(DMat3(mat_3));
 }
 
 
@@ -195,7 +196,7 @@ static dquat dquat_slerp(dquat q_a, dquat q_b, double t) {
     double sin_theta = sqrtf(1.0 - cos_theta * cos_theta);
 
     /* LERP q_b avoid zero division */
-    if (fabs(sin_theta) < 0.001f)
+    if (fabs(sin_theta) < 0.001)
         return dvec4_mix(q_a, q_b, t);
 
     /* SLERP */

@@ -37,7 +37,7 @@ static void dvec2_print_f(dvec2 vec, FILE *ostream) {
 
 static void dvec2_println_f(dvec2 vec, FILE *ostream) {
     dvec2_print_f(vec, ostream);
-    fputs("", ostream);
+    fprintf(ostream, "\n");
 }
 
 static void dvec2_print(dvec2 vec) {
@@ -81,7 +81,7 @@ static void dvec3_print_f(dvec3 vec, FILE *ostream) {
 
 static void dvec3_println_f(dvec3 vec, FILE *ostream) {
     dvec3_print_f(vec, ostream);
-    fputs("", ostream);
+    fprintf(ostream, "\n");
 }
 
 static void dvec3_print(dvec3 vec) {
@@ -124,7 +124,7 @@ static void dvec4_print_f(dvec4 vec, FILE *ostream) {
 
 static void dvec4_println_f(dvec4 vec, FILE *ostream) {
     dvec4_print_f(vec, ostream);
-    fputs("", ostream);
+    fprintf(ostream, "\n");
 }
 
 static void dvec4_print(dvec4 vec) {
@@ -172,7 +172,7 @@ static void dquat_print_f(dquat quat, FILE *ostream) {
 
 static void dquat_println_f(dquat quat, FILE *ostream) {
     dquat_print_f(quat, ostream);
-    fputs("", ostream);
+    fprintf(ostream, "\n");
 }
 
 static void dquat_print(dquat quat) {

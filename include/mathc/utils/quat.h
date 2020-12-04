@@ -4,6 +4,7 @@
 #include "math.h"
 #include "../initializer.h"
 #include "../types/float.h"
+#include "../vec/vec3.h"
 #include "../vec/vec4.h"
 
 

@@ -35,7 +35,7 @@ static void ivec2_print_f(ivec2 vec, FILE *ostream) {
 
 static void ivec2_println_f(ivec2 vec, FILE *ostream) {
     ivec2_print_f(vec, ostream);
-    fputs("", ostream);
+    fprintf(ostream, "\n");
 }
 
 static void ivec2_print(ivec2 vec) {
@@ -73,7 +73,7 @@ static void ivec3_print_f(ivec3 vec, FILE *ostream) {
 
 static void ivec3_println_f(ivec3 vec, FILE *ostream) {
     ivec3_print_f(vec, ostream);
-    fputs("", ostream);
+    fprintf(ostream, "\n");
 }
 
 static void ivec3_print(ivec3 vec) {
@@ -110,7 +110,7 @@ static void ivec4_print_f(ivec4 vec, FILE *ostream) {
 
 static void ivec4_println_f(ivec4 vec, FILE *ostream) {
     ivec4_print_f(vec, ostream);
-    fputs("", ostream);
+    fprintf(ostream, "\n");
 }
 
 static void ivec4_print(ivec4 vec) {

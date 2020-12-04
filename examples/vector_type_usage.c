@@ -25,12 +25,12 @@ int main() {
 
     // copies c into copy1
     vec3 copy1 = c;
-    vec3_print(copy1);  // mathc/io
+    vec3_println(copy1);  // mathc/io
 
     // copies c into copy2, by a memcpy and the raw pointer
     vec3 copy2;
     memcpy(copy2.v, c.v, sizeof(vec3));
-    vec3_print(copy2);
+    vec3_println(copy2);
 
 
     vec3 rgb = {{0, 1, 0.5}};
@@ -45,5 +45,5 @@ int main() {
 
     // copies gb (vec2)
     vec2 gb = rgba.yz;
-    vec2_print(gb);
+    vec2_println(gb);
 }

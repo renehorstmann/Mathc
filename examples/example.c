@@ -119,7 +119,7 @@ int main() {
     mat4 pose = ray_to_pose((vec3) {{100, 100, 50}}, (vec3) {{0, 0, 1}});
     vec3 point = {{10, 20, 30}};
     point = transform_point(mat4_inv(pose), point);
-    vec3_print(point);
+    vec3_println(point);
 
     mat4 VP = create_camera_VP((vec3) {{10, 20, 30}},
                                vec3_neg((vec3) VEC3_INIT_UNIT_Z),
@@ -127,7 +127,7 @@ int main() {
                                false);
     vec3 normal = {{0, 1, 0}};
     normal = transform_vector(VP, normal);
-    vec3_print(normal);
+    vec3_println(normal);
 
     printf("angle: %f\n", vec_angle(vec3_unit_x(), vec3_unit_y()));
 

@@ -34,7 +34,7 @@ static void bvec2_print_f(bvec2 vec, FILE *ostream) {
 
 static void bvec2_println_f(bvec2 vec, FILE *ostream) {
     bvec2_print_f(vec, ostream);
-    fputs("", ostream);
+    fprintf(ostream, "\n");
 }
 
 static void bvec2_print(bvec2 vec) {
@@ -55,7 +55,7 @@ static void bvec3_print_f(bvec3 vec, FILE *ostream) {
 
 static void bvec3_println_f(bvec3 vec, FILE *ostream) {
     bvec3_print_f(vec, ostream);
-    fputs("", ostream);
+    fprintf(ostream, "\n");
 }
 
 static void bvec3_print(bvec3 vec) {
@@ -76,7 +76,7 @@ static void bvec4_print_f(bvec4 vec, FILE *ostream) {
 
 static void bvec4_println_f(bvec4 vec, FILE *ostream) {
     bvec4_print_f(vec, ostream);
-    fputs("", ostream);
+    fprintf(ostream, "\n");
 }
 
 static void bvec4_print(bvec4 vec) {

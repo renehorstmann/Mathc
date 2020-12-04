@@ -32,13 +32,13 @@ int main() {
     float vec_raw[3] = {1, 2, 3};
     float res_raw[3];
     foo1(res_raw, vec_raw);
-    vec3_print(Vec3(res_raw));
+    vec3_println(Vec3(res_raw));
 
     vec3 vec = {{1, 2, 3}};
     vec3 res;
     foo2(res.v, vec.v);
-    vec3_print(res);
+    vec3_println(res);
 
     res = vec3_scale_add(vec, 1000, 50);
-    vec3_print(res);
+    vec3_println(res);
 }
