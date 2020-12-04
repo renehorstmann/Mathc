@@ -30,14 +30,23 @@ static void ivec2_print_f(ivec2 vec, FILE *ostream) {
     for (int v = 0; v < 2; v++) {
         fprintf(ostream, " %d", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+}
+
+static void ivec2_println_f(ivec2 vec, FILE *ostream) {
+    ivec2_print_f(vec, ostream);
+    fputs("", ostream);
 }
 
 static void ivec2_print(ivec2 vec) {
     ivec2_print_f(vec, stdout);
 }
 
-static void imat2_print_f(imat2 mat, FILE *ostream) {
+static void ivec2_println(ivec2 vec) {
+    ivec2_println_f(vec, stdout);
+}
+
+static void imat2_println_f(imat2 mat, FILE *ostream) {
     fprintf(ostream, "imat2: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 2; c++) {
         fprintf(ostream, "  |");
@@ -49,8 +58,8 @@ static void imat2_print_f(imat2 mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-static void imat2_print(imat2 matrix) {
-    imat2_print_f(matrix, stdout);
+static void imat2_println(imat2 matrix) {
+    imat2_println_f(matrix, stdout);
 }
 
 
@@ -59,14 +68,23 @@ static void ivec3_print_f(ivec3 vec, FILE *ostream) {
     for (int v = 0; v < 3; v++) {
         fprintf(ostream, " %i", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+}
+
+static void ivec3_println_f(ivec3 vec, FILE *ostream) {
+    ivec3_print_f(vec, ostream);
+    fputs("", ostream);
 }
 
 static void ivec3_print(ivec3 vec) {
     ivec3_print_f(vec, stdout);
 }
 
-static void imat3_print_f(imat3 mat, FILE *ostream) {
+static void ivec3_println(ivec3 vec) {
+    ivec3_println_f(vec, stdout);
+}
+
+static void imat3_println_f(imat3 mat, FILE *ostream) {
     fprintf(ostream, "imat3: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 3; c++) {
         fprintf(ostream, "  |");
@@ -78,8 +96,8 @@ static void imat3_print_f(imat3 mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-static void imat3_print(imat3 matrix) {
-    imat3_print_f(matrix, stdout);
+static void imat3_println(imat3 matrix) {
+    imat3_println_f(matrix, stdout);
 }
 
 static void ivec4_print_f(ivec4 vec, FILE *ostream) {
@@ -87,14 +105,23 @@ static void ivec4_print_f(ivec4 vec, FILE *ostream) {
     for (int v = 0; v < 4; v++) {
         fprintf(ostream, " %i", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+}
+
+static void ivec4_println_f(ivec4 vec, FILE *ostream) {
+    ivec4_print_f(vec, ostream);
+    fputs("", ostream);
 }
 
 static void ivec4_print(ivec4 vec) {
     ivec4_print_f(vec, stdout);
 }
 
-static void imat4_print_f(imat4 mat, FILE *ostream) {
+static void ivec4_println(ivec4 vec) {
+    ivec4_println_f(vec, stdout);
+}
+
+static void imat4_println_f(imat4 mat, FILE *ostream) {
     fprintf(ostream, "imat4: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 4; c++) {
         fprintf(ostream, "  |");
@@ -106,8 +133,8 @@ static void imat4_print_f(imat4 mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-static void imat4_print(imat4 matrix) {
-    imat4_print_f(matrix, stdout);
+static void imat4_println(imat4 matrix) {
+    imat4_println_f(matrix, stdout);
 }
 
 

@@ -33,14 +33,23 @@ static void vec2_print_f(vec2 vec, FILE *ostream) {
         else
             fprintf(ostream, " %g", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+}
+
+static void vec2_println_f(vec2 vec, FILE *ostream) {
+    vec2_print_f(vec, ostream);
+    fputs("", ostream);
 }
 
 static void vec2_print(vec2 vec) {
     vec2_print_f(vec, stdout);
 }
 
-static void mat2_print_f(mat2 mat, FILE *ostream) {
+static void vec2_println(vec2 vec) {
+    vec2_println_f(vec, stdout);
+}
+
+static void mat2_println_f(mat2 mat, FILE *ostream) {
     fprintf(ostream, "mat2: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 2; c++) {
         fprintf(ostream, "  |");
@@ -55,8 +64,8 @@ static void mat2_print_f(mat2 mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-static void mat2_print(mat2 matrix) {
-    mat2_print_f(matrix, stdout);
+static void mat2_println(mat2 matrix) {
+    mat2_println_f(matrix, stdout);
 }
 
 
@@ -68,14 +77,23 @@ static void vec3_print_f(vec3 vec, FILE *ostream) {
         else
             fprintf(ostream, " %g", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+}
+
+static void vec3_println_f(vec3 vec, FILE *ostream) {
+    vec3_print_f(vec, ostream);
+    fputs("", ostream);
 }
 
 static void vec3_print(vec3 vec) {
     vec3_print_f(vec, stdout);
 }
 
-static void mat3_print_f(mat3 mat, FILE *ostream) {
+static void vec3_println(vec3 vec) {
+    vec3_println_f(vec, stdout);
+}
+
+static void mat3_println_f(mat3 mat, FILE *ostream) {
     fprintf(ostream, "mat3: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 3; c++) {
         fprintf(ostream, "  |");
@@ -90,8 +108,8 @@ static void mat3_print_f(mat3 mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-static void mat3_print(mat3 matrix) {
-    mat3_print_f(matrix, stdout);
+static void mat3_println(mat3 matrix) {
+    mat3_println_f(matrix, stdout);
 }
 
 static void vec4_print_f(vec4 vec, FILE *ostream) {
@@ -102,14 +120,23 @@ static void vec4_print_f(vec4 vec, FILE *ostream) {
         else
             fprintf(ostream, " %g", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+}
+
+static void vec4_println_f(vec4 vec, FILE *ostream) {
+    vec4_print_f(vec, ostream);
+    fputs("", ostream);
 }
 
 static void vec4_print(vec4 vec) {
     vec4_print_f(vec, stdout);
 }
 
-static void mat4_print_f(mat4 mat, FILE *ostream) {
+static void vec4_println(vec4 vec) {
+    vec4_println_f(vec, stdout);
+}
+
+static void mat4_println_f(mat4 mat, FILE *ostream) {
     fprintf(ostream, "mat4: " MATHC_PRINT_COLOR "\n");
     for (int c = 0; c < 4; c++) {
         fprintf(ostream, "  |");
@@ -124,8 +151,8 @@ static void mat4_print_f(mat4 mat, FILE *ostream) {
     fprintf(ostream, MATHC_PRINT_COLOR_RESET "\n");
 }
 
-static void mat4_print(mat4 matrix) {
-    mat4_print_f(matrix, stdout);
+static void mat4_println(mat4 matrix) {
+    mat4_println_f(matrix, stdout);
 }
 
 
@@ -141,11 +168,20 @@ static void quat_print_f(quat quat, FILE *ostream) {
         else
             fprintf(ostream, " %g", quat.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+}
+
+static void quat_println_f(quat quat, FILE *ostream) {
+    quat_print_f(quat, ostream);
+    fputs("", ostream);
 }
 
 static void quat_print(quat quat) {
     quat_print_f(quat, stdout);
+}
+
+static void quat_println(quat quat) {
+    quat_println_f(quat, stdout);
 }
 
 #endif //MATHC_IO_FLOAT_H

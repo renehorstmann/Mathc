@@ -29,11 +29,20 @@ static void bvec2_print_f(bvec2 vec, FILE *ostream) {
     for (int v = 0; v < 2; v++) {
         fprintf(ostream, " %d", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+}
+
+static void bvec2_println_f(bvec2 vec, FILE *ostream) {
+    bvec2_print_f(vec, ostream);
+    fputs("", ostream);
 }
 
 static void bvec2_print(bvec2 vec) {
     bvec2_print_f(vec, stdout);
+}
+
+static void bvec2_println(bvec2 vec) {
+    bvec2_println_f(vec, stdout);
 }
 
 static void bvec3_print_f(bvec3 vec, FILE *ostream) {
@@ -41,11 +50,20 @@ static void bvec3_print_f(bvec3 vec, FILE *ostream) {
     for (int v = 0; v < 3; v++) {
         fprintf(ostream, " %i", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+}
+
+static void bvec3_println_f(bvec3 vec, FILE *ostream) {
+    bvec3_print_f(vec, ostream);
+    fputs("", ostream);
 }
 
 static void bvec3_print(bvec3 vec) {
     bvec3_print_f(vec, stdout);
+}
+
+static void bvec3_println(bvec3 vec) {
+    bvec3_println_f(vec, stdout);
 }
 
 static void bvec4_print_f(bvec4 vec, FILE *ostream) {
@@ -53,11 +71,20 @@ static void bvec4_print_f(bvec4 vec, FILE *ostream) {
     for (int v = 0; v < 4; v++) {
         fprintf(ostream, " %i", vec.v[v]);
     }
-    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET "\n");
+    fprintf(ostream, " )" MATHC_PRINT_COLOR_RESET);
+}
+
+static void bvec4_println_f(bvec4 vec, FILE *ostream) {
+    bvec4_print_f(vec, ostream);
+    fputs("", ostream);
 }
 
 static void bvec4_print(bvec4 vec) {
     bvec4_print_f(vec, stdout);
+}
+
+static void bvec4_println(bvec4 vec) {
+    bvec4_println_f(vec, stdout);
 }
 
 #endif //MATHC_IO_BOOL_H
