@@ -51,12 +51,12 @@ int main() {
 
     // copies c into copy1
     vec3 copy1 = c;
-    vec3_print(copy1);  // mathc/io
+    vec3_println(copy1);  // mathc/io
 
     // copies c into copy2, by a memcpy and the raw pointer
     vec3 copy2;
     memcpy(copy2.v, c.v, sizeof(vec3));
-    vec3_print(copy2);
+    vec3_println(copy2);
 
 
     vec3 rgb = {{0, 1, 0.5}};
@@ -71,7 +71,7 @@ int main() {
     
     // copies gb (vec2)
     vec2 gb = rgba.yz;
-    vec2_print(gb);
+    vec2_println(gb);
 }
 ```
 
@@ -113,15 +113,15 @@ int main() {
     float vec_raw[3] = {1, 2, 3};
     float res_raw[3];
     foo1(res_raw, vec_raw);
-    vec3_print(Vec3(res_raw));
+    vec3_println(Vec3(res_raw));
 
     vec3 vec = {{1, 2, 3}};
     vec3 res;
     foo2(res.v, vec.v);
-    vec3_print(res);
+    vec3_println(res);
 
     res = vec3_scale_add(vec, 1000, 50);
-    vec3_print(res);
+    vec3_println(res);
 }
 ```
 
@@ -161,7 +161,7 @@ int main() {
     rotation_matrix.col[0].x = -1;      // x column, value x
     rotation_matrix.col[1].y = -1;      // y column, value y
 
-    mat3_print(rotation_matrix);
+    mat3_println(rotation_matrix);
 
     // eye by col vectors
     vec3 x = vec3_unit_x();
@@ -171,7 +171,7 @@ int main() {
     rotation_matrix.col[1] = y;
     rotation_matrix.col[2] = z;
 
-    mat3_print(rotation_matrix);
+    mat3_println(rotation_matrix);
     
     // casts are like vector casts:
     float rot_mat_raw[9];
@@ -517,7 +517,7 @@ int main() {
     mat4 pose = ray_to_pose((vec3) {{100, 100, 50}}, (vec3) {{0, 0, 1}});
     vec3 point = {{10, 20, 30}};
     point = transform_point(mat4_inv(pose), point);
-    vec3_print(point);
+    vec3_println(point);
 
     mat4 VP = create_camera_VP((vec3) {{10, 20, 30}},
                                vec3_neg((vec3) VEC3_INIT_UNIT_Z),
@@ -525,7 +525,7 @@ int main() {
                                false);
     vec3 normal = {{0, 1, 0}};
     normal = transform_vector(VP, normal);
-    vec3_print(normal);
+    vec3_println(normal);
 
     printf("angle: %f\n", vec_angle(vec3_unit_x(), vec3_unit_y()));
 
