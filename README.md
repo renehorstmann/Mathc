@@ -11,6 +11,7 @@ C++11 should also work (also tested with GCC 9.3.0).
 - io: debug print for the types
 - vec: vector math
 - mat: matrix math
+- sca: scalar math (provides functions like min, max, clamp, ... for float, double, int)
 - utils: some useful functions
 
 
