@@ -14,6 +14,9 @@ typedef union dvec2 {
     struct {
         double x, y;
     };
+    struct {
+        double r, g;
+    };
 } dvec2;
 static_assert(sizeof(dvec2) == sizeof(double) * 2, "[Mathc] wrong expected size");
 
@@ -51,13 +54,18 @@ typedef union dvec3 {
         double v0, v1, v2;
     };
     dvec2 xy;
+    dvec2 rg;
     struct {
         double x;
+        double r;
         union {
             struct {
                 double y, z;
             };
-            dvec2 yz;
+            struct {
+                double g, b;
+            };
+            dvec2 gb;
         };
     };
 } dvec3;
@@ -100,21 +108,31 @@ typedef union dvec4 {
         double v0, v1, v2, v3;
     };
     dvec2 xy;
+    dvec2 rg;
     dvec3 xyz;
+    dvec3 rgb;
     struct {
         double x;
+        double r;
         union {
             struct {
                 double y;
+                double g;
                 union {
                     struct {
                         double z, w;
                     };
+                    struct {
+                        double b, a;
+                    };
                     dvec2 zw;
+                    dvec2 ba;
                 };
             };
             dvec2 yz;
+            dvec2 gb;
             dvec3 yzw;
+            dvec3 gba;
         };
     };
 } dvec4;
