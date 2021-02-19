@@ -32,12 +32,6 @@ static void uvecN_set(unsigned *dst_vec, unsigned scalar, unsigned n) {
         dst_vec[i] = scalar;
 }
 
-/** dst = -vec */
-static void uvecN_neg(unsigned *dst_vec, const unsigned *vec, unsigned n) {
-    for (int i = 0; i < n; i++)
-        dst_vec[i] = -vec[i];
-}
-
 /** dst = a + b */
 static void uvecN_add_vec(unsigned *dst_vec, const unsigned *vec_a, const unsigned *vec_b, unsigned n) {
     for (int i = 0; i < n; i++)
