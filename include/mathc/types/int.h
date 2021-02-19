@@ -54,18 +54,22 @@ typedef union ivec3 {
         int v0, v1, v2;
     };
     ivec2 xy;
-    ivec2 rg;
     struct {
         int x;
-        int r;
         union {
             struct {
                 int y, z;
             };
+            ivec2 yz;
+        };
+    };
+    ivec2 rg;
+    struct {
+        int r;
+        union {
             struct {
                 int g, b;
             };
-            ivec2 yz;
             ivec2 gb;
         };
     };
@@ -109,30 +113,38 @@ typedef union ivec4 {
         int v0, v1, v2, v3;
     };
     ivec2 xy;
-    ivec2 rg;
     ivec3 xyz;
-    ivec3 rgb;
     struct {
         int x;
-        int r;
         union {
             struct {
                 int y;
-                int g;
                 union {
                     struct {
                         int z, w;
                     };
-                    struct {
-                        int b, a;
-                    };
                     ivec2 zw;
-                    ivec2 ba;
                 };
             };
             ivec2 yz;
-            ivec2 gb;
             ivec3 yzw;
+        };
+    };
+    ivec2 rg;
+    ivec3 rgb;
+    struct {
+        int r;
+        union {
+            struct {
+                int g;
+                union {
+                    struct {
+                        int b, a;
+                    };
+                    ivec2 ba;
+                };
+            };
+            ivec2 gb;
             ivec3 gba;
         };
     };
