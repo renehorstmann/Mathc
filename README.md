@@ -20,6 +20,7 @@ There are multiple types for different sizes and value types:
 - vec2, vec3, vec4 for float vectors
 - mat2, mat3, mat4 for float square matrices
 - ivec2, ivec3, ivec4, imat2, imat3, imat4 for int vectors / square matrices
+- uvec2, uvec3, uvec4, umat2, umat3, umat4 for unsigned vectors / square matrices
 - dvec2, dvec3, dvec4, dmat2, dmat3, dmat4 for double vectors / square matrices
 - bvec2, bvec3, bvec4 for bool vectors
 
