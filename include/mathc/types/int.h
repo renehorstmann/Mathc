@@ -14,6 +14,9 @@ typedef union ivec2 {
     struct {
         int x, y;
     };
+    struct {
+        int r, g;
+    };
 } ivec2;
 static_assert(sizeof(ivec2) == sizeof(int) * 2, "[Mathc] wrong expected size");
 
@@ -51,13 +54,19 @@ typedef union ivec3 {
         int v0, v1, v2;
     };
     ivec2 xy;
+    ivec2 rg;
     struct {
         int x;
+        int r;
         union {
             struct {
                 int y, z;
             };
+            struct {
+                int g, b;
+            };
             ivec2 yz;
+            ivec2 gb;
         };
     };
 } ivec3;
@@ -100,21 +109,31 @@ typedef union ivec4 {
         int v0, v1, v2, v3;
     };
     ivec2 xy;
+    ivec2 rg;
     ivec3 xyz;
+    ivec3 rgb;
     struct {
         int x;
+        int r;
         union {
             struct {
                 int y;
+                int g;
                 union {
                     struct {
                         int z, w;
                     };
+                    struct {
+                        int b, a;
+                    };
                     ivec2 zw;
+                    ivec2 ba;
                 };
             };
             ivec2 yz;
+            ivec2 gb;
             ivec3 yzw;
+            ivec3 gba;
         };
     };
 } ivec4;
