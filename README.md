@@ -45,6 +45,11 @@ int main() {
     c.v1 = a.v1 + b.v1;
     c.v2 = a.v2 + b.v2;
 
+    // or by color:
+    c.r = a.r + b.r;
+    c.g = a.g + b.g;
+    c.b = a.b + b.b;
+
     // or by raw float *:
     c.v[0] = a.v[0] + b.v[0];
     c.v[1] = a.v[1] + b.v[1];
