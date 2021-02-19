@@ -2,7 +2,7 @@
 #define MATHC_VEC_UVEC2_H
 
 #include "uvecn.h"
-#include "../types/unsigned.h"
+#include "../types/uint.h"
 #include "../types/bool.h"
 
 
