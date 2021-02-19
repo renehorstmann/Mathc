@@ -5,7 +5,7 @@
 #include "float.h"
 #include "double.h"
 #include "int.h"
-//#include "uint.h"
+#include "uint.h"
 
 #include "utils/float.h"
 #include "utils/double.h"
