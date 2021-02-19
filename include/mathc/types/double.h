@@ -54,14 +54,19 @@ typedef union dvec3 {
         double v0, v1, v2;
     };
     dvec2 xy;
-    dvec2 rg;
     struct {
         double x;
-        double r;
         union {
             struct {
                 double y, z;
             };
+            dvec2 yz;
+        };
+    };
+    dvec2 rg;
+    struct {
+        double r;
+        union {
             struct {
                 double g, b;
             };
@@ -108,30 +113,38 @@ typedef union dvec4 {
         double v0, v1, v2, v3;
     };
     dvec2 xy;
-    dvec2 rg;
     dvec3 xyz;
-    dvec3 rgb;
     struct {
         double x;
-        double r;
         union {
             struct {
                 double y;
-                double g;
                 union {
                     struct {
                         double z, w;
                     };
-                    struct {
-                        double b, a;
-                    };
                     dvec2 zw;
-                    dvec2 ba;
                 };
             };
             dvec2 yz;
-            dvec2 gb;
             dvec3 yzw;
+        };
+    };
+    dvec2 rg;
+    dvec3 rgb;
+    struct {
+        double r;
+        union {
+            struct {
+                double g;
+                union {
+                    struct {
+                        double b, a;
+                    };
+                    dvec2 ba;
+                };
+            };
+            dvec2 gb;
             dvec3 gba;
         };
     };
