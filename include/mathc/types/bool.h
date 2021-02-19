@@ -8,7 +8,7 @@
 #include <stdbool.h>
 
 
-typedef union bvec2 {
+typedef union {
     bool v[2];
     struct {
         bool v0, v1;
@@ -28,7 +28,7 @@ static_assert(sizeof(bvec2) == sizeof(bool) * 2, "[Mathc] wrong expected size");
 /** casts a bool * to a dereferenced const bvec2 */
 #define ConstBVec2(bvec) (*(const bvec2 *) (bvec))
 
-typedef union bvec3 {
+typedef union {
     bool v[3];
     struct {
         bool v0, v1, v2;
@@ -63,7 +63,7 @@ static_assert(sizeof(bvec3) == sizeof(bool) * 3, "[Mathc] wrong expected size");
 #define ConstBVec3(bvec) (*(const bvec3 *) (bvec))
 
 
-typedef union bvec4 {
+typedef union {
     bool v[4];
     struct {
         bool v0, v1, v2, v3;
