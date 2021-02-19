@@ -34,11 +34,6 @@ static int isca_sqrt(int x) {
     return sqrt(x);
 }
 
-/** dst = 1 / sqrt(x) */
-static int isca_inversesqrt(int x) {
-    return 1.0 / sqrt(x);
-}
-
 /** dst = abs(x) */
 static int isca_abs(int x) {
     return abs(x);
