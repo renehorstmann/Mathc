@@ -2,7 +2,7 @@
 #define MATHC_MAT_UMAT4_H
 
 #include "umatn.h"
-#include "../types/unsigned.h"
+#include "../types/uint.h"
 #include "../vec/uvecn.h"
 
 
