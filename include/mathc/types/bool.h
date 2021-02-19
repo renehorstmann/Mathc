@@ -16,6 +16,9 @@ typedef union bvec2 {
     struct {
         bool x, y;
     };
+    struct {
+        bool r, g;
+    };
 } bvec2;
 static_assert(sizeof(bvec2) == sizeof(bool) * 2, "[Mathc] wrong expected size");
 
@@ -38,6 +41,16 @@ typedef union bvec3 {
                 bool y, z;
             };
             bvec2 yz;
+        };
+    };
+    bvec2 rg;
+    struct {
+        bool r;
+        union {
+            struct {
+                bool g, b;
+            };
+            bvec2 gb;
         };
     };
 } bvec3;
@@ -71,6 +84,24 @@ typedef union bvec4 {
             };
             bvec2 yz;
             bvec3 yzw;
+        };
+    };
+    bvec2 rg;
+    bvec3 rgb;
+    struct {
+        bool r;
+        union {
+            struct {
+                bool g;
+                union {
+                    struct {
+                        bool b, a;
+                    };
+                    bvec2 ba;
+                };
+            };
+            bvec2 gb;
+            bvec3 gba;
         };
     };
 } bvec4;
