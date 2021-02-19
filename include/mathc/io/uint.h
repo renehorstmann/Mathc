@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <locale.h>
-#include "../types/unsigned.h"
+#include "../types/uint.h"
 
 //
 // from cglm/io.h
