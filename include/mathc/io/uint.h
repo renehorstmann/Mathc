@@ -34,7 +34,7 @@
 static void uvec2_print_f(uvec2 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(uvec2) " MATHC_PRINT_COLOR "{{");
-    for (unsigned v = 0; v < 2; v++) {
+    for (int v = 0; v < 2; v++) {
         if(v>0)
             fputc(',', ostream);
         fprintf(ostream, " %u", vec.v[v]);
@@ -60,7 +60,7 @@ static void uvec2_println(uvec2 vec) {
 static void umat2_println_f(umat2 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "umat2: " MATHC_PRINT_COLOR "\n");
-    for (unsigned r = 0; r < 2; r++) {
+    for (int r = 0; r < 2; r++) {
         fprintf(ostream, "  |");
         for (unsigned c = 0; c < 2; c++)
             fprintf(ostream, " %u", mat.m[c][r]);
@@ -78,7 +78,7 @@ static void umat2_println(umat2 umat) {
 static void umat2_print_repr_f(umat2 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(umat2)" MATHC_PRINT_COLOR " {{");
-    for (unsigned v = 0; v < 4; v++) {
+    for (int v = 0; v < 4; v++) {
         if(v>0)
             fputc(',', ostream);
         fprintf(ostream, " %u", mat.v[v]);
@@ -104,7 +104,7 @@ static void umat2_println_repr(umat2 mat) {
 static void uvec3_print_f(uvec3 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(uvec3) " MATHC_PRINT_COLOR "{{");
-    for (unsigned v = 0; v < 3; v++) {
+    for (int v = 0; v < 3; v++) {
         if(v>0)
             fputc(',', ostream);
         fprintf(ostream, " %u", vec.v[v]);
@@ -129,7 +129,7 @@ static void uvec3_println(uvec3 vec) {
 static void umat3_println_f(umat3 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "umat3: " MATHC_PRINT_COLOR "\n");
-    for (unsigned r = 0; r < 3; r++) {
+    for (int r = 0; r < 3; r++) {
         fprintf(ostream, "  |");
         for (unsigned c = 0; c < 3; c++)
             fprintf(ostream, " %u", mat.m[c][r]);
@@ -147,7 +147,7 @@ static void umat3_println(umat3 umat) {
 static void umat3_print_repr_f(umat3 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(umat3)" MATHC_PRINT_COLOR " {{");
-    for (unsigned v = 0; v < 9; v++) {
+    for (int v = 0; v < 9; v++) {
         if(v>0)
             fputc(',', ostream);
         fprintf(ostream, " %u", mat.v[v]);
@@ -172,7 +172,7 @@ static void umat3_println_repr(umat3 mat) {
 static void uvec4_print_f(uvec4 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(uvec4) " MATHC_PRINT_COLOR "{{");
-    for (unsigned v = 0; v < 4; v++) {
+    for (int v = 0; v < 4; v++) {
         if(v>0)
             fputc(',', ostream);
         fprintf(ostream, " %u", vec.v[v]);
@@ -197,7 +197,7 @@ static void uvec4_println(uvec4 vec) {
 static void umat4_println_f(umat4 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "umat4: " MATHC_PRINT_COLOR "\n");
-    for (unsigned r = 0; r < 4; r++) {
+    for (int r = 0; r < 4; r++) {
         fprintf(ostream, "  |");
         for (unsigned c = 0; c < 4; c++)
             fprintf(ostream, " %u", mat.m[c][r]);
@@ -215,7 +215,7 @@ static void umat4_println(umat4 umat) {
 static void umat4_print_repr_f(umat4 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(umat4)" MATHC_PRINT_COLOR " {{");
-    for (unsigned v = 0; v < 16; v++) {
+    for (int v = 0; v < 16; v++) {
         if(v>0)
             fputc(',', ostream);
         fprintf(ostream, " %u", mat.v[v]);
