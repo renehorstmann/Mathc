@@ -6,7 +6,7 @@
 #endif
 
 
-typedef union uvec2 {
+typedef union {
     unsigned v[2];
     struct {
         unsigned v0, v1;
@@ -27,7 +27,7 @@ static_assert(sizeof(uvec2) == sizeof(unsigned) * 2, "[Mathc] wrong expected siz
 #define ConstUVec2(vec) (*(const uvec2 *) (vec))
 
 
-typedef union umata2 {
+typedef union {
     unsigned v[4];
     unsigned m[2][2];
     uvec2 col[2];
@@ -39,16 +39,16 @@ typedef union umata2 {
         unsigned m00, m01;
         unsigned m10, m11;
     };
-} umata2;
-static_assert(sizeof(umata2) == sizeof(unsigned) * 4, "[Mathc] wrong expected size");
+} umat2;
+static_assert(sizeof(umat2) == sizeof(unsigned) * 4, "[Mathc] wrong expected size");
 
 /** casts a unsigned * to a dereferenced umata2 */
-#define UMat2(mat) (*(umata2 *) (mat))
+#define UMat2(mat) (*(umat2 *) (mat))
 
 /** casts a unsigned * to a dereferenced const umata2 */
-#define ConstUMat2(mat) (*(const umata2 *) (mat))
+#define ConstUMat2(mat) (*(const umat2 *) (mat))
 
-typedef union uvec3 {
+typedef union {
     unsigned v[3];
     struct {
         unsigned v0, v1, v2;
@@ -83,7 +83,7 @@ static_assert(sizeof(uvec3) == sizeof(unsigned) * 3, "[Mathc] wrong expected siz
 #define ConstUVec3(vec) (*(const uvec3 *) (vec))
 
 
-typedef union umata3 {
+typedef union {
     unsigned v[9];
     unsigned m[3][3];
     uvec3 col[3];
@@ -97,17 +97,17 @@ typedef union umata3 {
         unsigned m10, m11, m12;
         unsigned m20, m21, m22;
     };
-} umata3;
-static_assert(sizeof(umata3) == sizeof(unsigned) * 9, "[Mathc] wrong expected size");
+} umat3;
+static_assert(sizeof(umat3) == sizeof(unsigned) * 9, "[Mathc] wrong expected size");
 
 /** casts a unsigned * to a dereferenced umata3 */
-#define UMat3(mat) (*(umata3 *) (mat))
+#define UMat3(mat) (*(umat3 *) (mat))
 
 /** casts a unsigned * to a dereferenced const umata3 */
-#define IConstMat3(mat) (*(const umata3 *) (mat))
+#define ConstUMat3(mat) (*(const umat3 *) (mat))
 
 
-typedef union uvec4 {
+typedef union {
     unsigned v[4];
     struct {
         unsigned v0, v1, v2, v3;
@@ -158,7 +158,7 @@ static_assert(sizeof(uvec4) == sizeof(unsigned) * 4, "[Mathc] wrong expected siz
 #define ConstUVec4(vec) (*(const uvec4 *) (vec))
 
 
-typedef union umata4 {
+typedef union {
     unsigned v[16];
     unsigned m[4][4];
     uvec4 col[4];
@@ -174,14 +174,14 @@ typedef union umata4 {
         unsigned m20, m21, m22, m23;
         unsigned m30, m31, m32, m33;
     };
-} umata4;
-static_assert(sizeof(umata4) == sizeof(unsigned) * 16, "[Mathc] wrong expected size");
+} umat4;
+static_assert(sizeof(umat4) == sizeof(unsigned) * 16, "[Mathc] wrong expected size");
 
 /** casts a unsigned * to a dereferenced umata4 */
-#define UMat4(mat) (*(umata4 *) (mat))
+#define UMat4(mat) (*(umat4 *) (mat))
 
 /** casts a unsigned * to a dereferenced const umata4 */
-#define ConstUMat4(mat) (*(const umata4 *) (mat))
+#define ConstUMat4(mat) (*(const umat4 *) (mat))
 
 
 #endif //MATHC_TYPES_UINT_H
