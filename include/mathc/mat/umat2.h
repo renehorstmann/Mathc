@@ -2,7 +2,7 @@
 #define MATHC_MAT_UMAT2_H
 
 #include "umatn.h"
-#include "../types/unsigned.h"
+#include "../types/uint.h"
 
 
 /** dst = r==c ? 1 : 0 (identity)  */
