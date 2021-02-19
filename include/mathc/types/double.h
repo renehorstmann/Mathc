@@ -6,7 +6,7 @@
 #endif
 
 
-typedef union dvec2 {
+typedef union {
     double v[2];
     struct {
         double v0, v1;
@@ -27,7 +27,7 @@ static_assert(sizeof(dvec2) == sizeof(double) * 2, "[Mathc] wrong expected size"
 #define ConstDVec2(vec) (*(const dvec2 *) (vec))
 
 
-typedef union dmat2 {
+typedef union {
     double v[4];
     double m[2][2];
     dvec2 col[2];
@@ -48,7 +48,7 @@ static_assert(sizeof(dmat2) == sizeof(double) * 4, "[Mathc] wrong expected size"
 /** casts a double * to a dereferenced const dmat2 */
 #define ConstDMat2(mat) (*(const dmat2 *) (mat))
 
-typedef union dvec3 {
+typedef union {
     double v[3];
     struct {
         double v0, v1, v2;
@@ -83,7 +83,7 @@ static_assert(sizeof(dvec3) == sizeof(double) * 3, "[Mathc] wrong expected size"
 #define ConstDVec3(vec) (*(const dvec3 *) (vec))
 
 
-typedef union dmat3 {
+typedef union {
     double v[9];
     double m[3][3];
     dvec3 col[3];
@@ -107,7 +107,7 @@ static_assert(sizeof(dmat3) == sizeof(double) * 9, "[Mathc] wrong expected size"
 #define ConstDMat3(mat) (*(const dmat3 *) (mat))
 
 
-typedef union dvec4 {
+typedef union {
     double v[4];
     struct {
         double v0, v1, v2, v3;
@@ -158,7 +158,7 @@ static_assert(sizeof(dvec4) == sizeof(double) * 4, "[Mathc] wrong expected size"
 #define ConstDVec4(vec) (*(const dvec4 *) (vec))
 
 
-typedef union dmat4 {
+typedef union {
     double v[16];
     double m[4][4];
     dvec4 col[4];
