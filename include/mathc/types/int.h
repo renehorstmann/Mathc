@@ -6,7 +6,7 @@
 #endif
 
 
-typedef union ivec2 {
+typedef union {
     int v[2];
     struct {
         int v0, v1;
@@ -27,7 +27,7 @@ static_assert(sizeof(ivec2) == sizeof(int) * 2, "[Mathc] wrong expected size");
 #define ConstIVec2(vec) (*(const ivec2 *) (vec))
 
 
-typedef union imat2 {
+typedef union {
     int v[4];
     int m[2][2];
     ivec2 col[2];
@@ -48,7 +48,7 @@ static_assert(sizeof(imat2) == sizeof(int) * 4, "[Mathc] wrong expected size");
 /** casts a int * to a dereferenced const imat2 */
 #define ConstIMat2(mat) (*(const imat2 *) (mat))
 
-typedef union ivec3 {
+typedef union {
     int v[3];
     struct {
         int v0, v1, v2;
@@ -83,7 +83,7 @@ static_assert(sizeof(ivec3) == sizeof(int) * 3, "[Mathc] wrong expected size");
 #define ConstIVec3(vec) (*(const ivec3 *) (vec))
 
 
-typedef union imat3 {
+typedef union {
     int v[9];
     int m[3][3];
     ivec3 col[3];
@@ -104,10 +104,10 @@ static_assert(sizeof(imat3) == sizeof(int) * 9, "[Mathc] wrong expected size");
 #define IMat3(mat) (*(imat3 *) (mat))
 
 /** casts a int * to a dereferenced const imat3 */
-#define IConstMat3(mat) (*(const imat3 *) (mat))
+#define ConstIMat3(mat) (*(const imat3 *) (mat))
 
 
-typedef union ivec4 {
+typedef union {
     int v[4];
     struct {
         int v0, v1, v2, v3;
@@ -158,7 +158,7 @@ static_assert(sizeof(ivec4) == sizeof(int) * 4, "[Mathc] wrong expected size");
 #define ConstIVec4(vec) (*(const ivec4 *) (vec))
 
 
-typedef union imat4 {
+typedef union {
     int v[16];
     int m[4][4];
     ivec4 col[4];
