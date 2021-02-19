@@ -54,18 +54,22 @@ typedef union vec3 {
         float v0, v1, v2;
     };
     vec2 xy;
-    vec2 rg;
     struct {
         float x;
-        float r
         union {
             struct {
                 float y, z;
             };
+            vec2 yz;
+        };
+    };
+    vec2 rg;
+    struct {
+        float r;
+        union {
             struct {
                 float g, b;
             };
-            vec2 yz;
             vec2 gb;
         };
     };
@@ -109,30 +113,38 @@ typedef union vec4 {
         float v0, v1, v2, v3;
     };
     vec2 xy;
-    vec2 rg;
     vec3 xyz;
-    vec3 rgb;
     struct {
         float x;
-        float r;
         union {
             struct {
                 float y;
-                float g;
                 union {
                     struct {
                         float z, w;
                     };
-                    struct {
-                        float b, a;
-                    };
                     vec2 zw;
-                    vec2 ba;
                 };
             };
             vec2 yz;
-            vec2 gb;
             vec3 yzw;
+        };
+    };
+    vec2 rg;
+    vec3 rgb;
+    struct {
+        float r;
+        union {
+            struct {
+                float g;
+                union {
+                    struct {
+                        float b, a;
+                    };
+                    vec2 ba;
+                };
+            };
+            vec2 gb;
             vec3 gba;
         };
     };
