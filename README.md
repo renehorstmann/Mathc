@@ -263,7 +263,7 @@ There are also variants for int, double and bool with i, d and b prefix.
 There are a lot of functions to use with the types:
 - vec*_unit*
 - vec*_set
-- vec*_cast_from_*
+- vec*_cast_from
 - vec*_neg
 - vec*_add
 - vec*_add_vec
@@ -340,7 +340,7 @@ Special bool vector functions:
 
 Matrix functions:
 - mat*_eye
-- mat*_cast_from_*
+- mat*_cast_from
 - mat*_get_row
 - mat*_get_col
 - mat*_set_row
