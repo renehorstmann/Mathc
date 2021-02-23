@@ -263,6 +263,7 @@ There are also variants for int, double and bool with i, d and b prefix.
 There are a lot of functions to use with the types:
 - vec*_unit*
 - vec*_set
+- vec*_cast_from_*
 - vec*_neg
 - vec*_add
 - vec*_add_vec
@@ -339,6 +340,7 @@ Special bool vector functions:
 
 Matrix functions:
 - mat*_eye
+- mat*_cast_from_*
 - mat*_get_row
 - mat*_get_col
 - mat*_set_row
@@ -353,6 +355,38 @@ Matrix functions:
 - mat*_set_block*
 - mat*_get_upper_left*
 - mat*_set_upper_left*
+
+
+Scalar function:
+- sca_radians
+- sca_degrees
+- sca_sin
+- sca_cos
+- sca_tan
+- sca_asin
+- sca_acos
+- sca_atan
+- sca_atan2
+- sca_pow
+- sca_exp
+- sca_log
+- sca_exp2
+- sca_log2
+- sca_sqrt
+- sca_inversesqrt
+- sca_abs
+- sca_sign
+- sca_floor
+- sca_ceil
+- sca_fract
+- sca_mod
+- sca_min
+- sca_max
+- sca_clamp
+- sca_mix
+- sca_step
+- sca_smoothstep
+- sca_isnan
 
 ### Typeless functions
 Most functions have their base function as vecN_* or matN_*.
