@@ -266,15 +266,15 @@ static vec4 vec4_atan_v(const float *vec_x) {
 }
 
 
-/** dst = atan4(y, x) */
-static vec4 vec4_atan4(vec4 vec_y, vec4 vec_x) {
+/** dst = atan2(y, x) */
+static vec4 vec4_atan2(vec4 vec_y, vec4 vec_x) {
     vec4 res;
     vecN_atan2(res.v, vec_y.v, vec_x.v, 4);
     return res;
 }
-/** dst = atan4(y, x) */
-static vec4 vec4_atan4_v(const float *vec_y, const float *vec_x) {
-    return vec4_atan4(Vec4(vec_y), Vec4(vec_x));
+/** dst = atan2(y, x) */
+static vec4 vec4_atan2_v(const float *vec_y, const float *vec_x) {
+    return vec4_atan2(Vec4(vec_y), Vec4(vec_x));
 }
 
 
@@ -326,27 +326,27 @@ static vec4 vec4_log_v(const float *vec_x) {
 }
 
 
-/** dst = exp4(x) */
-static vec4 vec4_exp4(vec4 vec_x) {
+/** dst = exp2(x) */
+static vec4 vec4_exp2(vec4 vec_x) {
     vec4 res;
     vecN_exp2(res.v, vec_x.v, 4);
     return res;
 }
-/** dst = exp4(x) */
-static vec4 vec4_exp4_v(const float *vec_x) {
-    return vec4_exp4(Vec4(vec_x));
+/** dst = exp2(x) */
+static vec4 vec4_exp2_v(const float *vec_x) {
+    return vec4_exp2(Vec4(vec_x));
 }
 
 
-/** dst = log4(x) */
-static vec4 vec4_log4(vec4 vec_x) {
+/** dst = log2(x) */
+static vec4 vec4_log2(vec4 vec_x) {
     vec4 res;
     vecN_log2(res.v, vec_x.v, 4);
     return res;
 }
-/** dst = log4(x) */
-static vec4 vec4_log4_v(const float *vec_x) {
-    return vec4_log4(Vec4(vec_x));
+/** dst = log2(x) */
+static vec4 vec4_log2_v(const float *vec_x) {
+    return vec4_log2(Vec4(vec_x));
 }
 
 
