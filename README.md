@@ -586,7 +586,7 @@ The top directory of this project contains a CmakeLists.txt file, which sets up 
 ## Author
 
 * **René Horstmann**
-* Copied some function implementations of: [cglm](https://github.com/recp/cglm)
+* Copied some function implementations of: [cglm](https://github.com/recp/cglm) (noted in my comments) (MIT License)
 
 ## License
 
