@@ -262,15 +262,15 @@ static dvec3 dvec3_atan_v(const double *vec_x) {
 }
 
 
-/** dst = atan3(y, x) */
-static dvec3 dvec3_atan3(dvec3 vec_y, dvec3 vec_x) {
+/** dst = atan2(y, x) */
+static dvec3 dvec3_atan2(dvec3 vec_y, dvec3 vec_x) {
     dvec3 res;
     dvecN_atan2(res.v, vec_y.v, vec_x.v, 3);
     return res;
 }
-/** dst = atan3(y, x) */
-static dvec3 dvec3_atan3_v(const double *vec_y, const double *vec_x) {
-    return dvec3_atan3(DVec3(vec_y), DVec3(vec_x));
+/** dst = atan2(y, x) */
+static dvec3 dvec3_atan2_v(const double *vec_y, const double *vec_x) {
+    return dvec3_atan2(DVec3(vec_y), DVec3(vec_x));
 }
 
 
@@ -322,27 +322,27 @@ static dvec3 dvec3_log_v(const double *vec_x) {
 }
 
 
-/** dst = exp3(x) */
-static dvec3 dvec3_exp3(dvec3 vec_x) {
+/** dst = exp2(x) */
+static dvec3 dvec3_exp2(dvec3 vec_x) {
     dvec3 res;
     dvecN_exp2(res.v, vec_x.v, 3);
     return res;
 }
-/** dst = exp3(x) */
-static dvec3 dvec3_exp3_v(const double *vec_x) {
-    return dvec3_exp3(DVec3(vec_x));
+/** dst = exp2(x) */
+static dvec3 dvec3_exp2_v(const double *vec_x) {
+    return dvec3_exp2(DVec3(vec_x));
 }
 
 
-/** dst = log3(x) */
-static dvec3 dvec3_log3(dvec3 vec_x) {
+/** dst = log2(x) */
+static dvec3 dvec3_log2(dvec3 vec_x) {
     dvec3 res;
     dvecN_log2(res.v, vec_x.v, 3);
     return res;
 }
-/** dst = log3(x) */
-static dvec3 dvec3_log3_v(const double *vec_x) {
-    return dvec3_log3(DVec3(vec_x));
+/** dst = log2(x) */
+static dvec3 dvec3_log2_v(const double *vec_x) {
+    return dvec3_log2(DVec3(vec_x));
 }
 
 
