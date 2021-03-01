@@ -201,7 +201,7 @@ Not only that, he can do better because he knows more about the data.
 
 The vec2 is defined as:
 ```c
-typedef union vec2 {
+typedef union {
     float v[2];
     struct {
         float v0, v1;
@@ -209,26 +209,29 @@ typedef union vec2 {
     struct {
         float x, y;
     };
+    struct {
+        float r, g;
+    };
 } vec2;
-static_assert(sizeof(vec2) == sizeof(float) * 2, 
-               "[Mathc] wrong expected size");
+static_assert(sizeof(vec2) == sizeof(float) * 2, "[Mathc] wrong expected size");
 ```
 
 
 There are different options to access the data in the vec2:
 ```c
 vec2 a = {{1, 2}};
-printf("a.x = %f = %f = %f\n",
+printf("a.x = %f = %f = %f = %f\n",
     a.v[0],     // raw vector data
     a.v0,       // vector data 0-1
-    a.x         // x, y
+    a.x,        // x, y
+    a.r         // r, g
 );
 ```
 
 
 The type vec3 can do a little bit more:
 ```c
-typedef union vec3 {
+typedef union {
     float v[3];
     struct {
         float v0, v1, v2;
@@ -243,13 +246,22 @@ typedef union vec3 {
             vec2 yz;
         };
     };
+    vec2 rg;
+    struct {
+        float r;
+        union {
+            struct {
+                float g, b;
+            };
+            vec2 gb;
+        };
+    };
 } vec3;
-static_assert(sizeof(vec3) == sizeof(float) * 3, 
-               "[Mathc] wrong expected size");
+static_assert(sizeof(vec3) == sizeof(float) * 3, "[Mathc] wrong expected size");
 ```
 
 
-In addition to v, v0-2, xyz, a vec3 lets you access subdata vec2:
+In addition to v, v0-2, xyz, rgb, a vec3 lets you access subdata vec2:
 ```c
 vec3 a = {{1, 2, 3}};
 vec2 b = a.yz;
@@ -257,8 +269,8 @@ assert(b.v0 == 2 && b.v1 == 3);
 ```
 
 
-vec4 has subdata for both, vec2 and vec3 (.xy, .xyz).
-There are also variants for int, double and bool with i, d and b prefix.
+vec4 has subdata for both, vec2 and vec3 (.xy, .xyz, .yza, .za, ...).
+There are also variants for double, int, unsigned, char, uchar and bool with d, i, u, c, uc and b prefix.
 
 
 ## Basic functions
