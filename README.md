@@ -72,13 +72,13 @@ int main() {
     vec4 rgba;
     
     // .xyz returns a vec3
-    rgba.xyz = rgb;
+    rgba.xyz = rgb;         // or .rgb
     
-    // .w is the 4. component (xyzw)
-    rgba.w = 1;
+    // .w is the 4. component (xyzw, rgba)
+    rgba.w = 1;             // or .a
     
     // copies gb (vec2)
-    vec2 gb = rgba.yz;
+    vec2 gb = rgba.gb;      // or yz
     vec2_println(gb);
 }
 ```
