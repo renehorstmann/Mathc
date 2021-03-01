@@ -169,8 +169,9 @@ int main() {
     rotation_matrix.col[0].x = -1;      // x column, value x
     rotation_matrix.col[1].y = -1;      // y column, value y
 
-    mat3_println(rotation_matrix);
-
+    mat3_println(rotation_matrix);      // nice to view
+    mat3_println_repr(rotation_matrix); // easy to copy into c
+    
     // eye by col vectors
     vec3 x = vec3_unit_x();
     vec3 y = vec3_unit_y();
