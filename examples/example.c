@@ -122,8 +122,8 @@ int main() {
     vec3_println(point);
 
     mat4 VP = create_camera_VP((vec3) {{10, 20, 30}},
-                               vec3_neg((vec3) VEC3_INIT_UNIT_Z),
-                               (vec3) VEC3_INIT_UNIT_Y,
+                               vec3_neg(vec3_unit_z()),
+                               vec3_unit_y(),
                                false);
     vec3 normal = {{0, 1, 0}};
     normal = transform_vector(VP, normal);
