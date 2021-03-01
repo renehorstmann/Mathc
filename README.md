@@ -278,6 +278,7 @@ There are a lot of functions to use with the types:
 - vec*_unit*
 - vec*_set
 - vec*_cast_from
+- vec*_cmp
 - vec*_neg
 - vec*_add
 - vec*_add_vec
@@ -355,6 +356,7 @@ Special bool vector functions:
 Matrix functions:
 - mat*_eye
 - mat*_cast_from
+- mat*_cmp
 - mat*_get_row
 - mat*_get_col
 - mat*_set_row
