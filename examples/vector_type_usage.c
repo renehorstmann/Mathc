@@ -1,4 +1,3 @@
-#include "string.h" // for memcpy
 #include "mathc/mathc.h"
 int main() {
     vec3 a = {{1, 2, 3}};

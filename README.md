@@ -28,7 +28,6 @@ There are multiple types for different sizes and value types: (sizes (*): 2 - 4)
 
 ### Vector type usage:
 ```c
-#include "string.h" // for memcpy
 #include "mathc/mathc.h"
 int main() {
     vec3 a = {{1, 2, 3}};
