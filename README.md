@@ -487,7 +487,7 @@ vec3 transform_vector(mat4 M, vec3 vector) {
     return mat4_mul_vec(M, hvector).xyz;
 }
 
-typedef struct Sphere_s {
+typedef struct {
     float x, y, z, radius;
     // ...
 } Sphere_s;
