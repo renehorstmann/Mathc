@@ -429,10 +429,10 @@ Within the sub folder utils/ are some additional libraries:
 All these libraries should have a d* prefix for double versions
 
 ## Import system
-Import everything from Mathc (except utils/):
+Import everything from Mathc (except of utils/):
 ```#include "mathc/mathc.h"```
 
-Import float related functions, except of utils:
+Import float related functions (except of utils/):
 ```#include "mathc/float.h"```
 
 Import float related utils functions:
@@ -447,7 +447,7 @@ Import only float typeless vector functions:
 Import only float vector4 functions:
 ```#include "mathc/vec/vec4.h"```
 
-Same for bool, double and int.
+Same for double, int, unsigned, char, uchar and bool.
 
 Only importing a subset (like mathc/float.h), speeds up the compilation process
 
