@@ -403,11 +403,11 @@ static float ivec2_length_v(const int *vec) {
 
 
 /** returns norm(b-a) */
-static int ivec2_distance(ivec2 vec_a, ivec2 vec_b) {
+static float ivec2_distance(ivec2 vec_a, ivec2 vec_b) {
     return ivecN_distance(vec_a.v, vec_b.v, 2);
 }
 /** returns norm(b-a) */
-static int ivec2_distance_v(const int *vec_a, const int *vec_b) {
+static float ivec2_distance_v(const int *vec_a, const int *vec_b) {
     return ivec2_distance(IVec2(vec_a), IVec2(vec_b));
 }
 

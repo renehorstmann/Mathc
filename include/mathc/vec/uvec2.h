@@ -339,11 +339,11 @@ static float uvec2_length_v(const unsigned *vec) {
 
 
 /** returns norm(b-a) */
-static unsigned uvec2_distance(uvec2 vec_a, uvec2 vec_b) {
+static float uvec2_distance(uvec2 vec_a, uvec2 vec_b) {
     return uvecN_distance(vec_a.v, vec_b.v, 2);
 }
 /** returns norm(b-a) */
-static unsigned uvec2_distance_v(const unsigned *vec_a, const unsigned *vec_b) {
+static float uvec2_distance_v(const unsigned *vec_a, const unsigned *vec_b) {
     return uvec2_distance(UVec2(vec_a), UVec2(vec_b));
 }
 
