@@ -34,6 +34,11 @@ static mat4 mat4_cast_from_unsigned(const unsigned *v) {
     return res;
 }
 
+/** mat_a == mat_b */
+static bool mat4_cmp(mat4 a, mat4 b) {
+    return vecN_cmp(a.v, b.v, 4*4);
+}
+
 
 /** dst = mat[row][:] */
 static vec4 mat4_get_row(mat4 mat, int row) {

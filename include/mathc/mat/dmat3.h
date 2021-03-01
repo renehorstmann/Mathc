@@ -35,6 +35,11 @@ static dmat3 dmat3_cast_from_unsigned(const unsigned *v) {
     return res;
 }
 
+/** mat_a == mat_b */
+static bool dmat3_cmp(dmat3 a, dmat3 b) {
+    return dvecN_cmp(a.v, b.v, 3*3);
+}
+
 /** dst = mat[row][:] */
 static dvec3 dmat3_get_row(dmat3 mat, int row) {
     dvec3 res;

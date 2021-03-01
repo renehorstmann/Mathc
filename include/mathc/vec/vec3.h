@@ -49,6 +49,18 @@ static vec3 vec3_cast_from_bool(const bool *v) {
     return res;
 }
 
+/** dst = vec / 255 */
+static vec3 vec3_cast_from_uchar_1(const unsigned char *v) {
+    vec3 res;
+    vecN_cast_from_uchar_1(res.v, v, 3);
+    return res;
+}
+
+/** vec_a == vec_b */
+static bool vec3_cmp(vec3 a, vec3 b) {
+    return vecN_cmp(a.v, b.v, 3);
+}
+
 
 /** dst = scalar */
 static vec3 vec3_set(float scalar) {

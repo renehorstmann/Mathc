@@ -34,6 +34,11 @@ static imat3 imat3_cast_from_unsigned(const unsigned *v) {
     return res;
 }
 
+/** mat_a == mat_b */
+static bool imat3_cmp(imat3 a, imat3 b) {
+    return ivecN_cmp(a.v, b.v, 3*3);
+}
+
 
 /** dst = mat[row][:] */
 static ivec3 imat3_get_row(imat3 mat, int row) {

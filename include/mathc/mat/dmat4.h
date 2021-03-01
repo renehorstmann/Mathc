@@ -35,6 +35,11 @@ static dmat4 dmat4_cast_from_unsigned(const unsigned *v) {
     return res;
 }
 
+/** mat_a == mat_b */
+static bool dmat4_cmp(dmat4 a, dmat4 b) {
+    return dvecN_cmp(a.v, b.v, 4*4);
+}
+
 /** dst = mat[row][:] */
 static dvec4 dmat4_get_row(dmat4 mat, int row) {
     dvec4 res;

@@ -54,6 +54,18 @@ static vec4 vec4_cast_from_bool(const bool *v) {
     return res;
 }
 
+/** dst = vec / 255 */
+static vec4 vec4_cast_from_uchar_1(const unsigned char *v) {
+    vec4 res;
+    vecN_cast_from_uchar_1(res.v, v, 4);
+    return res;
+}
+
+/** vec_a == vec_b */
+static bool vec4_cmp(vec4 a, vec4 b) {
+    return vecN_cmp(a.v, b.v, 4);
+}
+
 /** dst = scalar */
 static vec4 vec4_set(float scalar) {
     vec4 res;

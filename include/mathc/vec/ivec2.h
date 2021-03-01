@@ -16,6 +16,11 @@ static ivec2 ivec2_unit_y() {
     return (ivec2) {{0, 1}};
 }
 
+/** ivec_a == ivec_b */
+static bool ivec2_cmp(ivec2 a, ivec2 b) {
+    return ivecN_cmp(a.v, b.v, 2);
+}
+
 
 /** dst = scalar */
 static ivec2 ivec2_set(int scalar) {

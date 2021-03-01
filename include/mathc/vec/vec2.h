@@ -43,6 +43,26 @@ static vec2 vec2_cast_from_bool(const bool *v) {
     return res;
 }
 
+/** dst = (vec2) v */
+static vec2 vec2_cast_from_uchar(const unsigned char *v) {
+    vec2 res;
+    vecN_cast_into(res.v, v, 2);
+    return res;
+}
+
+/** dst = vec / 255 */
+static vec2 vec2_cast_from_uchar_1(const unsigned char *v) {
+    vec2 res;
+    vecN_cast_from_uchar_1(res.v, v, 2);
+    return res;
+}
+
+/** vec_a == vec_b */
+static bool vec2_cmp(vec2 a, vec2 b) {
+    return vecN_cmp(a.v, b.v, 2);
+}
+
+
 /** dst = scalar */
 static vec2 vec2_set(float scalar) {
     vec2 res;

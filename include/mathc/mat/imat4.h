@@ -35,6 +35,12 @@ static imat4 imat4_cast_from_unsigned(const unsigned *v) {
 }
 
 
+/** mat_a == mat_b */
+static bool imat4_cmp(imat4 a, imat4 b) {
+    return ivecN_cmp(a.v, b.v, 4*4);
+}
+
+
 /** dst = mat[row][:] */
 static ivec4 imat4_get_row(imat4 mat, int row) {
     ivec4 res;

@@ -26,14 +26,6 @@ static dvec4 dvec4_unit_w() {
     return (dvec4) {{0, 0, 0, 1}};
 }
 
-
-/** dst = scalar */
-static dvec4 dvec4_set(double scalar) {
-    dvec4 res;
-    dvecN_set(res.v, scalar, 4);
-    return res;
-}
-
 /** dst = (dvec4) v */
 static dvec4 dvec4_cast_from_float(const float *v) {
     dvec4 res;
@@ -59,6 +51,26 @@ static dvec4 dvec4_cast_from_unsigned(const unsigned *v) {
 static dvec4 dvec4_cast_from_bool(const bool *v) {
     dvec4 res;
     dvecN_cast_into(res.v, v, 4);
+    return res;
+}
+
+/** dst = vec / 455 v */
+static dvec4 dvec4_cast_from_uchar_1(const unsigned char *v) {
+    dvec4 res;
+    dvecN_cast_from_uchar_1(res.v, v, 4);
+    return res;
+}
+
+/** dvec_a == dvec_b */
+static bool dvec4_cmp(dvec4 a, dvec4 b) {
+    return dvecN_cmp(a.v, b.v, 4);
+}
+
+
+/** dst = scalar */
+static dvec4 dvec4_set(double scalar) {
+    dvec4 res;
+    dvecN_set(res.v, scalar, 4);
     return res;
 }
 

@@ -34,6 +34,11 @@ static mat2 mat2_cast_from_unsigned(const unsigned *v) {
     return res;
 }
 
+/** mat_a == mat_b */
+static bool mat2_cmp(mat2 a, mat2 b) {
+    return vecN_cmp(a.v, b.v, 2*2);
+}
+
 /** dst = mat[row][:] */
 static vec2 mat2_get_row(mat2 mat, int row) {
     vec2 res;

@@ -21,6 +21,11 @@ static ivec3 ivec3_unit_z() {
     return (ivec3) {{0, 0, 1}};
 }
 
+/** ivec_a == ivec_b */
+static bool ivec3_cmp(ivec3 a, ivec3 b) {
+    return ivecN_cmp(a.v, b.v, 3);
+}
+
 
 /** dst = scalar */
 static ivec3 ivec3_set(int scalar) {

@@ -7,6 +7,7 @@
 #endif
 #endif
 
+#include <string.h>     // memcmp
 #include <stdlib.h>     // abs
 #include <stdbool.h>
 #include <math.h>
@@ -20,6 +21,10 @@ do { \
         (dst_vec)[ivecN_cast_into_i_] = (int) (vec)[ivecN_cast_into_i_]; \
 } while(0)
 
+/** vec_a == vec_b */
+static bool ivecN_cmp(const int *vec_a, const int *vec_b, int n) {
+    return memcmp(vec_a, vec_b, n * sizeof(int)) == 0;
+}
 
 /** dst = vec */
 static void ivecN_copy(int *dst_vec, const int *vec, int n) {

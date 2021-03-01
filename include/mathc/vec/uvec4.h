@@ -26,6 +26,11 @@ static uvec4 uvec4_unit_w() {
     return (uvec4) {{0, 0, 0, 1}};
 }
 
+/** uvec_a == uvec_b */
+static bool uvec4_cmp(uvec4 a, uvec4 b) {
+    return uvecN_cmp(a.v, b.v, 4);
+}
+
 
 /** dst = scalar */
 static uvec4 uvec4_set(unsigned scalar) {

@@ -7,6 +7,7 @@
 #endif
 #endif
 
+#include <string.h>     // memcmp
 #include <stdbool.h>
 #include <math.h>
 #include <assert.h>
@@ -18,6 +19,11 @@ do { \
     for(unsigned uvecN_cast_into_i_=0; uvecN_cast_into_i_<(n); uvecN_cast_into_i_++) \
         (dst_vec)[uvecN_cast_into_i_] = (unsigned) (vec)[uvecN_cast_into_i_]; \
 } while(0)
+
+/** vec_a == vec_b */
+static bool uvecN_cmp(const unsigned *vec_a, const unsigned *vec_b, int n) {
+    return memcmp(vec_a, vec_b, n * sizeof(unsigned)) == 0;
+}
 
 
 /** dst = vec */

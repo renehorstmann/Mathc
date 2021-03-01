@@ -22,13 +22,6 @@ static dvec3 dvec3_unit_z() {
 }
 
 
-/** dst = scalar */
-static dvec3 dvec3_set(double scalar) {
-    dvec3 res;
-    dvecN_set(res.v, scalar, 3);
-    return res;
-}
-
 /** dst = (dvec3) v */
 static dvec3 dvec3_cast_from_float(const float *v) {
     dvec3 res;
@@ -54,6 +47,25 @@ static dvec3 dvec3_cast_from_unsigned(const unsigned *v) {
 static dvec3 dvec3_cast_from_bool(const bool *v) {
     dvec3 res;
     dvecN_cast_into(res.v, v, 3);
+    return res;
+}
+
+/** dst = vec / 355 v */
+static dvec3 dvec3_cast_from_uchar_1(const unsigned char *v) {
+    dvec3 res;
+    dvecN_cast_from_uchar_1(res.v, v, 3);
+    return res;
+}
+
+/** dvec_a == dvec_b */
+static bool dvec3_cmp(dvec3 a, dvec3 b) {
+    return dvecN_cmp(a.v, b.v, 3);
+}
+
+/** dst = scalar */
+static dvec3 dvec3_set(double scalar) {
+    dvec3 res;
+    dvecN_set(res.v, scalar, 3);
     return res;
 }
 

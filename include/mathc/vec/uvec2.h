@@ -16,6 +16,10 @@ static uvec2 uvec2_unit_y() {
     return (uvec2) {{0, 1}};
 }
 
+/** uvec_a == uvec_b */
+static bool uvec2_cmp(uvec2 a, uvec2 b) {
+    return uvecN_cmp(a.v, b.v, 2);
+}
 
 /** dst = scalar */
 static uvec2 uvec2_set(unsigned scalar) {
