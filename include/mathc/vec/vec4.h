@@ -48,6 +48,20 @@ static vec4 vec4_cast_from_unsigned(const unsigned *v) {
 }
 
 /** dst = (vec4) v */
+static vec4 vec4_cast_from_char(const char *v) {
+    vec4 res;
+    vecN_cast_into(res.v, v, 4);
+    return res;
+}
+
+/** dst = (vec4) v */
+static vec4 vec4_cast_from_uchar(const unsigned char *v) {
+    vec4 res;
+    vecN_cast_into(res.v, v, 4);
+    return res;
+}
+
+/** dst = (vec4) v */
 static vec4 vec4_cast_from_bool(const bool *v) {
     vec4 res;
     vecN_cast_into(res.v, v, 4);

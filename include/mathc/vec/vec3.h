@@ -42,6 +42,20 @@ static vec3 vec3_cast_from_unsigned(const unsigned *v) {
     return res;
 }
 
+/** dst = (vec4) v */
+static vec3 vec3_cast_from_char(const char *v) {
+    vec3 res;
+    vecN_cast_into(res.v, v, 3);
+    return res;
+}
+
+/** dst = (vec3) v */
+static vec3 vec3_cast_from_uchar(const unsigned char *v) {
+    vec3 res;
+    vecN_cast_into(res.v, v, 3);
+    return res;
+}
+
 /** dst = (vec3) v */
 static vec3 vec3_cast_from_bool(const bool *v) {
     vec3 res;

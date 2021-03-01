@@ -16,7 +16,7 @@
 /** macro to cast a vector unsignedo a unsigned vector */
 #define uvecN_cast_into(dst_vec, vec, n) \
 do { \
-    for(unsigned uvecN_cast_into_i_=0; uvecN_cast_into_i_<(n); uvecN_cast_into_i_++) \
+    for(int uvecN_cast_into_i_=0; uvecN_cast_into_i_<(n); uvecN_cast_into_i_++) \
         (dst_vec)[uvecN_cast_into_i_] = (unsigned) (vec)[uvecN_cast_into_i_]; \
 } while(0)
 

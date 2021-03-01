@@ -1,5 +1,5 @@
-#ifndef MATHC_MAT_UMATN_H
-#define MATHC_MAT_UMATN_H
+#ifndef MATHC_MAT_UCMATN_H
+#define MATHC_MAT_UCMATN_H
 
 // restrict
 #ifdef __cplusplus
@@ -15,9 +15,10 @@
 #include <math.h>
 #include <assert.h>
 
+typedef unsigned char uchar;
 
 /** dst = r==c ? 1 : 0 (identity) */
-static void umatN_eye(unsigned *dst_mat, int n) {
+static void ucmatN_eye(uchar *dst_mat, int n) {
     for (int r = 0; r < n; r++) {
         for (int c = 0; c < n; c++)
             dst_mat[r * n + c] = r == c ? 1 : 0;
@@ -25,49 +26,49 @@ static void umatN_eye(unsigned *dst_mat, int n) {
 }
 
 /** dst = mat[row][:] */
-static void umatN_get_row(unsigned *dst_vec, const unsigned *mat, int row, int n) {
+static void ucmatN_get_row(uchar *dst_vec, const uchar *mat, int row, int n) {
     assert(row >= 0 && row < n);
     for (int c = 0; c < n; c++)
         dst_vec[c] = mat[c * n + row];
 }
 
 /** dst = mat[:][col] */
-static void umatN_get_col(unsigned *dst_vec, const unsigned *mat, int col, int n) {
+static void ucmatN_get_col(uchar *dst_vec, const uchar *mat, int col, int n) {
     assert(col >= 0 && col < n);
     for (int r = 0; r < n; r++)
         dst_vec[r] = mat[col * n + r];
 }
 
 /** dst[row][:] = vec */
-static void umatN_set_row(unsigned *dst_mat, const unsigned *vec, int row, int n) {
+static void ucmatN_set_row(uchar *dst_mat, const uchar *vec, int row, int n) {
     assert(row >= 0 && row < n);
     for (int c = 0; c < n; c++)
         dst_mat[c * n + row] = vec[c];
 }
 
 /** dst[:][col] = vec */
-static void umatN_set_col(unsigned *dst_mat, const unsigned *vec, int col, int n) {
+static void ucmatN_set_col(uchar *dst_mat, const uchar *vec, int col, int n) {
     assert(col >= 0 && col < n);
     for (int r = 0; r < n; r++)
         dst_mat[col * n + r] = vec[r];
 }
 
 /** dst[row][:] = scalar */
-static void umatN_set_row_sca(unsigned *dst_mat, unsigned scalar, int row, int n) {
+static void ucmatN_set_row_sca(uchar *dst_mat, uchar scalar, int row, int n) {
     assert(row >= 0 && row < n);
     for (int c = 0; c < n; c++)
         dst_mat[c * n + row] = scalar;
 }
 
 /** dst[:][col] = scalar */
-static void umatN_set_col_sca(unsigned *dst_mat, unsigned scalar, int col, int n) {
+static void ucmatN_set_col_sca(uchar *dst_mat, uchar scalar, int col, int n) {
     assert(col >= 0 && col < n);
     for (int r = 0; r < n; r++)
         dst_mat[col * n + r] = scalar;
 }
 
 /** returns sum of diagonal form upper left to lower right */
-static unsigned umatN_trace(const unsigned *mat, int n) {
+static unsigned ucmatN_trace(const uchar *mat, int n) {
     unsigned sum = 0;
     for(int i=0; i<n; i++)
         sum += mat[i*n + i];
@@ -75,7 +76,7 @@ static unsigned umatN_trace(const unsigned *mat, int n) {
 }
 
 /** dst = mat^t  (restrict data) */
-static void umatN_transpose_no_alias(unsigned *restrict dst_mat, const unsigned *restrict mat, int n) {
+static void ucmatN_transpose_no_alias(uchar *restrict dst_mat, const uchar *restrict mat, int n) {
     for (int c = 0; c < n; c++) {
         for (int r = 0; r < n; r++) {
             dst_mat[c * n + r] = mat[r * n + c];
@@ -84,21 +85,21 @@ static void umatN_transpose_no_alias(unsigned *restrict dst_mat, const unsigned 
 }
 
 /** dst = mat^t */
-static void umatN_transpose(unsigned *dst_mat, const unsigned *mat, int n) {
+static void ucmatN_transpose(uchar *dst_mat, const uchar *mat, int n) {
 #ifdef MATHC_MAX_SIZE
     assert(n <= MATHC_MAX_SIZE);
-    unsigned tmp[MATHC_MAX_SIZE * MATHC_MAX_SIZE];
+    uchar tmp[MATHC_MAX_SIZE * MATHC_MAX_SIZE];
 #else
-    unsigned tmp[n * n];
+    uchar tmp[n * n];
 #endif
-    umatN_transpose_no_alias(tmp, mat, n);
+    ucmatN_transpose_no_alias(tmp, mat, n);
     for (int i = 0; i < n * n; i++)
         dst_mat[i] = tmp[i];
 }
 
 /** dst = a @ b  (restrict data) */
-static void umatN_mul_mat_no_alias(unsigned *restrict dst_mat, const unsigned *restrict mat_a,
-                                  const unsigned *restrict mat_b, int n) {
+static void ucmatN_mul_mat_no_alias(uchar *restrict dst_mat, const uchar *restrict mat_a,
+                                  const uchar *restrict mat_b, int n) {
     for (int c = 0; c < n; c++) {
         for (int r = 0; r < n; r++) {
             dst_mat[c * n + r] = 0;
@@ -109,21 +110,21 @@ static void umatN_mul_mat_no_alias(unsigned *restrict dst_mat, const unsigned *r
 }
 
 /** dst = a @ b */
-static void umatN_mul_mat(unsigned *dst_mat, const unsigned *mat_a, const unsigned *mat_b, int n) {
+static void ucmatN_mul_mat(uchar *dst_mat, const uchar *mat_a, const uchar *mat_b, int n) {
 #ifdef MATHC_MAX_SIZE
     assert(n <= MATHC_MAX_SIZE);
-    unsigned tmp[MATHC_MAX_SIZE * MATHC_MAX_SIZE];
+    uchar tmp[MATHC_MAX_SIZE * MATHC_MAX_SIZE];
 #else
-    unsigned tmp[n * n];
+    uchar tmp[n * n];
 #endif
-    umatN_mul_mat_no_alias(tmp, mat_a, mat_b, n);
+    ucmatN_mul_mat_no_alias(tmp, mat_a, mat_b, n);
     for (int i = 0; i < n * n; i++)
         dst_mat[i] = tmp[i];
 }
 
 /** dst = a @ b  (restrict data) */
-static void umatN_mul_vec_no_alias(unsigned *restrict dst_vec, const unsigned *restrict mat_a,
-                                  const unsigned *restrict vec_b, int n) {
+static void ucmatN_mul_vec_no_alias(uchar *restrict dst_vec, const uchar *restrict mat_a,
+                                  const uchar *restrict vec_b, int n) {
     for (int r = 0; r < n; r++) {
         dst_vec[r] = 0;
         for (int c = 0; c < n; c++) {
@@ -133,21 +134,21 @@ static void umatN_mul_vec_no_alias(unsigned *restrict dst_vec, const unsigned *r
 }
 
 /** dst = a @ b */
-static void umatN_mul_vec(unsigned *dst_vec, const unsigned *mat_a, const unsigned *vec_b, int n) {
+static void ucmatN_mul_vec(uchar *dst_vec, const uchar *mat_a, const uchar *vec_b, int n) {
 #ifdef MATHC_MAX_SIZE
     assert(n <= MATHC_MAX_SIZE);
-    unsigned tmp[MATHC_MAX_SIZE];
+    uchar tmp[MATHC_MAX_SIZE];
 #else
-    unsigned tmp[n];
+    uchar tmp[n];
 #endif
-    umatN_mul_vec_no_alias(tmp, mat_a, vec_b, n);
+    ucmatN_mul_vec_no_alias(tmp, mat_a, vec_b, n);
     for (int i = 0; i < n; i++)
         dst_vec[i] = tmp[i];
 }
 
 /** dst = a @ b  (restrict data) */
-static void uvecN_mul_mat_no_alias(unsigned *restrict dst_vec, const unsigned *restrict vec_a,
-                                  const unsigned *restrict mat_b, int n) {
+static void ucvecN_mul_mat_no_alias(uchar *restrict dst_vec, const uchar *restrict vec_a,
+                                  const uchar *restrict mat_b, int n) {
     for (int c = 0; c < n; c++) {
         dst_vec[c] = 0;
         for (int r = 0; r < n; r++) {
@@ -157,20 +158,20 @@ static void uvecN_mul_mat_no_alias(unsigned *restrict dst_vec, const unsigned *r
 }
 
 /** dst = a @ b */
-static void uvecN_mul_mat(unsigned *dst_vec, const unsigned *vec_a, const unsigned *mat_b, int n) {
+static void ucvecN_mul_mat(uchar *dst_vec, const uchar *vec_a, const uchar *mat_b, int n) {
 #ifdef MATHC_MAX_SIZE
     assert(n <= MATHC_MAX_SIZE);
-    unsigned tmp[MATHC_MAX_SIZE];
+    uchar tmp[MATHC_MAX_SIZE];
 #else
-    unsigned tmp[n];
+    uchar tmp[n];
 #endif
-    uvecN_mul_mat_no_alias(tmp, vec_a, mat_b, n);
+    ucvecN_mul_mat_no_alias(tmp, vec_a, mat_b, n);
     for (int i = 0; i < n; i++)
         dst_vec[i] = tmp[i];
 }
 
 /** block<block_n*block_n> = mat<n*n>[col:col+block_n, row:row+block_n] */
-static void umatN_get_block(unsigned * restrict dst_block, const unsigned * restrict mat, int row, int col, unsigned block_n, int n) {
+static void ucmatN_get_block(uchar * restrict dst_block, const uchar * restrict mat, int row, int col, uchar block_n, int n) {
     assert(row >= 0 && row + block_n <= n);
     assert(col >= 0 && col + block_n <= n);
     for(int c=0; c<block_n; c++) {
@@ -181,7 +182,7 @@ static void umatN_get_block(unsigned * restrict dst_block, const unsigned * rest
 }
 
 /** dst<n*n>[col:col+block_n, row:row+block_n] = block<block_n*block_n> */
-static void umatN_set_block(unsigned * restrict dst_mat, const unsigned * restrict block, int row, int col, unsigned block_n, int n) {
+static void ucmatN_set_block(uchar * restrict dst_mat, const uchar * restrict block, int row, int col, uchar block_n, int n) {
     assert(row >= 0 && row + block_n <= n);
     assert(col >= 0 && col + block_n <= n);
     for(int c=0; c<block_n; c++) {
@@ -191,4 +192,4 @@ static void umatN_set_block(unsigned * restrict dst_mat, const unsigned * restri
     }
 }
 
-#endif //MATHC_MAT_UMATN_H
+#endif //MATHC_MAT_UCMATN_H

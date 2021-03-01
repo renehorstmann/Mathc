@@ -11,18 +11,20 @@ C++11 should also work (also tested with GCC 9.3.0).
 - io: debug print for the types
 - vec: vector math
 - mat: matrix math
-- sca: scalar math (provides functions like min, max, clamp, ... for float, double, int)
+- sca: scalar math (provides functions like min, max, clamp, ... for float, double, int, ...)
 - utils: some useful functions
 
 
 ## The Types
-There are multiple types for different sizes and value types:
-- vec2, vec3, vec4 for float vectors
-- mat2, mat3, mat4 for float square matrices
-- ivec2, ivec3, ivec4, imat2, imat3, imat4 for int vectors / square matrices
-- uvec2, uvec3, uvec4, umat2, umat3, umat4 for unsigned vectors / square matrices
-- dvec2, dvec3, dvec4, dmat2, dmat3, dmat4 for double vectors / square matrices
-- bvec2, bvec3, bvec4 for bool vectors
+There are multiple types for different sizes and value types: (sizes (*): 2 - 4)
+- vec* for float vectors
+- mat* for float square matrices
+- dvec*, dmat* for double vectors / square matrices
+- ivec*, imat* for int vectors / square matrices
+- uvec*, umat* for unsigned vectors / square matrices
+- cvec*, cmat* for char vectors / square matrices
+- ucvec*, ucmat* for unsigned char vectors / square matrices
+- bvec* for bool vectors
 
 ### Vector type usage:
 ```c

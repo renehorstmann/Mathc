@@ -34,6 +34,20 @@ static imat4 imat4_cast_from_unsigned(const unsigned *v) {
     return res;
 }
 
+/** dst = (imat4) v */
+static imat4 imat4_cast_from_char(const char *v) {
+    imat4 res;
+    ivecN_cast_into(res.v, v, 4*4);
+    return res;
+}
+
+/** dst = (imat4) v */
+static imat4 imat4_cast_from_uchar(const unsigned char *v) {
+    imat4 res;
+    ivecN_cast_into(res.v, v, 4*4);
+    return res;
+}
+
 
 /** mat_a == mat_b */
 static bool imat4_cmp(imat4 a, imat4 b) {

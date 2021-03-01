@@ -48,13 +48,27 @@ static dvec4 dvec4_cast_from_unsigned(const unsigned *v) {
 }
 
 /** dst = (dvec4) v */
+static dvec4 dvec4_cast_from_char(const char *v) {
+    dvec4 res;
+    dvecN_cast_into(res.v, v, 4);
+    return res;
+}
+
+/** dst = (dvec4) v */
+static dvec4 dvec4_cast_from_uchar(const unsigned char *v) {
+    dvec4 res;
+    dvecN_cast_into(res.v, v, 4);
+    return res;
+}
+
+/** dst = (dvec4) v */
 static dvec4 dvec4_cast_from_bool(const bool *v) {
     dvec4 res;
     dvecN_cast_into(res.v, v, 4);
     return res;
 }
 
-/** dst = vec / 455 v */
+/** dst = vec / 255 v */
 static dvec4 dvec4_cast_from_uchar_1(const unsigned char *v) {
     dvec4 res;
     dvecN_cast_from_uchar_1(res.v, v, 4);

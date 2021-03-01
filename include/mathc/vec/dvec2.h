@@ -37,6 +37,19 @@ static dvec2 dvec2_cast_from_unsigned(const unsigned *v) {
     return res;
 }
 
+/** dst = (dvec2) v */
+static dvec2 dvec2_cast_from_char(const char *v) {
+    dvec2 res;
+    dvecN_cast_into(res.v, v, 2);
+    return res;
+}
+
+/** dst = (dvec2) v */
+static dvec2 dvec2_cast_from_uchar(const unsigned char *v) {
+    dvec2 res;
+    dvecN_cast_into(res.v, v, 2);
+    return res;
+}
 
 /** dst = (dvec2) v */
 static dvec2 dvec2_cast_from_bool(const bool *v) {

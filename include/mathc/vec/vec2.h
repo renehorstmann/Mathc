@@ -37,7 +37,7 @@ static vec2 vec2_cast_from_unsigned(const unsigned *v) {
 }
 
 /** dst = (vec2) v */
-static vec2 vec2_cast_from_bool(const bool *v) {
+static vec2 vec2_cast_from_char(const char *v) {
     vec2 res;
     vecN_cast_into(res.v, v, 2);
     return res;
@@ -45,6 +45,13 @@ static vec2 vec2_cast_from_bool(const bool *v) {
 
 /** dst = (vec2) v */
 static vec2 vec2_cast_from_uchar(const unsigned char *v) {
+    vec2 res;
+    vecN_cast_into(res.v, v, 2);
+    return res;
+}
+
+/** dst = (vec2) v */
+static vec2 vec2_cast_from_bool(const bool *v) {
     vec2 res;
     vecN_cast_into(res.v, v, 2);
     return res;

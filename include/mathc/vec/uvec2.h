@@ -50,6 +50,19 @@ static uvec2 uvec2_cast_from_int(const int *v) {
     return res;
 }
 
+/** dst = (uvec2) v */
+static uvec2 uvec2_cast_from_char(const char *v) {
+    uvec2 res;
+    uvecN_cast_into(res.v, v, 2);
+    return res;
+}
+
+/** dst = (uvec2) v */
+static uvec2 uvec2_cast_from_uchar(const unsigned char *v) {
+    uvec2 res;
+    uvecN_cast_into(res.v, v, 2);
+    return res;
+}
 
 /** dst = (uvec2) v */
 static uvec2 uvec2_cast_from_bool(const bool *v) {

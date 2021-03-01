@@ -56,6 +56,20 @@ static uvec3 uvec3_cast_from_int(const int *v) {
 }
 
 /** dst = (uvec3) v */
+static uvec3 uvec3_cast_from_char(const char *v) {
+    uvec3 res;
+    uvecN_cast_into(res.v, v, 3);
+    return res;
+}
+
+/** dst = (uvec3) v */
+static uvec3 uvec3_cast_from_uchar(const unsigned char *v) {
+    uvec3 res;
+    uvecN_cast_into(res.v, v, 3);
+    return res;
+}
+
+/** dst = (uvec3) v */
 static uvec3 uvec3_cast_from_bool(const bool *v) {
     uvec3 res;
     uvecN_cast_into(res.v, v, 3);
