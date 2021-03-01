@@ -78,7 +78,7 @@ int main() {
     rgba.w = 1;             // or .a
     
     // copies gb (vec2)
-    vec2 gb = rgba.gb;      // or yz
+    vec2 gb = rgba.gb;      // or .yz
     vec2_println(gb);
 }
 ```
