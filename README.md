@@ -515,17 +515,17 @@ mat4 ray_to_pose(vec3 pos, vec3 dir) {
     vec3 z = vec3_normalize(dir);
 
     // align x axis of pose to unit x
-    vec3 y = vec3_cross(z, (vec3) VEC3_INIT_UNIT_X);
+    vec3 y = vec3_cross(z, vec3_unit_x());
     if(vec3_norm(y) < 0.01f) {
         // z is parallel to x, using y for x instead
-        y = vec3_cross(z, (vec3) VEC3_INIT_UNIT_Y);
+        y = vec3_cross(z, vec3_unit_y());
     }
     y = vec3_normalize(y);
 
     vec3 x = vec3_cross(y, z);
     // no need to normalize, cause y and z are orthogonal and normalized
 
-    mat4 pose = MAT4_INIT_EYE;
+    mat4 pose = mat4_eye();
     pose.col[0].xyz = x;
     pose.col[1].xyz = y;
     pose.col[2].xyz = z;
@@ -577,8 +577,8 @@ int main() {
     vec3_println(point);
 
     mat4 VP = create_camera_VP((vec3) {{10, 20, 30}},
-                               vec3_neg((vec3) VEC3_INIT_UNIT_Z),
-                               (vec3) VEC3_INIT_UNIT_Y,
+                               vec3_neg(vec3_unit_z()),
+                               vec3_unit_y(),
                                false);
     vec3 normal = {{0, 1, 0}};
     normal = transform_vector(VP, normal);
