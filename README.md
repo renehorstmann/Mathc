@@ -429,7 +429,7 @@ Within the sub folder utils/ are some additional libraries:
 All these libraries should have a d* prefix for double versions
 
 ## Import system
-Import everything from Mathc (except of utils/):
+Import everything from Mathc:
 ```#include "mathc/mathc.h"```
 
 Import float related functions (except of utils/):
