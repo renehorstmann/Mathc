@@ -1,7 +1,4 @@
-
 #include "mathc/mathc.h"
-#include "mathc/utils/float.h"
-#include "mathc/utils/double.h"
 
 int main() {
     vec3 x = vec3_unit_x();

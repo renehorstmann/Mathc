@@ -1,6 +1,5 @@
 #include "mathc/mathc.h"
-#include "mathc/utils/float.h"
-
+#include <time.h>
 
 int main() {
     // some tests here...
@@ -18,4 +17,8 @@ int main() {
 
     rgba = ucvec4_cast_from_float_1(col.v);
     ucvec4_println(rgba);
+
+    srand(time(NULL));
+    vec4 normal = vec4_random_normal(0, 1);
+    vec4_println(normal);
 }
