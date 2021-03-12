@@ -425,6 +425,7 @@ Within the sub folder utils/ are some additional libraries:
 - [intersection.h](include/mathc/utils/intersection.h): for plane, line, triangle intersections
 - [rotation.h](include/mathc/utils/rotation.h): for angle axis to matrix rotations
 - [quat.h](include/mathc/utils/quat.h): for Quaternion math
+- [random.h](include/mathc/utils/random.h): for random number generation (rand function can be user defined)
 
 All these libraries should have a d* prefix for double versions
 
