@@ -57,6 +57,9 @@ int main() {
     c.v[1] = a.v[1] + b.v[1];
     c.v[2] = a.v[2] + b.v[2];
 
+    // or by function
+    c = vec3_add_vec(a, b);
+
     // copies c into copy1
     vec3 copy1 = c;
     vec3_println(copy1);  // mathc/io
