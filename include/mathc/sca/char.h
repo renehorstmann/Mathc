@@ -40,7 +40,7 @@ static signed char csca_abs(signed char x) {
 }
 
 /** dst = x % m (always positive) **/
-static signed char isca_mod_positive(signed char x, unsigned y) {
+static signed char csca_mod_positive(signed char x, unsigned y) {
     signed char dst = (int) x % (int) y;
     if (dst < 0) {
         dst += y;
