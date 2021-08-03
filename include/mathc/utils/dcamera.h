@@ -77,7 +77,6 @@ static dmat4 dmat4_camera_perspective(double fovy, double aspect, double near, d
  * Creates the view matrix for a 3d camera.
  * up vector must not be parallel with eye to center vector
  */
-
 static dmat4 dmat4_camera_lookat(dvec3 eye, dvec3 center, dvec3 up) {
     // from cglm/cam.h/glm_lookar
 
