@@ -77,7 +77,6 @@ static mat4 mat4_camera_perspective(float fovy, float aspect, float near, float 
  * Creates the view matrix for a 3d camera.
  * up vector must not be parallel with eye to center vector
  */
-
 static mat4 mat4_camera_lookat(vec3 eye, vec3 center, vec3 up) {
     // from cglm/cam.h/glm_lookar
 
