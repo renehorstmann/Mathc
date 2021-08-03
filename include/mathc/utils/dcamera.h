@@ -2,6 +2,7 @@
 #define MATHC_UTILS_DCAMERA_H
 
 #include "../vec/dvec3.h"
+#include "../mat/dmat4.h"
 
 /**
  * Creates an orthogonal camera matrix
