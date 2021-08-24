@@ -8,6 +8,11 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-long-long -pedantic -Wno-unused-function")
 
 
+if (MINGW)
+    add_definitions(-DMATHC_NO_PRINT_COLOR)
+endif()
+
+
 add_executable(main examples/main.c)
 target_include_directories(main PUBLIC include)
 target_link_libraries(main m)
