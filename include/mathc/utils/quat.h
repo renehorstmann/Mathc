@@ -18,6 +18,7 @@ static quat quat_eye() {
 static quat quat_conj(quat q) {
     return (quat) {{-q.x, -q.y, -q.z, q.w}};
 }
+
 /** dst = -x, -y, -z, w */
 static quat quat_conj_v(const float *q) {
     return quat_conj(Quat(q));
@@ -29,6 +30,7 @@ static quat quat_inv(quat q) {
     quat conj = quat_conj(q);
     return vec4_scale(conj, 1.0f / vec4_dot(q, q));
 }
+
 /** dst = inv(quat) */
 static quat quat_inv_v(const float *q) {
     return quat_inv(Quat(q));
@@ -45,6 +47,7 @@ static quat quat_mul(quat q_a, quat q_b) {
     res.v[3] = q_a.v[3] * q_b.v[3] - q_a.v[0] * q_b.v[0] - q_a.v[1] * q_b.v[1] - q_a.v[2] * q_b.v[2];
     return res;
 }
+
 /** dst = a @ b Hamilton Product */
 static quat quat_mul_v(const float *q_a, const float *q_b) {
     return quat_mul(Quat(q_a), Quat(q_b));
@@ -65,6 +68,7 @@ static quat quat_from_angle_axis(vec4 angle_axis) {
     res.w = c;
     return res;
 }
+
 /** angle_axis = xyz + w=angle in rad */
 static quat quat_from_angle_axis_v(const float *angle_axis) {
     return quat_from_angle_axis(Quat(angle_axis));
@@ -87,6 +91,7 @@ static vec4 quat_to_angle_axis(quat q) {
     angle_axis.w = angle;
     return angle_axis;
 }
+
 /** angle_axis = xyz + w=angle in rad */
 static vec4 quat_to_angle_axis_v(const float *q) {
     return quat_to_angle_axis(Quat(q));
@@ -130,6 +135,7 @@ static mat3 quat_to_rotation_matrix(quat q) {
     res.m[0][2] = xz - wy;
     return res;
 }
+
 static mat3 quat_to_rotation_matrix_v(const float *q) {
     return quat_to_rotation_matrix(Quat(q));
 }
@@ -176,6 +182,7 @@ static quat quat_from_rotation_matrix(mat3 mat) {
 
     return res;
 }
+
 static quat quat_from_rotation_matrix_v(const float *mat_3) {
     return quat_from_rotation_matrix(Mat3(mat_3));
 }
@@ -207,6 +214,7 @@ static quat quat_slerp(quat q_a, quat q_b, float t) {
     q1 = vec4_add_vec(q1, q2);
     return vec4_scale(q1, 1.0f / sin_theta);
 }
+
 static quat quat_slerp_v(const float *q_a, const float *q_b, float t) {
     return quat_slerp(Quat(q_a), Quat(q_b), t);
 }

@@ -65,7 +65,7 @@ static int isca_clamp(int x, int min, int max) {
 
 /** dst = a * (1-t) + b * t */
 static int isca_mix(int a, int b, float t) {
-    return a * (1.0-t) + b * t;
+    return a * (1.0 - t) + b * t;
 }
 
 /** dst = x < edge ? 0 : 1 */

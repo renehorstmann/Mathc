@@ -140,6 +140,26 @@ static void ivecN_max_vec(int *dst_vec, const int *vec_a, const int *vec_b, int 
         dst_vec[i] = vec_a[i] > vec_b[i] ? vec_a[i] : vec_b[i];
 }
 
+/** returns the index of the min vec value */
+static int ivecN_min_index(const int *vec, int n) {
+    int idx = 0;
+    for (int i = 1; i < n; i++) {
+        if (vec[i] < vec[idx])
+            idx = i;
+    }
+    return idx;
+}
+
+/** returns the index of the max vec value */
+static int ivecN_max_index(const int *vec, int n) {
+    int idx = 0;
+    for (int i = 1; i < n; i++) {
+        if (vec[i] > vec[idx])
+            idx = i;
+    }
+    return idx;
+}
+
 /** dst = x < min ? min : (x > max ? max : x) */
 static void ivecN_clamp(int *dst_vec, const int *vec_x, int min, int max, int n) {
     for (int i = 0; i < n; i++)

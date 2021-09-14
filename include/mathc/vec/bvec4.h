@@ -45,6 +45,7 @@ static bvec4 bvec4_not(bvec4 vec) {
     bvecN_not(res.v, vec.v, 4);
     return res;
 }
+
 /** dst = !vec */
 static bvec4 bvec4_not_v(const bool *vec) {
     return bvec4_not(BVec4(vec));
@@ -57,6 +58,7 @@ static bvec4 bvec4_or(bvec4 vec_a, bvec4 vec_b) {
     bvecN_or(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = a || b */
 static bvec4 bvec4_or_v(const bool *vec_a, const bool *vec_b) {
     return bvec4_or(BVec4(vec_a), BVec4(vec_b));
@@ -69,6 +71,7 @@ static bvec4 bvec4_nor(bvec4 vec_a, bvec4 vec_b) {
     bvecN_nor(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = !(a || b) */
 static bvec4 bvec4_nor_v(const bool *vec_a, const bool *vec_b) {
     return bvec4_nor(BVec4(vec_a), BVec4(vec_b));
@@ -81,6 +84,7 @@ static bvec4 bvec4_xor(bvec4 vec_a, bvec4 vec_b) {
     bvecN_xor(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = a ^ b */
 static bvec4 bvec4_xor_v(const bool *vec_a, const bool *vec_b) {
     return bvec4_xor(BVec4(vec_a), BVec4(vec_b));
@@ -93,6 +97,7 @@ static bvec4 bvec4_nxor(bvec4 vec_a, bvec4 vec_b) {
     bvecN_nxor(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = !(a ^ b) */
 static bvec4 bvec4_nxor_v(const bool *vec_a, const bool *vec_b) {
     return bvec4_nxor(BVec4(vec_a), BVec4(vec_b));
@@ -105,6 +110,7 @@ static bvec4 bvec4_and(bvec4 vec_a, bvec4 vec_b) {
     bvecN_and(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = a && b */
 static bvec4 bvec4_and_v(const bool *vec_a, const bool *vec_b) {
     return bvec4_and(BVec4(vec_a), BVec4(vec_b));
@@ -117,6 +123,7 @@ static bvec4 bvec4_nand(bvec4 vec_a, bvec4 vec_b) {
     bvecN_nand(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = !(a && b) */
 static bvec4 bvec4_nand_v(const bool *vec_a, const bool *vec_b) {
     return bvec4_nand(BVec4(vec_a), BVec4(vec_b));
@@ -127,6 +134,7 @@ static bvec4 bvec4_nand_v(const bool *vec_a, const bool *vec_b) {
 static int bvec4_sum(bvec4 vec) {
     return bvecN_sum(vec.v, 4);
 }
+
 /** returns the sum of true values */
 static int bvec4_sum_v(const bool *vec) {
     return bvec4_sum(BVec4(vec));
@@ -137,6 +145,7 @@ static int bvec4_sum_v(const bool *vec) {
 static bool bvec4_any(bvec4 vec) {
     return bvecN_any(vec.v, 4);
 }
+
 /** returns sum(vec) > 0 */
 static bool bvec4_any_v(const bool *vec) {
     return bvec4_any(BVec4(vec));
@@ -147,6 +156,7 @@ static bool bvec4_any_v(const bool *vec) {
 static bool bvec4_all(bvec4 vec) {
     return bvecN_all(vec.v, 4);
 }
+
 /** returns sum(vec) == n */
 static bool bvec4_all_v(const bool *vec) {
     return bvec4_all(BVec4(vec));

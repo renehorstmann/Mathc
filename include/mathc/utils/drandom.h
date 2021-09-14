@@ -22,7 +22,7 @@ static double dsca_random() {
 
 /** dst = rand() [a:b] */
 static double dsca_random_range(double a, double b) {
-    return a + (b-a) * dsca_random();
+    return a + (b - a) * dsca_random();
 }
 
 /** dst = mean +- amplitude * rand() */
@@ -48,49 +48,49 @@ static double dsca_random_normal(double mean, double sigma) {
 
 /** dst = rand() [0:1] */
 static void dvecN_random(double *dst, int n) {
-    for(int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         dst[i] = dsca_random();
     }
 }
 
 /** dst = rand() [a:b] */
 static void dvecN_random_range(double *dst, double a, double b, int n) {
-    for(int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         dst[i] = dsca_random_range(a, b);
     }
 }
 
 /** dst = rand() [a:b] */
 static void dvecN_random_range_dvec(double *dst, const double *a, const double *b, int n) {
-    for(int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         dst[i] = dsca_random_range(a[i], b[i]);
     }
 }
 
 /** dst = mean +- amplitude * rand() */
 static void dvecN_random_noise(double *dst, double mean, double amplitude, int n) {
-    for(int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         dst[i] = dsca_random_noise(mean, amplitude);
     }
 }
 
 /** dst = mean +- amplitude * rand() */
 static void dvecN_random_noise_dvec(double *dst, const double *mean, const double *amplitude, int n) {
-    for(int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         dst[i] = dsca_random_noise(mean[i], amplitude[i]);
     }
 }
 
 /** dst = mean +- sigma * normalized_rand() */
 static void dvecN_random_normal(double *dst, double mean, double sigma, int n) {
-    for(int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         dst[i] = dsca_random_normal(mean, sigma);
     }
 }
 
 /** dst = mean +- sigma * normalized_rand() */
 static void dvecN_random_normal_dvec(double *dst, const double *mean, const double *sigma, int n) {
-    for(int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         dst[i] = dsca_random_normal(mean[i], sigma[i]);
     }
 }

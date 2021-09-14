@@ -23,7 +23,7 @@ do { \
 
 /** dst = vec / 255 */
 static void dvecN_cast_from_uchar_1(double *dst_vec, const unsigned char *vec, int n) {
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
         dst_vec[i] = (double) vec[i] / 255.0;
 }
 
@@ -266,6 +266,26 @@ static void dvecN_max_vec(double *dst_vec, const double *vec_a, const double *ve
         dst_vec[i] = vec_a[i] > vec_b[i] ? vec_a[i] : vec_b[i];
 }
 
+/** returns the index of the min vec value */
+static int dvecN_min_index(const double *vec, int n) {
+    int idx = 0;
+    for (int i = 1; i < n; i++) {
+        if (vec[i] < vec[idx])
+            idx = i;
+    }
+    return idx;
+}
+
+/** returns the index of the max vec value */
+static int dvecN_max_index(const double *vec, int n) {
+    int idx = 0;
+    for (int i = 1; i < n; i++) {
+        if (vec[i] > vec[idx])
+            idx = i;
+    }
+    return idx;
+}
+
 /** dst = x < min ? min : (x > max ? max : x) */
 static void dvecN_clamp(double *dst_vec, const double *vec_x, double min, double max, int n) {
     for (int i = 0; i < n; i++)
@@ -397,7 +417,8 @@ static double dvecN_distance(const double *vec_a, const double *vec_b, int n) {
 }
 
 /** dst = dot(I, Nref) < 0 ? N : -N */
-static void dvecN_faceforward(double *dst_vec, const double *vec_N, const double *vec_I, const double *vec_Nref, int n) {
+static void
+dvecN_faceforward(double *dst_vec, const double *vec_N, const double *vec_I, const double *vec_Nref, int n) {
     if (dvecN_dot(vec_I, vec_Nref, n) < 0)
         dvecN_copy(dst_vec, vec_N, n);
     else

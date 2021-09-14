@@ -69,8 +69,8 @@ static void imatN_set_col_sca(int *dst_mat, int scalar, int col, int n) {
 /** returns sum of diagonal form upper left to lower right */
 static int imatN_trace(const int *mat, int n) {
     int sum = 0;
-    for(int i=0; i<n; i++)
-        sum += mat[i*n + i];
+    for (int i = 0; i < n; i++)
+        sum += mat[i * n + i];
     return sum;
 }
 
@@ -98,7 +98,7 @@ static void imatN_transpose(int *dst_mat, const int *mat, int n) {
 
 /** dst = a @ b  (restrict data) */
 static void imatN_mul_mat_no_alias(int *restrict dst_mat, const int *restrict mat_a,
-                                  const int *restrict mat_b, int n) {
+                                   const int *restrict mat_b, int n) {
     for (int c = 0; c < n; c++) {
         for (int r = 0; r < n; r++) {
             dst_mat[c * n + r] = 0;
@@ -123,7 +123,7 @@ static void imatN_mul_mat(int *dst_mat, const int *mat_a, const int *mat_b, int 
 
 /** dst = a @ b  (restrict data) */
 static void imatN_mul_vec_no_alias(int *restrict dst_vec, const int *restrict mat_a,
-                                  const int *restrict vec_b, int n) {
+                                   const int *restrict vec_b, int n) {
     for (int r = 0; r < n; r++) {
         dst_vec[r] = 0;
         for (int c = 0; c < n; c++) {
@@ -147,7 +147,7 @@ static void imatN_mul_vec(int *dst_vec, const int *mat_a, const int *vec_b, int 
 
 /** dst = a @ b  (restrict data) */
 static void ivecN_mul_mat_no_alias(int *restrict dst_vec, const int *restrict vec_a,
-                                  const int *restrict mat_b, int n) {
+                                   const int *restrict mat_b, int n) {
     for (int c = 0; c < n; c++) {
         dst_vec[c] = 0;
         for (int r = 0; r < n; r++) {
@@ -170,22 +170,22 @@ static void ivecN_mul_mat(int *dst_vec, const int *vec_a, const int *mat_b, int 
 }
 
 /** block<block_n*block_n> = mat<n*n>[col:col+block_n, row:row+block_n] */
-static void imatN_get_block(int * restrict dst_block, const int * restrict mat, int row, int col, int block_n, int n) {
+static void imatN_get_block(int *restrict dst_block, const int *restrict mat, int row, int col, int block_n, int n) {
     assert(row >= 0 && row + block_n <= n);
     assert(col >= 0 && col + block_n <= n);
-    for(int c=0; c<block_n; c++) {
-        for(int r=0; r<block_n; r++) {
+    for (int c = 0; c < block_n; c++) {
+        for (int r = 0; r < block_n; r++) {
             dst_block[c * block_n + r] = mat[c * n + r];
         }
     }
 }
 
 /** dst<n*n>[col:col+block_n, row:row+block_n] = block<block_n*block_n> */
-static void imatN_set_block(int * restrict dst_mat, const int * restrict block, int row, int col, int block_n, int n) {
+static void imatN_set_block(int *restrict dst_mat, const int *restrict block, int row, int col, int block_n, int n) {
     assert(row >= 0 && row + block_n <= n);
     assert(col >= 0 && col + block_n <= n);
-    for(int c=0; c<block_n; c++) {
-        for(int r=0; r<block_n; r++) {
+    for (int c = 0; c < block_n; c++) {
+        for (int r = 0; r < block_n; r++) {
             dst_mat[c * n + r] = block[c * block_n + r];
         }
     }

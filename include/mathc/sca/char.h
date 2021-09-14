@@ -65,12 +65,12 @@ static signed char csca_clamp(signed char x, signed char min, signed char max) {
 
 /** dst = a * (1-t) + b * t */
 static signed char csca_mix(signed char a, signed char b, float t) {
-    return a * (1.0-t) + b * t;
+    return a * (1.0 - t) + b * t;
 }
 
 /** dst = x < edge ? 0 : 1 */
 static signed char csca_step(signed char x, signed char edge) {
-    return x < edge ? 0: 1;
+    return x < edge ? 0 : 1;
 }
 
 #endif //MATHC_SCA_CHAR_H

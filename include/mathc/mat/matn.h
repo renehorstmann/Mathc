@@ -69,8 +69,8 @@ static void matN_set_col_sca(float *dst_mat, float scalar, int col, int n) {
 /** returns sum of diagonal form upper left to lower right */
 static float matN_trace(const float *mat, int n) {
     float sum = 0;
-    for(int i=0; i<n; i++)
-        sum += mat[i*n + i];
+    for (int i = 0; i < n; i++)
+        sum += mat[i * n + i];
     return sum;
 }
 
@@ -170,22 +170,22 @@ static void vecN_mul_mat(float *dst_vec, const float *vec_a, const float *mat_b,
 }
 
 /** block<block_n*block_n> = mat<n*n>[col:col+block_n, row:row+block_n] */
-static void matN_get_block(float * restrict dst_block, const float * restrict mat, int row, int col, int block_n, int n) {
+static void matN_get_block(float *restrict dst_block, const float *restrict mat, int row, int col, int block_n, int n) {
     assert(row >= 0 && row + block_n <= n);
     assert(col >= 0 && col + block_n <= n);
-    for(int c=0; c<block_n; c++) {
-        for(int r=0; r<block_n; r++) {
+    for (int c = 0; c < block_n; c++) {
+        for (int r = 0; r < block_n; r++) {
             dst_block[c * block_n + r] = mat[c * n + r];
         }
     }
 }
 
 /** dst<n*n>[col:col+block_n, row:row+block_n] = block<block_n*block_n> */
-static void matN_set_block(float * restrict dst_mat, const float * restrict block, int row, int col, int block_n, int n) {
+static void matN_set_block(float *restrict dst_mat, const float *restrict block, int row, int col, int block_n, int n) {
     assert(row >= 0 && row + block_n <= n);
     assert(col >= 0 && col + block_n <= n);
-    for(int c=0; c<block_n; c++) {
-        for(int r=0; r<block_n; r++) {
+    for (int c = 0; c < block_n; c++) {
+        for (int r = 0; r < block_n; r++) {
             dst_mat[c * n + r] = block[c * block_n + r];
         }
     }

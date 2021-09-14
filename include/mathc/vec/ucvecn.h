@@ -24,13 +24,13 @@ do { \
 
 /** dst = vec * 255 */
 static void ucvecN_cast_from_float_1(unsigned char *dst_vec, const float *vec, int n) {
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
         dst_vec[i] = (unsigned char) (vec[i] * 255.0f);
 }
 
 /** dst = vec * 255 */
 static void ucvecN_cast_from_double_1(unsigned char *dst_vec, const double *vec, int n) {
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
         dst_vec[i] = (unsigned char) (vec[i] * 255.0);
 }
 
@@ -136,14 +136,36 @@ static void ucvecN_max_vec(unsigned char *dst_vec, const unsigned char *vec_a, c
         dst_vec[i] = vec_a[i] > vec_b[i] ? vec_a[i] : vec_b[i];
 }
 
+/** returns the index of the min vec value */
+static int ucvecN_min_index(const unsigned char *vec, int n) {
+    int idx = 0;
+    for (int i = 1; i < n; i++) {
+        if (vec[i] < vec[idx])
+            idx = i;
+    }
+    return idx;
+}
+
+/** returns the index of the max vec value */
+static int ucvecN_max_index(const unsigned char *vec, int n) {
+    int idx = 0;
+    for (int i = 1; i < n; i++) {
+        if (vec[i] > vec[idx])
+            idx = i;
+    }
+    return idx;
+}
+
 /** dst = x < min ? min : (x > max ? max : x) */
-static void ucvecN_clamp(unsigned char *dst_vec, const unsigned char *vec_x, unsigned char min, unsigned char max, int n) {
+static void
+ucvecN_clamp(unsigned char *dst_vec, const unsigned char *vec_x, unsigned char min, unsigned char max, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_x[i] < min ? min : (vec_x[i] > max ? max : vec_x[i]);
 }
 
 /** dst = x < min ? min : (x > max ? max : x) */
-static void ucvecN_clamp_vec(unsigned char *dst_vec, const unsigned char *vec_x, const unsigned char *vec_min, const unsigned char *vec_max, int n) {
+static void ucvecN_clamp_vec(unsigned char *dst_vec, const unsigned char *vec_x, const unsigned char *vec_min,
+                             const unsigned char *vec_max, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_x[i] < vec_min[i] ? vec_min[i] : (vec_x[i] > vec_max[i] ? vec_max[i] : vec_x[i]);
 }
@@ -155,7 +177,9 @@ static void ucvecN_mix(unsigned char *dst_vec, const unsigned char *vec_a, const
 }
 
 /** dst = a * (1-t) + b * t */
-static void ucvecN_mix_vec(unsigned char *dst_vec, const unsigned char *vec_a, const unsigned char *vec_b, const float *vec_t, int n) {
+static void
+ucvecN_mix_vec(unsigned char *dst_vec, const unsigned char *vec_a, const unsigned char *vec_b, const float *vec_t,
+               int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] * (1.0f - vec_t[i]) + vec_b[i] * vec_t[i];
 }
@@ -253,7 +277,8 @@ static void ucvecN_greater_than_equal(bool *dst_vec, const unsigned char *vec_a,
 }
 
 /** dst = a >= b */
-static void ucvecN_greater_than_equal_vec(bool *dst_vec, const unsigned char *vec_a, const unsigned char *vec_b, int n) {
+static void
+ucvecN_greater_than_equal_vec(bool *dst_vec, const unsigned char *vec_a, const unsigned char *vec_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] >= vec_b[i];
 }

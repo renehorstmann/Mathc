@@ -82,13 +82,13 @@ static cvec4 cvec4_cast_from_bool(const bool *v) {
 }
 
 
-
 /** dst = -vec */
 static cvec4 cvec4_neg(cvec4 vec) {
     cvec4 res;
     cvecN_neg(res.v, vec.v, 4);
     return res;
 }
+
 /** dst = -vec */
 static cvec4 cvec4_neg_v(const signed char *vec) {
     return cvec4_neg(CVec4(vec));
@@ -101,6 +101,7 @@ static cvec4 cvec4_add_vec(cvec4 vec_a, cvec4 vec_b) {
     cvecN_add_vec(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = a + b */
 static cvec4 cvec4_add_vec_v(const signed char *vec_a, const signed char *vec_b) {
     return cvec4_add_vec(CVec4(vec_a), CVec4(vec_b));
@@ -113,6 +114,7 @@ static cvec4 cvec4_add(cvec4 vec_a, signed char scalar_b) {
     cvecN_add(res.v, vec_a.v, scalar_b, 4);
     return res;
 }
+
 /** dst = a + b */
 static cvec4 cvec4_add_v(const signed char *vec_a, signed char scalar_b) {
     return cvec4_add(CVec4(vec_a), scalar_b);
@@ -125,6 +127,7 @@ static cvec4 cvec4_sub_vec(cvec4 vec_a, cvec4 vec_b) {
     cvecN_sub_vec(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = a - b */
 static cvec4 cvec4_sub_vec_v(const signed char *vec_a, const signed char *vec_b) {
     return cvec4_sub_vec(CVec4(vec_a), CVec4(vec_b));
@@ -137,6 +140,7 @@ static cvec4 cvec4_sub(cvec4 vec_a, signed char scalar_b) {
     cvecN_sub(res.v, vec_a.v, scalar_b, 4);
     return res;
 }
+
 /** dst = a - b */
 static cvec4 cvec4_sub_v(const signed char *vec_a, signed char scalar_b) {
     return cvec4_sub(CVec4(vec_a), scalar_b);
@@ -149,6 +153,7 @@ static cvec4 cvec4_scale_vec(cvec4 vec_a, cvec4 vec_b) {
     cvecN_scale_vec(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = a * b */
 static cvec4 cvec4_scale_vec_v(const signed char *vec_a, const signed char *vec_b) {
     return cvec4_scale_vec(CVec4(vec_a), CVec4(vec_b));
@@ -161,6 +166,7 @@ static cvec4 cvec4_scale(cvec4 vec_a, signed char scalar_b) {
     cvecN_scale(res.v, vec_a.v, scalar_b, 4);
     return res;
 }
+
 /** dst = a * b */
 static cvec4 cvec4_scale_v(const signed char *vec_a, signed char scalar_b) {
     return cvec4_scale(CVec4(vec_a), scalar_b);
@@ -173,6 +179,7 @@ static cvec4 cvec4_div_vec(cvec4 vec_a, cvec4 vec_b) {
     cvecN_div_vec(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = a / b */
 static cvec4 cvec4_div_vec_v(const signed char *vec_a, const signed char *vec_b) {
     return cvec4_div_vec(CVec4(vec_a), CVec4(vec_b));
@@ -185,6 +192,7 @@ static cvec4 cvec4_div(cvec4 vec_a, signed char scalar_b) {
     cvecN_div(res.v, vec_a.v, scalar_b, 4);
     return res;
 }
+
 /** dst = a / b */
 static cvec4 cvec4_div_v(const signed char *vec_a, signed char scalar_b) {
     return cvec4_div(CVec4(vec_a), scalar_b);
@@ -197,6 +205,7 @@ static cvec4 cvec4_abs(cvec4 vec_x) {
     cvecN_abs(res.v, vec_x.v, 4);
     return res;
 }
+
 /** dst = abs(x) */
 static cvec4 cvec4_abs_v(const signed char *vec_x) {
     return cvec4_abs(CVec4(vec_x));
@@ -209,6 +218,7 @@ static cvec4 cvec4_sign(cvec4 vec_x) {
     cvecN_sign(res.v, vec_x.v, 4);
     return res;
 }
+
 /** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
 static cvec4 cvec4_sign_v(const signed char *vec_x) {
     return cvec4_sign(CVec4(vec_x));
@@ -221,6 +231,7 @@ static cvec4 cvec4_mod(cvec4 vec_x, signed char y) {
     cvecN_mod(res.v, vec_x.v, y, 4);
     return res;
 }
+
 /** dst = x % y */
 static cvec4 cvec4_mod_v(const signed char *vec_x, signed char y) {
     return cvec4_mod(CVec4(vec_x), y);
@@ -233,6 +244,7 @@ static cvec4 cvec4_mod_vec(cvec4 vec_x, cvec4 vec_y) {
     cvecN_mod_vec(res.v, vec_x.v, vec_y.v, 4);
     return res;
 }
+
 /** dst = x % y */
 static cvec4 cvec4_mod_vec_v(const signed char *vec_x, const signed char *vec_y) {
     return cvec4_mod_vec(CVec4(vec_x), CVec4(vec_y));
@@ -245,6 +257,7 @@ static cvec4 cvec4_min(cvec4 vec_x, signed char y) {
     cvecN_min(res.v, vec_x.v, y, 4);
     return res;
 }
+
 /** dst = a < b ? a : b */
 static cvec4 cvec4_min_v(const signed char *vec_x, signed char y) {
     return cvec4_min(CVec4(vec_x), y);
@@ -257,6 +270,7 @@ static cvec4 cvec4_min_vec(cvec4 vec_x, cvec4 vec_y) {
     cvecN_min_vec(res.v, vec_x.v, vec_y.v, 4);
     return res;
 }
+
 /** dst = a < b ? a : b */
 static cvec4 cvec4_min_vec_v(const signed char *vec_x, const signed char *vec_y) {
     return cvec4_min_vec(CVec4(vec_x), CVec4(vec_y));
@@ -269,6 +283,7 @@ static cvec4 cvec4_max(cvec4 vec_x, signed char y) {
     cvecN_max(res.v, vec_x.v, y, 4);
     return res;
 }
+
 /** dst = a > b ? a : b */
 static cvec4 cvec4_max_v(const signed char *vec_x, signed char y) {
     return cvec4_max(CVec4(vec_x), y);
@@ -281,11 +296,32 @@ static cvec4 cvec4_max_vec(cvec4 vec_x, cvec4 vec_y) {
     cvecN_max_vec(res.v, vec_x.v, vec_y.v, 4);
     return res;
 }
+
 /** dst = a > b ? a : b */
 static cvec4 cvec4_max_vec_v(const signed char *vec_x, const signed char *vec_y) {
     return cvec4_max_vec(CVec4(vec_x), CVec4(vec_y));
 }
 
+
+/** returns the index of the min vec value */
+static int cvec4_min_index(cvec4 vec) {
+    return cvecN_min_index(vec.v, 4);
+}
+
+/** returns the index of the min vec value */
+static int cvec4_min_index_v(const signed char *vec) {
+    return cvec4_min_index(CVec4(vec));
+}
+
+/** returns the index of the max vec value */
+static int cvec4_max_index(cvec4 vec) {
+    return cvecN_max_index(vec.v, 4);
+}
+
+/** returns the index of the max vec value */
+static int cvec4_max_index_v(const signed char *vec) {
+    return cvec4_max_index(CVec4(vec));
+}
 
 /** dst = x < min ? min : (x > max ? max : x) */
 static cvec4 cvec4_clamp(cvec4 vec_x, signed char min, signed char max) {
@@ -293,6 +329,7 @@ static cvec4 cvec4_clamp(cvec4 vec_x, signed char min, signed char max) {
     cvecN_clamp(res.v, vec_x.v, min, max, 4);
     return res;
 }
+
 /** dst = x < min ? min : (x > max ? max : x) */
 static cvec4 cvec4_clamp_v(const signed char *vec_x, signed char min, signed char max) {
     return cvec4_clamp(CVec4(vec_x), min, max);
@@ -305,6 +342,7 @@ static cvec4 cvec4_clamp_vec(cvec4 vec_x, cvec4 vec_min, cvec4 vec_max) {
     cvecN_clamp_vec(res.v, vec_x.v, vec_min.v, vec_max.v, 4);
     return res;
 }
+
 /** dst = x < min ? min : (x > max ? max : x) */
 static cvec4 cvec4_clamp_vec_v(const signed char *vec_x, const signed char *vec_min, const signed char *vec_max) {
     return cvec4_clamp_vec(CVec4(vec_x), CVec4(vec_min), CVec4(vec_max));
@@ -316,6 +354,7 @@ static cvec4 cvec4_mix(cvec4 vec_a, cvec4 vec_b, float t) {
     cvecN_mix(res.v, vec_a.v, vec_b.v, t, 4);
     return res;
 }
+
 /** dst = a * (1-t) + b * t */
 static cvec4 cvec4_mix_v(const signed char *vec_a, const signed char *vec_b, float t) {
     return cvec4_mix(CVec4(vec_a), CVec4(vec_b), t);
@@ -328,6 +367,7 @@ static cvec4 cvec4_mix_vec(cvec4 vec_a, cvec4 vec_b, const float *vec_t) {
     cvecN_mix_vec(res.v, vec_a.v, vec_b.v, vec_t, 4);
     return res;
 }
+
 /** dst = a * (1-t) + b * t */
 static cvec4 cvec4_mix_vec_v(const signed char *vec_a, const signed char *vec_b, const float *vec_t) {
     return cvec4_mix_vec(CVec4(vec_a), CVec4(vec_b), vec_t);
@@ -340,6 +380,7 @@ static cvec4 cvec4_step(cvec4 vec_x, signed char edge) {
     cvecN_step(res.v, vec_x.v, edge, 4);
     return res;
 }
+
 /** dst = x < edge ? 0 : 1 */
 static cvec4 cvec4_step_v(const signed char *vec_x, signed char edge) {
     return cvec4_step(CVec4(vec_x), edge);
@@ -352,6 +393,7 @@ static cvec4 cvec4_step_vec(cvec4 vec_x, cvec4 vec_edge) {
     cvecN_step_vec(res.v, vec_x.v, vec_edge.v, 4);
     return res;
 }
+
 /** dst = x < edge ? 0 : 1 */
 static cvec4 cvec4_step_vec_v(const signed char *vec_x, const signed char *vec_edge) {
     return cvec4_step_vec(CVec4(vec_x), CVec4(vec_edge));
@@ -361,6 +403,7 @@ static cvec4 cvec4_step_vec_v(const signed char *vec_x, const signed char *vec_e
 static int cvec4_sum(cvec4 vec) {
     return cvecN_sum(vec.v, 4);
 }
+
 /** returns vec[0] + vec[1] + ... + vec[n-1] */
 static int cvec4_sum_v(const signed char *vec) {
     return cvec4_sum(CVec4(vec));
@@ -371,6 +414,7 @@ static int cvec4_sum_v(const signed char *vec) {
 static int cvec4_dot(cvec4 vec_a, cvec4 vec_b) {
     return cvecN_dot(vec_a.v, vec_b.v, 4);
 }
+
 /** returns a dot b */
 static int cvec4_dot_v(const signed char *vec_a, const signed char *vec_b) {
     return cvec4_dot(CVec4(vec_a), CVec4(vec_b));
@@ -381,6 +425,7 @@ static int cvec4_dot_v(const signed char *vec_a, const signed char *vec_b) {
 static float cvec4_norm(cvec4 vec) {
     return cvecN_norm(vec.v, 4);
 }
+
 /** returns ||vec||_4 */
 static float cvec4_norm_v(const signed char *vec) {
     return cvec4_norm(CVec4(vec));
@@ -391,6 +436,7 @@ static float cvec4_norm_v(const signed char *vec) {
 static float cvec4_norm_p(cvec4 vec, float p) {
     return cvecN_norm_p(vec.v, p, 4);
 }
+
 /** returns ||vec||_p */
 static float cvec4_norm_p_v(const signed char *vec, float p) {
     return cvec4_norm_p(CVec4(vec), p);
@@ -401,6 +447,7 @@ static float cvec4_norm_p_v(const signed char *vec, float p) {
 static int cvec4_norm_1(cvec4 vec) {
     return cvecN_norm_1(vec.v, 4);
 }
+
 /** returns ||vec||_1 */
 static int cvec4_norm_1_v(const signed char *vec) {
     return cvec4_norm_1(CVec4(vec));
@@ -411,6 +458,7 @@ static int cvec4_norm_1_v(const signed char *vec) {
 static int cvec4_norm_inf(cvec4 vec) {
     return cvecN_norm_inf(vec.v, 4);
 }
+
 /** returns ||vec||_inf */
 static int cvec4_norm_inf_v(const signed char *vec) {
     return cvec4_norm_inf(CVec4(vec));
@@ -421,6 +469,7 @@ static int cvec4_norm_inf_v(const signed char *vec) {
 static float cvec4_length(cvec4 vec) {
     return cvecN_length(vec.v, 4);
 }
+
 /** returns length of a vector, see cvecN_norm. Just here to match glsl */
 static float cvec4_length_v(const signed char *vec) {
     return cvec4_length(CVec4(vec));
@@ -431,6 +480,7 @@ static float cvec4_length_v(const signed char *vec) {
 static float cvec4_distance(cvec4 vec_a, cvec4 vec_b) {
     return cvecN_distance(vec_a.v, vec_b.v, 4);
 }
+
 /** returns norm(b-a) */
 static float cvec4_distance_v(const signed char *vec_a, const signed char *vec_b) {
     return cvec4_distance(CVec4(vec_a), CVec4(vec_b));
@@ -443,6 +493,7 @@ static bvec4 cvec4_less_than(cvec4 vec_a, signed char b) {
     cvecN_less_than(res.v, vec_a.v, b, 4);
     return res;
 }
+
 /** dst = a < b */
 static bvec4 cvec4_less_than_v(const signed char *vec_a, signed char b) {
     return cvec4_less_than(CVec4(vec_a), b);
@@ -455,6 +506,7 @@ static bvec4 cvec4_less_than_vec(cvec4 vec_a, cvec4 vec_b) {
     cvecN_less_than_vec(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = a < b */
 static bvec4 cvec4_less_than_vec_v(const signed char *vec_a, const signed char *vec_b) {
     return cvec4_less_than_vec(CVec4(vec_a), CVec4(vec_b));
@@ -467,6 +519,7 @@ static bvec4 cvec4_less_than_equal(cvec4 vec_a, signed char b) {
     cvecN_less_than_equal(res.v, vec_a.v, b, 4);
     return res;
 }
+
 /** dst = a <= b */
 static bvec4 cvec4_less_than_equal_v(const signed char *vec_a, signed char b) {
     return cvec4_less_than_equal(CVec4(vec_a), b);
@@ -479,6 +532,7 @@ static bvec4 cvec4_less_than_equal_vec(cvec4 vec_a, cvec4 vec_b) {
     cvecN_less_than_equal_vec(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = a <= b */
 static bvec4 cvec4_less_than_equal_vec_v(const signed char *vec_a, const signed char *vec_b) {
     return cvec4_less_than_equal_vec(CVec4(vec_a), CVec4(vec_b));
@@ -491,6 +545,7 @@ static bvec4 cvec4_greater_than(cvec4 vec_a, signed char b) {
     cvecN_greater_than(res.v, vec_a.v, b, 4);
     return res;
 }
+
 /** dst = a > b */
 static bvec4 cvec4_greater_than_v(const signed char *vec_a, signed char b) {
     return cvec4_greater_than(CVec4(vec_a), b);
@@ -503,6 +558,7 @@ static bvec4 cvec4_greater_than_vec(cvec4 vec_a, cvec4 vec_b) {
     cvecN_greater_than_vec(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = a > b */
 static bvec4 cvec4_greater_than_vec_v(const signed char *vec_a, const signed char *vec_b) {
     return cvec4_greater_than_vec(CVec4(vec_a), CVec4(vec_b));
@@ -515,6 +571,7 @@ static bvec4 cvec4_greater_than_equal(cvec4 vec_a, signed char b) {
     cvecN_greater_than_equal(res.v, vec_a.v, b, 4);
     return res;
 }
+
 /** dst = a >= b */
 static bvec4 cvec4_greater_than_equal_v(const signed char *vec_a, signed char b) {
     return cvec4_greater_than_equal(CVec4(vec_a), b);
@@ -527,6 +584,7 @@ static bvec4 cvec4_greater_than_equal_vec(cvec4 vec_a, cvec4 vec_b) {
     cvecN_greater_than_equal_vec(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = a >= b */
 static bvec4 cvec4_greater_than_equal_vec_v(const signed char *vec_a, const signed char *vec_b) {
     return cvec4_greater_than_equal_vec(CVec4(vec_a), CVec4(vec_b));
@@ -539,6 +597,7 @@ static bvec4 cvec4_equal(cvec4 vec_a, signed char b) {
     cvecN_equal(res.v, vec_a.v, b, 4);
     return res;
 }
+
 /** dst = a == b */
 static bvec4 cvec4_equal_v(const signed char *vec_a, signed char b) {
     return cvec4_equal(CVec4(vec_a), b);
@@ -551,6 +610,7 @@ static bvec4 cvec4_equal_vec(cvec4 vec_a, cvec4 vec_b) {
     cvecN_equal_vec(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = a == b */
 static bvec4 cvec4_equal_vec_v(const signed char *vec_a, const signed char *vec_b) {
     return cvec4_equal_vec(CVec4(vec_a), CVec4(vec_b));
@@ -563,6 +623,7 @@ static bvec4 cvec4_not_equal(cvec4 vec_a, signed char b) {
     cvecN_not_equal(res.v, vec_a.v, b, 4);
     return res;
 }
+
 /** dst = a != b */
 static bvec4 cvec4_not_equal_v(const signed char *vec_a, signed char b) {
     return cvec4_not_equal(CVec4(vec_a), b);
@@ -575,6 +636,7 @@ static bvec4 cvec4_not_equal_vec(cvec4 vec_a, cvec4 vec_b) {
     cvecN_not_equal_vec(res.v, vec_a.v, vec_b.v, 4);
     return res;
 }
+
 /** dst = a != b */
 static bvec4 cvec4_not_equal_vec_v(const signed char *vec_a, const signed char *vec_b) {
     return cvec4_not_equal_vec(CVec4(vec_a), CVec4(vec_b));
@@ -596,6 +658,7 @@ static cvec4 cvec4_cross(cvec4 vec_a, cvec4 vec_b) {
     res.w = 0;
     return res;
 }
+
 /** dst = a x b , dst.w = 0 */
 static cvec4 cvec4_cross_v(const signed char *vec_a, const signed char *vec_b) {
     return cvec4_cross(CVec4(vec_a), CVec4(vec_b));

@@ -184,7 +184,6 @@ static_assert(sizeof(dmat4) == sizeof(double) * 16, "[Mathc] wrong expected size
 #define ConstDMat4(mat) (*(const dmat4 *) (mat))
 
 
-
 // quaternion type
 typedef dvec4 dquat;
 #define DQuat DVec4

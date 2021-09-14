@@ -35,7 +35,7 @@ static void vec2_print_f(vec2 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(vec2)" MATHC_PRINT_COLOR " {{");
     for (int v = 0; v < 2; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         if (vec.v[v] < MATHC_PRINT_MAX_TO_SHORT)
             fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, vec.v[v]);
@@ -86,7 +86,7 @@ static void mat2_print_repr_f(mat2 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(mat2)" MATHC_PRINT_COLOR " {{");
     for (int v = 0; v < 4; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         if (mat.v[v] < MATHC_PRINT_MAX_TO_SHORT)
             fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, mat.v[v]);
@@ -115,7 +115,7 @@ static void vec3_print_f(vec3 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(vec3) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 3; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         if (vec.v[v] < MATHC_PRINT_MAX_TO_SHORT)
             fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, vec.v[v]);
@@ -167,7 +167,7 @@ static void mat3_print_repr_f(mat3 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(mat3)" MATHC_PRINT_COLOR " {{");
     for (int v = 0; v < 9; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         if (mat.v[v] < MATHC_PRINT_MAX_TO_SHORT)
             fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, mat.v[v]);
@@ -195,7 +195,7 @@ static void vec4_print_f(vec4 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(vec4) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 4; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         if (vec.v[v] < MATHC_PRINT_MAX_TO_SHORT)
             fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, vec.v[v]);
@@ -247,7 +247,7 @@ static void mat4_print_repr_f(mat4 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(mat4)" MATHC_PRINT_COLOR " {{");
     for (int v = 0; v < 16; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         if (mat.v[v] < MATHC_PRINT_MAX_TO_SHORT)
             fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, mat.v[v]);
@@ -280,7 +280,7 @@ static void quat_print_f(quat quat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(quat) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 4; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         if (quat.v[v] < MATHC_PRINT_MAX_TO_SHORT)
             fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, quat.v[v]);

@@ -141,6 +141,26 @@ static void cvecN_max_vec(signed char *dst_vec, const signed char *vec_a, const 
         dst_vec[i] = vec_a[i] > vec_b[i] ? vec_a[i] : vec_b[i];
 }
 
+/** returns the index of the min vec value */
+static int cvecN_min_index(const signed char *vec, int n) {
+    int idx = 0;
+    for (int i = 1; i < n; i++) {
+        if (vec[i] < vec[idx])
+            idx = i;
+    }
+    return idx;
+}
+
+/** returns the index of the max vec value */
+static int cvecN_max_index(const signed char *vec, int n) {
+    int idx = 0;
+    for (int i = 1; i < n; i++) {
+        if (vec[i] > vec[idx])
+            idx = i;
+    }
+    return idx;
+}
+
 /** dst = x < min ? min : (x > max ? max : x) */
 static void cvecN_clamp(signed char *dst_vec, const signed char *vec_x, signed char min, signed char max, int n) {
     for (int i = 0; i < n; i++)
@@ -148,7 +168,9 @@ static void cvecN_clamp(signed char *dst_vec, const signed char *vec_x, signed c
 }
 
 /** dst = x < min ? min : (x > max ? max : x) */
-static void cvecN_clamp_vec(signed char *dst_vec, const signed char *vec_x, const signed char *vec_min, const signed char *vec_max, int n) {
+static void
+cvecN_clamp_vec(signed char *dst_vec, const signed char *vec_x, const signed char *vec_min, const signed char *vec_max,
+                int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_x[i] < vec_min[i] ? vec_min[i] : (vec_x[i] > vec_max[i] ? vec_max[i] : vec_x[i]);
 }
@@ -160,7 +182,8 @@ static void cvecN_mix(signed char *dst_vec, const signed char *vec_a, const sign
 }
 
 /** dst = a * (1-t) + b * t */
-static void cvecN_mix_vec(signed char *dst_vec, const signed char *vec_a, const signed char *vec_b, const float *vec_t, int n) {
+static void
+cvecN_mix_vec(signed char *dst_vec, const signed char *vec_a, const signed char *vec_b, const float *vec_t, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] * (1.0f - vec_t[i]) + vec_b[i] * vec_t[i];
 }

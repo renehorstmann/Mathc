@@ -50,7 +50,7 @@ static unsigned usca_clamp(unsigned x, unsigned min, unsigned max) {
 
 /** dst = a * (1-t) + b * t */
 static unsigned usca_mix(unsigned a, unsigned b, float t) {
-    return a * (1.0-t) + b * t;
+    return a * (1.0 - t) + b * t;
 }
 
 /** dst = x < edge ? 0 : 1 */

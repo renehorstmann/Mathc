@@ -23,7 +23,7 @@ do { \
 
 /** dst = vec / 255 */
 static void vecN_cast_from_uchar_1(float *dst_vec, const unsigned char *vec, int n) {
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
         dst_vec[i] = (float) vec[i] / 255.0f;
 }
 
@@ -264,6 +264,26 @@ static void vecN_max(float *dst_vec, const float *vec_a, float b, int n) {
 static void vecN_max_vec(float *dst_vec, const float *vec_a, const float *vec_b, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_a[i] > vec_b[i] ? vec_a[i] : vec_b[i];
+}
+
+/** returns the index of the min vec value */
+static int vecN_min_index(const float *vec, int n) {
+    int idx = 0;
+    for (int i = 1; i < n; i++) {
+        if (vec[i] < vec[idx])
+            idx = i;
+    }
+    return idx;
+}
+
+/** returns the index of the max vec value */
+static int vecN_max_index(const float *vec, int n) {
+    int idx = 0;
+    for (int i = 1; i < n; i++) {
+        if (vec[i] > vec[idx])
+            idx = i;
+    }
+    return idx;
 }
 
 /** dst = x < min ? min : (x > max ? max : x) */

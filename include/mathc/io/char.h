@@ -27,7 +27,7 @@ static void cvec2_print_f(cvec2 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(cvec2) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 2; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %i", vec.v[v]);
     }
@@ -75,7 +75,7 @@ static void cmat2_print_repr_f(cmat2 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(cmat2)" MATHC_PRINT_COLOR " {{");
     for (int v = 0; v < 4; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %i", mat.v[v]);
     }
@@ -101,7 +101,7 @@ static void cvec3_print_f(cvec3 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(cvec3) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 3; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %i", vec.v[v]);
     }
@@ -146,7 +146,7 @@ static void cmat3_print_repr_f(cmat3 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(cmat3)" MATHC_PRINT_COLOR " {{");
     for (int v = 0; v < 9; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %i", mat.v[v]);
     }
@@ -171,7 +171,7 @@ static void cvec4_print_f(cvec4 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(cvec4) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 4; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %i", vec.v[v]);
     }
@@ -216,7 +216,7 @@ static void cmat4_print_repr_f(cmat4 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(cmat4)" MATHC_PRINT_COLOR " {{");
     for (int v = 0; v < 16; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %i", mat.v[v]);
     }

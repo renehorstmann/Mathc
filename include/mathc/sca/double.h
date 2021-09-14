@@ -130,7 +130,7 @@ static double dsca_clamp(double x, double min, double max) {
 
 /** dst = a * (1-t) + b * t */
 static double dsca_mix(double a, double b, double t) {
-    return a * (1.0-t) + b * t;
+    return a * (1.0 - t) + b * t;
 }
 
 /** dst = x < edge ? 0 : 1 */

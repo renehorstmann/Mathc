@@ -50,7 +50,7 @@ static unsigned char ucsca_clamp(unsigned char x, unsigned char min, unsigned ch
 
 /** dst = a * (1-t) + b * t */
 static unsigned char ucsca_mix(unsigned char a, unsigned char b, float t) {
-    return a * (1.0-t) + b * t;
+    return a * (1.0 - t) + b * t;
 }
 
 /** dst = x < edge ? 0 : 1 */

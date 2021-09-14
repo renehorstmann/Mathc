@@ -130,7 +130,7 @@ static float sca_clamp(float x, float min, float max) {
 
 /** dst = a * (1-t) + b * t */
 static float sca_mix(float a, float b, float t) {
-    return a * (1.0f-t) + b * t;
+    return a * (1.0f - t) + b * t;
 }
 
 /** dst = x < edge ? 0 : 1 */

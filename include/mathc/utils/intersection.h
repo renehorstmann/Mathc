@@ -40,6 +40,7 @@ static bool intersection_plane_plane(vec3 *out_pos, vec3 *out_dir,
 
     return true;
 }
+
 /** returns false if planes are parallel */
 static int intersection_plane_plane_v(float *out_pos, float *out_dir,
                                       const float *plane_hessian_a, const float *plane_hessian_b) {
@@ -67,6 +68,7 @@ static bool intersection_plane_line(vec3 *out_pos, vec4 plane_hessian,
     *out_pos = vec3_add_vec(vec3_add_vec(w, si_dir), plane_point);
     return true;
 }
+
 /** returns false if plane and line are parallel */
 static bool intersection_plane_line_v(float *out_pos, const float *plane_hessian,
                                       const float *line_pos, const float *line_dir) {
@@ -105,6 +107,7 @@ static float intersection_triangle_line(vec3 v0, vec3 v1, vec3 v2,
 
     return vec3_dot(v0v2, qvec) * inv_det;
 }
+
 /** returns t (line_pos + line_dir * t), or NAN if not intersecting */
 static float intersection_triangle_line_v(const float *v0, const float *v1, const float *v2,
                                           const float *line_pos, const float *line_dir,
@@ -136,6 +139,7 @@ static bool intersection_line_line(float *out_tau_a, float *out_tau_b,
     *out_tau_b = (a * f - b * c) / d;
     return true;
 }
+
 /** returns false if lines are parallel, searches for the nearest distance points */
 static bool intersection_line_line_v(float *out_tau_a, float *out_tau_b,
                                      const float *line_a_pos, const float *line_a_dir,

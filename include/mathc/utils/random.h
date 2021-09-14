@@ -5,7 +5,9 @@
 #include <math.h>
 
 #ifndef MATHC_RANDOM_FUNCTION
+
 #include <stdlib.h>
+
 #define MATHC_RANDOM_FUNCTION rand
 #endif
 
@@ -22,7 +24,7 @@ static float sca_random() {
 
 /** dst = rand() [a:b] */
 static float sca_random_range(float a, float b) {
-    return a + (b-a) * sca_random();
+    return a + (b - a) * sca_random();
 }
 
 /** dst = mean +- amplitude * rand() */
@@ -48,49 +50,49 @@ static float sca_random_normal(float mean, float sigma) {
 
 /** dst = rand() [0:1] */
 static void vecN_random(float *dst, int n) {
-    for(int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         dst[i] = sca_random();
     }
 }
 
 /** dst = rand() [a:b] */
 static void vecN_random_range(float *dst, float a, float b, int n) {
-    for(int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         dst[i] = sca_random_range(a, b);
     }
 }
 
 /** dst = rand() [a:b] */
 static void vecN_random_range_vec(float *dst, const float *a, const float *b, int n) {
-    for(int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         dst[i] = sca_random_range(a[i], b[i]);
     }
 }
 
 /** dst = mean +- amplitude * rand() */
 static void vecN_random_noise(float *dst, float mean, float amplitude, int n) {
-    for(int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         dst[i] = sca_random_noise(mean, amplitude);
     }
 }
 
 /** dst = mean +- amplitude * rand() */
 static void vecN_random_noise_vec(float *dst, const float *mean, const float *amplitude, int n) {
-    for(int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         dst[i] = sca_random_noise(mean[i], amplitude[i]);
     }
 }
 
 /** dst = mean +- sigma * normalized_rand() */
 static void vecN_random_normal(float *dst, float mean, float sigma, int n) {
-    for(int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         dst[i] = sca_random_normal(mean, sigma);
     }
 }
 
 /** dst = mean +- sigma * normalized_rand() */
 static void vecN_random_normal_vec(float *dst, const float *mean, const float *sigma, int n) {
-    for(int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         dst[i] = sca_random_normal(mean[i], sigma[i]);
     }
 }

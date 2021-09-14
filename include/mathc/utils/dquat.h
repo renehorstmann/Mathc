@@ -18,6 +18,7 @@ static dquat dquat_eye() {
 static dquat dquat_conj(dquat q) {
     return (dquat) {{-q.x, -q.y, -q.z, q.w}};
 }
+
 /** dst = -x, -y, -z, w */
 static dquat dquat_conj_v(const double *q) {
     return dquat_conj(DQuat(q));
@@ -29,6 +30,7 @@ static dquat dquat_inv(dquat q) {
     dquat conj = dquat_conj(q);
     return dvec4_scale(conj, 1.0 / dvec4_dot(q, q));
 }
+
 /** dst = inv(dquat) */
 static dquat dquat_inv_v(const double *q) {
     return dquat_inv(DQuat(q));
@@ -45,6 +47,7 @@ static dquat dquat_mul(dquat q_a, dquat q_b) {
     res.v[3] = q_a.v[3] * q_b.v[3] - q_a.v[0] * q_b.v[0] - q_a.v[1] * q_b.v[1] - q_a.v[2] * q_b.v[2];
     return res;
 }
+
 /** dst = a @ b Hamilton Product */
 static dquat dquat_mul_v(const double *q_a, const double *q_b) {
     return dquat_mul(DQuat(q_a), DQuat(q_b));
@@ -65,6 +68,7 @@ static dquat dquat_from_angle_axis(dvec4 angle_axis) {
     res.w = c;
     return res;
 }
+
 /** angle_axis = xyz + w=angle in rad */
 static dquat dquat_from_angle_axis_v(const double *angle_axis) {
     return dquat_from_angle_axis(DQuat(angle_axis));
@@ -87,6 +91,7 @@ static dvec4 dquat_to_angle_axis(dquat q) {
     angle_axis.w = angle;
     return angle_axis;
 }
+
 /** angle_axis = xyz + w=angle in rad */
 static dvec4 dquat_to_angle_axis_v(const double *q) {
     return dquat_to_angle_axis(DQuat(q));
@@ -130,6 +135,7 @@ static dmat3 dquat_to_rotation_matrix(dquat q) {
     res.m[0][2] = xz - wy;
     return res;
 }
+
 static dmat3 dquat_to_rotation_matrix_v(const double *q) {
     return dquat_to_rotation_matrix(DQuat(q));
 }
@@ -176,6 +182,7 @@ static dquat dquat_from_rotation_matrix(dmat3 mat) {
 
     return res;
 }
+
 static dquat dquat_from_rotation_matrix_v(const double *mat_3) {
     return dquat_from_rotation_matrix(DMat3(mat_3));
 }
@@ -207,6 +214,7 @@ static dquat dquat_slerp(dquat q_a, dquat q_b, double t) {
     q1 = dvec4_add_vec(q1, q2);
     return dvec4_scale(q1, 1.0 / sin_theta);
 }
+
 static dquat dquat_slerp_v(const double *q_a, const double *q_b, double t) {
     return dquat_slerp(DQuat(q_a), DQuat(q_b), t);
 }

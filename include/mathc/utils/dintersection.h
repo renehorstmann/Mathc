@@ -11,7 +11,7 @@
 
 /** returns false if planes are parallel */
 static bool dintersection_plane_plane(dvec3 *out_pos, dvec3 *out_dir,
-                                     dvec4 plane_hessian_a, dvec4 plane_hessian_b) {
+                                      dvec4 plane_hessian_a, dvec4 plane_hessian_b) {
     // parallel check
     if (dvec3_dot(plane_hessian_a.xyz, plane_hessian_b.xyz) > (1.0 - DINTERSECTION_EPSILON))
         return false;
@@ -40,17 +40,18 @@ static bool dintersection_plane_plane(dvec3 *out_pos, dvec3 *out_dir,
 
     return true;
 }
+
 /** returns false if planes are parallel */
 static int dintersection_plane_plane_v(double *out_pos, double *out_dir,
-                                      const double *plane_hessian_a, const double *plane_hessian_b) {
+                                       const double *plane_hessian_a, const double *plane_hessian_b) {
     return dintersection_plane_plane((dvec3 *) out_pos, (dvec3 *) out_dir,
-                                    DVec4(plane_hessian_a), DVec4(plane_hessian_b));
+                                     DVec4(plane_hessian_a), DVec4(plane_hessian_b));
 }
 
 
 /** returns false if plane and line are parallel */
 static bool dintersection_plane_line(dvec3 *out_pos, dvec4 plane_hessian,
-                                    dvec3 line_pos, dvec3 line_dir) {
+                                     dvec3 line_pos, dvec3 line_dir) {
     double plane_line_dot = dvec3_dot(plane_hessian.xyz, line_dir);
 
     // parallel check
@@ -67,9 +68,10 @@ static bool dintersection_plane_line(dvec3 *out_pos, dvec4 plane_hessian,
     *out_pos = dvec3_add_vec(dvec3_add_vec(w, si_dir), plane_point);
     return true;
 }
+
 /** returns false if plane and line are parallel */
 static bool dintersection_plane_line_v(double *out_pos, const double *plane_hessian,
-                                      const double *line_pos, const double *line_dir) {
+                                       const double *line_pos, const double *line_dir) {
     return dintersection_plane_line((dvec3 *) out_pos, DVec4(plane_hessian), DVec3(line_pos), DVec3(line_dir));
 }
 
@@ -105,6 +107,7 @@ static double dintersection_triangle_line(dvec3 v0, dvec3 v1, dvec3 v2,
 
     return dvec3_dot(v0v2, qvec) * inv_det;
 }
+
 /** returns t (line_pos + line_dir * t), or NAN if not intersecting */
 static double dintersection_triangle_line_v(const double *v0, const double *v1, const double *v2,
                                             const double *line_pos, const double *line_dir,
@@ -115,8 +118,8 @@ static double dintersection_triangle_line_v(const double *v0, const double *v1, 
 
 /** returns false if lines are parallel, searches for the nearest distance points */
 static bool dintersection_line_line(double *out_tau_a, double *out_tau_b,
-                                   dvec3 line_a_pos, dvec3 line_a_dir,
-                                   dvec3 line_b_pos, dvec3 line_b_dir) {
+                                    dvec3 line_a_pos, dvec3 line_a_dir,
+                                    dvec3 line_b_pos, dvec3 line_b_dir) {
     // Book: Real Time Collision Detection: section 5.1.8 Closest Point of Two Lines
     dvec3 r = dvec3_sub_vec(line_a_pos, line_b_pos);
 
@@ -136,12 +139,13 @@ static bool dintersection_line_line(double *out_tau_a, double *out_tau_b,
     *out_tau_b = (a * f - b * c) / d;
     return true;
 }
+
 /** returns false if lines are parallel, searches for the nearest distance points */
 static bool dintersection_line_line_v(double *out_tau_a, double *out_tau_b,
-                                     const double *line_a_pos, const double *line_a_dir,
-                                     const double *line_b_pos, const double *line_b_dir) {
+                                      const double *line_a_pos, const double *line_a_dir,
+                                      const double *line_b_pos, const double *line_b_dir) {
     return dintersection_line_line(out_tau_a, out_tau_b, DVec3(line_a_pos), DVec3(line_a_dir),
-                                  DVec3(line_b_pos), DVec3(line_b_dir));
+                                   DVec3(line_b_pos), DVec3(line_b_dir));
 }
 
 

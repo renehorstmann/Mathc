@@ -27,7 +27,7 @@ static void ucvec2_print_f(ucvec2 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(ucvec2) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 2; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %u", vec.v[v]);
     }
@@ -73,7 +73,7 @@ static void ucmat2_print_repr_f(ucmat2 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(ucmat2)" MATHC_PRINT_COLOR " {{");
     for (int v = 0; v < 4; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %u", mat.v[v]);
     }
@@ -99,7 +99,7 @@ static void ucvec3_print_f(ucvec3 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(ucvec3) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 3; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %u", vec.v[v]);
     }
@@ -144,7 +144,7 @@ static void ucmat3_print_repr_f(ucmat3 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(ucmat3)" MATHC_PRINT_COLOR " {{");
     for (int v = 0; v < 9; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %u", mat.v[v]);
     }
@@ -169,7 +169,7 @@ static void ucvec4_print_f(ucvec4 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(ucvec4) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 4; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %u", vec.v[v]);
     }
@@ -214,7 +214,7 @@ static void ucmat4_print_repr_f(ucmat4 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(ucmat4)" MATHC_PRINT_COLOR " {{");
     for (int v = 0; v < 16; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %u", mat.v[v]);
     }

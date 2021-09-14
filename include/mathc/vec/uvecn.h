@@ -122,6 +122,26 @@ static void uvecN_max_vec(unsigned *dst_vec, const unsigned *vec_a, const unsign
         dst_vec[i] = vec_a[i] > vec_b[i] ? vec_a[i] : vec_b[i];
 }
 
+/** returns the index of the min vec value */
+static int uvecN_min_index(const unsigned *vec, int n) {
+    int idx = 0;
+    for (int i = 1; i < n; i++) {
+        if (vec[i] < vec[idx])
+            idx = i;
+    }
+    return idx;
+}
+
+/** returns the index of the max vec value */
+static int uvecN_max_index(const unsigned *vec, int n) {
+    int idx = 0;
+    for (int i = 1; i < n; i++) {
+        if (vec[i] > vec[idx])
+            idx = i;
+    }
+    return idx;
+}
+
 /** dst = x < min ? min : (x > max ? max : x) */
 static void uvecN_clamp(unsigned *dst_vec, const unsigned *vec_x, unsigned min, unsigned max, int n) {
     for (int i = 0; i < n; i++)
@@ -129,7 +149,8 @@ static void uvecN_clamp(unsigned *dst_vec, const unsigned *vec_x, unsigned min, 
 }
 
 /** dst = x < min ? min : (x > max ? max : x) */
-static void uvecN_clamp_vec(unsigned *dst_vec, const unsigned *vec_x, const unsigned *vec_min, const unsigned *vec_max, int n) {
+static void
+uvecN_clamp_vec(unsigned *dst_vec, const unsigned *vec_x, const unsigned *vec_min, const unsigned *vec_max, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_x[i] < vec_min[i] ? vec_min[i] : (vec_x[i] > vec_max[i] ? vec_max[i] : vec_x[i]);
 }

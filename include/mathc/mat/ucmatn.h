@@ -68,8 +68,8 @@ static void ucmatN_set_col_sca(unsigned char *dst_mat, unsigned char scalar, int
 /** returns sum of diagonal form upper left to lower right */
 static unsigned ucmatN_trace(const unsigned char *mat, int n) {
     unsigned sum = 0;
-    for(int i=0; i<n; i++)
-        sum += mat[i*n + i];
+    for (int i = 0; i < n; i++)
+        sum += mat[i * n + i];
     return sum;
 }
 
@@ -97,7 +97,7 @@ static void ucmatN_transpose(unsigned char *dst_mat, const unsigned char *mat, i
 
 /** dst = a @ b  (restrict data) */
 static void ucmatN_mul_mat_no_alias(unsigned char *restrict dst_mat, const unsigned char *restrict mat_a,
-                                  const unsigned char *restrict mat_b, int n) {
+                                    const unsigned char *restrict mat_b, int n) {
     for (int c = 0; c < n; c++) {
         for (int r = 0; r < n; r++) {
             dst_mat[c * n + r] = 0;
@@ -122,7 +122,7 @@ static void ucmatN_mul_mat(unsigned char *dst_mat, const unsigned char *mat_a, c
 
 /** dst = a @ b  (restrict data) */
 static void ucmatN_mul_vec_no_alias(unsigned char *restrict dst_vec, const unsigned char *restrict mat_a,
-                                  const unsigned char *restrict vec_b, int n) {
+                                    const unsigned char *restrict vec_b, int n) {
     for (int r = 0; r < n; r++) {
         dst_vec[r] = 0;
         for (int c = 0; c < n; c++) {
@@ -146,7 +146,7 @@ static void ucmatN_mul_vec(unsigned char *dst_vec, const unsigned char *mat_a, c
 
 /** dst = a @ b  (restrict data) */
 static void ucvecN_mul_mat_no_alias(unsigned char *restrict dst_vec, const unsigned char *restrict vec_a,
-                                  const unsigned char *restrict mat_b, int n) {
+                                    const unsigned char *restrict mat_b, int n) {
     for (int c = 0; c < n; c++) {
         dst_vec[c] = 0;
         for (int r = 0; r < n; r++) {
@@ -169,22 +169,24 @@ static void ucvecN_mul_mat(unsigned char *dst_vec, const unsigned char *vec_a, c
 }
 
 /** block<block_n*block_n> = mat<n*n>[col:col+block_n, row:row+block_n] */
-static void ucmatN_get_block(unsigned char * restrict dst_block, const unsigned char * restrict mat, int row, int col, unsigned char block_n, int n) {
+static void ucmatN_get_block(unsigned char *restrict dst_block, const unsigned char *restrict mat, int row, int col,
+                             unsigned char block_n, int n) {
     assert(row >= 0 && row + block_n <= n);
     assert(col >= 0 && col + block_n <= n);
-    for(int c=0; c<block_n; c++) {
-        for(int r=0; r<block_n; r++) {
+    for (int c = 0; c < block_n; c++) {
+        for (int r = 0; r < block_n; r++) {
             dst_block[c * block_n + r] = mat[c * n + r];
         }
     }
 }
 
 /** dst<n*n>[col:col+block_n, row:row+block_n] = block<block_n*block_n> */
-static void ucmatN_set_block(unsigned char * restrict dst_mat, const unsigned char * restrict block, int row, int col, unsigned char block_n, int n) {
+static void ucmatN_set_block(unsigned char *restrict dst_mat, const unsigned char *restrict block, int row, int col,
+                             unsigned char block_n, int n) {
     assert(row >= 0 && row + block_n <= n);
     assert(col >= 0 && col + block_n <= n);
-    for(int c=0; c<block_n; c++) {
-        for(int r=0; r<block_n; r++) {
+    for (int c = 0; c < block_n; c++) {
+        for (int r = 0; r < block_n; r++) {
             dst_mat[c * n + r] = block[c * block_n + r];
         }
     }

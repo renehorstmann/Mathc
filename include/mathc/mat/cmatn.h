@@ -69,8 +69,8 @@ static void cmatN_set_col_sca(signed char *dst_mat, signed char scalar, int col,
 /** returns sum of diagonal form upper left to lower right */
 static int cmatN_trace(const signed char *mat, int n) {
     int sum = 0;
-    for(int i=0; i<n; i++)
-        sum += mat[i*n + i];
+    for (int i = 0; i < n; i++)
+        sum += mat[i * n + i];
     return sum;
 }
 
@@ -98,7 +98,7 @@ static void cmatN_transpose(signed char *dst_mat, const signed char *mat, int n)
 
 /** dst = a @ b  (restrict data) */
 static void cmatN_mul_mat_no_alias(signed char *restrict dst_mat, const signed char *restrict mat_a,
-                                  const signed char *restrict mat_b, int n) {
+                                   const signed char *restrict mat_b, int n) {
     for (int c = 0; c < n; c++) {
         for (int r = 0; r < n; r++) {
             dst_mat[c * n + r] = 0;
@@ -123,7 +123,7 @@ static void cmatN_mul_mat(signed char *dst_mat, const signed char *mat_a, const 
 
 /** dst = a @ b  (restrict data) */
 static void cmatN_mul_vec_no_alias(signed char *restrict dst_vec, const signed char *restrict mat_a,
-                                  const signed char *restrict vec_b, int n) {
+                                   const signed char *restrict vec_b, int n) {
     for (int r = 0; r < n; r++) {
         dst_vec[r] = 0;
         for (int c = 0; c < n; c++) {
@@ -147,7 +147,7 @@ static void cmatN_mul_vec(signed char *dst_vec, const signed char *mat_a, const 
 
 /** dst = a @ b  (restrict data) */
 static void cvecN_mul_mat_no_alias(signed char *restrict dst_vec, const signed char *restrict vec_a,
-                                  const signed char *restrict mat_b, int n) {
+                                   const signed char *restrict mat_b, int n) {
     for (int c = 0; c < n; c++) {
         dst_vec[c] = 0;
         for (int r = 0; r < n; r++) {
@@ -170,22 +170,26 @@ static void cvecN_mul_mat(signed char *dst_vec, const signed char *vec_a, const 
 }
 
 /** block<block_n*block_n> = mat<n*n>[col:col+block_n, row:row+block_n] */
-static void cmatN_get_block(signed char * restrict dst_block, const signed char * restrict mat, int row, int col, signed char block_n, int n) {
+static void
+cmatN_get_block(signed char *restrict dst_block, const signed char *restrict mat, int row, int col, signed char block_n,
+                int n) {
     assert(row >= 0 && row + block_n <= n);
     assert(col >= 0 && col + block_n <= n);
-    for(int c=0; c<block_n; c++) {
-        for(int r=0; r<block_n; r++) {
+    for (int c = 0; c < block_n; c++) {
+        for (int r = 0; r < block_n; r++) {
             dst_block[c * block_n + r] = mat[c * n + r];
         }
     }
 }
 
 /** dst<n*n>[col:col+block_n, row:row+block_n] = block<block_n*block_n> */
-static void cmatN_set_block(signed char * restrict dst_mat, const signed char * restrict block, int row, int col, signed char block_n, int n) {
+static void
+cmatN_set_block(signed char *restrict dst_mat, const signed char *restrict block, int row, int col, signed char block_n,
+                int n) {
     assert(row >= 0 && row + block_n <= n);
     assert(col >= 0 && col + block_n <= n);
-    for(int c=0; c<block_n; c++) {
-        for(int r=0; r<block_n; r++) {
+    for (int c = 0; c < block_n; c++) {
+        for (int r = 0; r < block_n; r++) {
             dst_mat[c * n + r] = block[c * block_n + r];
         }
     }

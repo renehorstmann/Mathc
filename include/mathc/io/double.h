@@ -34,7 +34,7 @@ static void dvec2_print_f(dvec2 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(dvec2) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 2; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         if (vec.v[v] < MATHC_PRINT_MAX_TO_SHORT)
             fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, vec.v[v]);
@@ -85,7 +85,7 @@ static void dmat2_print_repr_f(dmat2 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(dmat2)" MATHC_PRINT_COLOR " {{");
     for (int v = 0; v < 4; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         if (mat.v[v] < MATHC_PRINT_MAX_TO_SHORT)
             fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, mat.v[v]);
@@ -114,7 +114,7 @@ static void dvec3_print_f(dvec3 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(dvec3) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 3; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         if (vec.v[v] < MATHC_PRINT_MAX_TO_SHORT)
             fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, vec.v[v]);
@@ -165,7 +165,7 @@ static void dmat3_print_repr_f(dmat3 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(dmat3)" MATHC_PRINT_COLOR " {{");
     for (int v = 0; v < 9; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         if (mat.v[v] < MATHC_PRINT_MAX_TO_SHORT)
             fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, mat.v[v]);
@@ -193,7 +193,7 @@ static void dvec4_print_f(dvec4 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(dvec4) " MATHC_PRINT_COLOR "{{");
     for (int v = 0; v < 4; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         if (vec.v[v] < MATHC_PRINT_MAX_TO_SHORT)
             fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, vec.v[v]);
@@ -244,7 +244,7 @@ static void dmat4_print_repr_f(dmat4 mat, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(dmat4)" MATHC_PRINT_COLOR " {{");
     for (int v = 0; v < 16; v++) {
-        if(v>0)
+        if (v > 0)
             fputc(',', ostream);
         if (mat.v[v] < MATHC_PRINT_MAX_TO_SHORT)
             fprintf(ostream, " %.*f", MATHC_PRINT_PRECISION, mat.v[v]);

@@ -25,8 +25,8 @@
 static void bvec2_print_f(bvec2 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(bvec2) " MATHC_PRINT_COLOR "{{");
-    for(int v=0; v<2; v++) {
-        if(v>0)
+    for (int v = 0; v < 2; v++) {
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %i", vec.v[v]);
     }
@@ -50,8 +50,8 @@ static void bvec2_println(bvec2 vec) {
 static void bvec3_print_f(bvec3 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(bvec3) " MATHC_PRINT_COLOR "{{");
-    for(int v=0; v<3; v++) {
-        if(v>0)
+    for (int v = 0; v < 3; v++) {
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %i", vec.v[v]);
     }
@@ -75,8 +75,8 @@ static void bvec3_println(bvec3 vec) {
 static void bvec4_print_f(bvec4 vec, FILE *ostream) {
     char *local_save = setlocale(LC_ALL, "C");
     fprintf(ostream, "(bvec4) " MATHC_PRINT_COLOR "{{");
-    for(int v=0; v<4; v++) {
-        if(v>0)
+    for (int v = 0; v < 4; v++) {
+        if (v > 0)
             fputc(',', ostream);
         fprintf(ostream, " %i", vec.v[v]);
     }
