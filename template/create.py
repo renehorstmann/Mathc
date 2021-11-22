@@ -47,6 +47,23 @@ def publictypes(env, DICT, X):
     template.stream(**variables).dump(dst)
 
 
+def types(env, DICT, X):
+    variables = DICT.copy()
+
+    template = env.get_template('types/vecX.h')
+    for i in range(2, X+1):
+        variables['X'] = i
+        dst = get_dst('types/', DICT['vec'] + str(i) + '.h')
+        print('...', dst)
+        template.stream(**variables).dump(dst)
+
+    template = env.get_template('types/float.h')
+    variables['X'] = X
+    dst = get_dst('types/', DICT['float'] + '.h')
+    print('...', dst)
+    template.stream(**variables).dump(dst)
+
+
 def main():
     env = jinja2.Environment(loader=jinja2.FileSystemLoader('in'))
     env.variable_start_string = '<{'
@@ -61,6 +78,10 @@ def main():
     publictypes(env, FLOAT, X)
     publictypes(env, DOUBLE, X)
     publictypes(env, INT, X)
+
+    types(env, FLOAT, X)
+    types(env, DOUBLE, X)
+    types(env, INT, X)
 
 
 if __name__ == '__main__':
