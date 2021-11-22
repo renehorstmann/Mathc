@@ -69,6 +69,9 @@ def main():
     print('clean_up')
     shutil.rmtree('out')
 
+    # vec2, ..., vecX
+    X = 4
+
     env = jinja2.Environment(loader=jinja2.FileSystemLoader('in'))
     env.variable_start_string = '<{'
     env.variable_end_string = '}>'
@@ -76,8 +79,6 @@ def main():
     env.block_end_string = '%>'
     env.comment_start_string = '<#'
     env.comment_end_string = '#>'
-
-    X = 4
 
     print('starting with X =', X)
 
