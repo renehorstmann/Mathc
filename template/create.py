@@ -1,4 +1,5 @@
 import os
+import shutil
 import jinja2
 
 FLOAT = {
@@ -65,6 +66,9 @@ def types(env, DICT, X):
 
 
 def main():
+    print('clean_up')
+    shutil.rmtree('out')
+
     env = jinja2.Environment(loader=jinja2.FileSystemLoader('in'))
     env.variable_start_string = '<{'
     env.variable_end_string = '}>'
@@ -75,6 +79,8 @@ def main():
 
     X = 4
 
+    print('starting with X =', X)
+
     publictypes(env, FLOAT, X)
     publictypes(env, DOUBLE, X)
     publictypes(env, INT, X)
@@ -83,6 +89,7 @@ def main():
     types(env, DOUBLE, X)
     types(env, INT, X)
 
+    print('finished with X =', X)
 
 if __name__ == '__main__':
     main()
