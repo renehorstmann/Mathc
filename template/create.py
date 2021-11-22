@@ -57,7 +57,6 @@ DOUBLE = {
 }
 
 INT = {
-    'real': False,
     'float': 'int',
     'FLOAT': 'INT',
     'vec': 'ivec',
@@ -67,6 +66,18 @@ INT = {
     'dotzero': '',
     'fabsf': 'abs',
     'powf': '(int) pow'
+}
+
+UCHAR = {
+    'unsigned': True,
+    'float': 'unsigned char',
+    'FLOAT': 'UCHAR',
+    'vec': 'ucvec',
+    'VEC': 'UCVEC',
+    'mat': 'ucmat',
+    'MAT': 'UCMAT',
+    'dotzero': '',
+    'powf': '(unsigned char) pow'
 }
 
 
@@ -154,14 +165,17 @@ def main():
     publictypes(env, FLOAT, X)
     publictypes(env, DOUBLE, X)
     publictypes(env, INT, X)
+    publictypes(env, UCHAR, X)
 
     types(env, FLOAT, X)
     types(env, DOUBLE, X)
     types(env, INT, X)
+    types(env, UCHAR, X)
 
     vec(env, FLOAT, X)
     vec(env, DOUBLE, X)
     vec(env, INT, X)
+    vec(env, UCHAR, X)
 
     print('finished with X =', X)
 

@@ -47,11 +47,13 @@ static void <{vec}>N_set(<{float}> *dst_vec, <{float}> scalar, int n) {
         dst_vec[i] = scalar;
 }
 
+<% if not unsigned -%>
 /** dst = -vec */
 static void <{vec}>N_neg(<{float}> *dst_vec, const <{float}> *vec, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = -vec[i];
 }
+<% endif -%>
 
 /** dst = a + b */
 static void <{vec}>N_add_vec(<{float}> *dst_vec, const <{float}> *vec_a, const <{float}> *vec_b, int n) {
@@ -114,18 +116,21 @@ static void <{vec}>N_pow_vec(<{float}> *dst_vec, const <{float}> *vec_x, const <
         dst_vec[i] = <{powf}>(vec_x[i], vec_y[i]);
 }
 
-
+<% if not unsigned -%>
 /** dst = abs(x) */
 static void <{vec}>N_abs(<{float}> *dst_vec, const <{float}> *vec_x, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = <{fabsf}>(vec_x[i]);
 }
+<% endif -%>
 
+<% if not unsigned -%>
 /** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
 static void <{vec}>N_sign(<{float}> *dst_vec, const <{float}> *vec_x, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec_x[i] > 0<{dotzero}> ? 1<{dotzero}> : (vec_x[i] < 0<{dotzero}> ? -1<{dotzero}> : 0.0);
 }
+<% endif -%>
 
 <% if real -%>
 /** dst = x - y * floor(x/y) */
@@ -256,32 +261,6 @@ static <{float}> <{vec}>N_norm_inf(const <{float}> *vec, int n) {
             max = <{fabsf}>(vec[i]);
     }
     return max;
-}
-
-/** dst = dot(I, Nref) < 0 ? N : -N */
-static void <{vec}>N_faceforward(<{float}> *dst_vec, const <{float}> *vec_N, const <{float}> *vec_I, const <{float}> *vec_Nref, int n) {
-    if (<{vec}>N_dot(vec_I, vec_Nref, n) < 0)
-        <{vec}>N_copy(dst_vec, vec_N, n);
-    else
-        <{vec}>N_neg(dst_vec, vec_N, n);
-}
-
-/** dst = I - 2.0 * N * dot(N,I) */
-static void <{vec}>N_reflect(<{float}> *dst_vec, const <{float}> *vec_I, const <{float}> *vec_N, int n) {
-    <{vec}>N_scale(dst_vec, vec_N, 2<{dotzero}> * <{vec}>N_dot(vec_N, vec_I, n), n);
-    <{vec}>N_sub_vec(dst_vec, vec_I, dst_vec, n);
-}
-
-static void <{vec}>N_refract(<{float}> *dst_vec, const <{float}> *vec_I, const <{float}> *vec_N, <{float}> eta, int n) {
-    // implementation from example implementation: https://developer.download.nvidia.com/cg/refract.html
-    <{vec}>N_neg(dst_vec, vec_I, n);
-    <{float}> cosi = <{vec}>N_dot(dst_vec, vec_N, n);
-    <{float}> cost2 = 1<{dotzero}> - eta * eta * (1<{dotzero}> - cosi * cosi);
-    <{vec}>N_scale(dst_vec, vec_N, eta * cosi - <{sqrtf}>(<{fabsf}>(cost2)), n);
-    <{float}> t[3];
-    <{vec}>N_scale(t, vec_I, eta, n);
-    <{vec}>N_add_vec(t, t, dst_vec, n);
-    <{vec}>N_scale(dst_vec, t, cost2 > 0.0, n);
 }
 
 <# -#>
@@ -470,6 +449,32 @@ static <{float}> <{vec}>N_distance(const <{float}> *vec_a, const <{float}> *vec_
     return <{vec}>N_norm(tmp, n);
 }
 
+/** dst = dot(I, Nref) < 0 ? N : -N */
+static void <{vec}>N_faceforward(<{float}> *dst_vec, const <{float}> *vec_N, const <{float}> *vec_I, const <{float}> *vec_Nref, int n) {
+    if (<{vec}>N_dot(vec_I, vec_Nref, n) < 0)
+        <{vec}>N_copy(dst_vec, vec_N, n);
+    else
+        <{vec}>N_neg(dst_vec, vec_N, n);
+}
+
+/** dst = I - 2.0 * N * dot(N,I) */
+static void <{vec}>N_reflect(<{float}> *dst_vec, const <{float}> *vec_I, const <{float}> *vec_N, int n) {
+    <{vec}>N_scale(dst_vec, vec_N, 2<{dotzero}> * <{vec}>N_dot(vec_N, vec_I, n), n);
+    <{vec}>N_sub_vec(dst_vec, vec_I, dst_vec, n);
+}
+
+static void <{vec}>N_refract(<{float}> *dst_vec, const <{float}> *vec_I, const <{float}> *vec_N, <{float}> eta, int n) {
+    // implementation from example implementation: https://developer.download.nvidia.com/cg/refract.html
+    <{vec}>N_neg(dst_vec, vec_I, n);
+    <{float}> cosi = <{vec}>N_dot(dst_vec, vec_N, n);
+    <{float}> cost2 = 1<{dotzero}> - eta * eta * (1<{dotzero}> - cosi * cosi);
+    <{vec}>N_scale(dst_vec, vec_N, eta * cosi - <{sqrtf}>(<{fabsf}>(cost2)), n);
+    <{float}> t[3];
+    <{vec}>N_scale(t, vec_I, eta, n);
+    <{vec}>N_add_vec(t, t, dst_vec, n);
+    <{vec}>N_scale(dst_vec, t, cost2 > 0.0, n);
+}
+
 /** dst = isnan(vec) */
 static void <{vec}>N_isnan(bool *dst_vec, const <{float}> *vec, int n) {
     for (int i = 0; i < n; i++)
@@ -490,7 +495,7 @@ static void <{vec}>N_not_isnan(bool *dst_vec, const <{float}> *vec, int n) {
 <# -#>
 
 //
-// compersions to a bool vec
+// compere to a bool vec
 //
 
 
@@ -566,6 +571,13 @@ static void <{vec}>N_not_equal_vec(bool *dst_vec, const <{float}> *vec_a, const 
         dst_vec[i] = vec_a[i] != vec_b[i];
 }
 
+<# -#>
+<# -#>
+<# only for real types -#>
+<# -#>
+<# -#>
+
+<% if real %>
 /** dst = a == b (+-eps) */
 static void <{vec}>N_equal_eps(bool *dst_vec, const <{float}> *vec_a, <{float}> b, <{float}> eps, int n) {
     for (int i = 0; i < n; i++)
@@ -589,5 +601,12 @@ static void <{vec}>N_not_equal_eps_vec(bool *dst_vec, const <{float}> *vec_a, co
     for (int i = 0; i < n; i++)
         dst_vec[i] = <{fabsf}>(vec_a[i] - vec_b[i]) > eps;
 }
+<% endif %>
+
+<# -#>
+<# -#>
+<# end of only for real types -#>
+<# -#>
+<# -#>
 
 #endif //MATHC_VEC_<{VEC}>N_H
