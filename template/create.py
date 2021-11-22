@@ -7,6 +7,8 @@ FLOAT = {
     'FLOAT': 'FLOAT',
     'vec': 'vec',
     'VEC': 'VEC',
+    'mat': 'mat',
+    'MAT': 'MAT'
 }
 
 DOUBLE = {
@@ -14,6 +16,8 @@ DOUBLE = {
     'FLOAT': 'DOUBLE',
     'vec': 'dvec',
     'VEC': 'DVEC',
+    'mat': 'dmat',
+    'MAT': 'DMAT'
 }
 
 INT = {
@@ -21,6 +25,8 @@ INT = {
     'FLOAT': 'INT',
     'vec': 'ivec',
     'VEC': 'IVEC',
+    'mat': 'imat',
+    'MAT': 'IMAT'
 }
 
 
@@ -41,6 +47,13 @@ def publictypes(env, DICT, X):
         print('...', dst)
         template.stream(**variables).dump(dst)
 
+    template = env.get_template('publictypes/matX.h')
+    for i in range(2, X+1):
+        variables['X'] = i
+        dst = get_dst('publictypes/', DICT['mat'] + str(i) + '.h')
+        print('...', dst)
+        template.stream(**variables).dump(dst)
+
     template = env.get_template('publictypes/float.h')
     variables['X'] = X
     dst = get_dst('publictypes/', DICT['float'] + '.h')
@@ -58,6 +71,13 @@ def types(env, DICT, X):
         print('...', dst)
         template.stream(**variables).dump(dst)
 
+    template = env.get_template('types/matX.h')
+    for i in range(2, X+1):
+        variables['X'] = i
+        dst = get_dst('types/', DICT['mat'] + str(i) + '.h')
+        print('...', dst)
+        template.stream(**variables).dump(dst)
+
     template = env.get_template('types/float.h')
     variables['X'] = X
     dst = get_dst('types/', DICT['float'] + '.h')
@@ -70,7 +90,7 @@ def main():
     shutil.rmtree('out')
 
     # vec2, ..., vecX
-    X = 4
+    X = 6
 
     env = jinja2.Environment(loader=jinja2.FileSystemLoader('in'))
     env.variable_start_string = '<{'

@@ -97,4 +97,5 @@ typedef union {
 } mathc_<{vec}><{X}>;
 <% endif %>
 static_assert(sizeof(mathc_<{vec}><{X}>) == sizeof(<{float}>) * <{X}>, "[Mathc] wrong expected size");
+
 #endif //MATHC_PUBLICTYPES_<{VEC}><{X}>_H
