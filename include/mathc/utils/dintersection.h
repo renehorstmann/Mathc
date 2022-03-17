@@ -55,7 +55,7 @@ static bool dintersection_plane_line(dvec3 *out_pos, dvec4 plane_hessian,
     double plane_line_dot = dvec3_dot(plane_hessian.xyz, line_dir);
 
     // parallel check
-    if (fabs(plane_line_dot) < DINTERSECTION_EPSILON)
+    if (dsca_abs(plane_line_dot) < DINTERSECTION_EPSILON)
         return false;
 
     dvec3 plane_point = dvec3_scale(plane_hessian.xyz, -plane_hessian.w);
@@ -89,7 +89,7 @@ static double dintersection_triangle_line(dvec3 v0, dvec3 v1, dvec3 v2,
         if (det < DINTERSECTION_EPSILON)
             return NAN;
     } else {
-        if (fabs(det) < DINTERSECTION_EPSILON)
+        if (dsca_abs(det) < DINTERSECTION_EPSILON)
             return NAN;
     }
 
@@ -132,7 +132,7 @@ static bool dintersection_line_line(double *out_tau_a, double *out_tau_b,
     double d = a * e - b * b;
 
     // parallel check
-    if (fabs(d) < DINTERSECTION_EPSILON)
+    if (dsca_abs(d) < DINTERSECTION_EPSILON)
         return false;
 
     *out_tau_a = (b * f - c * e) / d;
@@ -159,6 +159,56 @@ static double dintersection_line_point(dvec3 line_pos, dvec3 line_dir, dvec3 poi
 static double dintersection_line_point_v(const double *line_pos, const double *line_dir, const double *point) {
     return dintersection_line_point(DVec3(line_pos), DVec3(line_dir), DVec3(point));
 }
+
+
+//
+// dvec2 versions:
+//
+
+
+/** returns false if lines are parallel */
+static bool dintersection2_line_line(double *out_tau_a, double *out_tau_b,
+                                    dvec2 line_a_pos, dvec2 line_a_dir,
+                                    dvec2 line_b_pos, dvec2 line_b_dir) {
+    // stupid clone of the dvec2 version above:
+    dvec2 r = dvec2_sub_vec(line_a_pos, line_b_pos);
+
+    double a = dvec2_dot(line_a_dir, line_a_dir);
+    double b = dvec2_dot(line_a_dir, line_b_dir);
+    double c = dvec2_dot(line_a_dir, r);
+    double e = dvec2_dot(line_b_dir, line_b_dir);
+    double f = dvec2_dot(line_b_dir, r);
+
+    double d = a * e - b * b;
+
+    // parallel check
+    if (dsca_abs(d) < INTERSECTION_EPSILON)
+        return false;
+
+    *out_tau_a = (b * f - c * e) / d;
+    *out_tau_b = (a * f - b * c) / d;
+    return true;
+}
+
+/** returns false if lines are parallel */
+static bool dintersection2_line_line_v(double *out_tau_a, double *out_tau_b,
+                                      const double *line_a_pos, const double *line_a_dir,
+                                      const double *line_b_pos, const double *line_b_dir) {
+    return dintersection2_line_line(out_tau_a, out_tau_b, DVec2(line_a_pos), DVec2(line_a_dir),
+                                   DVec2(line_b_pos), DVec2(line_b_dir));
+}
+
+/** returns the projection point on the line by tau. searches for the nearest distance points */
+static double dintersection2_line_point(dvec2 line_pos, dvec2 line_dir, dvec2 point) {
+    return dvec2_dot(dvec2_sub_vec(point, line_pos), line_dir)
+           / dvec2_dot(line_dir, line_dir);
+}
+
+/** returns the projection point on the line by tau. searches for the nearest distance points */
+static double dintersection2_line_point_v(const double *line_pos, const double *line_dir, const double *point) {
+    return dintersection2_line_point(DVec2(line_pos), DVec2(line_dir), DVec2(point));
+}
+
 
 
 #endif //MATHC_UTILS_DINTERSECTION_H
