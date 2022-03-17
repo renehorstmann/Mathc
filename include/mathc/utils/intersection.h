@@ -149,4 +149,15 @@ static bool intersection_line_line_v(float *out_tau_a, float *out_tau_b,
 }
 
 
+/** returns the projection point on the line by tau. searches for the nearest distance points */
+static float intersection_line_point(vec3 line_pos, vec3 line_dir, vec3 point) {
+    return vec3_dot(vec3_sub_vec(point, line_pos), line_dir)
+           / vec3_dot(line_dir, line_dir);
+}
+
+/** returns the projection point on the line by tau. searches for the nearest distance points */
+static float intersection_line_point_v(const float *line_pos, const float *line_dir, const float *point) {
+    return intersection_line_point(Vec3(line_pos), Vec3(line_dir), Vec3(point));
+}
+
 #endif //MATHC_UTILS_INTERSECTION_H

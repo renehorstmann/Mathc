@@ -149,4 +149,16 @@ static bool dintersection_line_line_v(double *out_tau_a, double *out_tau_b,
 }
 
 
+/** returns the projection point on the line by tau. searches for the nearest distance points */
+static double dintersection_line_point(dvec3 line_pos, dvec3 line_dir, dvec3 point) {
+    return dvec3_dot(dvec3_sub_vec(point, line_pos), line_dir)
+           / dvec3_dot(line_dir, line_dir);
+}
+
+/** returns the projection point on the line by tau. searches for the nearest distance points */
+static double dintersection_line_point_v(const double *line_pos, const double *line_dir, const double *point) {
+    return dintersection_line_point(DVec3(line_pos), DVec3(line_dir), DVec3(point));
+}
+
+
 #endif //MATHC_UTILS_DINTERSECTION_H
