@@ -266,6 +266,18 @@ static float cvecN_distance(const signed char *vec_a, const signed char *vec_b, 
     return cvecN_norm(tmp, n);
 }
 
+/** returns dot(b-a) */
+static float cvecN_sqr_distance(const signed char *vec_a, const signed char *vec_b, int n) {
+#ifdef MATHC_MAX_SIZE
+    assert(n <= MATHC_MAX_SIZE);
+    signed char tmp[MATHC_MAX_SIZE];
+#else
+    signed char tmp[n];
+#endif
+    cvecN_sub_vec(tmp, vec_b, vec_a, n);
+    return cvecN_sqr_norm(tmp, n);
+}
+
 /** dst = a < b */
 static void cvecN_less_than(bool *dst_vec, const signed char *vec_a, signed char b, int n) {
     for (int i = 0; i < n; i++)

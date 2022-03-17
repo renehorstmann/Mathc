@@ -336,6 +336,7 @@ There are a lot of functions to use with the types:
 - vec*_normalize
 - vec*_length
 - vec*_distance
+- vec*_sqr_distance
 - vec*_faceforward
 - vec*_reflect
 - vec*_refract

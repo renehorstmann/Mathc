@@ -478,6 +478,17 @@ static float ivec2_distance_v(const int *vec_a, const int *vec_b) {
 }
 
 
+/** returns dot(b-a) */
+static float ivec2_sqr_distance(ivec2 vec_a, ivec2 vec_b) {
+    return ivecN_sqr_distance(vec_a.v, vec_b.v, 2);
+}
+
+/** returns dot(b-a) */
+static float ivec2_sqr_distance_v(const int *vec_a, const int *vec_b) {
+    return ivec2_sqr_distance(IVec2(vec_a), IVec2(vec_b));
+}
+
+
 /** dst = a < b */
 static bvec2 ivec2_less_than(ivec2 vec_a, int b) {
     bvec2 res;

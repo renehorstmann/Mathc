@@ -422,6 +422,17 @@ static float ucvec2_distance_v(const unsigned char *vec_a, const unsigned char *
 }
 
 
+/** returns dot(b-a) */
+static float ucvec2_sqr_distance(ucvec2 vec_a, ucvec2 vec_b) {
+    return ucvecN_sqr_distance(vec_a.v, vec_b.v, 2);
+}
+
+/** returns dot(b-a) */
+static float ucvec2_sqr_distance_v(const unsigned char *vec_a, const unsigned char *vec_b) {
+    return ucvec2_sqr_distance(UCVec2(vec_a), UCVec2(vec_b));
+}
+
+
 /** dst = a < b */
 static bvec2 ucvec2_less_than(ucvec2 vec_a, unsigned char b) {
     bvec2 res;

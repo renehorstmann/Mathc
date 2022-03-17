@@ -803,6 +803,17 @@ static float vec3_distance_v(const float *vec_a, const float *vec_b) {
 }
 
 
+/** returns dot(b-a) */
+static float vec3_sqr_distance(vec3 vec_a, vec3 vec_b) {
+    return vecN_sqr_distance(vec_a.v, vec_b.v, 3);
+}
+
+/** returns dot(b-a) */
+static float vec3_sqr_distance_v(const float *vec_a, const float *vec_b) {
+    return vec3_sqr_distance(Vec3(vec_a), Vec3(vec_b));
+}
+
+
 /** dst = dot(I, Nref) < 0 ? N : -N */
 static vec3 vec3_faceforward(vec3 vec_N, vec3 vec_I, vec3 vec_Nref) {
     vec3 res;

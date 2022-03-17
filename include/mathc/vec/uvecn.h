@@ -217,6 +217,18 @@ static float uvecN_distance(const unsigned *vec_a, const unsigned *vec_b, int n)
     return uvecN_norm(tmp, n);
 }
 
+/** returns dot(b-a) */
+static float uvecN_sqr_distance(const unsigned *vec_a, const unsigned *vec_b, int n) {
+#ifdef MATHC_MAX_SIZE
+    assert(n <= MATHC_MAX_SIZE);
+    unsigned tmp[MATHC_MAX_SIZE];
+#else
+    unsigned tmp[n];
+#endif
+    uvecN_sub_vec(tmp, vec_b, vec_a, n);
+    return uvecN_dot(tmp, n);
+}
+
 /** dst = a < b */
 static void uvecN_less_than(bool *dst_vec, const unsigned *vec_a, unsigned b, int n) {
     for (int i = 0; i < n; i++)

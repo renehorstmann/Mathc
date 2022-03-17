@@ -797,6 +797,17 @@ static float vec2_distance_v(const float *vec_a, const float *vec_b) {
 }
 
 
+/** returns dot(b-a) */
+static float vec2_sqr_distance(vec2 vec_a, vec2 vec_b) {
+    return vecN_sqr_distance(vec_a.v, vec_b.v, 2);
+}
+
+/** returns dot(b-a) */
+static float vec2_sqr_distance_v(const float *vec_a, const float *vec_b) {
+    return vec2_sqr_distance(Vec2(vec_a), Vec2(vec_b));
+}
+
+
 /** dst = dot(I, Nref) < 0 ? N : -N */
 static vec2 vec2_faceforward(vec2 vec_N, vec2 vec_I, vec2 vec_Nref) {
     vec2 res;

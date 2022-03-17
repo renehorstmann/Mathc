@@ -809,6 +809,17 @@ static double dvec4_distance_v(const double *vec_a, const double *vec_b) {
 }
 
 
+/** returns dot(b-a) */
+static double dvec4_sqr_distance(dvec4 vec_a, dvec4 vec_b) {
+    return dvecN_sqr_distance(vec_a.v, vec_b.v, 4);
+}
+
+/** returns dot(b-a) */
+static double dvec4_sqr_distance_v(const double *vec_a, const double *vec_b) {
+    return dvec4_sqr_distance(DVec4(vec_a), DVec4(vec_b));
+}
+
+
 /** dst = dot(I, Nref) < 0 ? N : -N */
 static dvec4 dvec4_faceforward(dvec4 vec_N, dvec4 vec_I, dvec4 vec_Nref) {
     dvec4 res;

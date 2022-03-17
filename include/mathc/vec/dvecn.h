@@ -416,6 +416,18 @@ static double dvecN_distance(const double *vec_a, const double *vec_b, int n) {
     return dvecN_norm(tmp, n);
 }
 
+/** returns dot(b-a) */
+static double dvecN_sqr_distance(const double *vec_a, const double *vec_b, int n) {
+#ifdef MATHC_MAX_SIZE
+    assert(n <= MATHC_MAX_SIZE);
+    double tmp[MATHC_MAX_SIZE];
+#else
+    double tmp[n];
+#endif
+    dvecN_sub_vec(tmp, vec_b, vec_a, n);
+    return dvecN_dot(tmp, n);
+}
+
 /** dst = dot(I, Nref) < 0 ? N : -N */
 static void
 dvecN_faceforward(double *dst_vec, const double *vec_N, const double *vec_I, const double *vec_Nref, int n) {

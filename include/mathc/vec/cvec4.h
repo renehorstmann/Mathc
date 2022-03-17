@@ -487,6 +487,17 @@ static float cvec4_distance_v(const signed char *vec_a, const signed char *vec_b
 }
 
 
+/** returns dot(b-a) */
+static float cvec4_sqr_distance(cvec4 vec_a, cvec4 vec_b) {
+    return cvecN_sqr_distance(vec_a.v, vec_b.v, 4);
+}
+
+/** returns dot(b-a) */
+static float cvec4_sqr_distance_v(const signed char *vec_a, const signed char *vec_b) {
+    return cvec4_sqr_distance(CVec4(vec_a), CVec4(vec_b));
+}
+
+
 /** dst = a < b */
 static bvec4 cvec4_less_than(cvec4 vec_a, signed char b) {
     bvec4 res;

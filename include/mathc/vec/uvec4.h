@@ -417,6 +417,17 @@ static float uvec4_distance_v(const unsigned *vec_a, const unsigned *vec_b) {
 }
 
 
+/** returns dot(b-a) */
+static float uvec4_sqr_distance(uvec4 vec_a, uvec4 vec_b) {
+    return uvecN_sqr_distance(vec_a.v, vec_b.v, 4);
+}
+
+/** returns dot(b-a) */
+static float uvec4_sqr_distance_v(const unsigned *vec_a, const unsigned *vec_b) {
+    return uvec4_sqr_distance(UVec4(vec_a), UVec4(vec_b));
+}
+
+
 /** dst = a < b */
 static bvec4 uvec4_less_than(uvec4 vec_a, unsigned b) {
     bvec4 res;

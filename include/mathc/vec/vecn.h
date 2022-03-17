@@ -416,6 +416,18 @@ static float vecN_distance(const float *vec_a, const float *vec_b, int n) {
     return vecN_norm(tmp, n);
 }
 
+/** returns dot(b-a) */
+static float vecN_sqr_distance(const float *vec_a, const float *vec_b, int n) {
+#ifdef MATHC_MAX_SIZE
+    assert(n <= MATHC_MAX_SIZE);
+    float tmp[MATHC_MAX_SIZE];
+#else
+    float tmp[n];
+#endif
+    vecN_sub_vec(tmp, vec_b, vec_a, n);
+    return vecN_dot(tmp, n);
+}
+
 /** dst = dot(I, Nref) < 0 ? N : -N */
 static void vecN_faceforward(float *dst_vec, const float *vec_N, const float *vec_I, const float *vec_Nref, int n) {
     if (vecN_dot(vec_I, vec_Nref, n) < 0)
