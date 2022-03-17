@@ -2,6 +2,8 @@ import os
 import shutil
 import jinja2
 
+# in active work, just a project idea...
+
 FLOAT = {
     'real': True,
     'float': 'float',
