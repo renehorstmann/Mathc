@@ -425,7 +425,7 @@ static double dvecN_sqr_distance(const double *vec_a, const double *vec_b, int n
     double tmp[n];
 #endif
     dvecN_sub_vec(tmp, vec_b, vec_a, n);
-    return dvecN_dot(tmp, n);
+    return dvecN_dot(tmp, tmp, n);
 }
 
 /** dst = dot(I, Nref) < 0 ? N : -N */

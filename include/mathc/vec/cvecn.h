@@ -275,7 +275,7 @@ static float cvecN_sqr_distance(const signed char *vec_a, const signed char *vec
     signed char tmp[n];
 #endif
     cvecN_sub_vec(tmp, vec_b, vec_a, n);
-    return cvecN_sqr_norm(tmp, n);
+    return cvecN_dot(tmp, tmp, n);
 }
 
 /** dst = a < b */

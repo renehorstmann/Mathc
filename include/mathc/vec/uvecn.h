@@ -226,7 +226,7 @@ static float uvecN_sqr_distance(const unsigned *vec_a, const unsigned *vec_b, in
     unsigned tmp[n];
 #endif
     uvecN_sub_vec(tmp, vec_b, vec_a, n);
-    return uvecN_dot(tmp, n);
+    return uvecN_dot(tmp, tmp, n);
 }
 
 /** dst = a < b */

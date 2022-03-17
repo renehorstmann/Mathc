@@ -425,7 +425,7 @@ static float vecN_sqr_distance(const float *vec_a, const float *vec_b, int n) {
     float tmp[n];
 #endif
     vecN_sub_vec(tmp, vec_b, vec_a, n);
-    return vecN_dot(tmp, n);
+    return vecN_dot(tmp, tmp, n);
 }
 
 /** dst = dot(I, Nref) < 0 ? N : -N */

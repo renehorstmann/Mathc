@@ -273,7 +273,7 @@ static float ivecN_sqr_distance(const int *vec_a, const int *vec_b, int n) {
     int tmp[n];
 #endif
     ivecN_sub_vec(tmp, vec_b, vec_a, n);
-    return ivecN_dot(tmp, n);
+    return ivecN_dot(tmp, tmp, n);
 }
 
 /** dst = a < b */

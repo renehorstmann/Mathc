@@ -243,7 +243,7 @@ static float ucvecN_sqr_distance(const unsigned char *vec_a, const unsigned char
     unsigned char tmp[n];
 #endif
     ucvecN_sub_vec(tmp, vec_b, vec_a, n);
-    return ucvecN_dot(tmp, n);
+    return ucvecN_dot(tmp, tmp, n);
 }
 
 /** dst = a < b */
