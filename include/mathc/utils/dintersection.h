@@ -192,7 +192,7 @@ static bool dintersection2_line_line(double *out_tau_a, double *out_tau_b,
     double d = a * e - b * b;
 
     // parallel check
-    if (dsca_abs(d) < INTERSECTION_EPSILON)
+    if (dsca_abs(d) < DINTERSECTION_EPSILON)
         return false;
 
     *out_tau_a = (b * f - c * e) / d;
