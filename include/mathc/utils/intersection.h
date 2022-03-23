@@ -12,6 +12,8 @@
 /** returns false if planes are parallel */
 static bool intersection_plane_plane(vec3 *out_pos, vec3 *out_dir,
                                      vec4 plane_hessian_a, vec4 plane_hessian_b) {
+    *out_pos = *out_dir = vec3_set(NAN);
+
     // parallel check
     if (vec3_dot(plane_hessian_a.xyz, plane_hessian_b.xyz) > (1.0f - INTERSECTION_EPSILON))
         return false;
@@ -52,6 +54,8 @@ static int intersection_plane_plane_v(float *out_pos, float *out_dir,
 /** returns false if plane and line are parallel */
 static bool intersection_plane_line(vec3 *out_pos, vec4 plane_hessian,
                                     vec3 line_pos, vec3 line_dir) {
+    *out_pos = vec3_set(NAN);
+
     float plane_line_dot = vec3_dot(plane_hessian.xyz, line_dir);
 
     // parallel check
@@ -120,6 +124,8 @@ static float intersection_triangle_line_v(const float *v0, const float *v1, cons
 static bool intersection_line_line(float *out_tau_a, float *out_tau_b,
                                    vec3 line_a_pos, vec3 line_a_dir,
                                    vec3 line_b_pos, vec3 line_b_dir) {
+    *out_tau_a = *out_tau_b = NAN;
+
     // Book: Real Time Collision Detection: section 5.1.8 Closest Point of Two Lines
     vec3 r = vec3_sub_vec(line_a_pos, line_b_pos);
 
@@ -170,6 +176,8 @@ static float intersection_line_point_v(const float *line_pos, const float *line_
 static bool intersection2_line_line(float *out_tau_a, float *out_tau_b,
                                    vec2 line_a_pos, vec2 line_a_dir,
                                    vec2 line_b_pos, vec2 line_b_dir) {
+    *out_tau_a = *out_tau_b = NAN;
+
     // stupid clone of the vec2 version above:
     vec2 r = vec2_sub_vec(line_a_pos, line_b_pos);
 
