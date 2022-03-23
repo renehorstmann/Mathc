@@ -12,6 +12,8 @@
 /** returns false if planes are parallel */
 static bool dintersection_plane_plane(dvec3 *out_pos, dvec3 *out_dir,
                                       dvec4 plane_hessian_a, dvec4 plane_hessian_b) {
+    *out_pos = *out_dir = dvec3_set(NAN);
+
     // parallel check
     if (dvec3_dot(plane_hessian_a.xyz, plane_hessian_b.xyz) > (1.0 - DINTERSECTION_EPSILON))
         return false;
@@ -52,6 +54,8 @@ static int dintersection_plane_plane_v(double *out_pos, double *out_dir,
 /** returns false if plane and line are parallel */
 static bool dintersection_plane_line(dvec3 *out_pos, dvec4 plane_hessian,
                                      dvec3 line_pos, dvec3 line_dir) {
+    *out_pos = dvec3_set(NAN);
+
     double plane_line_dot = dvec3_dot(plane_hessian.xyz, line_dir);
 
     // parallel check
@@ -120,6 +124,8 @@ static double dintersection_triangle_line_v(const double *v0, const double *v1, 
 static bool dintersection_line_line(double *out_tau_a, double *out_tau_b,
                                     dvec3 line_a_pos, dvec3 line_a_dir,
                                     dvec3 line_b_pos, dvec3 line_b_dir) {
+    *out_tau_a = *out_tau_b = NAN;
+
     // Book: Real Time Collision Detection: section 5.1.8 Closest Point of Two Lines
     dvec3 r = dvec3_sub_vec(line_a_pos, line_b_pos);
 
@@ -170,6 +176,8 @@ static double dintersection_line_point_v(const double *line_pos, const double *l
 static bool dintersection2_line_line(double *out_tau_a, double *out_tau_b,
                                     dvec2 line_a_pos, dvec2 line_a_dir,
                                     dvec2 line_b_pos, dvec2 line_b_dir) {
+    *out_tau_a = *out_tau_b = NAN;
+
     // stupid clone of the dvec2 version above:
     dvec2 r = dvec2_sub_vec(line_a_pos, line_b_pos);
 
