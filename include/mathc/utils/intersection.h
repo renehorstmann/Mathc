@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include "../sca/float.h"
+#include "../vec/vec2.h"
 #include "../vec/vec3.h"
 #include "../mat/mat3.h"
 
