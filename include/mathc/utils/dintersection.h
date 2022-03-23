@@ -2,6 +2,7 @@
 #define MATHC_UTILS_DINTERSECTION_H
 
 #include <stdbool.h>
+#include "../sca/double.h"
 #include "../vec/dvec3.h"
 #include "../mat/dmat3.h"
 

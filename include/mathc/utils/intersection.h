@@ -2,6 +2,7 @@
 #define MATHC_UTILS_INTERSECTION_H
 
 #include <stdbool.h>
+#include "../sca/float.h"
 #include "../vec/vec3.h"
 #include "../mat/mat3.h"
 
