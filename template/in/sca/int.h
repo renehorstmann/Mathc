@@ -1,0 +1,81 @@
+#ifndef MATHC_SCA_INT_H
+#define MATHC_SCA_INT_H
+
+#include <stdlib.h>  // abs
+#include <math.h>
+
+/** dst = pow(x, y) */
+static int isca_pow(int x, int y) {
+    return (int) pow(x, y);
+}
+
+/** dst = exp(x) */
+static int isca_exp(int x) {
+    return (int) exp(x);
+}
+
+/** dst = log(x) */
+static int isca_log(int x) {
+    return (int) log(x);
+}
+
+/** dst = exp2(x) */
+static int isca_exp2(int x) {
+    return (int) exp2(x);
+}
+
+/** dst = log2(x) */
+static int isca_log2(int x) {
+    return (int) log2(x);
+}
+
+/** dst = sqrt(x) */
+static int isca_sqrt(int x) {
+    return (int) sqrt(x);
+}
+
+/** dst = abs(x) */
+static int isca_abs(int x) {
+    return abs(x);
+}
+
+/** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
+static int isca_sign(int x) {
+    return x > 0 ? 1 : (x < 0 ? -1 : 0);
+}
+
+/** dst = x % y (always positive) **/
+static int isca_mod_positive(int x, unsigned y) {
+    int dst = x % (int) y;
+    if (dst < 0) {
+        dst += y;
+    }
+    return dst;
+}
+
+/** dst = a < b ? a : b */
+static int isca_min(int a, int b) {
+    return a < b ? a : b;
+}
+
+/** dst = a > b ? a : b */
+static int isca_max(int a, int b) {
+    return a > b ? a : b;
+}
+
+/** dst = x < min ? min : (x > max ? max : x) */
+static int isca_clamp(int x, int min, int max) {
+    return x < min ? min : (x > max ? max : x);
+}
+
+/** dst = a * (1-t) + b * t */
+static int isca_mix(int a, int b, float t) {
+    return (int) (a * (1.0f - t) + b * t);
+}
+
+/** dst = x < edge ? 0 : 1 */
+static int isca_step(int x, int edge) {
+    return x < edge ? 0 : 1;
+}
+
+#endif //MATHC_SCA_INT_H
