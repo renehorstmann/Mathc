@@ -379,12 +379,17 @@ if __name__ == '__main__':
     os.makedirs('out/types')
     shutil.copyfile('in/types/bool.h', 'out/types/bool.h')
     os.makedirs('out/vec')
+    shutil.copyfile('in/vec/bool.h', 'out/vec/bool.h')
+    shutil.copyfile('in/vec/bvecn.h', 'out/vec/bvecn.h')
+    shutil.copyfile('in/vec/bvec2.h', 'out/vec/bvec2.h')
+    shutil.copyfile('in/vec/bvec3.h', 'out/vec/bvec3.h')
+    shutil.copyfile('in/vec/bvec4.h', 'out/vec/bvec4.h')
 
     create_float_files(FLOAT)
     create_float_files(DOUBLE)
-    create_float_files(LONGDOUBLE)
+    # create_float_files(LONGDOUBLE)
 
     create_int_files(INT, True)
     create_int_files(UCHAR, False)
-    create_int_files(LONGLONG, True)
+    # create_int_files(LONGLONG, True)
 
