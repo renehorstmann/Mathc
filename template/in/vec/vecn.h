@@ -24,7 +24,7 @@ do { \
 /** dst = v / 255 */
 static void vecN_cast_from_uchar_1(float *dst, const unsigned char *v, int n) {
     for (int i = 0; i < n; i++)
-        dst[i] = (float) v[i] / 255.0f;
+        dst[i] = (float) v[i] / (float) 255;
 }
 
 /** a == b */
@@ -364,7 +364,7 @@ static float vecN_norm_p(const float *v, float p, int n) {
     for (int i = 0; i < n; i++) {
         sum += sca_pow(sca_abs(v[i]), p);
     }
-    return sca_pow(sum, 1.0f / p);
+    return sca_pow(sum, (float) 1 / p);
 }
 
 /** returns ||v||_1 */
@@ -388,13 +388,13 @@ static float vecN_norm_inf(const float *v, int n) {
 
 /** dst = v / norm(v) */
 static void vecN_normalize_unsafe(float *dst, const float *v, int n) {
-    vecN_scale(dst, v, 1.0f / vecN_norm(v, n), n);
+    vecN_scale(dst, v, (float) 1 / vecN_norm(v, n), n);
 }
 
 /** dst = v / (norm(v) > 0 ? norm(v) : 1) */
 static void vecN_normalize(float *dst, const float *v, int n) {
     float norm = vecN_norm(v, n);
-    vecN_scale(dst, v, 1.0f / (norm > 0.0f ? norm : 1.0f), n);
+    vecN_scale(dst, v, (float) 1 / (norm > (float) 0 ? norm : (float) 1), n);
 }
 
 /** returns length of a vector, see vecN_norm. Just here to match glsl */
@@ -436,7 +436,7 @@ static void vecN_faceforward(float *dst, const float *n_v, const float *i_v, con
 
 /** dst = i_v - 2.0 * n_v * dot(n_v,i_v) */
 static void vecN_reflect(float *dst, const float *i_v, const float *n_v, int n) {
-    vecN_scale(dst, n_v, 2.0f * vecN_dot(n_v, i_v, n), n);
+    vecN_scale(dst, n_v, (float) 2 * vecN_dot(n_v, i_v, n), n);
     vecN_sub_vec(dst, i_v, dst, n);
 }
 
@@ -444,12 +444,12 @@ static void vecN_refract(float *dst, const float *i_v, const float *n_v, float e
     // implementation from example implementation: https://developer.download.nvidia.com/cg/refract.html
     vecN_neg(dst, i_v, n);
     float cosi = vecN_dot(dst, n_v, n);
-    float cost2 = 1.0f - eta * eta * (1.0f - cosi * cosi);
+    float cost2 = (float) 1 - eta * eta * ((float) 1 - cosi * cosi);
     vecN_scale(dst, n_v, eta * cosi - sca_sqrt(sca_abs(cost2)), n);
     float t[3];
     vecN_scale(t, i_v, eta, n);
     vecN_add_vec(t, t, dst, n);
-    vecN_scale(dst, t, cost2 > 0.0f, n);
+    vecN_scale(dst, t, cost2 > (float) 0, n);
 }
 
 /** dst = a < b */

@@ -12,6 +12,14 @@
 #include <assert.h>
 #include "../sca/int.h"
 
+/*/ 0 /*/   // template file!
+/*/ 0 /*/   //
+/*/ 0 /*/   // all lines starting with "/*/ cond /*/" may be removed
+/*/ 0 /*/   // if cond is true:
+/*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
+/*/ 0 /*/   // if cond is false:
+/*/ 0 /*/   //      the whole line will be removed
+/*/ 0 /*/
 
 
 /** macro to cast a vector into a int vector */
@@ -23,19 +31,19 @@ do { \
 
 
 /** dst = vec * 255 */
-static void ivecN_cast_from_float_1(unsigned char *dst_vec, const float *vec, int n) {
+static void ivecN_cast_from_float_1(int *dst_vec, const float *vec, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = (int) (vec[i] * 255.0f);
 }
 
 /** dst = vec * 255 */
-static void ivecN_cast_from_double_1(unsigned char *dst_vec, const double *vec, int n) {
+static void ivecN_cast_from_double_1(int *dst_vec, const double *vec, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = (int) (vec[i] * 255.0);
 }
 
 /** dst = vec * 255 */
-static void ivecN_cast_from_longdouble_1(unsigned char *dst_vec, const long double *vec, int n) {
+static void ivecN_cast_from_longdouble_1(int *dst_vec, const long double *vec, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = (int) (vec[i] * 255.0);
 }
@@ -57,11 +65,11 @@ static void ivecN_set(int *dst, int scalar, int n) {
         dst[i] = scalar;
 }
 
-//SIGNED /** dst = -v */
-//SIGNED static void ivecN_neg(int *dst, const int *vec, int n) {
-//SIGNED     for (int i = 0; i < n; i++)
-//SIGNED         dst[i] = -vec[i];
-//SIGNED }
+/*/ signed /*//** dst = -v */
+/*/ signed /*/static void ivecN_neg(int *dst, const int *vec, int n) {
+/*/ signed /*/    for (int i = 0; i < n; i++)
+/*/ signed /*/        dst[i] = -vec[i];
+/*/ signed /*/}
 
 /** dst = a + b */
 static void ivecN_add_vec(int *dst, const int *a, const int *b, int n) {
@@ -153,29 +161,29 @@ static void ivecN_sqrt(int *dst, const int *x, int n) {
         dst[i] = isca_sqrt(x[i]);
 }
 
-//SIGNED /** dst = abs(x) */
-//SIGNED static void ivecN_abs(int *dst, const int *x, int n) {
-//SIGNED     for (int i = 0; i < n; i++)
-//SIGNED         dst[i] = isca_abs(x[i]);
-//SIGNED }
+/*/ signed /*//** dst = abs(x) */
+/*/ signed /*/static void ivecN_abs(int *dst, const int *x, int n) {
+/*/ signed /*/    for (int i = 0; i < n; i++)
+/*/ signed /*/        dst[i] = isca_abs(x[i]);
+/*/ signed /*/}
 
-//SIGNED /** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
-//SIGNED static void ivecN_sign(int *dst, const int *x, int n) {
-//SIGNED     for (int i = 0; i < n; i++)
-//SIGNED         dst[i] = isca_sign(x[i]);
-//SIGNED }
+/*/ signed /*//** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
+/*/ signed /*/static void ivecN_sign(int *dst, const int *x, int n) {
+/*/ signed /*/    for (int i = 0; i < n; i++)
+/*/ signed /*/        dst[i] = isca_sign(x[i]);
+/*/ signed /*/}
 
-//SIGNED /** dst = x % y (always positive) **/
-//SIGNED static void ivecN_mod_positive(int *dst, const int *x, int y, int n) {
-//SIGNED     for (int i = 0; i < n; i++)
-//SIGNED         dst[i] = isca_mod_positive(x[i], y);
-//SIGNED }
+/*/ signed /*//** dst = x % y (always positive) **/
+/*/ signed /*/static void ivecN_mod_positive(int *dst, const int *x, int y, int n) {
+/*/ signed /*/    for (int i = 0; i < n; i++)
+/*/ signed /*/        dst[i] = isca_mod_positive(x[i], y);
+/*/ signed /*/}
 
-//SIGNED /** dst = x % y (always positive) **/
-//SIGNED static void ivecN_mod_positive_vec(int *dst, const int *x, const int *y, int n) {
-//SIGNED     for (int i = 0; i < n; i++)
-//SIGNED         dst[i] = isca_mod_positive(x[i], y[i]);
-//SIGNED }
+/*/ signed /*//** dst = x % y (always positive) **/
+/*/ signed /*/static void ivecN_mod_positive_vec(int *dst, const int *x, const int *y, int n) {
+/*/ signed /*/    for (int i = 0; i < n; i++)
+/*/ signed /*/        dst[i] = isca_mod_positive(x[i], y[i]);
+/*/ signed /*/}
 
 /** dst = a < b ? a : b */
 static void ivecN_min(int *dst, const int *a, int b, int n) {
@@ -278,33 +286,33 @@ static int ivecN_norm(const int *v, int n) {
     return isca_sqrt(ivecN_dot(v, v, n));
 }
 
-//SIGNED /** returns ||v||_p */
-//SIGNED static int ivecN_norm_p(const int *v, int p, int n) {
-//SIGNED     int sum = 0;
-//SIGNED     for (int i = 0; i < n; i++) {
-//SIGNED         sum += isca_pow(isca_abs(v[i]), p);
-//SIGNED     }
-//SIGNED     return isca_pow(sum, 1.0f / p);
-//SIGNED }
+/*/ signed /*//** returns ||v||_p */
+/*/ signed /*/static int ivecN_norm_p(const int *v, int p, int n) {
+/*/ signed /*/    int sum = 0;
+/*/ signed /*/    for (int i = 0; i < n; i++) {
+/*/ signed /*/        sum += isca_pow(isca_abs(v[i]), p);
+/*/ signed /*/    }
+/*/ signed /*/    return isca_pow(sum, 1.0f / p);
+/*/ signed /*/}
 
-//SIGNED /** returns ||v||_1 */
-//SIGNED static int ivecN_norm_1(const int *v, int n) {
-//SIGNED     int sum = 0;
-//SIGNED     for (int i = 0; i < n; i++) {
-//SIGNED         sum += isca_abs(v[i]);
-//SIGNED     }
-//SIGNED     return sum;
-//SIGNED }
+/*/ signed /*//** returns ||v||_1 */
+/*/ signed /*/static int ivecN_norm_1(const int *v, int n) {
+/*/ signed /*/    int sum = 0;
+/*/ signed /*/    for (int i = 0; i < n; i++) {
+/*/ signed /*/        sum += isca_abs(v[i]);
+/*/ signed /*/    }
+/*/ signed /*/    return sum;
+/*/ signed /*/}
 
-//SIGNED /** returns ||v||_inf */
-//SIGNED static int ivecN_norm_inf(const int *v, int n) {
-//SIGNED     int max = 0;
-//SIGNED     for (int i = 0; i < n; i++) {
-//SIGNED         if (max < isca_abs(v[i]))
-//SIGNED             max = isca_abs(v[i]);
-//SIGNED     }
-//SIGNED     return max;
-//SIGNED }
+/*/ signed /*//** returns ||v||_inf */
+/*/ signed /*/static int ivecN_norm_inf(const int *v, int n) {
+/*/ signed /*/    int max = 0;
+/*/ signed /*/    for (int i = 0; i < n; i++) {
+/*/ signed /*/        if (max < isca_abs(v[i]))
+/*/ signed /*/            max = isca_abs(v[i]);
+/*/ signed /*/    }
+/*/ signed /*/    return max;
+/*/ signed /*/}
 
 /** returns length of a vector, see ivecN_norm. Just here to match glsl */
 static int ivecN_length(const int *v, int n) {

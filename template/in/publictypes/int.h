@@ -3,7 +3,7 @@
 
 
 //
-// ivectors 2, 3, 4
+// vectors 2, 3, 4
 //
 
 typedef union {
@@ -105,7 +105,7 @@ _Static_assert(sizeof(mathc_ivec4) == sizeof(int) * 4, "[Mathc] wrong expected s
 
 
 //
-// square imatrices 2x2, 3x3, 4x4
+// square matrices 2x2, 3x3, 4x4
 //
 
 typedef union {
