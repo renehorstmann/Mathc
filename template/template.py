@@ -212,7 +212,6 @@ def apply_int_template(src_file, dst_file, template: dict, signed: bool, X=0):
     apply_replace(src_file, dst_file, replace)
 
 
-
 def create_float_files(template: dict):
     # 2, 3, 4
     X_MIN = 2
@@ -235,7 +234,7 @@ def create_float_files(template: dict):
     apply_float_template('in/vec/vecn.h',
                          apply_regex_replace_list('out/vec/vecn.h', replace_to_float_basic),
                          template)
-    for x in range(X_MIN, X_MAX+1):
+    for x in range(X_MIN, X_MAX + 1):
         apply_float_template('in/vec/vecX.h',
                              apply_regex_replace_list('out/vec/vec%i.h' % x, replace_to_float_basic),
                              template, x)
@@ -247,11 +246,10 @@ def create_float_files(template: dict):
     apply_float_template('in/mat/matn.h',
                          apply_regex_replace_list('out/mat/matn.h', replace_to_float_basic),
                          template)
-    for x in range(X_MIN, X_MAX+1):
+    for x in range(X_MIN, X_MAX + 1):
         apply_float_template('in/mat/matX.h',
                              apply_regex_replace_list('out/mat/mat%i.h' % x, replace_to_float_basic),
                              template, x)
-
 
 
 def create_int_files(template: dict, signed: bool):
@@ -276,7 +274,7 @@ def create_int_files(template: dict, signed: bool):
     apply_int_template('in/vec/ivecn.h',
                        apply_regex_replace_list('out/vec/ivecn.h', replace_to_int_basic),
                        template, signed)
-    for x in range(X_MIN, X_MAX+1):
+    for x in range(X_MIN, X_MAX + 1):
         apply_int_template('in/vec/ivecX.h',
                            apply_regex_replace_list('out/vec/ivec%i.h' % x, replace_to_int_basic),
                            template, signed, x)
@@ -288,10 +286,20 @@ def create_int_files(template: dict, signed: bool):
     apply_int_template('in/mat/imatn.h',
                        apply_regex_replace_list('out/mat/imatn.h', replace_to_int_basic),
                        template, signed)
-    for x in range(X_MIN, X_MAX+1):
+    for x in range(X_MIN, X_MAX + 1):
         apply_int_template('in/mat/imatX.h',
                            apply_regex_replace_list('out/mat/imat%i.h' % x, replace_to_int_basic),
                            template, signed, x)
+
+
+def create_util_files(template: dict, prefix: str):
+    apply_float_template('in/utils/float.h', 'out/utils/%sfloat.h' % prefix, template)
+    apply_float_template('in/utils/camera.h', 'out/utils/%scamera.h' % prefix, template)
+    apply_float_template('in/utils/color.h', 'out/utils/%scolor.h' % prefix, template)
+    apply_float_template('in/utils/intersection.h', 'out/utils/%sintersection.h' % prefix, template)
+    apply_float_template('in/utils/quat.h', 'out/utils/%squat.h' % prefix, template)
+    apply_float_template('in/utils/random.h', 'out/utils/%srandom.h' % prefix, template)
+    apply_float_template('in/utils/rotation.h', 'out/utils/%srotation.h' % prefix, template)
 
 
 FLOAT = {
@@ -360,7 +368,6 @@ LONGLONG = {
     'primitive_file': 'longlong'
 }
 
-
 if __name__ == '__main__':
     import shutil
 
@@ -389,7 +396,10 @@ if __name__ == '__main__':
     create_float_files(DOUBLE)
     # create_float_files(LONGDOUBLE)
 
+    create_util_files(FLOAT, '')
+    create_util_files(DOUBLE, 'd')
+    # create_util_files(LONGDOUBLE, 'ld')
+
     create_int_files(INT, True)
     create_int_files(UCHAR, False)
     # create_int_files(LONGLONG, True)
-
