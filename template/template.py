@@ -51,9 +51,10 @@ def create_replace_list(template: dict, X=0):
     # conditional lines:
     replace.append((regex_condition('0', False), ''))
     replace.append((regex_condition('1', True), ''))
-    replace.append((regex_condition('float', 'is_integer' not in template or not template['is_integer']), ''))
-    replace.append((regex_condition('int', 'is_integer' in template and template['is_integer']), ''))
-    replace.append((regex_condition('signed', 'is_integer' in template and template['is_signed']), ''))
+    is_float = 'is_integer' not in template or not template['is_integer']
+    replace.append((regex_condition('float', is_float), ''))
+    replace.append((regex_condition('int', not is_float), ''))
+    replace.append((regex_condition('signed', is_float or ('is_integer' in template and template['is_signed'])), ''))
     replace.append((regex_condition('bool', 'is_bool' in template and template['is_bool']), ''))
     for x in range(X_MIN, X_MAX+1):
         replace.append((regex_condition('X==%i' % x, X == x), ''))
@@ -95,6 +96,12 @@ def create_replace_list(template: dict, X=0):
 
     # _MATN_H header
     replace.append((regex_name_postfix('_MATN_H'), '_' + template['mat_header'] + 'N_H'))
+
+    # MATHC_VEC* macro
+    replace.append((regex_name_prefix('MATHC_VEC'), 'MATHC_' + template['vec_header']))
+
+    # MATHC_MAT* macro
+    replace.append((regex_name_prefix('MATHC_MAT'), 'MATHC_' + template['mat_header']))
 
     for x in range(X_MIN, X_MAX + 1):
         # vecX_ functions
