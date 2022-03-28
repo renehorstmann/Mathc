@@ -1,9 +1,6 @@
 #ifndef MATHC_VEC_BVEC__X___H
 #define MATHC_VEC_BVEC__X___H
 
-#include "bvecn.h"
-#include "../types/bvec__X__.h"
-
 /*/ 0 /*/   // template file!
 /*/ 0 /*/   //
 /*/ 0 /*/   // __X__ will be replaced by X=[2, 3, 4, ...]
@@ -15,8 +12,12 @@
 /*/ 0 /*/   //      the whole line will be removed
 /*/ 0 /*/
 /*/ 0 /*/   // the following setup is just here to pleasure an ide
+/*/ 0 /*/ #include "../../out/types/bvec4.h"
 /*/ 0 /*/ typedef bvec4 bvec__X__;
 /*/ 0 /*/ #define __X__ 4
+
+#include "bvecn.h"
+/*/ 1 /*///#include "../types/bvec__X__.h"
 
 
 /** bvec_a == bvec_b */
@@ -49,7 +50,7 @@ static bvec__X__ bvec__X___unit_y() {
 
 
 /*/ X>=3 /*//** dst = unit_z */
-/*/ X>=3 /*/static bvec__X__ vec__X___unit_z() {
+/*/ X>=3 /*/static bvec__X__ bvec__X___unit_z() {
 /*/ X>=3 /*/    bvec__X__ res;
 /*/ X>=3 /*/    bvecN_unit_z(res.v, __X__);
 /*/ X>=3 /*/    return res;
@@ -57,7 +58,7 @@ static bvec__X__ bvec__X___unit_y() {
 
 
 /*/ X>=4 /*//** dst = unit_w */
-/*/ X>=4 /*/static bvec__X__ vec__X___unit_w() {
+/*/ X>=4 /*/static bvec__X__ bvec__X___unit_w() {
 /*/ X>=4 /*/    bvec__X__ res;
 /*/ X>=4 /*/    bvecN_unit_w(res.v, __X__);
 /*/ X>=4 /*/    return res;

@@ -1,6 +1,7 @@
 #ifndef MATHC_SCA_FLOAT_H
 #define MATHC_SCA_FLOAT_H
 
+#include <stdbool.h>
 #include <float.h>  // for FLT_MAX, ...
 #include <math.h>
 
@@ -172,12 +173,12 @@ static float sca_smoothstep(float x, float edge1, float edge2) {
 }
 
 /** dst = isnan(x) */
-static _Bool sca_isnan(float x) {
+static bool sca_isnan(float x) {
     return isnan(x);
 }
 
 /** dst = isinf(x) */
-static _Bool sca_isinf(float x) {
+static bool sca_isinf(float x) {
     return isinf(x);
 }
 

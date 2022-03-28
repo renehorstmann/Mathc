@@ -1,11 +1,28 @@
 #ifndef MATHC_UTILS_INTERSECTION_H
 #define MATHC_UTILS_INTERSECTION_H
 
+/*/ 0 /*/   // template file!
+/*/ 0 /*/   //
+/*/ 0 /*/   // __X__ will be replaced by X=[2, 3, 4, ...]
+/*/ 0 /*/   //
+/*/ 0 /*/   // all lines starting with "/*/ cond /*/[//]" may be removed
+/*/ 0 /*/   // if cond is true:
+/*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
+/*/ 0 /*/   // if cond is false:
+/*/ 0 /*/   //      the whole line will be removed
+/*/ 0 /*/   // the following setup is just here to pleasure an ide
+/*/ 0 /*/ #include "../../out/vec/vec2.h"
+/*/ 0 /*/ #include "../../out/vec/vec3.h"
+/*/ 0 /*/ #include "../../out/vec/vec4.h"
+/*/ 0 /*/ #include "../../out/mat/mat3.h"
+
+
 #include <stdbool.h>
 #include "../sca/float.h"
-#include "../vec/vec2.h"
-#include "../vec/vec3.h"
-#include "../mat/mat3.h"
+/*/ 1 /*///#include "../vec/vec2.h"
+/*/ 1 /*///#include "../vec/vec3.h"
+/*/ 1 /*///#include "../vec/vec4.h"
+/*/ 1 /*///#include "../mat/mat3.h"
 
 #ifndef INTERSECTION_EPSILON
 #define INTERSECTION_EPSILON (float) 0.01

@@ -41,6 +41,11 @@ static unsigned char ucsca_sqrt(unsigned char x) {
     return (unsigned char) sqrt(x);
 }
 
+/** dst =  x % y  **/
+static unsigned char ucsca_mod(unsigned char x, unsigned char y) {
+    return x % y;
+}
+
 /** dst = a < b ? a : b */
 static unsigned char ucsca_min(unsigned char a, unsigned char b) {
     return a < b ? a : b;

@@ -56,6 +56,7 @@ def create_replace_list(template: dict, X=0):
     replace.append((regex_condition('int', not is_float), ''))
     replace.append((regex_condition('signed', is_float or ('is_integer' in template and template['is_signed'])), ''))
     replace.append((regex_condition('bool', 'is_bool' in template and template['is_bool']), ''))
+    replace.append((regex_condition('!bool', not 'is_bool' in template or not template['is_bool']), ''))
     for x in range(X_MIN, X_MAX+1):
         replace.append((regex_condition('X==%i' % x, X == x), ''))
         replace.append((regex_condition('X!=%i' % x, X != x), ''))
@@ -138,6 +139,10 @@ def apply_template(src_file, dst_file, template: dict, X=0):
 
 def create_publictypes(template: dict, X_list_vec, X_list_mat):
     replace_to_float_basic = create_replace_list(template)
+
+    apply_template('in/publictypes/float.h',
+                   apply_regex_replace_list('out/publictypes/float.h', replace_to_float_basic),
+                   template)
     
     for x in X_list_vec:
         apply_template('in/publictypes/vecX.h',
@@ -153,6 +158,10 @@ def create_publictypes(template: dict, X_list_vec, X_list_mat):
 def create_types(template: dict, X_list_vec, X_list_mat):
     replace_to_float_basic = create_replace_list(template)
 
+    apply_template('in/types/float.h',
+                   apply_regex_replace_list('out/types/float.h', replace_to_float_basic),
+                   template)
+
     for x in X_list_vec:
         apply_template('in/types/vecX.h',
                        apply_regex_replace_list('out/types/vec%i.h' % x, replace_to_float_basic),
@@ -167,6 +176,10 @@ def create_types(template: dict, X_list_vec, X_list_mat):
 def create_vec(template: dict, X_list):
     replace_to_float_basic = create_replace_list(template)
 
+    apply_template('in/vec/float.h',
+                   apply_regex_replace_list('out/vec/float.h', replace_to_float_basic),
+                   template)
+
     apply_template('in/vec/vecn.h',
                          apply_regex_replace_list('out/vec/vecn.h', replace_to_float_basic),
                          template)
@@ -178,6 +191,10 @@ def create_vec(template: dict, X_list):
 
 def create_mat(template: dict, X_list):
     replace_to_float_basic = create_replace_list(template)
+
+    apply_template('in/mat/float.h',
+                   apply_regex_replace_list('out/mat/float.h', replace_to_float_basic),
+                   template)
 
     apply_template('in/mat/matn.h',
                          apply_regex_replace_list('out/mat/matn.h', replace_to_float_basic),
@@ -196,8 +213,14 @@ def create_all(template: dict, X_list_vec, X_list_mat):
 
 
 def create_bool(X_list):
+    replace_to_float_basic = create_replace_list(BOOL)
+
     create_publictypes(BOOL, X_list, [])
     create_types(BOOL, X_list, [])
+
+    apply_template('in/vec/float.h',
+                   apply_regex_replace_list('out/vec/float.h', replace_to_float_basic),
+                   BOOL)
 
     apply_replace('in/vec/bvecn.h', 'out/vec/bvecn.h', [])
     for X in X_list:
@@ -219,7 +242,8 @@ def create_bool(X_list):
 
 
 def create_util(template: dict, prefix: str):
-    apply_template('in/utils/float.h', 'out/utils/%sfloat.h' % prefix, template)
+    replace_to_float_basic = create_replace_list(template)
+    apply_template('in/utils/float.h', apply_regex_replace_list('out/utils/float.h', replace_to_float_basic), template)
     apply_template('in/utils/camera.h', 'out/utils/%scamera.h' % prefix, template)
     apply_template('in/utils/color.h', 'out/utils/%scolor.h' % prefix, template)
     apply_template('in/utils/intersection.h', 'out/utils/%sintersection.h' % prefix, template)
@@ -273,6 +297,32 @@ LONGDOUBLE = {
     'primitive_file': 'longdouble'
 }
 
+CHAR = {
+    'primitive': 'signed char',     # signed, because char alone may be unsigned
+    'sca': 'csca',
+    'vec': 'cvec',
+    'mat': 'cmat',
+    'primitive_header': 'CHAR',
+    'vec_header': 'CVEC',
+    'mat_header': 'CMAT',
+    'primitive_file': 'char',
+    'is_integer': True,
+    'is_signed': True
+}
+
+SHORT = {
+    'primitive': 'short',
+    'sca': 'ssca',
+    'vec': 'svec',
+    'mat': 'smat',
+    'primitive_header': 'SHORT',
+    'vec_header': 'SVEC',
+    'mat_header': 'SMAT',
+    'primitive_file': 'short',
+    'is_integer': True,
+    'is_signed': True
+}
+
 INT = {
     'primitive': 'int',
     'sca': 'isca',
@@ -282,6 +332,19 @@ INT = {
     'vec_header': 'IVEC',
     'mat_header': 'IMAT',
     'primitive_file': 'int',
+    'is_integer': True,
+    'is_signed': True
+}
+
+LONGLONG = {
+    'primitive': 'long long',
+    'sca': 'llsca',
+    'vec': 'llvec',
+    'mat': 'llmat',
+    'primitive_header': 'LONGLONG',
+    'vec_header': 'LLVEC',
+    'mat_header': 'LLMAT',
+    'primitive_file': 'longlong',
     'is_integer': True,
     'is_signed': True
 }
@@ -299,17 +362,43 @@ UCHAR = {
     'is_signed': False
 }
 
-LONGLONG = {
-    'primitive': 'long long',
-    'sca': 'llsca',
-    'vec': 'llvec',
-    'mat': 'llmat',
-    'primitive_header': 'LONGLONG',
-    'vec_header': 'LLVEC',
-    'mat_header': 'LLMAT',
-    'primitive_file': 'longlong',
+USHORT = {
+    'primitive': 'unsigned short',
+    'sca': 'ussca',
+    'vec': 'usvec',
+    'mat': 'usmat',
+    'primitive_header': 'USHORT',
+    'vec_header': 'USVEC',
+    'mat_header': 'USMAT',
+    'primitive_file': 'ushort',
     'is_integer': True,
-    'is_signed': True
+    'is_signed': False
+}
+
+UINT = {
+    'primitive': 'unsigned int',
+    'sca': 'uisca',
+    'vec': 'uivec',
+    'mat': 'uimat',
+    'primitive_header': 'UINT',
+    'vec_header': 'UIVEC',
+    'mat_header': 'UIMAT',
+    'primitive_file': 'uint',
+    'is_integer': True,
+    'is_signed': False
+}
+
+ULONGLONG = {
+    'primitive': 'unsigned long long',
+    'sca': 'ullsca',
+    'vec': 'ullvec',
+    'mat': 'ullmat',
+    'primitive_header': 'ULONGLONG',
+    'vec_header': 'ULLVEC',
+    'mat_header': 'ULLMAT',
+    'primitive_file': 'ulonglong',
+    'is_integer': True,
+    'is_signed': False
 }
 
 if __name__ == '__main__':
@@ -318,17 +407,29 @@ if __name__ == '__main__':
     if os.path.exists('out'):
         shutil.rmtree('out')
 
+    # copy static files
     os.makedirs('out/sca')
+    shutil.copyfile('in/mathc.h', 'out/mathc.h')
+    shutil.copyfile('in/bool.h', 'out/bool.h')
+    shutil.copyfile('in/float.h', 'out/float.h')
+    shutil.copyfile('in/double.h', 'out/double.h')
+    shutil.copyfile('in/int.h', 'out/int.h')
+    shutil.copyfile('in/uchar.h', 'out/uchar.h')
     shutil.copyfile('in/sca/float.h', 'out/sca/float.h')
     shutil.copyfile('in/sca/double.h', 'out/sca/double.h')
     shutil.copyfile('in/sca/longdouble.h', 'out/sca/longdouble.h')
+    shutil.copyfile('in/sca/char.h', 'out/sca/char.h')
+    shutil.copyfile('in/sca/short.h', 'out/sca/short.h')
     shutil.copyfile('in/sca/int.h', 'out/sca/int.h')
     shutil.copyfile('in/sca/longlong.h', 'out/sca/longlong.h')
     shutil.copyfile('in/sca/uchar.h', 'out/sca/uchar.h')
-    os.makedirs('out/publictypes')
+    shutil.copyfile('in/sca/ushort.h', 'out/sca/ushort.h')
+    shutil.copyfile('in/sca/uint.h', 'out/sca/uint.h')
+    shutil.copyfile('in/sca/ulonglong.h', 'out/sca/ulonglong.h')
 
-    X_list_vec = [2, 3, 4, 6, 12]
-    X_list_mat = [2, 3, 4, 6]
+    # minimum should be [2, 3, 4]
+    X_list_vec = [2, 3, 4]
+    X_list_mat = [2, 3, 4]
 
     create_bool(X_list_vec)
 

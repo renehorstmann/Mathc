@@ -1,6 +1,7 @@
 #ifndef MATHC_SCA_LONGDOUBLE_H
 #define MATHC_SCA_LONGDOUBLE_H
 
+#include <stdbool.h>
 #include <float.h>  // for LDBL_MAX, ...
 #include <math.h>
 
@@ -172,12 +173,12 @@ static long double ldsca_smoothstep(long double x, long double edge1, long doubl
 }
 
 /** dst = isnan(x) */
-static _Bool ldsca_isnan(long double x) {
+static bool ldsca_isnan(long double x) {
     return isnan(x);
 }
 
 /** dst = isinf(x) */
-static _Bool ldsca_isinf(long double x) {
+static bool ldsca_isinf(long double x) {
     return isinf(x);
 }
 

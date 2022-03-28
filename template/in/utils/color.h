@@ -1,7 +1,19 @@
 #ifndef MATHC_UTILS_COLOR_H
 #define MATHC_UTILS_COLOR_H
 
-#include "../vec/vec3.h"
+/*/ 0 /*/   // template file!
+/*/ 0 /*/   //
+/*/ 0 /*/   // __X__ will be replaced by X=[2, 3, 4, ...]
+/*/ 0 /*/   //
+/*/ 0 /*/   // all lines starting with "/*/ cond /*/[//]" may be removed
+/*/ 0 /*/   // if cond is true:
+/*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
+/*/ 0 /*/   // if cond is false:
+/*/ 0 /*/   //      the whole line will be removed
+/*/ 0 /*/   // the following setup is just here to pleasure an ide
+/*/ 0 /*/ #include "../../out/vec/vec3.h"
+
+/*/ 1 /*///#include "../vec/vec3.h"
 
 // rgb[0:1] hsv[0:360, 0:1, 0:1]
 static vec3 vec3_rgb2hsv(vec3 rgb) {

@@ -1,13 +1,6 @@
 #ifndef MATHC_MAT_MAT__X___H
 #define MATHC_MAT_MAT__X___H
 
-#include "matn.h"
-/*/ 1 /*///#include "../types/mat__X__.h"
-/*/ X==3 /*///#include "../types/mat2.h"
-/*/ X==4 /*///#include "../types/mat2.h"
-/*/ X==4 /*///#include "../types/mat3.h"
-#include "../vec/vecn.h"
-
 /*/ 0 /*/   // template file!
 /*/ 0 /*/   //
 /*/ 0 /*/   // __X__ will be replaced by X=[2, 3, 4, ...]
@@ -28,6 +21,13 @@
 /*/ 0 /*/ typedef vec4 vec__X__;
 /*/ 0 /*/ typedef mat4 mat__X__;
 /*/ 0 /*/ #define __X__ 4
+
+#include "matn.h"
+/*/ 1 /*///#include "../types/mat__X__.h"
+/*/ X==3 /*///#include "../types/mat2.h"
+/*/ X==4 /*///#include "../types/mat2.h"
+/*/ X==4 /*///#include "../types/mat3.h"
+#include "../vec/vecn.h"
 
 
 /** dst = r==c ? 1 : 0 (identity)  */

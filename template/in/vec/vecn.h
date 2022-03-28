@@ -1,6 +1,14 @@
 #ifndef MATHC_VEC_VECN_H
 #define MATHC_VEC_VECN_H
 
+/*/ 0 /*/   // template file!
+/*/ 0 /*/   //
+/*/ 0 /*/   // all lines starting with "/*/ cond /*/[//]" may be removed
+/*/ 0 /*/   // if cond is true:
+/*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
+/*/ 0 /*/   // if cond is false:
+/*/ 0 /*/   //      the whole line will be removed
+
 #ifndef MATHC_MAX_SIZE
 #ifdef __STDC_NO_VLA__
 #define MATHC_MAX_SIZE 16
@@ -11,14 +19,6 @@
 #include <stdbool.h>
 #include <assert.h>
 #include "../sca/float.h"
-
-/*/ 0 /*/   // template file!
-/*/ 0 /*/   //
-/*/ 0 /*/   // all lines starting with "/*/ cond /*/[//]" may be removed
-/*/ 0 /*/   // if cond is true:
-/*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
-/*/ 0 /*/   // if cond is false:
-/*/ 0 /*/   //      the whole line will be removed
 
 /** macro to cast a vector into a float vector */
 #define vecN_cast_into(dst, from, n) \

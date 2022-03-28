@@ -1,6 +1,7 @@
 #ifndef MATHC_SCA_DOUBLE_H
 #define MATHC_SCA_DOUBLE_H
 
+#include <stdbool.h>
 #include <float.h>  // for DBL_MAX, ...
 #include <math.h>
 
@@ -172,12 +173,12 @@ static double dsca_smoothstep(double x, double edge1, double edge2) {
 }
 
 /** dst = isnan(x) */
-static _Bool dsca_isnan(double x) {
+static bool dsca_isnan(double x) {
     return isnan(x);
 }
 
 /** dst = isinf(x) */
-static _Bool dsca_isinf(double x) {
+static bool dsca_isinf(double x) {
     return isinf(x);
 }
 

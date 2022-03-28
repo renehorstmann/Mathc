@@ -1,12 +1,26 @@
-#ifndef MATHC_QUAT_QUAT_H
-#define MATHC_QUAT_QUAT_H
+#ifndef MATHC_UTILS_QUAT_H
+#define MATHC_UTILS_QUAT_H
+
+/*/ 0 /*/   // template file!
+/*/ 0 /*/   //
+/*/ 0 /*/   // __X__ will be replaced by X=[2, 3, 4, ...]
+/*/ 0 /*/   //
+/*/ 0 /*/   // all lines starting with "/*/ cond /*/[//]" may be removed
+/*/ 0 /*/   // if cond is true:
+/*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
+/*/ 0 /*/   // if cond is false:
+/*/ 0 /*/   //      the whole line will be removed
+/*/ 0 /*/   // the following setup is just here to pleasure an ide
+/*/ 0 /*/ #include "../../out/vec/vec3.h"
+/*/ 0 /*/ #include "../../out/vec/vec4.h"
+/*/ 0 /*/ #include "../../out/mat/mat4.h"
 
 #include <math.h>
 #include "../types/float.h"
 #include "../sca/float.h"
-#include "../vec/vec3.h"
-#include "../vec/vec4.h"
-#include "../mat/mat4.h"
+/*/ 1 /*///#include "../vec/vec3.h"
+/*/ 1 /*///#include "../vec/vec4.h"
+/*/ 1 /*///#include "../mat/mat4.h"
 
 
 /** vec4 = [0, 0, 0, 1] */
@@ -234,4 +248,4 @@ static vec4 quat_slerp(vec4 q_a, vec4 q_b, float t) {
 }
 
 
-#endif //MATHC_QUAT_QUAT_H
+#endif //MATHC_UTILS_QUAT_H

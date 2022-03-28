@@ -1,10 +1,6 @@
 #ifndef MATHC_VEC_VEC__X___H
 #define MATHC_VEC_VEC__X___H
 
-#include "vecn.h"
-#include "../types/vec__X__.h"
-#include "../types/bvec__X__.h"
-
 /*/ 0 /*/   // template file!
 /*/ 0 /*/   //
 /*/ 0 /*/   // __X__ will be replaced by X=[2, 3, 4, ...]
@@ -22,6 +18,10 @@
 /*/ 0 /*/ typedef bvec4 bvec__X__;
 /*/ 0 /*/ #define __X__ 4
 /*/ 0 /*/ typedef float really_a_float;
+
+#include "vecn.h"
+/*/ 1 /*///#include "../types/vec__X__.h"
+/*/ 1 /*///#include "../types/bvec__X__.h"
 
 
 /** dst = (vec__X__) v */
