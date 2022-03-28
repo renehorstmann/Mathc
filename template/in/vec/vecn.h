@@ -12,6 +12,13 @@
 #include <assert.h>
 #include "../sca/float.h"
 
+/*/ 0 /*/   // template file!
+/*/ 0 /*/   //
+/*/ 0 /*/   // all lines starting with "/*/ cond /*/" may be removed
+/*/ 0 /*/   // if cond is true:
+/*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
+/*/ 0 /*/   // if cond is false:
+/*/ 0 /*/   //      the whole line will be removed
 
 /** macro to cast a vector into a float vector */
 #define vecN_cast_into(dst, from, n) \
@@ -62,6 +69,32 @@ static void vecN_copy(float *dst, const float *v, int n) {
 static void vecN_set(float *dst, float s, int n) {
     for (int i = 0; i < n; i++)
         dst[i] = s;
+}
+
+/** dst = unit_x */
+static void vecN_unit_x(float *dst, int n) {
+    vecN_set(dst, 0, n);
+    dst[0] = 1;
+}
+
+/** dst = unit_y */
+static void vecN_unit_y(float *dst, int n) {
+    vecN_set(dst, 0, n);
+    dst[1] = 1;
+}
+
+/** assert(n>=3); dst = unit_z */
+static void vecN_unit_z(float *dst, int n) {
+    assert(n>=3 && "mathc vec*_unit_z");
+    vecN_set(dst, 0, n);
+    dst[2] = 1;
+}
+
+/** assert(n>=4); dst = unit_w */
+static void vecN_unit_w(float *dst, int n) {
+    assert(n>=4 && "mathc vec*_unit_w");
+    vecN_set(dst, 0, n);
+    dst[3] = 1;
 }
 
 /*/ signed /*//** dst = -v */

@@ -21,33 +21,6 @@
 /*/ 0 /*/ int __X__ = 4;
 /*/ 0 /*/ typedef float really_a_float;
 
-/** dst = unit_x */
-static vec__X__ vec__X___unit_x() {
-    return (vec__X__) {{1, 0
-/*/ X>=3 /*/                     , 0
-/*/ X>=4 /*/                     , 0
-                       }};
-}
-
-/** dst = unit_y */
-static vec__X__ vec__X___unit_y() {
-    return (vec__X__) {{0, 1
-/*/ X>=3 /*/                     , 0
-/*/ X>=4 /*/                     , 0
-                       }};
-}
-
-/*/ X>=3 /*//** dst = unit_z */
-/*/ X>=3 /*/static vec__X__ vec__X___unit_z() {
-/*/ X>=3 /*/    return (vec__X__) {{0, 0, 1
-/*/ X>=4 /*/                    , 0
-/*/ X>=3 /*/    }};
-/*/ X>=3 /*/}
-
-/*/ X>=4 /*//** dst = unit_w */
-/*/ X>=4 /*/static vec__X__ vec__X___unit_w() {
-/*/ X>=4 /*/    return (vec__X__) {{0, 0, 0, 1}};
-/*/ X>=4 /*/}
 
 /** dst = (vec__X__) v */
 static vec__X__ vec__X___cast_from_float(const really_a_float *cast) {
@@ -110,12 +83,45 @@ static bool vec__X___cmp(vec__X__ a, vec__X__ b) {
     return vecN_cmp(a.v, b.v, __X__);
 }
 
+
 /** dst = s */
 static vec__X__ vec__X___set(float s) {
     vec__X__ res;
     vecN_set(res.v, s, __X__);
     return res;
 }
+
+
+/** dst = unit_x */
+static vec__X__ vec__X___unit_x() {
+    vec__X__ res;
+    vecN_unit_x(res.v, __X__);
+    return res;
+}
+
+
+/** dst = unit_y */
+static vec__X__ vec__X___unit_y() {
+    vec__X__ res;
+    vecN_unit_y(res.v, __X__);
+    return res;
+}
+
+
+/*/ X>=3 /*//** dst = unit_z */
+/*/ X>=3 /*/static vec__X__ vec__X___unit_z() {
+/*/ X>=3 /*/    vec__X__ res;
+/*/ X>=3 /*/    vecN_unit_z(res.v, __X__);
+/*/ X>=3 /*/    return res;
+/*/ X>=3 /*/}
+
+
+/*/ X>=4 /*//** dst = unit_w */
+/*/ X>=4 /*/static vec__X__ vec__X___unit_w() {
+/*/ X>=4 /*/    vec__X__ res;
+/*/ X>=4 /*/    vecN_unit_w(res.v, __X__);
+/*/ X>=4 /*/    return res;
+/*/ X>=4 /*/}
 
 
 /*/ signed /*//** dst = -v */
@@ -421,6 +427,7 @@ static int vec__X___min_index(vec__X__ vec) {
     return vecN_min_index(vec.v, __X__);
 }
 
+
 /** returns the index of the max v value */
 static int vec__X___max_index(vec__X__ vec) {
     return vecN_max_index(vec.v, __X__);
@@ -508,6 +515,7 @@ static vec__X__ vec__X___cross(vec__X__ a, vec__X__ b) {
     vecN_cross(res.v, a.v, b.v, __X__);
     return res;
 }
+
 
 /** returns ||v||___X__ */
 static float vec__X___norm(vec__X__ v) {
@@ -717,12 +725,14 @@ static bvec__X__ vec__X___not_equal_vec(vec__X__ a, vec__X__ b) {
 /*/ float /*/    return res;
 /*/ float /*/}
 
+
 /*/ float /*//** dst = isnan(v) */
 /*/ float /*/static bvec__X__ vec__X___isnan(vec__X__ v) {
 /*/ float /*/    bvec__X__ res;
 /*/ float /*/    vecN_isnan(res.v, v.v, __X__);
 /*/ float /*/    return res;
 /*/ float /*/}
+
 
 /*/ float /*//** dst = !isnan(v) */
 /*/ float /*/static bvec__X__ vec__X___not_isnan(vec__X__ v) {
@@ -731,12 +741,14 @@ static bvec__X__ vec__X___not_equal_vec(vec__X__ a, vec__X__ b) {
 /*/ float /*/    return res;
 /*/ float /*/}
 
+
 /*/ float /*//** dst = isinf(v) */
 /*/ float /*/static bvec__X__ vec__X___isinf(vec__X__ v) {
 /*/ float /*/    bvec__X__ res;
 /*/ float /*/    vecN_isinf(res.v, v.v, __X__);
 /*/ float /*/    return res;
 /*/ float /*/}
+
 
 /*/ float /*//** dst = !isinf(v) */
 /*/ float /*/static bvec__X__ vec__X___not_isinf(vec__X__ v) {

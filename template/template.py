@@ -172,6 +172,29 @@ def create_files(template: dict):
                              apply_regex_replace_list('out/mat/mat%i.h' % x, replace_to_float_basic),
                              template, x)
 
+
+def create_bool_vec_files():
+    # 2, 3, 4
+    X_MIN = 2
+    X_MAX = 4
+
+    for X in range(X_MIN, X_MAX+1):
+        replace = []
+        # start with X, to first replace vec__X__* with vec2, 3, 4
+        replace.append(('__X__', '%i' % X))
+        # conditional lines:
+        for x in range(X_MIN, X_MAX+1):
+            replace.append((regex_condition('0', False), ''))
+            replace.append((regex_condition('X==%i' % x, X == x), ''))
+            replace.append((regex_condition('X!=%i' % x, X != x), ''))
+            replace.append((regex_condition('X>%i' % x, X > x), ''))
+            replace.append((regex_condition('X>=%i' % x, X >= x), ''))
+            replace.append((regex_condition('X<%i' % x, X < x), ''))
+            replace.append((regex_condition('X<=%i' % x, X <= x), ''))
+
+        apply_replace('in/vec/bvecX.h', 'out/vec/bvec%i.h' % X, replace)
+
+
 def create_util_files(template: dict, prefix: str):
     apply_template('in/utils/float.h', 'out/utils/%sfloat.h' % prefix, template)
     apply_template('in/utils/camera.h', 'out/utils/%scamera.h' % prefix, template)
@@ -274,9 +297,8 @@ if __name__ == '__main__':
     os.makedirs('out/vec')
     shutil.copyfile('in/vec/bool.h', 'out/vec/bool.h')
     shutil.copyfile('in/vec/bvecn.h', 'out/vec/bvecn.h')
-    shutil.copyfile('in/vec/bvec2.h', 'out/vec/bvec2.h')
-    shutil.copyfile('in/vec/bvec3.h', 'out/vec/bvec3.h')
-    shutil.copyfile('in/vec/bvec4.h', 'out/vec/bvec4.h')
+
+    create_bool_vec_files()
 
     create_files(FLOAT)
     create_files(DOUBLE)
