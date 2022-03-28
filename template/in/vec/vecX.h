@@ -2,23 +2,25 @@
 #define MATHC_VEC_VEC__X___H
 
 #include "vecn.h"
-#include "../types/float.h"
-#include "../types/bool.h"
+#include "../types/vec__X__.h"
+#include "../types/bvec__X__.h"
 
 /*/ 0 /*/   // template file!
 /*/ 0 /*/   //
-/*/ 0 /*/   // __X__ will be replaced by X=[2, 3, 4]
+/*/ 0 /*/   // __X__ will be replaced by X=[2, 3, 4, ...]
 /*/ 0 /*/   //
-/*/ 0 /*/   // all lines starting with "/*/ cond /*/" may be removed
+/*/ 0 /*/   // all lines starting with "/*/ cond /*/[//]" may be removed
 /*/ 0 /*/   // if cond is true:
 /*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
 /*/ 0 /*/   // if cond is false:
 /*/ 0 /*/   //      the whole line will be removed
 /*/ 0 /*/
 /*/ 0 /*/   // the following setup is just here to pleasure an ide
+/*/ 0 /*/ #include "../../out/types/vec4.h"
+/*/ 0 /*/ #include "../../out/types/bvec4.h"
 /*/ 0 /*/ typedef vec4 vec__X__;
 /*/ 0 /*/ typedef bvec4 bvec__X__;
-/*/ 0 /*/ int __X__ = 4;
+/*/ 0 /*/ #define __X__ 4
 /*/ 0 /*/ typedef float really_a_float;
 
 

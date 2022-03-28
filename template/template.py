@@ -16,7 +16,7 @@ def regex_name_postfix(name_postfix: str):
 
 def regex_condition(cond: str, select_only_condition: bool):
     if select_only_condition:
-        return r'\/\*\/\s*' + cond + r'\s*\/\*\/'
+        return r'\/\*\/\s*' + cond + r'\s*\/\*\/(\/\/)?'
     return r'\/\*\/\s*' + cond + r'\s*\/\*\/.*\n'
 
 
@@ -39,16 +39,10 @@ def apply_replace(src_file, dst_file, replace: list):
     file.close()
 
 
-RESULT_TPYE_FLOAT = 0
-RESULT_TYPE_INT = 1
-RESULT_TYPE_UNSIGNED = 2
-
+X_MIN = 2
+X_MAX = 32
 
 def create_replace_list(template: dict, X=0):
-    # 2, 3, 4
-    X_MIN = 2
-    X_MAX = 4
-
     replace = []
 
     # start with X, to first replace vec__X__* with vec2, 3, 4
@@ -56,10 +50,12 @@ def create_replace_list(template: dict, X=0):
 
     # conditional lines:
     replace.append((regex_condition('0', False), ''))
+    replace.append((regex_condition('1', True), ''))
     replace.append((regex_condition('float', 'is_integer' not in template or not template['is_integer']), ''))
     replace.append((regex_condition('int', 'is_integer' in template and template['is_integer']), ''))
     replace.append((regex_condition('signed', 'is_integer' in template and template['is_signed']), ''))
-    for x in range(X_MIN, X_MAX + 1):
+    replace.append((regex_condition('bool', 'is_bool' in template and template['is_bool']), ''))
+    for x in range(X_MIN, X_MAX+1):
         replace.append((regex_condition('X==%i' % x, X == x), ''))
         replace.append((regex_condition('X!=%i' % x, X != x), ''))
         replace.append((regex_condition('X>%i' % x, X > x), ''))
@@ -133,58 +129,78 @@ def apply_template(src_file, dst_file, template: dict, X=0):
     apply_replace(src_file, dst_file, replace)
 
 
-def create_files(template: dict):
-    # 2, 3, 4
-    X_MIN = 2
-    X_MAX = 4
+def create_publictypes(template: dict, X_list_vec, X_list_mat):
+    replace_to_float_basic = create_replace_list(template)
+    
+    for x in X_list_vec:
+        apply_template('in/publictypes/vecX.h',
+                       apply_regex_replace_list('out/publictypes/vec%i.h' % x, replace_to_float_basic),
+                       template, x)
 
+    for x in X_list_mat:
+        apply_template('in/publictypes/matX.h',
+                       apply_regex_replace_list('out/publictypes/mat%i.h' % x, replace_to_float_basic),
+                       template, x)
+
+
+def create_types(template: dict, X_list_vec, X_list_mat):
     replace_to_float_basic = create_replace_list(template)
 
-    # types
-    apply_template('in/publictypes/float.h',
-                         apply_regex_replace_list('out/publictypes/float.h', replace_to_float_basic),
-                         template)
-    apply_template('in/types/float.h',
-                         apply_regex_replace_list('out/types/float.h', replace_to_float_basic),
-                         template)
+    for x in X_list_vec:
+        apply_template('in/types/vecX.h',
+                       apply_regex_replace_list('out/types/vec%i.h' % x, replace_to_float_basic),
+                       template, x)
 
-    # vec
-    apply_template('in/vec/float.h',
-                         apply_regex_replace_list('out/vec/float.h', replace_to_float_basic),
-                         template)
+    for x in X_list_mat:
+        apply_template('in/types/matX.h',
+                       apply_regex_replace_list('out/types/mat%i.h' % x, replace_to_float_basic),
+                       template, x)
+
+
+def create_vec(template: dict, X_list):
+    replace_to_float_basic = create_replace_list(template)
+
     apply_template('in/vec/vecn.h',
                          apply_regex_replace_list('out/vec/vecn.h', replace_to_float_basic),
                          template)
-    for x in range(X_MIN, X_MAX + 1):
+    for x in X_list:
         apply_template('in/vec/vecX.h',
                              apply_regex_replace_list('out/vec/vec%i.h' % x, replace_to_float_basic),
                              template, x)
 
-    # mat
-    apply_template('in/mat/float.h',
-                         apply_regex_replace_list('out/mat/float.h', replace_to_float_basic),
-                         template)
+
+def create_mat(template: dict, X_list):
+    replace_to_float_basic = create_replace_list(template)
+
     apply_template('in/mat/matn.h',
                          apply_regex_replace_list('out/mat/matn.h', replace_to_float_basic),
                          template)
-    for x in range(X_MIN, X_MAX + 1):
+    for x in X_list:
         apply_template('in/mat/matX.h',
                              apply_regex_replace_list('out/mat/mat%i.h' % x, replace_to_float_basic),
                              template, x)
 
 
-def create_bool_vec_files():
-    # 2, 3, 4
-    X_MIN = 2
-    X_MAX = 4
+def create_all(template: dict, X_list_vec, X_list_mat):
+    create_publictypes(template, X_list_vec, X_list_mat)
+    create_types(template, X_list_vec, X_list_mat)
+    create_vec(template, X_list_vec)
+    create_mat(template, X_list_mat)
 
-    for X in range(X_MIN, X_MAX+1):
+
+def create_bool(X_list):
+    create_publictypes(BOOL, X_list, [])
+    create_types(BOOL, X_list, [])
+
+    apply_replace('in/vec/bvecn.h', 'out/vec/bvecn.h', [])
+    for X in X_list:
         replace = []
         # start with X, to first replace vec__X__* with vec2, 3, 4
         replace.append(('__X__', '%i' % X))
         # conditional lines:
         for x in range(X_MIN, X_MAX+1):
             replace.append((regex_condition('0', False), ''))
+            replace.append((regex_condition('1', True), ''))
             replace.append((regex_condition('X==%i' % x, X == x), ''))
             replace.append((regex_condition('X!=%i' % x, X != x), ''))
             replace.append((regex_condition('X>%i' % x, X > x), ''))
@@ -195,7 +211,7 @@ def create_bool_vec_files():
         apply_replace('in/vec/bvecX.h', 'out/vec/bvec%i.h' % X, replace)
 
 
-def create_util_files(template: dict, prefix: str):
+def create_util(template: dict, prefix: str):
     apply_template('in/utils/float.h', 'out/utils/%sfloat.h' % prefix, template)
     apply_template('in/utils/camera.h', 'out/utils/%scamera.h' % prefix, template)
     apply_template('in/utils/color.h', 'out/utils/%scolor.h' % prefix, template)
@@ -214,6 +230,18 @@ FLOAT = {
     'vec_header': 'VEC',
     'mat_header': 'MAT',
     'primitive_file': 'float'
+}
+
+BOOL = {
+    'primitive': 'bool',
+    'sca': '###',
+    'vec': 'bvec',
+    'mat': '###',
+    'primitive_header': 'BOOL',
+    'vec_header': 'BVEC',
+    'mat_header': '###',
+    'primitive_file': 'bool',
+    'is_bool': True,
 }
 
 DOUBLE = {
@@ -291,23 +319,20 @@ if __name__ == '__main__':
     shutil.copyfile('in/sca/longlong.h', 'out/sca/longlong.h')
     shutil.copyfile('in/sca/uchar.h', 'out/sca/uchar.h')
     os.makedirs('out/publictypes')
-    shutil.copyfile('in/publictypes/bool.h', 'out/publictypes/bool.h')
-    os.makedirs('out/types')
-    shutil.copyfile('in/types/bool.h', 'out/types/bool.h')
-    os.makedirs('out/vec')
-    shutil.copyfile('in/vec/bool.h', 'out/vec/bool.h')
-    shutil.copyfile('in/vec/bvecn.h', 'out/vec/bvecn.h')
 
-    create_bool_vec_files()
+    X_list_vec = [2, 3, 4, 6, 12]
+    X_list_mat = [2, 3, 4, 6]
 
-    create_files(FLOAT)
-    create_files(DOUBLE)
-    # create_files(LONGDOUBLE)
+    create_bool(X_list_vec)
 
-    create_util_files(FLOAT, '')
-    create_util_files(DOUBLE, 'd')
-    # create_util_files(LONGDOUBLE, 'ld')
+    create_all(FLOAT, X_list_vec, X_list_mat)
+    create_all(DOUBLE, X_list_vec, X_list_mat)
+    # create_all(LONGDOUBLE, X_list_vec, X_list_mat)
 
-    create_files(INT)
-    create_files(UCHAR)
-    # create_files(LONGLONG)
+    create_util(FLOAT, '')
+    create_util(DOUBLE, 'd')
+    # create_util(LONGDOUBLE, 'ld')
+
+    create_all(INT, X_list_vec, X_list_mat)
+    create_all(UCHAR, X_list_vec, X_list_mat)
+    # create_all(LONGLONG, X_list_vec, X_list_mat)

@@ -14,7 +14,7 @@
 
 /*/ 0 /*/   // template file!
 /*/ 0 /*/   //
-/*/ 0 /*/   // all lines starting with "/*/ cond /*/" may be removed
+/*/ 0 /*/   // all lines starting with "/*/ cond /*/[//]" may be removed
 /*/ 0 /*/   // if cond is true:
 /*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
 /*/ 0 /*/   // if cond is false:
