@@ -2,7 +2,14 @@
 #define MATHC_SCA_INT_H
 
 #include <stdlib.h>  // abs
+#include <limits.h>  // INT_MAX
 #include <math.h>
+
+/** maximum possible value */
+#define ISCA_MAX INT_MAX
+
+/** minimum possible value */
+#define ISCA_MIN (-INT_MIN)
 
 /** dst = pow(x, y) */
 static int isca_pow(int x, int y) {
@@ -44,13 +51,9 @@ static int isca_sign(int x) {
     return x > 0 ? 1 : (x < 0 ? -1 : 0);
 }
 
-/** dst = x % y (always positive) **/
-static int isca_mod_positive(int x, unsigned y) {
-    int dst = x % (int) y;
-    if (dst < 0) {
-        dst += y;
-    }
-    return dst;
+/** dst = (x % y + y) % y (always positive, if y>0) **/
+static int isca_mod(int x, int y) {
+    return (x % y + y) % y;
 }
 
 /** dst = a < b ? a : b */

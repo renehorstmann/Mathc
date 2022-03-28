@@ -1,16 +1,44 @@
 #ifndef MATHC_SCA_FLOAT_H
 #define MATHC_SCA_FLOAT_H
 
+#include <float.h>  // for FLT_MAX, ...
 #include <math.h>
+
+/** maximum possible value */
+#define SCA_MAX FLT_MAX
+
+/** minimum possible value */
+#define SCA_MIN (-FLT_MAX)
+
+/** smallest positive value */
+#define SCA_SMALL FLT_MIN
+
+/** smallest positive value change */
+#define SCA_EPS FLT_EPSILON
+
+/* clone of some math.h constants */
+#define SCA_E 2.718281828459045235360287471352662498f /* e */
+#define SCA_LOG2E 1.442695040888963407359924681001892137f /* log_2 e */
+#define SCA_LOG10E 0.434294481903251827651128918916605082f /* log_10 e */
+#define SCA_LN2 0.693147180559945309417232121458176568f /* log_e 2 */
+#define SCA_LN10 2.302585092994045684017991454684364208f /* log_e 10 */
+#define SCA_PI 3.141592653589793238462643383279502884f /* pi */
+#define SCA_PI_2 1.570796326794896619231321691639751442f /* pi/2 */
+#define SCA_PI_4 0.785398163397448309615660845819875721f /* pi/4 */
+#define SCA_1_PI 0.318309886183790671537767526745028724f /* 1/pi */
+#define SCA_2_PI 0.636619772367581343075535053490057448f /* 2/pi */
+#define SCA_2_SQRTPI 1.128379167095512573896158903121545172f /* 2/sqrt(pi) */
+#define SCA_SQRT2 1.414213562373095048801688724209698079f /* sqrt(2) */
+#define SCA_SQRT1_2 0.707106781186547524400844362104849039f /* 1/sqrt(2) */
 
 /** dst = a * M_PI / 180 */
 static float sca_radians(float deg) {
-    return deg * M_PI / 180.0f;
+    return deg * SCA_PI / 180.0f;
 }
 
 /** dst = a * 180 / M_PI */
 static float sca_degrees(float rad) {
-    return rad * 180.0f / M_PI;
+    return rad * 180.0f / SCA_PI;
 }
 
 /** dst = sin(angle_rad) */
@@ -144,8 +172,13 @@ static float sca_smoothstep(float x, float edge1, float edge2) {
 }
 
 /** dst = isnan(x) */
-static float sca_isnan(float x) {
+static _Bool sca_isnan(float x) {
     return isnan(x);
+}
+
+/** dst = isinf(x) */
+static _Bool sca_isinf(float x) {
+    return isinf(x);
 }
 
 #endif //MATHC_SCA_FLOAT_H

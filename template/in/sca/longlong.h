@@ -2,7 +2,14 @@
 #define MATHC_SCA_LONGLONG_H
 
 #include <stdlib.h>  // abs
+#include <limits.h>  // LLONG_MAX
 #include <math.h>
+
+/** maximum possible value */
+#define LLSCA_MAX LLONG_MAX
+
+/** minimum possible value */
+#define LLSCA_MIN (-LLONG_MIN)
 
 /** dst = pow(x, y) */
 static long long llsca_pow(long long x, long long y) {
@@ -44,13 +51,9 @@ static long long llsca_sign(long long x) {
     return x > 0 ? 1 : (x < 0 ? -1 : 0);
 }
 
-/** dst = x % y (always positive) **/
-static long long llsca_mod_positive(long long x, unsigned y) {
-    long long dst = x % (long long) y;
-    if (dst < 0) {
-        dst += y;
-    }
-    return dst;
+/** dst = (x % y + y) % y (always positive, if y>0) **/
+static int llsca_mod(long long x, long long y) {
+    return (x % y + y) % y;
 }
 
 /** dst = a < b ? a : b */

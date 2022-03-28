@@ -21,11 +21,31 @@ do { \
 } while(0)
 
 
-/** dst = v / 255 */
-static void vecN_cast_from_uchar_1(float *dst, const unsigned char *v, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = (float) v[i] / (float) 255;
-}
+/*/ float /*//** dst = v / 255 */
+/*/ float /*/static void vecN_cast_from_uchar_1(float *dst, const unsigned char *v, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = (float) v[i] / (float) 255;
+/*/ float /*/}
+
+
+/*/ int /*//** dst = vec * 255 */
+/*/ int /*/static void vecN_cast_from_float_1(float *dst_vec, const float *vec, int n) {
+/*/ int /*/    for (int i = 0; i < n; i++)
+/*/ int /*/        dst_vec[i] = (float) (vec[i] * 255.0f);
+/*/ int /*/}
+
+/*/ int /*//** dst = vec * 255 */
+/*/ int /*/static void vecN_cast_from_double_1(float *dst_vec, const double *vec, int n) {
+/*/ int /*/    for (int i = 0; i < n; i++)
+/*/ int /*/        dst_vec[i] = (float) (vec[i] * 255.0);
+/*/ int /*/}
+
+/*/ int /*//** dst = vec * 255 */
+/*/ int /*/static void vecN_cast_from_longdouble_1(float *dst_vec, const long double *vec, int n) {
+/*/ int /*/    for (int i = 0; i < n; i++)
+/*/ int /*/        dst_vec[i] = (float) (vec[i] * 255.0);
+/*/ int /*/}
+
 
 /** a == b */
 static bool vecN_cmp(const float *a, const float *b, int n) {
@@ -44,11 +64,11 @@ static void vecN_set(float *dst, float s, int n) {
         dst[i] = s;
 }
 
-/** dst = -v */
-static void vecN_neg(float *dst, const float *v, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = -v[i];
-}
+/*/ signed /*//** dst = -v */
+/*/ signed /*/static void vecN_neg(float *dst, const float *v, int n) {
+/*/ signed /*/    for (int i = 0; i < n; i++)
+/*/ signed /*/        dst[i] = -v[i];
+/*/ signed /*/}
 
 /** dst = a + b */
 static void vecN_add_vec(float *dst, const float *a, const float *b, int n) {
@@ -98,59 +118,59 @@ static void vecN_div(float *dst, const float *a, float b, int n) {
         dst[i] = a[i] / b;
 }
 
-/** dst = a * M_PI / 180 */
-static void vecN_radians(float *dst, const float *deg, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_radians(deg[i]);
-}
+/*/ float /*//** dst = a * M_PI / 180 */
+/*/ float /*/static void vecN_radians(float *dst, const float *deg, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_radians(deg[i]);
+/*/ float /*/}
 
-/** dst = a * 180 / M_PI */
-static void vecN_degrees(float *dst, const float *rad, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_degrees(rad[i]);
-}
+/*/ float /*//** dst = a * 180 / M_PI */
+/*/ float /*/static void vecN_degrees(float *dst, const float *rad, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_degrees(rad[i]);
+/*/ float /*/}
 
-/** dst = sin(angle_rad) */
-static void vecN_sin(float *dst, const float *angle_rad, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_sin(angle_rad[i]);
-}
+/*/ float /*//** dst = sin(angle_rad) */
+/*/ float /*/static void vecN_sin(float *dst, const float *angle_rad, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_sin(angle_rad[i]);
+/*/ float /*/}
 
-/** dst = cos(angle_rad) */
-static void vecN_cos(float *dst, const float *angle_rad, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_cos(angle_rad[i]);
-}
+/*/ float /*//** dst = cos(angle_rad) */
+/*/ float /*/static void vecN_cos(float *dst, const float *angle_rad, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_cos(angle_rad[i]);
+/*/ float /*/}
 
-/** dst = tan(angle_rad) */
-static void vecN_tan(float *dst, const float *angle_rad, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_tan(angle_rad[i]);
-}
+/*/ float /*//** dst = tan(angle_rad) */
+/*/ float /*/static void vecN_tan(float *dst, const float *angle_rad, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_tan(angle_rad[i]);
+/*/ float /*/}
 
-/** dst = asin(x) */
-static void vecN_asin(float *dst, const float *x, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_asin(x[i]);
-}
+/*/ float /*//** dst = asin(x) */
+/*/ float /*/static void vecN_asin(float *dst, const float *x, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_asin(x[i]);
+/*/ float /*/}
 
-/** dst = acos(x) */
-static void vecN_acos(float *dst, const float *x, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_acos(x[i]);
-}
+/*/ float /*//** dst = acos(x) */
+/*/ float /*/static void vecN_acos(float *dst, const float *x, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_acos(x[i]);
+/*/ float /*/}
 
-/** dst = atan(x) */
-static void vecN_atan(float *dst, const float *x, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_atan(x[i]);
-}
+/*/ float /*//** dst = atan(x) */
+/*/ float /*/static void vecN_atan(float *dst, const float *x, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_atan(x[i]);
+/*/ float /*/}
 
-/** dst = atan2(y, x) */
-static void vecN_atan2(float *dst, const float *y, const float *x, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_atan2(y[i], x[i]);
-}
+/*/ float /*//** dst = atan2(y, x) */
+/*/ float /*/static void vecN_atan2(float *dst, const float *y, const float *x, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_atan2(y[i], x[i]);
+/*/ float /*/}
 
 /** dst = pow(x, y) */
 static void vecN_pow(float *dst, const float *x, float y, int n) {
@@ -194,49 +214,51 @@ static void vecN_sqrt(float *dst, const float *x, int n) {
         dst[i] = sca_sqrt(x[i]);
 }
 
-/** dst = 1 / sqrt(x) */
-static void vecN_inversesqrt(float *dst, const float *x, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_inversesqrt(x[i]);
-}
+/*/ float /*//** dst = 1 / sqrt(x) */
+/*/ float /*/static void vecN_inversesqrt(float *dst, const float *x, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_inversesqrt(x[i]);
+/*/ float /*/}
 
-/** dst = abs(x) */
-static void vecN_abs(float *dst, const float *x, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_abs(x[i]);
-}
+/*/ signed /*//** dst = abs(x) */
+/*/ signed /*/static void vecN_abs(float *dst, const float *x, int n) {
+/*/ signed /*/    for (int i = 0; i < n; i++)
+/*/ signed /*/        dst[i] = sca_abs(x[i]);
+/*/ signed /*/}
 
-/** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
-static void vecN_sign(float *dst, const float *x, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_sign(x[i]);
-}
+/*/ signed /*//** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
+/*/ signed /*/static void vecN_sign(float *dst, const float *x, int n) {
+/*/ signed /*/    for (int i = 0; i < n; i++)
+/*/ signed /*/        dst[i] = sca_sign(x[i]);
+/*/ signed /*/}
 
-/** dst = floor(x) */
-static void vecN_floor(float *dst, const float *x, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_floor(x[i]);
-}
+/*/ float /*//** dst = floor(x) */
+/*/ float /*/static void vecN_floor(float *dst, const float *x, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_floor(x[i]);
+/*/ float /*/}
 
-/** dst = ceil(x) */
-static void vecN_ceil(float *dst, const float *x, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_ceil(x[i]);
-}
+/*/ float /*//** dst = ceil(x) */
+/*/ float /*/static void vecN_ceil(float *dst, const float *x, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_ceil(x[i]);
+/*/ float /*/}
 
-/** dst = x - floor(x) */
-static void vecN_fract(float *dst, const float *x, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_fract(x[i]);
-}
+/*/ float /*//** dst = x - floor(x) */
+/*/ float /*/static void vecN_fract(float *dst, const float *x, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_fract(x[i]);
+/*/ float /*/}
 
-/** dst = x - y * floor(x/y) */
+/*/ float /*//** dst = x - y * floor(x/y) */
+/*/ int /*//** dst = (x % y + y) % y (always positive, if y>0) **/
 static void vecN_mod(float *dst, const float *x, float y, int n) {
     for (int i = 0; i < n; i++)
         dst[i] = sca_mod(x[i], y);
 }
 
-/** dst = x - y * floor(x/y) */
+/*/ float /*//** dst = x - y * floor(x/y) */
+/*/ int /*//** dst = (x % y + y) % y (always positive, if y>0) **/
 static void vecN_mod_vec(float *dst, const float *x, const float *y, int n) {
     for (int i = 0; i < n; i++)
         dst[i] = sca_mod(x[i], y[i]);
@@ -322,20 +344,20 @@ static void vecN_step_vec(float *dst, const float *x, const float *edge, int n) 
         dst[i] = sca_step(x[i], edge[i]);
 }
 
-/** dst = x < edge1 ? 0 : (x > edge2 ? 1 : x * x * (3 - 2 * x)) Hermite polynomials */
-static void vecN_smoothstep(float *dst, const float *x, float edge1, float edge2, int n) {
-    for (int i = 0; i < n; i++) {
-        dst[i] = sca_smoothstep(x[i], edge1, edge2);
-    }
-}
+/*/ float /*//** dst = x < edge1 ? 0 : (x > edge2 ? 1 : x * x * (3 - 2 * x)) Hermite polynomials */
+/*/ float /*/static void vecN_smoothstep(float *dst, const float *x, float edge1, float edge2, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++) {
+/*/ float /*/        dst[i] = sca_smoothstep(x[i], edge1, edge2);
+/*/ float /*/    }
+/*/ float /*/}
 
-/** dst = x < edge1 ? 0 : (x > edge2 ? 1 : x * x * (3 - 2 * x)) Hermite polynomials */
-static void
-vecN_smoothstep_vec(float *dst, const float *x, const float *edge1, const float *edge2, int n) {
-    for (int i = 0; i < n; i++) {
-        dst[i] = sca_smoothstep(x[i], edge1[i], edge2[i]);
-    }
-}
+/*/ float /*//** dst = x < edge1 ? 0 : (x > edge2 ? 1 : x * x * (3 - 2 * x)) Hermite polynomials */
+/*/ float /*/static void
+/*/ float /*/vecN_smoothstep_vec(float *dst, const float *x, const float *edge1, const float *edge2, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++) {
+/*/ float /*/        dst[i] = sca_smoothstep(x[i], edge1[i], edge2[i]);
+/*/ float /*/    }
+/*/ float /*/}
 
 /** returns v[0] + v[1] + ... + v[n-1] */
 static float vecN_sum(const float *v, int n) {
@@ -353,49 +375,59 @@ static float vecN_dot(const float *a, const float *b, int n) {
     return dot;
 }
 
+/** assert(n>=3) ; dst = a x b , dst.w... = 0 */
+static void vecN_cross(float *dst, const float *a, const float *b, int n) {
+    assert(n>=3 && "mathc vec*_cross only in 3D");
+    dst[0] = a[1] * b[2] - a[2] * b[1];
+    dst[1] = a[2] * b[0] - a[0] * b[2];
+    dst[2] = a[0] * b[1] - a[1] * b[0];
+    for(int i=3; i<n; i++)
+        dst[i] = 0;
+}
+
 /** returns ||v||_2 */
 static float vecN_norm(const float *v, int n) {
     return sca_sqrt(vecN_dot(v, v, n));
 }
 
-/** returns ||v||_p */
-static float vecN_norm_p(const float *v, float p, int n) {
-    float sum = 0;
-    for (int i = 0; i < n; i++) {
-        sum += sca_pow(sca_abs(v[i]), p);
-    }
-    return sca_pow(sum, (float) 1 / p);
-}
+/*/ signed /*//** returns ||v||_p */
+/*/ signed /*/static float vecN_norm_p(const float *v, float p, int n) {
+/*/ signed /*/    float sum = 0;
+/*/ signed /*/    for (int i = 0; i < n; i++) {
+/*/ signed /*/        sum += sca_pow(sca_abs(v[i]), p);
+/*/ signed /*/    }
+/*/ signed /*/    return sca_pow(sum, (float) 1 / p);
+/*/ signed /*/}
 
-/** returns ||v||_1 */
-static float vecN_norm_1(const float *v, int n) {
-    float sum = 0;
-    for (int i = 0; i < n; i++) {
-        sum += sca_abs(v[i]);
-    }
-    return sum;
-}
+/*/ signed /*//** returns ||v||_1 */
+/*/ signed /*/static float vecN_norm_1(const float *v, int n) {
+/*/ signed /*/    float sum = 0;
+/*/ signed /*/    for (int i = 0; i < n; i++) {
+/*/ signed /*/        sum += sca_abs(v[i]);
+/*/ signed /*/    }
+/*/ signed /*/    return sum;
+/*/ signed /*/}
 
-/** returns ||v||_inf */
-static float vecN_norm_inf(const float *v, int n) {
-    float max = 0;
-    for (int i = 0; i < n; i++) {
-        if (max < sca_abs(v[i]))
-            max = sca_abs(v[i]);
-    }
-    return max;
-}
+/*/ signed /*//** returns ||v||_inf */
+/*/ signed /*/static float vecN_norm_inf(const float *v, int n) {
+/*/ signed /*/    float max = 0;
+/*/ signed /*/    for (int i = 0; i < n; i++) {
+/*/ signed /*/        if (max < sca_abs(v[i]))
+/*/ signed /*/            max = sca_abs(v[i]);
+/*/ signed /*/    }
+/*/ signed /*/    return max;
+/*/ signed /*/}
 
-/** dst = v / norm(v) */
-static void vecN_normalize_unsafe(float *dst, const float *v, int n) {
-    vecN_scale(dst, v, (float) 1 / vecN_norm(v, n), n);
-}
+/*/ float /*//** dst = v / norm(v) */
+/*/ float /*/static void vecN_normalize_unsafe(float *dst, const float *v, int n) {
+/*/ float /*/    vecN_scale(dst, v, (float) 1 / vecN_norm(v, n), n);
+/*/ float /*/}
 
-/** dst = v / (norm(v) > 0 ? norm(v) : 1) */
-static void vecN_normalize(float *dst, const float *v, int n) {
-    float norm = vecN_norm(v, n);
-    vecN_scale(dst, v, (float) 1 / (norm > (float) 0 ? norm : (float) 1), n);
-}
+/*/ float /*//** dst = v / (norm(v) > 0 ? norm(v) : 1) */
+/*/ float /*/static void vecN_normalize(float *dst, const float *v, int n) {
+/*/ float /*/    float norm = vecN_norm(v, n);
+/*/ float /*/    vecN_scale(dst, v, (float) 1 / (norm > (float) 0 ? norm : (float) 1), n);
+/*/ float /*/}
 
 /** returns length of a vector, see vecN_norm. Just here to match glsl */
 static float vecN_length(const float *v, int n) {
@@ -426,31 +458,31 @@ static float vecN_sqr_distance(const float *a, const float *b, int n) {
     return vecN_dot(tmp, tmp, n);
 }
 
-/** dst = dot(i_v, nref_v) < 0 ? n_v : -n_v */
-static void vecN_faceforward(float *dst, const float *n_v, const float *i_v, const float *nref_v, int n) {
-    if (vecN_dot(i_v, nref_v, n) < 0)
-        vecN_copy(dst, n_v, n);
-    else
-        vecN_neg(dst, n_v, n);
-}
+/*/ float /*//** dst = dot(i_v, nref_v) < 0 ? n_v : -n_v */
+/*/ float /*/static void vecN_faceforward(float *dst, const float *n_v, const float *i_v, const float *nref_v, int n) {
+/*/ float /*/    if (vecN_dot(i_v, nref_v, n) < 0)
+/*/ float /*/        vecN_copy(dst, n_v, n);
+/*/ float /*/    else
+/*/ float /*/        vecN_neg(dst, n_v, n);
+/*/ float /*/}
 
-/** dst = i_v - 2.0 * n_v * dot(n_v,i_v) */
-static void vecN_reflect(float *dst, const float *i_v, const float *n_v, int n) {
-    vecN_scale(dst, n_v, (float) 2 * vecN_dot(n_v, i_v, n), n);
-    vecN_sub_vec(dst, i_v, dst, n);
-}
+/*/ float /*//** dst = i_v - 2.0 * n_v * dot(n_v,i_v) */
+/*/ float /*/static void vecN_reflect(float *dst, const float *i_v, const float *n_v, int n) {
+/*/ float /*/    vecN_scale(dst, n_v, (float) 2 * vecN_dot(n_v, i_v, n), n);
+/*/ float /*/    vecN_sub_vec(dst, i_v, dst, n);
+/*/ float /*/}
 
-static void vecN_refract(float *dst, const float *i_v, const float *n_v, float eta, int n) {
-    // implementation from example implementation: https://developer.download.nvidia.com/cg/refract.html
-    vecN_neg(dst, i_v, n);
-    float cosi = vecN_dot(dst, n_v, n);
-    float cost2 = (float) 1 - eta * eta * ((float) 1 - cosi * cosi);
-    vecN_scale(dst, n_v, eta * cosi - sca_sqrt(sca_abs(cost2)), n);
-    float t[3];
-    vecN_scale(t, i_v, eta, n);
-    vecN_add_vec(t, t, dst, n);
-    vecN_scale(dst, t, cost2 > (float) 0, n);
-}
+/*/ float /*/static void vecN_refract(float *dst, const float *i_v, const float *n_v, float eta, int n) {
+/*/ float /*/    // implementation from example implementation: https://developer.download.nvidia.com/cg/refract.html
+/*/ float /*/    vecN_neg(dst, i_v, n);
+/*/ float /*/    float cosi = vecN_dot(dst, n_v, n);
+/*/ float /*/    float cost2 = (float) 1 - eta * eta * ((float) 1 - cosi * cosi);
+/*/ float /*/    vecN_scale(dst, n_v, eta * cosi - sca_sqrt(sca_abs(cost2)), n);
+/*/ float /*/    float t[3];
+/*/ float /*/    vecN_scale(t, i_v, eta, n);
+/*/ float /*/    vecN_add_vec(t, t, dst, n);
+/*/ float /*/    vecN_scale(dst, t, cost2 > (float) 0, n);
+/*/ float /*/}
 
 /** dst = a < b */
 static void vecN_less_than(bool *dst, const float *a, float b, int n) {
@@ -524,40 +556,52 @@ static void vecN_not_equal_vec(bool *dst, const float *a, const float *b, int n)
         dst[i] = a[i] != b[i];
 }
 
-/** dst = a == b (+-eps) */
-static void vecN_equal_eps(bool *dst, const float *a, float b, float eps, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_abs(a[i] - b) <= eps;
-}
+/*/ float /*//** dst = a == b (+-eps) */
+/*/ float /*/static void vecN_equal_eps(bool *dst, const float *a, float b, float eps, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_abs(a[i] - b) <= eps;
+/*/ float /*/}
 
-/** dst = a == b (+-eps) */
-static void vecN_equal_eps_vec(bool *dst, const float *a, const float *b, float eps, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_abs(a[i] - b[i]) <= eps;
-}
+/*/ float /*//** dst = a == b (+-eps) */
+/*/ float /*/static void vecN_equal_eps_vec(bool *dst, const float *a, const float *b, float eps, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_abs(a[i] - b[i]) <= eps;
+/*/ float /*/}
 
-/** dst = a != b (+-eps) */
-static void vecN_not_equal_eps(bool *dst, const float *a, float b, float eps, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_abs(a[i] - b) > eps;
-}
+/*/ float /*//** dst = a != b (+-eps) */
+/*/ float /*/static void vecN_not_equal_eps(bool *dst, const float *a, float b, float eps, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_abs(a[i] - b) > eps;
+/*/ float /*/}
 
-/** dst = a != b (+-eps) */
-static void vecN_not_equal_eps_vec(bool *dst, const float *a, const float *b, float eps, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_abs(a[i] - b[i]) > eps;
-}
+/*/ float /*//** dst = a != b (+-eps) */
+/*/ float /*/static void vecN_not_equal_eps_vec(bool *dst, const float *a, const float *b, float eps, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_abs(a[i] - b[i]) > eps;
+/*/ float /*/}
 
-/** dst = isnan(vec) */
-static void vecN_isnan(bool *dst, const float *v, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = sca_isnan(v[i]);
-}
+/*/ float /*//** dst = isnan(v) */
+/*/ float /*/static void vecN_isnan(bool *dst, const float *v, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_isnan(v[i]);
+/*/ float /*/}
 
-/** dst = !isnan(vec) */
-static void vecN_not_isnan(bool *dst, const float *v, int n) {
-    for (int i = 0; i < n; i++)
-        dst[i] = !sca_isnan(v[i]);
-}
+/*/ float /*//** dst = !isnan(v) */
+/*/ float /*/static void vecN_not_isnan(bool *dst, const float *v, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = !sca_isnan(v[i]);
+/*/ float /*/}
+
+/*/ float /*//** dst = isinf(v) */
+/*/ float /*/static void vecN_isinf(bool *dst, const float *v, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = sca_isinf(v[i]);
+/*/ float /*/}
+
+/*/ float /*//** dst = !isinf(v) */
+/*/ float /*/static void vecN_not_isinf(bool *dst, const float *v, int n) {
+/*/ float /*/    for (int i = 0; i < n; i++)
+/*/ float /*/        dst[i] = !sca_isinf(v[i]);
+/*/ float /*/}
 
 #endif //MATHC_VEC_VECN_H

@@ -77,12 +77,33 @@ static vec__X__ vec__X___cast_from_uchar(const unsigned char *cast) {
     return res;
 }
 
-/** dst = v / 255 */
-static vec__X__ vec__X___cast_from_uchar_1(const unsigned char *cast) {
-    vec__X__ res;
-    vecN_cast_from_uchar_1(res.v, cast, __X__);
-    return res;
-}
+/*/ float /*//** dst = v / 255 */
+/*/ float /*/static vec__X__ vec__X___cast_from_uchar_1(const unsigned char *cast) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_cast_from_uchar_1(res.v, cast, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
+
+/*/ int /*//** dst = vec * 255 */
+/*/ int /*/static vec__X__ vec__X___cast_from_float_1(const float *cast) {
+/*/ int /*/    vec__X__ res;
+/*/ int /*/    vecN_cast_from_float_1(res.v, cast, __X__);
+/*/ int /*/    return res;
+/*/ int /*/}
+
+/*/ int /*//** dst = vec * 255 */
+/*/ int /*/static vec__X__ vec__X___cast_from_double_1(const double *cast) {
+/*/ int /*/    vec__X__ res;
+/*/ int /*/    vecN_cast_from_double_1(res.v, cast, __X__);
+/*/ int /*/    return res;
+/*/ int /*/}
+
+/*/ int /*//** dst = vec * 255 */
+/*/ int /*/static vec__X__ vec__X___cast_from_longdouble_1(const long double *cast) {
+/*/ int /*/    vec__X__ res;
+/*/ int /*/    vecN_cast_from_longdouble_1(res.v, cast, __X__);
+/*/ int /*/    return res;
+/*/ int /*/}
 
 /** a == b */
 static bool vec__X___cmp(vec__X__ a, vec__X__ b) {
@@ -97,12 +118,12 @@ static vec__X__ vec__X___set(float s) {
 }
 
 
-/** dst = -v */
-static vec__X__ vec__X___neg(vec__X__ v) {
-    vec__X__ res;
-    vecN_neg(res.v, v.v, __X__);
-    return res;
-}
+/*/ signed /*//** dst = -v */
+/*/ signed /*/static vec__X__ vec__X___neg(vec__X__ v) {
+/*/ signed /*/    vec__X__ res;
+/*/ signed /*/    vecN_neg(res.v, v.v, __X__);
+/*/ signed /*/    return res;
+/*/ signed /*/}
 
 
 /** dst = a + b */
@@ -169,76 +190,76 @@ static vec__X__ vec__X___div(vec__X__ a, float b) {
 }
 
 
-/** dst = a * M_PI / 180 */
-static vec__X__ vec__X___radians(vec__X__ deg) {
-    vec__X__ res;
-    vecN_radians(res.v, deg.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = a * M_PI / 180 */
+/*/ float /*/static vec__X__ vec__X___radians(vec__X__ deg) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_radians(res.v, deg.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = a * 180 / M_PI */
-static vec__X__ vec__X___degrees(vec__X__ rad) {
-    vec__X__ res;
-    vecN_degrees(res.v, rad.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = a * 180 / M_PI */
+/*/ float /*/static vec__X__ vec__X___degrees(vec__X__ rad) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_degrees(res.v, rad.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = sin(angle_rad) */
-static vec__X__ vec__X___sin(vec__X__ angle_rad) {
-    vec__X__ res;
-    vecN_sin(res.v, angle_rad.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = sin(angle_rad) */
+/*/ float /*/static vec__X__ vec__X___sin(vec__X__ angle_rad) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_sin(res.v, angle_rad.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = cos(angle_rad) */
-static vec__X__ vec__X___cos(vec__X__ angle_rad) {
-    vec__X__ res;
-    vecN_cos(res.v, angle_rad.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = cos(angle_rad) */
+/*/ float /*/static vec__X__ vec__X___cos(vec__X__ angle_rad) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_cos(res.v, angle_rad.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = tan(angle_rad) */
-static vec__X__ vec__X___tan(vec__X__ angle_rad) {
-    vec__X__ res;
-    vecN_tan(res.v, angle_rad.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = tan(angle_rad) */
+/*/ float /*/static vec__X__ vec__X___tan(vec__X__ angle_rad) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_tan(res.v, angle_rad.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = asin(x) */
-static vec__X__ vec__X___asin(vec__X__ x) {
-    vec__X__ res;
-    vecN_asin(res.v, x.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = asin(x) */
+/*/ float /*/static vec__X__ vec__X___asin(vec__X__ x) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_asin(res.v, x.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = acos(x) */
-static vec__X__ vec__X___acos(vec__X__ x) {
-    vec__X__ res;
-    vecN_acos(res.v, x.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = acos(x) */
+/*/ float /*/static vec__X__ vec__X___acos(vec__X__ x) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_acos(res.v, x.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = atan(x) */
-static vec__X__ vec__X___atan(vec__X__ x) {
-    vec__X__ res;
-    vecN_atan(res.v, x.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = atan(x) */
+/*/ float /*/static vec__X__ vec__X___atan(vec__X__ x) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_atan(res.v, x.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = atan2(y, x) */
-static vec__X__ vec__X___atan2(vec__X__ y, vec__X__ x) {
-    vec__X__ res;
-    vecN_atan2(res.v, y.v, x.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = atan2(y, x) */
+/*/ float /*/static vec__X__ vec__X___atan2(vec__X__ y, vec__X__ x) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_atan2(res.v, y.v, x.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
 /** dst = pow(x, y) */
@@ -297,55 +318,56 @@ static vec__X__ vec__X___sqrt(vec__X__ x) {
 }
 
 
-/** dst = 1 / sqrt(x) */
-static vec__X__ vec__X___inversesqrt(vec__X__ x) {
-    vec__X__ res;
-    vecN_inversesqrt(res.v, x.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = 1 / sqrt(x) */
+/*/ float /*/static vec__X__ vec__X___inversesqrt(vec__X__ x) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_inversesqrt(res.v, x.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = abs(x) */
-static vec__X__ vec__X___abs(vec__X__ x) {
-    vec__X__ res;
-    vecN_abs(res.v, x.v, __X__);
-    return res;
-}
+/*/ signed /*//** dst = abs(x) */
+/*/ signed /*/static vec__X__ vec__X___abs(vec__X__ x) {
+/*/ signed /*/    vec__X__ res;
+/*/ signed /*/    vecN_abs(res.v, x.v, __X__);
+/*/ signed /*/    return res;
+/*/ signed /*/}
 
 
-/** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
-static vec__X__ vec__X___sign(vec__X__ x) {
-    vec__X__ res;
-    vecN_sign(res.v, x.v, __X__);
-    return res;
-}
+/*/ signed /*//** dst = x > 0 ? 1 : (x < 0 ? -1 : 0) */
+/*/ signed /*/static vec__X__ vec__X___sign(vec__X__ x) {
+/*/ signed /*/    vec__X__ res;
+/*/ signed /*/    vecN_sign(res.v, x.v, __X__);
+/*/ signed /*/    return res;
+/*/ signed /*/}
 
 
-/** dst = floor(x) */
-static vec__X__ vec__X___floor(vec__X__ x) {
-    vec__X__ res;
-    vecN_floor(res.v, x.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = floor(x) */
+/*/ float /*/static vec__X__ vec__X___floor(vec__X__ x) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_floor(res.v, x.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = ceil(x) */
-static vec__X__ vec__X___ceil(vec__X__ x) {
-    vec__X__ res;
-    vecN_ceil(res.v, x.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = ceil(x) */
+/*/ float /*/static vec__X__ vec__X___ceil(vec__X__ x) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_ceil(res.v, x.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = x - floor(x) */
-static vec__X__ vec__X___fract(vec__X__ x) {
-    vec__X__ res;
-    vecN_fract(res.v, x.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = x - floor(x) */
+/*/ float /*/static vec__X__ vec__X___fract(vec__X__ x) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_fract(res.v, x.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = x - y * floor(x/y) */
+/*/ float /*//** dst = x - y * floor(x/y) */
+/*/ int /*//** dst = (x % y + y) % y (always positive, if y>0) **/
 static vec__X__ vec__X___mod(vec__X__ x, float y) {
     vec__X__ res;
     vecN_mod(res.v, x.v, y, __X__);
@@ -353,7 +375,8 @@ static vec__X__ vec__X___mod(vec__X__ x, float y) {
 }
 
 
-/** dst = x - y * floor(x/y) */
+/*/ float /*//** dst = x - y * floor(x/y) */
+/*/ int /*//** dst = (x % y + y) % y (always positive, if y>0) **/
 static vec__X__ vec__X___mod_vec(vec__X__ x, vec__X__ y) {
     vec__X__ res;
     vecN_mod_vec(res.v, x.v, y.v, __X__);
@@ -451,20 +474,20 @@ static vec__X__ vec__X___step_vec(vec__X__ x, vec__X__ edge) {
 }
 
 
-/** dst = x < edge1 ? 0 : (x > edge2 ? 1 : x * x * (3 - 2 * x)) Hermite polynomials */
-static vec__X__ vec__X___smoothstep(vec__X__ x, float edge1, float edge2) {
-    vec__X__ res;
-    vecN_smoothstep(res.v, x.v, edge1, edge2, __X__);
-    return res;
-}
+/*/ float /*//** dst = x < edge1 ? 0 : (x > edge2 ? 1 : x * x * (3 - 2 * x)) Hermite polynomials */
+/*/ float /*/static vec__X__ vec__X___smoothstep(vec__X__ x, float edge1, float edge2) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_smoothstep(res.v, x.v, edge1, edge2, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = x < edge1 ? 0 : (x > edge2 ? 1 : x * x * (3 - 2 * x)) Hermite polynomials */
-static vec__X__ vec__X___smoothstep_vec(vec__X__ x, vec__X__ edge1, vec__X__ edge2) {
-    vec__X__ res;
-    vecN_smoothstep_vec(res.v, x.v, edge1.v, edge2.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = x < edge1 ? 0 : (x > edge2 ? 1 : x * x * (3 - 2 * x)) Hermite polynomials */
+/*/ float /*/static vec__X__ vec__X___smoothstep_vec(vec__X__ x, vec__X__ edge1, vec__X__ edge2) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_smoothstep_vec(res.v, x.v, edge1.v, edge2.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
 /** returns v[0] + v[1] + ... + v[n-1] */
@@ -479,44 +502,51 @@ static float vec__X___dot(vec__X__ a, vec__X__ b) {
 }
 
 
+/** dst = a x b , dst.w... = 0 */
+static vec__X__ vec__X___cross(vec__X__ a, vec__X__ b) {
+    vec__X__ res;
+    vecN_cross(res.v, a.v, b.v, __X__);
+    return res;
+}
+
 /** returns ||v||___X__ */
 static float vec__X___norm(vec__X__ v) {
     return vecN_norm(v.v, __X__);
 }
 
 
-/** returns ||v||_p */
-static float vec__X___norm_p(vec__X__ v, float p) {
-    return vecN_norm_p(v.v, p, __X__);
-}
+/*/ signed /*//** returns ||v||_p */
+/*/ signed /*/static float vec__X___norm_p(vec__X__ v, float p) {
+/*/ signed /*/    return vecN_norm_p(v.v, p, __X__);
+/*/ signed /*/}
 
 
-/** returns ||v||_1 */
-static float vec__X___norm_1(vec__X__ v) {
-    return vecN_norm_1(v.v, __X__);
-}
+/*/ signed /*//** returns ||v||_1 */
+/*/ signed /*/static float vec__X___norm_1(vec__X__ v) {
+/*/ signed /*/    return vecN_norm_1(v.v, __X__);
+/*/ signed /*/}
 
 
-/** returns ||v||_inf */
-static float vec__X___norm_inf(vec__X__ v) {
-    return vecN_norm_inf(v.v, __X__);
-}
+/*/ signed /*//** returns ||v||_inf */
+/*/ signed /*/static float vec__X___norm_inf(vec__X__ v) {
+/*/ signed /*/    return vecN_norm_inf(v.v, __X__);
+/*/ signed /*/}
 
 
-/** dst = v / norm(v) */
-static vec__X__ vec__X___normalize_unsafe(vec__X__ v) {
-    vec__X__ res;
-    vecN_normalize_unsafe(res.v, v.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = v / norm(v) */
+/*/ float /*/static vec__X__ vec__X___normalize_unsafe(vec__X__ v) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_normalize_unsafe(res.v, v.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = v / (norm(v) > 0 ? norm(v) : 1) */
-static vec__X__ vec__X___normalize(vec__X__ v) {
-    vec__X__ res;
-    vecN_normalize(res.v, v.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = v / (norm(v) > 0 ? norm(v) : 1) */
+/*/ float /*/static vec__X__ vec__X___normalize(vec__X__ v) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_normalize(res.v, v.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
 /** returns length of a vector, see vecN_norm. Just here to match glsl */
@@ -537,27 +567,27 @@ static float vec__X___sqr_distance(vec__X__ a, vec__X__ b) {
 }
 
 
-/** dst = dot(i, nref) < 0 ? N : -N */
-static vec__X__ vec__X___faceforward(vec__X__ n, vec__X__ i, vec__X__ nref) {
-    vec__X__ res;
-    vecN_faceforward(res.v, n.v, i.v, nref.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = dot(i, nref) < 0 ? N : -N */
+/*/ float /*/static vec__X__ vec__X___faceforward(vec__X__ n, vec__X__ i, vec__X__ nref) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_faceforward(res.v, n.v, i.v, nref.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = i - 2.0 * n * dot(n,i) */
-static vec__X__ vec__X___reflect(vec__X__ i, vec__X__ n) {
-    vec__X__ res;
-    vecN_reflect(res.v, i.v, n.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = i - 2.0 * n * dot(n,i) */
+/*/ float /*/static vec__X__ vec__X___reflect(vec__X__ i, vec__X__ n) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_reflect(res.v, i.v, n.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-static vec__X__ vec__X___refract(vec__X__ i, vec__X__ n, float eta) {
-    vec__X__ res;
-    vecN_refract(res.v, i.v, n.v, eta, __X__);
-    return res;
-}
+/*/ float /*/static vec__X__ vec__X___refract(vec__X__ i, vec__X__ n, float eta) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_refract(res.v, i.v, n.v, eta, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
 /** dst = a < b */
@@ -656,59 +686,63 @@ static bvec__X__ vec__X___not_equal_vec(vec__X__ a, vec__X__ b) {
 }
 
 
-/** dst = a == b (+-eps) */
-static bvec__X__ vec__X___equal_eps(vec__X__ a, float b, float eps) {
-    bvec__X__ res;
-    vecN_equal_eps(res.v, a.v, b, eps, __X__);
-    return res;
-}
+/*/ float /*//** dst = a == b (+-eps) */
+/*/ float /*/static bvec__X__ vec__X___equal_eps(vec__X__ a, float b, float eps) {
+/*/ float /*/    bvec__X__ res;
+/*/ float /*/    vecN_equal_eps(res.v, a.v, b, eps, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = a == b (+-eps) */
-static bvec__X__ vec__X___equal_eps_vec(vec__X__ a, vec__X__ b, float eps) {
-    bvec__X__ res;
-    vecN_equal_eps_vec(res.v, a.v, b.v, eps, __X__);
-    return res;
-}
+/*/ float /*//** dst = a == b (+-eps) */
+/*/ float /*/static bvec__X__ vec__X___equal_eps_vec(vec__X__ a, vec__X__ b, float eps) {
+/*/ float /*/    bvec__X__ res;
+/*/ float /*/    vecN_equal_eps_vec(res.v, a.v, b.v, eps, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = a != b (+-eps) */
-static bvec__X__ vec__X___not_equal_eps(vec__X__ a, float b, float eps) {
-    bvec__X__ res;
-    vecN_not_equal_eps(res.v, a.v, b, eps, __X__);
-    return res;
-}
+/*/ float /*//** dst = a != b (+-eps) */
+/*/ float /*/static bvec__X__ vec__X___not_equal_eps(vec__X__ a, float b, float eps) {
+/*/ float /*/    bvec__X__ res;
+/*/ float /*/    vecN_not_equal_eps(res.v, a.v, b, eps, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 
-/** dst = a != b (+-eps) */
-static bvec__X__ vec__X___not_equal_eps_vec(vec__X__ a, vec__X__ b, float eps) {
-    bvec__X__ res;
-    vecN_not_equal_eps_vec(res.v, a.v, b.v, eps, __X__);
-    return res;
-}
+/*/ float /*//** dst = a != b (+-eps) */
+/*/ float /*/static bvec__X__ vec__X___not_equal_eps_vec(vec__X__ a, vec__X__ b, float eps) {
+/*/ float /*/    bvec__X__ res;
+/*/ float /*/    vecN_not_equal_eps_vec(res.v, a.v, b.v, eps, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
-/** dst = isnan(a) */
-static bvec__X__ vec__X___isnan(vec__X__ v) {
-    bvec__X__ res;
-    vecN_isnan(res.v, v.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = isnan(v) */
+/*/ float /*/static bvec__X__ vec__X___isnan(vec__X__ v) {
+/*/ float /*/    bvec__X__ res;
+/*/ float /*/    vecN_isnan(res.v, v.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
-/** dst = isnan(a) */
-static bvec__X__ vec__X___not_isnan(vec__X__ v) {
-    bvec__X__ res;
-    vecN_not_isnan(res.v, v.v, __X__);
-    return res;
-}
+/*/ float /*//** dst = !isnan(v) */
+/*/ float /*/static bvec__X__ vec__X___not_isnan(vec__X__ v) {
+/*/ float /*/    bvec__X__ res;
+/*/ float /*/    vecN_not_isnan(res.v, v.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
-/*/ X>=3 /*//** dst = a x b , dst.w = 0 */
-/*/ X>=3 /*/static vec__X__ vec__X___cross(vec__X__ a, vec__X__ b) {
-/*/ X>=3 /*/    vec__X__ res;
-/*/ X>=3 /*/    res.x = a.y * b.z - a.z * b.y;
-/*/ X>=3 /*/    res.y = a.z * b.x - a.x * b.z;
-/*/ X>=3 /*/    res.z = a.x * b.y - a.y * b.x;
-/*/ X>=4 /*/    res.w = 0;
-/*/ X>=3 /*/    return res;
-/*/ X>=3 /*/}
+/*/ float /*//** dst = isinf(v) */
+/*/ float /*/static bvec__X__ vec__X___isinf(vec__X__ v) {
+/*/ float /*/    bvec__X__ res;
+/*/ float /*/    vecN_isinf(res.v, v.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
+
+/*/ float /*//** dst = !isinf(v) */
+/*/ float /*/static bvec__X__ vec__X___not_isinf(vec__X__ v) {
+/*/ float /*/    bvec__X__ res;
+/*/ float /*/    vecN_not_isinf(res.v, v.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
 
 #endif //MATHC_VEC_VEC__X___H

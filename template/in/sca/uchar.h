@@ -2,7 +2,14 @@
 #define MATHC_SCA_UCHAR_H
 
 #include <stdlib.h>  // abs
+#include <limits.h>  // UCHAR_MAX
 #include <math.h>
+
+/** maximum possible value */
+#define UCSCA_MAX UCHAR_MAX
+
+/** minimum possible value */
+#define UCSCA_MIN 0
 
 /** dst = pow(x, y) */
 static unsigned char ucsca_pow(unsigned char x, unsigned char y) {
