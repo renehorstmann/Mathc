@@ -24,7 +24,7 @@
  * float v[5] = {1.1, 2.2, 3.3, 4.4, 5.5};
  * char buf[128];
  * vecN_snprint(buf, sizeof buf, v, 5);
- * // (float[5]) { 10000.1, 2.2, 3.3, 4.4, 5.5 }
+ * // (float[5]) { 1.1, 2.2, 3.3, 4.4, 5.5 }
  */
 static size_t vecN_snprint(char *str, size_t size, const float *v, int n) {
     setlocale(LC_ALL, "C");
@@ -58,7 +58,7 @@ static size_t vecN_snprintln(char *str, size_t size, const float *v, int n) {
  * Example:
  * float v[5] = {1.1, 2.2, 3.3, 4.4, 5.5};
  * vecN_fprint(stdout, v, 5);
- * // (float[5]) { 10000.1, 2.2, 3.3, 4.4, 5.5 }
+ * // (float[5]) { 1.1, 2.2, 3.3, 4.4, 5.5 }
  */
 static size_t vecN_fprint(FILE *stream, const float *v, int n) {
     setlocale(LC_ALL, "C");
@@ -93,7 +93,7 @@ static size_t vecN_fprintln(FILE *stream, const float *v, int n) {
  * Example:
  * float v[5] = {1.1, 2.2, 3.3, 4.4, 5.5};
  * vecN_print(v, 5);
- * // (float[5]) { 10000.1, 2.2, 3.3, 4.4, 5.5 }
+ * // (float[5]) { 1.1, 2.2, 3.3, 4.4, 5.5 }
  */
 static size_t vecN_print(const float *v, int n) {
     return vecN_fprint(stdout, v, n);

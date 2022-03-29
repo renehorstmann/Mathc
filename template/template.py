@@ -238,6 +238,16 @@ def create_io(template: dict, X_list_vec, X_list_mat):
                        apply_regex_replace_list('out/mathc/io/vec%i.h' % x, replace_to_float_basic),
                        template, x)
 
+    if len(X_list_mat) > 0:
+        apply_template('in/io/matn.h',
+                       apply_regex_replace_list('out/mathc/io/matn.h', replace_to_float_basic),
+                       template)
+
+        for x in X_list_mat:
+            apply_template('in/io/matX.h',
+                           apply_regex_replace_list('out/mathc/io/mat%i.h' % x, replace_to_float_basic),
+                           template, x)
+
 
 def create_vec(template: dict, X_list):
     """creates the Mathc vec files for the given template"""

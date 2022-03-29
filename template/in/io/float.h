@@ -15,5 +15,9 @@
 /*/ 1 /*///#include "vec2.h"
 /*/ 1 /*///#include "vec3.h"
 /*/ 1 /*///#include "vec4.h"
+/*/ !bool /*/#include "matn.h"
+/*/ !bool /*///#include "mat2.h"
+/*/ !bool /*///#include "mat3.h"
+/*/ !bool /*///#include "mat4.h"
 
 #endif //MATHC_IO_FLOAT_H
