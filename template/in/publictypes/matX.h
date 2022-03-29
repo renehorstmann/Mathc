@@ -85,6 +85,6 @@
 _Static_assert(sizeof(mathc_mat__X__) == sizeof(float) * __X__ * __X__, "[Mathc] wrong expected size");
 
 /** casts a float * to a dereferenced mat__X__ */
-#define MATHC_MAT__X__(mat) (*(mathc_mat__X__ *) (mat))
+#define MATHC_AS_MAT__X__(mat) (*(mathc_mat__X__ *) (mat))
 
 #endif //MATHC_PUBLICTYPES_MAT__X___H

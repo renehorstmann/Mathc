@@ -141,10 +141,10 @@ def create_replace_list(template: dict, X=0, prefix=''):
     replace.append((regex_name_postfix('_MATN_H'), '_' + PREFIX + 'MATN_H'))
 
     # MATHC_VEC* macro
-    replace.append((regex_name_prefix('MATHC_VEC'), 'MATHC_' + PREFIX + 'VEC'))
+    replace.append((regex_name_prefix('MATHC_AS_VEC'), 'MATHC_AS_' + PREFIX + 'VEC'))
 
     # MATHC_MAT* macro
-    replace.append((regex_name_prefix('MATHC_MAT'), 'MATHC_' + PREFIX + 'MAT'))
+    replace.append((regex_name_prefix('MATHC_AS_MAT'), 'MATHC_AS_' + PREFIX + 'MAT'))
     
     # SCA_* constands
     replace.append((regex_name_prefix('SCA_'), PREFIX + 'SCA_'))
