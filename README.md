@@ -462,7 +462,13 @@ Same for double, int, uchar and bool.
 
 Only importing a subset (like mathc/float.h), speeds up the compilation process
 
-### Example usage
+## Namespace
+All functions start as namespace with the type.
+If you collide with other libraries, use the publictypes header, which defines the types under the `mathc_` namespace.
+The only functions that may have different namespaces are in the dir utils, 
+like the functions in [intersection.h](include/mathc/utils/intersection.h) which start with the `intersection_` namespace.
+
+## Example usage
 ```c
 // includes float related vector and matrix functions
 #include "mathc/float.h"
