@@ -56,6 +56,7 @@ dkms.conf
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+.idea/*
 
 # User-specific stuff
 .idea/**/workspace.xml
@@ -92,6 +93,7 @@ dkms.conf
 
 # CMake
 cmake-build-*/
+build/
 
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
@@ -120,13 +122,6 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
-# Android studio 3.1+ serialized cache file
-
-/.idea/Bindingc.iml
-/.idea/misc.xml
-/.idea/modules.xml
-/.idea/vcs.xml
-/.idea/Utilc.iml
-/.idea/Mathc.iml
-/.idea/inspectionProfiles/Project_Default.xml
-/.idea/.gitignore
+#
+# end of template
+#
