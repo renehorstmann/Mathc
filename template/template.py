@@ -1,32 +1,64 @@
 import os
 import re
 
+#
+# This file generates the Mathc library files from the template files of dir "in/*"
+# The generated files will be output in the dir "out/*"
+#
+# No standard template engine was used, but a regex substitution system
+# The "template" files were written as if they were for the float type
+# The sized types have an "__X__" specifier, that will be replaced with the actual size (vec__X__ -> vec4)
+# Their also some conditional lines with "/*/ cond /*/[//]".
+#   If cond is true, only the condition comment is removed
+#   If cond is false, the whole line is removed
+#   The conditions are not actually evaluated, only testet for their existence
+#   The following conditions are used:
+#       0       (remove that line)
+#       1       (keep that line, used with the optional [//] line comment, just to pleasure the ide)
+#       float   (only for floating point types like float, double)
+#       int     (only for integer types like int, unsigned char)
+#       signed  (only for signed types like int, float)
+#       bool    (only for the bool type)
+#       !bool   (not for the bool type)
+#       X==i, !=, >, >=, <, <=  (i from 2 to 5, see X_MIN, X_MAX below)
+#
+
+X_MIN = 2
+X_MAX = 5
+
 
 def regex_name(name: str):
+    """selects a full name in a C file"""
     return r'(?<![a-zA-Z0-9_])' + name + r'(?![a-zA-Z0-9_])'
 
 
 def regex_name_prefix(name_prefix: str):
+    """selects a name with unknown end in a C file"""
     return r'(?<![a-zA-Z0-9_])' + name_prefix
 
 
 def regex_name_postfix(name_postfix: str):
+    """selects a name with unknown start in a C file"""
     return name_postfix + r'(?![a-zA-Z0-9_])'
 
 
 def regex_condition(cond: str, select_only_condition: bool):
+    """will select either only the condition comment "/*/ cond /*/[//]" or the whole line"""
     if select_only_condition:
         return r'\/\*\/\s*' + cond + r'\s*\/\*\/(\/\/)?'
     return r'\/\*\/\s*' + cond + r'\s*\/\*\/.*\n'
 
 
 def apply_regex_replace_list(text: str, replace: list):
+    """replace list is a list of tuples (select, replace) that will be used on the text"""
     for item in replace:
+        # regex substitute
         text = re.sub(item[0], item[1], text)
     return text
 
 
 def apply_replace(src_file, dst_file, replace: list):
+    """reads in the src file, applies the replace list and saves the generated file under dst (and creates all dirs)"""
     file = open(src_file, 'r')
     text = file.read()
     file.close()
@@ -39,16 +71,10 @@ def apply_replace(src_file, dst_file, replace: list):
     file.close()
 
 
-X_MIN = 2
-X_MAX = 32
-
-def create_replace_list(template: dict, X=0):
+def create_replace_conditions(template: dict, X=0):
+    """creates all line conditions "/*/ cond /*/[//]" """
     replace = []
 
-    # start with X, to first replace vec__X__* with vec2, 3, 4
-    replace.append(('__X__', '%i' % X))
-
-    # conditional lines:
     replace.append((regex_condition('0', False), ''))
     replace.append((regex_condition('1', True), ''))
     is_float = 'is_integer' not in template or not template['is_integer']
@@ -64,6 +90,15 @@ def create_replace_list(template: dict, X=0):
         replace.append((regex_condition('X>=%i' % x, X >= x), ''))
         replace.append((regex_condition('X<%i' % x, X < x), ''))
         replace.append((regex_condition('X<=%i' % x, X <= x), ''))
+    return replace
+
+
+def create_replace_list(template: dict, X=0):
+    """creates the whole replace list for the Mathc template files, based on the float data type"""
+    replace = create_replace_conditions(template, X)
+
+    # start with X, to first replace vec__X__* with vec2, 3, 4
+    replace.append(('__X__', '%i' % X))
 
     # primitive file (before primitive below)
     replace.append((regex_name('float.h'), template['primitive_file'] + '.h'))
@@ -133,11 +168,13 @@ def create_replace_list(template: dict, X=0):
 
 
 def apply_template(src_file, dst_file, template: dict, X=0):
+    """creates a replace list of the given template and applies it on the given src file to create the dst file"""
     replace = create_replace_list(template, X)
     apply_replace(src_file, dst_file, replace)
 
 
 def create_publictypes(template: dict, X_list_vec, X_list_mat):
+    """creates the Mathc publictypes files for the given template"""
     replace_to_float_basic = create_replace_list(template)
 
     apply_template('in/publictypes/float.h',
@@ -156,6 +193,7 @@ def create_publictypes(template: dict, X_list_vec, X_list_mat):
 
 
 def create_types(template: dict, X_list_vec, X_list_mat):
+    """creates the Mathc types files for the given template"""
     replace_to_float_basic = create_replace_list(template)
 
     apply_template('in/types/float.h',
@@ -174,6 +212,7 @@ def create_types(template: dict, X_list_vec, X_list_mat):
 
 
 def create_vec(template: dict, X_list):
+    """creates the Mathc vec files for the given template"""
     replace_to_float_basic = create_replace_list(template)
 
     apply_template('in/vec/float.h',
@@ -190,6 +229,7 @@ def create_vec(template: dict, X_list):
 
 
 def create_mat(template: dict, X_list):
+    """creates the Mathc mat files for the given template"""
     replace_to_float_basic = create_replace_list(template)
 
     apply_template('in/mat/float.h',
@@ -206,6 +246,7 @@ def create_mat(template: dict, X_list):
 
 
 def create_all(template: dict, X_list_vec, X_list_mat):
+    """creates the Mathc publictypes, types, vec and mat files for the given template"""
     create_publictypes(template, X_list_vec, X_list_mat)
     create_types(template, X_list_vec, X_list_mat)
     create_vec(template, X_list_vec)
@@ -213,6 +254,7 @@ def create_all(template: dict, X_list_vec, X_list_mat):
 
 
 def create_bool(X_list):
+    """creates the Mathc bool files"""
     replace_to_float_basic = create_replace_list(BOOL)
 
     create_publictypes(BOOL, X_list, [])
@@ -242,6 +284,7 @@ def create_bool(X_list):
 
 
 def create_util(template: dict, prefix: str):
+    """creates the Mathc util files for the given template, should be floating point type"""
     replace_to_float_basic = create_replace_list(template)
     apply_template('in/utils/float.h', apply_regex_replace_list('out/utils/float.h', replace_to_float_basic), template)
     apply_template('in/utils/camera.h', 'out/utils/%scamera.h' % prefix, template)
@@ -251,6 +294,11 @@ def create_util(template: dict, prefix: str):
     apply_template('in/utils/random.h', 'out/utils/%srandom.h' % prefix, template)
     apply_template('in/utils/rotation.h', 'out/utils/%srotation.h' % prefix, template)
 
+
+
+#
+# templates
+#
 
 FLOAT = {
     'primitive': 'float',
