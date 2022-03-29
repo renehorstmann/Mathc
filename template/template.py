@@ -481,14 +481,22 @@ if __name__ == '__main__':
 
     create_bool(X_list_vec)
 
+    # floating point types
     create_all(FLOAT, X_list_vec, X_list_mat)
     create_all(DOUBLE, X_list_vec, X_list_mat)
     # create_all(LONGDOUBLE, X_list_vec, X_list_mat)
 
+    # integer types
+    create_all(UCHAR, X_list_vec, X_list_mat)
+    # create_all(CHAR, X_list_vec, X_list_mat)
+    # create_all(USHORT, X_list_vec, X_list_mat)
+    # create_all(SHORT, X_list_vec, X_list_mat)
+    # create_all(UINT, X_list_vec, X_list_mat)
+    create_all(INT, X_list_vec, X_list_mat)
+    # create_all(ULONGLONG, X_list_vec, X_list_mat)
+    # create_all(LONGLONG, X_list_vec, X_list_mat)
+
+    # mathc/utils (floating point types)
     create_util(FLOAT, '')
     create_util(DOUBLE, 'd')
     # create_util(LONGDOUBLE, 'ld')
-
-    create_all(INT, X_list_vec, X_list_mat)
-    create_all(UCHAR, X_list_vec, X_list_mat)
-    # create_all(LONGLONG, X_list_vec, X_list_mat)
