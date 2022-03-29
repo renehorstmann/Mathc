@@ -1,7 +1,7 @@
 #ifndef MATHC_PUBLICTYPES_VEC__X___H
 #define MATHC_PUBLICTYPES_VEC__X___H
 
-#ifndef __cplusplus
+#ifdef __cplusplus
 #define static_assert _Static_assert
 #endif
 
