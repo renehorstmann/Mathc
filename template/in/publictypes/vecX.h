@@ -1,9 +1,7 @@
 #ifndef MATHC_PUBLICTYPES_VEC__X___H
 #define MATHC_PUBLICTYPES_VEC__X___H
 
-#ifdef __cplusplus
-#define static_assert _Static_assert
-#endif
+#include <assert.h>     // for static_assert
 
 /*/ 0 /*/   // template file!
 /*/ 0 /*/   //
@@ -116,7 +114,7 @@
 /*/ X>=5 /*/} mathc_vec__X__;
 
 
-_Static_assert(sizeof(mathc_vec__X__) == sizeof(float) * __X__, "[Mathc] wrong expected size");
+static_assert(sizeof(mathc_vec__X__) == sizeof(float) * __X__, "[Mathc] wrong expected size");
 
 /** casts a float * to a dereferenced vec__X__ */
 #define MATHC_AS_VEC__X__(vec) (*(mathc_vec__X__ *) (vec))
