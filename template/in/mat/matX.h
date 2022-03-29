@@ -12,12 +12,12 @@
 /*/ 0 /*/   //      the whole line will be removed
 /*/ 0 /*/
 /*/ 0 /*/   // the following setup is just here to pleasure an ide
-/*/ 0 /*/ #include "../../out/types/vec2.h"
-/*/ 0 /*/ #include "../../out/types/mat2.h"
-/*/ 0 /*/ #include "../../out/types/vec3.h"
-/*/ 0 /*/ #include "../../out/types/mat3.h"
-/*/ 0 /*/ #include "../../out/types/vec4.h"
-/*/ 0 /*/ #include "../../out/types/mat4.h"
+/*/ 0 /*/ #include "../../out/mathc/types/vec2.h"
+/*/ 0 /*/ #include "../../out/mathc/types/mat2.h"
+/*/ 0 /*/ #include "../../out/mathc/types/vec3.h"
+/*/ 0 /*/ #include "../../out/mathc/types/mat3.h"
+/*/ 0 /*/ #include "../../out/mathc/types/vec4.h"
+/*/ 0 /*/ #include "../../out/mathc/types/mat4.h"
 /*/ 0 /*/ typedef vec4 vec__X__;
 /*/ 0 /*/ typedef mat4 mat__X__;
 /*/ 0 /*/ #define __X__ 4

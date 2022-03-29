@@ -12,9 +12,9 @@
 /*/ 0 /*/   //      the whole line will be removed
 /*/ 0 /*/
 /*/ 0 /*/   // the following setup is just here to pleasure an ide
-/*/ 0 /*/ #include "../../out/vec/vec3.h"
-/*/ 0 /*/ #include "../../out/mat/mat3.h"
-/*/ 0 /*/ #include "../../out/mat/mat4.h"
+/*/ 0 /*/ #include "../../out/mathc/vec/vec3.h"
+/*/ 0 /*/ #include "../../out/mathc/mat/mat3.h"
+/*/ 0 /*/ #include "../../out/mathc/mat/mat4.h"
 
 /*/ 1 /*///#include "../vec/vec3.h"
 /*/ 1 /*///#include "../mat/mat3.h"

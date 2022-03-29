@@ -12,9 +12,9 @@
 /*/ 0 /*/   //      the whole line will be removed
 /*/ 0 /*/
 /*/ 0 /*/   // the following setup is just here to pleasure an ide
-/*/ 0 /*/ #include "../../out/types/vec2.h"
-/*/ 0 /*/ #include "../../out/types/vec3.h"
-/*/ 0 /*/ #include "../../out/types/vec4.h"
+/*/ 0 /*/ #include "../../out/mathc/types/vec2.h"
+/*/ 0 /*/ #include "../../out/mathc/types/vec3.h"
+/*/ 0 /*/ #include "../../out/mathc/types/vec4.h"
 
 
 #ifndef MATHC_RANDOM_FUNCTION

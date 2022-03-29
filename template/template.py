@@ -3,7 +3,7 @@ import re
 
 #
 # This file generates the Mathc library files from the template files of dir "in/*"
-# The generated files will be output in the dir "out/*"
+# The generated files will be output in the dir "out/mathc/*"
 #
 # No standard template engine was used, but a regex substitution system
 # The "template" files were written as if they were for the float type
@@ -188,17 +188,17 @@ def create_publictypes(template: dict, X_list_vec, X_list_mat):
     replace_to_float_basic = create_replace_list(template)
 
     apply_template('in/publictypes/float.h',
-                   apply_regex_replace_list('out/publictypes/float.h', replace_to_float_basic),
+                   apply_regex_replace_list('out/mathc/publictypes/float.h', replace_to_float_basic),
                    template)
     
     for x in X_list_vec:
         apply_template('in/publictypes/vecX.h',
-                       apply_regex_replace_list('out/publictypes/vec%i.h' % x, replace_to_float_basic),
+                       apply_regex_replace_list('out/mathc/publictypes/vec%i.h' % x, replace_to_float_basic),
                        template, x)
 
     for x in X_list_mat:
         apply_template('in/publictypes/matX.h',
-                       apply_regex_replace_list('out/publictypes/mat%i.h' % x, replace_to_float_basic),
+                       apply_regex_replace_list('out/mathc/publictypes/mat%i.h' % x, replace_to_float_basic),
                        template, x)
 
 
@@ -207,17 +207,17 @@ def create_types(template: dict, X_list_vec, X_list_mat):
     replace_to_float_basic = create_replace_list(template)
 
     apply_template('in/types/float.h',
-                   apply_regex_replace_list('out/types/float.h', replace_to_float_basic),
+                   apply_regex_replace_list('out/mathc/types/float.h', replace_to_float_basic),
                    template)
 
     for x in X_list_vec:
         apply_template('in/types/vecX.h',
-                       apply_regex_replace_list('out/types/vec%i.h' % x, replace_to_float_basic),
+                       apply_regex_replace_list('out/mathc/types/vec%i.h' % x, replace_to_float_basic),
                        template, x)
 
     for x in X_list_mat:
         apply_template('in/types/matX.h',
-                       apply_regex_replace_list('out/types/mat%i.h' % x, replace_to_float_basic),
+                       apply_regex_replace_list('out/mathc/types/mat%i.h' % x, replace_to_float_basic),
                        template, x)
 
 
@@ -226,16 +226,16 @@ def create_io(template: dict, X_list_vec, X_list_mat):
     replace_to_float_basic = create_replace_list(template)
 
     apply_template('in/io/float.h',
-                   apply_regex_replace_list('out/io/float.h', replace_to_float_basic),
+                   apply_regex_replace_list('out/mathc/io/float.h', replace_to_float_basic),
                    template)
 
     apply_template('in/io/vecn.h',
-                   apply_regex_replace_list('out/io/vecn.h', replace_to_float_basic),
+                   apply_regex_replace_list('out/mathc/io/vecn.h', replace_to_float_basic),
                    template)
 
     for x in X_list_vec:
         apply_template('in/io/vecX.h',
-                       apply_regex_replace_list('out/io/vec%i.h' % x, replace_to_float_basic),
+                       apply_regex_replace_list('out/mathc/io/vec%i.h' % x, replace_to_float_basic),
                        template, x)
 
 
@@ -244,15 +244,15 @@ def create_vec(template: dict, X_list):
     replace_to_float_basic = create_replace_list(template)
 
     apply_template('in/vec/float.h',
-                   apply_regex_replace_list('out/vec/float.h', replace_to_float_basic),
+                   apply_regex_replace_list('out/mathc/vec/float.h', replace_to_float_basic),
                    template)
 
     apply_template('in/vec/vecn.h',
-                         apply_regex_replace_list('out/vec/vecn.h', replace_to_float_basic),
+                         apply_regex_replace_list('out/mathc/vec/vecn.h', replace_to_float_basic),
                          template)
     for x in X_list:
         apply_template('in/vec/vecX.h',
-                             apply_regex_replace_list('out/vec/vec%i.h' % x, replace_to_float_basic),
+                             apply_regex_replace_list('out/mathc/vec/vec%i.h' % x, replace_to_float_basic),
                              template, x)
 
 
@@ -261,15 +261,15 @@ def create_mat(template: dict, X_list):
     replace_to_float_basic = create_replace_list(template)
 
     apply_template('in/mat/float.h',
-                   apply_regex_replace_list('out/mat/float.h', replace_to_float_basic),
+                   apply_regex_replace_list('out/mathc/mat/float.h', replace_to_float_basic),
                    template)
 
     apply_template('in/mat/matn.h',
-                         apply_regex_replace_list('out/mat/matn.h', replace_to_float_basic),
+                         apply_regex_replace_list('out/mathc/mat/matn.h', replace_to_float_basic),
                          template)
     for x in X_list:
         apply_template('in/mat/matX.h',
-                             apply_regex_replace_list('out/mat/mat%i.h' % x, replace_to_float_basic),
+                             apply_regex_replace_list('out/mathc/mat/mat%i.h' % x, replace_to_float_basic),
                              template, x)
 
 
@@ -291,28 +291,28 @@ def create_bool(X_list):
     create_io(BOOL, X_list, [])
 
     apply_template('in/vec/float.h',
-                   apply_regex_replace_list('out/vec/float.h', replace_to_float_basic),
+                   apply_regex_replace_list('out/mathc/vec/float.h', replace_to_float_basic),
                    BOOL)
 
-    apply_replace('in/vec/bvecn.h', 'out/vec/bvecn.h', [])
+    apply_replace('in/vec/bvecn.h', 'out/mathc/vec/bvecn.h', [])
     for X in X_list:
         replace = create_replace_conditions({}, X)
         replace.append(('__X__', '%i' % X))
 
-        apply_replace('in/vec/bvecX.h', 'out/vec/bvec%i.h' % X, replace)
+        apply_replace('in/vec/bvecX.h', 'out/mathc/vec/bvec%i.h' % X, replace)
 
 
 def create_util(template: dict):
     """creates the Mathc util files for the given template, should be floating point type"""
     replace_to_float_basic = create_replace_list(template)
-    apply_template('in/utils/float.h', apply_regex_replace_list('out/utils/float.h', replace_to_float_basic),
+    apply_template('in/utils/float.h', apply_regex_replace_list('out/mathc/utils/float.h', replace_to_float_basic),
                    template)
-    apply_template('in/utils/camera.h', 'out/utils/%scamera.h' % template['prefix'], template)
-    apply_template('in/utils/color.h', 'out/utils/%scolor.h' % template['prefix'], template)
-    apply_template('in/utils/intersection.h', 'out/utils/%sintersection.h' % template['prefix'], template)
-    apply_template('in/utils/quat.h', 'out/utils/%squat.h' % template['prefix'], template)
-    apply_template('in/utils/random.h', 'out/utils/%srandom.h' % template['prefix'], template)
-    apply_template('in/utils/rotation.h', 'out/utils/%srotation.h' % template['prefix'], template)
+    apply_template('in/utils/camera.h', 'out/mathc/utils/%scamera.h' % template['prefix'], template)
+    apply_template('in/utils/color.h', 'out/mathc/utils/%scolor.h' % template['prefix'], template)
+    apply_template('in/utils/intersection.h', 'out/mathc/utils/%sintersection.h' % template['prefix'], template)
+    apply_template('in/utils/quat.h', 'out/mathc/utils/%squat.h' % template['prefix'], template)
+    apply_template('in/utils/random.h', 'out/mathc/utils/%srandom.h' % template['prefix'], template)
+    apply_template('in/utils/rotation.h', 'out/mathc/utils/%srotation.h' % template['prefix'], template)
 
 
 
@@ -431,27 +431,28 @@ if __name__ == '__main__':
         shutil.rmtree('out')
 
     # copy static files
-    os.makedirs('out/io')
-    os.makedirs('out/sca')
-    shutil.copyfile('in/mathc.h', 'out/mathc.h')
-    shutil.copyfile('in/bool.h', 'out/bool.h')
-    shutil.copyfile('in/float.h', 'out/float.h')
-    shutil.copyfile('in/double.h', 'out/double.h')
-    shutil.copyfile('in/int.h', 'out/int.h')
-    shutil.copyfile('in/uchar.h', 'out/uchar.h')
-    shutil.copyfile('in/io/terminalcolor.h', 'out/io/terminalcolor.h')
-    shutil.copyfile('in/sca/bool.h', 'out/sca/bool.h')
-    shutil.copyfile('in/sca/float.h', 'out/sca/float.h')
-    shutil.copyfile('in/sca/double.h', 'out/sca/double.h')
-    shutil.copyfile('in/sca/longdouble.h', 'out/sca/longdouble.h')
-    shutil.copyfile('in/sca/char.h', 'out/sca/char.h')
-    shutil.copyfile('in/sca/short.h', 'out/sca/short.h')
-    shutil.copyfile('in/sca/int.h', 'out/sca/int.h')
-    shutil.copyfile('in/sca/longlong.h', 'out/sca/longlong.h')
-    shutil.copyfile('in/sca/uchar.h', 'out/sca/uchar.h')
-    shutil.copyfile('in/sca/ushort.h', 'out/sca/ushort.h')
-    shutil.copyfile('in/sca/uint.h', 'out/sca/uint.h')
-    shutil.copyfile('in/sca/ulonglong.h', 'out/sca/ulonglong.h')
+    os.makedirs('out/mathc/io')
+    os.makedirs('out/mathc/sca')
+    shutil.copyfile('in/LICENSE', 'out/mathc/LICENSE')
+    shutil.copyfile('in/mathc.h', 'out/mathc/mathc.h')
+    shutil.copyfile('in/bool.h', 'out/mathc/bool.h')
+    shutil.copyfile('in/float.h', 'out/mathc/float.h')
+    shutil.copyfile('in/double.h', 'out/mathc/double.h')
+    shutil.copyfile('in/int.h', 'out/mathc/int.h')
+    shutil.copyfile('in/uchar.h', 'out/mathc/uchar.h')
+    shutil.copyfile('in/io/terminalcolor.h', 'out/mathc/io/terminalcolor.h')
+    shutil.copyfile('in/sca/bool.h', 'out/mathc/sca/bool.h')
+    shutil.copyfile('in/sca/float.h', 'out/mathc/sca/float.h')
+    shutil.copyfile('in/sca/double.h', 'out/mathc/sca/double.h')
+    shutil.copyfile('in/sca/longdouble.h', 'out/mathc/sca/longdouble.h')
+    shutil.copyfile('in/sca/char.h', 'out/mathc/sca/char.h')
+    shutil.copyfile('in/sca/short.h', 'out/mathc/sca/short.h')
+    shutil.copyfile('in/sca/int.h', 'out/mathc/sca/int.h')
+    shutil.copyfile('in/sca/longlong.h', 'out/mathc/sca/longlong.h')
+    shutil.copyfile('in/sca/uchar.h', 'out/mathc/sca/uchar.h')
+    shutil.copyfile('in/sca/ushort.h', 'out/mathc/sca/ushort.h')
+    shutil.copyfile('in/sca/uint.h', 'out/mathc/sca/uint.h')
+    shutil.copyfile('in/sca/ulonglong.h', 'out/mathc/sca/ulonglong.h')
 
     # minimum should be [2, 3, 4]
     X_list_vec = [2, 3, 4]
