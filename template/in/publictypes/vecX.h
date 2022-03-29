@@ -1,6 +1,10 @@
 #ifndef MATHC_PUBLICTYPES_VEC__X___H
 #define MATHC_PUBLICTYPES_VEC__X___H
 
+#ifndef __cplusplus
+#define static_assert _Static_assert
+#endif
+
 /*/ 0 /*/   // template file!
 /*/ 0 /*/   //
 /*/ 0 /*/   // __X__ will be replaced by X=[2, 3, 4, ...]
@@ -15,6 +19,8 @@
 /*/ 0 /*/ #define __X__ 4
 
 /*/ bool /*/#include <stdbool.h>
+
+
 
 /*/ X==2 /*/typedef union {
 /*/ X==2 /*/    float v[2];

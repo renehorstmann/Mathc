@@ -1,6 +1,10 @@
 #ifndef MATHC_PUBLICTYPES_MAT__X___H
 #define MATHC_PUBLICTYPES_MAT__X___H
 
+#ifndef __cplusplus
+#define static_assert _Static_assert
+#endif
+
 /*/ 0 /*/   // template file!
 /*/ 0 /*/   //
 /*/ 0 /*/   // __X__ will be replaced by X=[2, 3, 4, ...]
