@@ -3,10 +3,10 @@
 #include <time.h>
 
 // see performance_test_lib.c
-float performance_manual(const float *vectors_a, const float *vectors_b, int n);
-float performance_mathc1(const float *vectors_a, const float *vectors_b, int n);
-float performance_mathc2(const float *vectors_a, const float *vectors_b, int n);
-float performance_mathc3(const float *vectors_a, const float *vectors_b, int n);
+float performance_manual(const float *restrict vectors_a, const float *restrict vectors_b, int n);
+float performance_mathc1(const float *restrict vectors_a, const float *restrict vectors_b, int n);
+float performance_mathc2(const float *restrict vectors_a, const float *restrict vectors_b, int n);
+float performance_mathc3(const float *restrict vectors_a, const float *restrict vectors_b, int n);
 
 
 static double monotonic() {

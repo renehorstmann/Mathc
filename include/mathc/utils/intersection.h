@@ -1,14 +1,16 @@
 #ifndef MATHC_UTILS_INTERSECTION_H
 #define MATHC_UTILS_INTERSECTION_H
 
+
 #include <stdbool.h>
 #include "../sca/float.h"
 #include "../vec/vec2.h"
 #include "../vec/vec3.h"
+#include "../vec/vec4.h"
 #include "../mat/mat3.h"
 
 #ifndef INTERSECTION_EPSILON
-#define INTERSECTION_EPSILON 0.01f
+#define INTERSECTION_EPSILON (float) 0.01
 #endif
 
 /** returns false if planes are parallel */
@@ -17,7 +19,7 @@ static bool intersection_plane_plane(vec3 *out_pos, vec3 *out_dir,
     *out_pos = *out_dir = vec3_set(NAN);
 
     // parallel check
-    if (vec3_dot(plane_hessian_a.xyz, plane_hessian_b.xyz) > (1.0f - INTERSECTION_EPSILON))
+    if (vec3_dot(plane_hessian_a.xyz, plane_hessian_b.xyz) > ((float) 1 - INTERSECTION_EPSILON))
         return false;
 
     // line dir is orthogonal to both plane orthogonals (nx ny nz)
@@ -45,13 +47,6 @@ static bool intersection_plane_plane(vec3 *out_pos, vec3 *out_dir,
     return true;
 }
 
-/** returns false if planes are parallel */
-static int intersection_plane_plane_v(float *out_pos, float *out_dir,
-                                      const float *plane_hessian_a, const float *plane_hessian_b) {
-    return intersection_plane_plane((vec3 *) out_pos, (vec3 *) out_dir,
-                                    Vec4(plane_hessian_a), Vec4(plane_hessian_b));
-}
-
 
 /** returns false if plane and line are parallel */
 static bool intersection_plane_line(vec3 *out_pos, vec4 plane_hessian,
@@ -75,12 +70,6 @@ static bool intersection_plane_line(vec3 *out_pos, vec4 plane_hessian,
     return true;
 }
 
-/** returns false if plane and line are parallel */
-static bool intersection_plane_line_v(float *out_pos, const float *plane_hessian,
-                                      const float *line_pos, const float *line_dir) {
-    return intersection_plane_line((vec3 *) out_pos, Vec4(plane_hessian), Vec3(line_pos), Vec3(line_dir));
-}
-
 
 /** returns t (line_pos + line_dir * t), or NAN if not intersecting */
 static float intersection_triangle_line(vec3 v0, vec3 v1, vec3 v2,
@@ -95,11 +84,11 @@ static float intersection_triangle_line(vec3 v0, vec3 v1, vec3 v2,
         if (det < INTERSECTION_EPSILON)
             return NAN;
     } else {
-        if (fabsf(det) < INTERSECTION_EPSILON)
+        if (sca_abs(det) < INTERSECTION_EPSILON)
             return NAN;
     }
 
-    float inv_det = 1.0f / det;
+    float inv_det = (float) 1 / det;
 
     vec3 tvec = vec3_sub_vec(line_pos, v0);
     float u = vec3_dot(tvec, pvec) * inv_det;
@@ -112,13 +101,6 @@ static float intersection_triangle_line(vec3 v0, vec3 v1, vec3 v2,
         return NAN;
 
     return vec3_dot(v0v2, qvec) * inv_det;
-}
-
-/** returns t (line_pos + line_dir * t), or NAN if not intersecting */
-static float intersection_triangle_line_v(const float *v0, const float *v1, const float *v2,
-                                          const float *line_pos, const float *line_dir,
-                                          bool culling) {
-    return intersection_triangle_line(Vec3(v0), Vec3(v1), Vec3(v2), Vec3(line_pos), Vec3(line_dir), culling);
 }
 
 
@@ -148,24 +130,11 @@ static bool intersection_line_line(float *out_tau_a, float *out_tau_b,
     return true;
 }
 
-/** returns false if lines are parallel, searches for the nearest distance points */
-static bool intersection_line_line_v(float *out_tau_a, float *out_tau_b,
-                                     const float *line_a_pos, const float *line_a_dir,
-                                     const float *line_b_pos, const float *line_b_dir) {
-    return intersection_line_line(out_tau_a, out_tau_b, Vec3(line_a_pos), Vec3(line_a_dir),
-                                  Vec3(line_b_pos), Vec3(line_b_dir));
-}
-
 
 /** returns the projection point on the line by tau. searches for the nearest distance points */
 static float intersection_line_point(vec3 line_pos, vec3 line_dir, vec3 point) {
     return vec3_dot(vec3_sub_vec(point, line_pos), line_dir)
            / vec3_dot(line_dir, line_dir);
-}
-
-/** returns the projection point on the line by tau. searches for the nearest distance points */
-static float intersection_line_point_v(const float *line_pos, const float *line_dir, const float *point) {
-    return intersection_line_point(Vec3(line_pos), Vec3(line_dir), Vec3(point));
 }
 
 
@@ -176,8 +145,8 @@ static float intersection_line_point_v(const float *line_pos, const float *line_
 
 /** returns false if lines are parallel */
 static bool intersection2_line_line(float *out_tau_a, float *out_tau_b,
-                                   vec2 line_a_pos, vec2 line_a_dir,
-                                   vec2 line_b_pos, vec2 line_b_dir) {
+                                    vec2 line_a_pos, vec2 line_a_dir,
+                                    vec2 line_b_pos, vec2 line_b_dir) {
     *out_tau_a = *out_tau_b = NAN;
 
     // stupid clone of the vec2 version above:
@@ -200,23 +169,10 @@ static bool intersection2_line_line(float *out_tau_a, float *out_tau_b,
     return true;
 }
 
-/** returns false if lines are parallel */
-static bool intersection2_line_line_v(float *out_tau_a, float *out_tau_b,
-                                     const float *line_a_pos, const float *line_a_dir,
-                                     const float *line_b_pos, const float *line_b_dir) {
-    return intersection2_line_line(out_tau_a, out_tau_b, Vec2(line_a_pos), Vec2(line_a_dir),
-                                  Vec2(line_b_pos), Vec2(line_b_dir));
-}
-
 /** returns the projection point on the line by tau. searches for the nearest distance points */
 static float intersection2_line_point(vec2 line_pos, vec2 line_dir, vec2 point) {
     return vec2_dot(vec2_sub_vec(point, line_pos), line_dir)
            / vec2_dot(line_dir, line_dir);
-}
-
-/** returns the projection point on the line by tau. searches for the nearest distance points */
-static float intersection2_line_point_v(const float *line_pos, const float *line_dir, const float *point) {
-    return intersection2_line_point(Vec2(line_pos), Vec2(line_dir), Vec2(point));
 }
 
 #endif //MATHC_UTILS_INTERSECTION_H

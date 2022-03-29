@@ -1,8 +1,6 @@
 #ifndef MAHTC_UTILS_RANDOM
 #define MAHTC_UTILS_RANDOM
 
-#include <float.h>
-#include <math.h>
 
 #ifndef MATHC_RANDOM_FUNCTION
 
@@ -15,11 +13,14 @@
 #define MATHC_RANDOM_FUNCTION_MAX RAND_MAX
 #endif
 
-#include "../types/float.h"
+#include "../types/vec2.h"
+#include "../types/vec3.h"
+#include "../types/vec4.h"
+#include "../sca/float.h"
 
 /** dst = rand() [0:1] */
 static float sca_random() {
-    return 1.0 * MATHC_RANDOM_FUNCTION() / MATHC_RANDOM_FUNCTION_MAX;
+    return (float) 1 * MATHC_RANDOM_FUNCTION() / (float) MATHC_RANDOM_FUNCTION_MAX;
 }
 
 /** dst = rand() [a:b] */
@@ -37,11 +38,11 @@ static float sca_random_normal(float mean, float sigma) {
     float u1, u2;
     do {
         u1 = sca_random();
-    } while (u1 <= FLT_EPSILON);
+    } while (u1 <= (float) 0.00000001);
     u2 = sca_random();
 
-    float mag = sigma * sqrt(-2.0 * log(u1));
-    return mean + mag * cos(2 * M_PI * u2);
+    float mag = sigma * sca_sqrt((float) -2 * log(u1));
+    return mean + mag * sca_cos(2 * M_PI * u2);
 }
 
 //
@@ -122,11 +123,6 @@ static vec2 vec2_random_range_vec(vec2 a, vec2 b) {
     return res;
 }
 
-/** dst = rand() [a:b] */
-static vec2 vec2_random_range_vec_v(const float *a, const float *b) {
-    return vec2_random_range_vec(Vec2(a), Vec2(b));
-}
-
 /** dst = mean +- amplitude * rand() */
 static vec2 vec2_random_noise(float mean, float amplitude) {
     vec2 res;
@@ -141,11 +137,6 @@ static vec2 vec2_random_noise_vec(vec2 mean, vec2 amplitude) {
     return res;
 }
 
-/** dst = mean +- amplitude * rand() */
-static vec2 vec2_random_noise_vec_v(const float *mean, const float *amplitude) {
-    return vec2_random_noise_vec(Vec2(mean), Vec2(amplitude));
-}
-
 /** dst = mean +- sigma * normalized_rand() */
 static vec2 vec2_random_normal(float mean, float sigma) {
     vec2 res;
@@ -158,11 +149,6 @@ static vec2 vec2_random_normal_vec(vec2 mean, vec2 sigma) {
     vec2 res;
     vecN_random_normal_vec(res.v, mean.v, sigma.v, 2);
     return res;
-}
-
-/** dst = mean +- sigma * normalized_rand() */
-static vec2 vec2_random_normal_vec_v(const float *mean, const float *sigma) {
-    return vec2_random_normal_vec(Vec2(mean), Vec2(sigma));
 }
 
 //
@@ -190,11 +176,6 @@ static vec3 vec3_random_range_vec(vec3 a, vec3 b) {
     return res;
 }
 
-/** dst = rand() [a:b] */
-static vec3 vec3_random_range_vec_v(const float *a, const float *b) {
-    return vec3_random_range_vec(Vec3(a), Vec3(b));
-}
-
 /** dst = mean +- amplitude * rand() */
 static vec3 vec3_random_noise(float mean, float amplitude) {
     vec3 res;
@@ -209,11 +190,6 @@ static vec3 vec3_random_noise_vec(vec3 mean, vec3 amplitude) {
     return res;
 }
 
-/** dst = mean +- amplitude * rand() */
-static vec3 vec3_random_noise_vec_v(const float *mean, const float *amplitude) {
-    return vec3_random_noise_vec(Vec3(mean), Vec3(amplitude));
-}
-
 /** dst = mean +- sigma * normalized_rand() */
 static vec3 vec3_random_normal(float mean, float sigma) {
     vec3 res;
@@ -226,11 +202,6 @@ static vec3 vec3_random_normal_vec(vec3 mean, vec3 sigma) {
     vec3 res;
     vecN_random_normal_vec(res.v, mean.v, sigma.v, 3);
     return res;
-}
-
-/** dst = mean +- sigma * normalized_rand() */
-static vec3 vec3_random_normal_vec_v(const float *mean, const float *sigma) {
-    return vec3_random_normal_vec(Vec3(mean), Vec3(sigma));
 }
 
 
@@ -259,11 +230,6 @@ static vec4 vec4_random_range_vec(vec4 a, vec4 b) {
     return res;
 }
 
-/** dst = rand() [a:b] */
-static vec4 vec4_random_range_vec_v(const float *a, const float *b) {
-    return vec4_random_range_vec(Vec4(a), Vec4(b));
-}
-
 /** dst = mean +- amplitude * rand() */
 static vec4 vec4_random_noise(float mean, float amplitude) {
     vec4 res;
@@ -278,11 +244,6 @@ static vec4 vec4_random_noise_vec(vec4 mean, vec4 amplitude) {
     return res;
 }
 
-/** dst = mean +- amplitude * rand() */
-static vec4 vec4_random_noise_vec_v(const float *mean, const float *amplitude) {
-    return vec4_random_noise_vec(Vec4(mean), Vec4(amplitude));
-}
-
 /** dst = mean +- sigma * normalized_rand() */
 static vec4 vec4_random_normal(float mean, float sigma) {
     vec4 res;
@@ -295,11 +256,6 @@ static vec4 vec4_random_normal_vec(vec4 mean, vec4 sigma) {
     vec4 res;
     vecN_random_normal_vec(res.v, mean.v, sigma.v, 4);
     return res;
-}
-
-/** dst = mean +- sigma * normalized_rand() */
-static vec4 vec4_random_normal_vec_v(const float *mean, const float *sigma) {
-    return vec4_random_normal_vec(Vec4(mean), Vec4(sigma));
 }
 
 #endif // MAHTC_UTILS_RANDOM

@@ -1,6 +1,7 @@
 #ifndef MATHC_UTILS_COLOR_H
 #define MATHC_UTILS_COLOR_H
 
+
 #include "../vec/vec3.h"
 
 // rgb[0:1] hsv[0:360, 0:1, 0:1]
@@ -16,12 +17,12 @@ static vec3 vec3_rgb2hsv(vec3 rgb) {
 
     hsv.v2 = max;
     delta = max - min;
-    if (delta < 0.00001f) {
+    if (delta < (float) 0.00001) {
         hsv.v0 = 0; // undefined
         hsv.v1 = 0;
         return hsv;
     }
-    if (max > 0.0) {
+    if (max > 0) {
         // NOTE: if Max is == 0, this divide would cause a crash
         hsv.v1 = (delta / max);
     } else {
@@ -36,16 +37,16 @@ static vec3 vec3_rgb2hsv(vec3 rgb) {
         hsv.v0 = (rgb.g - rgb.b) / delta;
         // between yellow & magenta
     else if (rgb.g >= max)
-        hsv.v0 = 2.0 + (rgb.b - rgb.r) / delta;
+        hsv.v0 = (float) 2 + (rgb.b - rgb.r) / delta;
         // between cyan & yellow
     else
-        hsv.v0 = 4.0 + (rgb.r - rgb.g) / delta;
+        hsv.v0 = (float) 4 + (rgb.r - rgb.g) / delta;
     // between magenta & cyan
 
-    hsv.v0 *= 60.0; // degrees
+    hsv.v0 *= 60; // degrees
 
     if (hsv.v0 < 0)
-        hsv.v0 += 360.0;
+        hsv.v0 += 60;
     return hsv;
 }
 
@@ -63,13 +64,13 @@ static vec3 vec3_hsv2rgb(vec3 hsv) {
         return rgb;
     }
     hh = hsv.v0;
-    if (hh >= 360.0) hh = 0.0;
-    hh /= 60.0;
+    if (hh >= 360) hh = 0;
+    hh /= 60;
     i = (long) hh;
     ff = hh - i;
-    p = hsv.v2 * (1.0 - hsv.v1);
-    q = hsv.v2 * (1.0 - (hsv.v1 * ff));
-    t = hsv.v2 * (1.0 - (hsv.v1 * (1.0 - ff)));
+    p = hsv.v2 * ((float) 1 - hsv.v1);
+    q = hsv.v2 * ((float) 1 - (hsv.v1 * ff));
+    t = hsv.v2 * ((float) 1 - (hsv.v1 * ((float) 1 - ff)));
 
     switch (i) {
         case 0:

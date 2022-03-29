@@ -39,8 +39,9 @@ typedef struct {
 
 /** Test collision between spheres */
 bool sphere_collision(Sphere_s a, Sphere_s b) {
-    // _v functions take const float * and treats them as vec3
-    vec3 dist = vec3_sub_vec_v(&b.x, &a.x);
+    // MATHC_AS_* casts a pointer into a mathc type
+    // these macros do the same thing as the second parameter:
+    vec3 dist = vec3_sub_vec(MATHC_AS_VEC3(&b.x), *((vec3*)(&a.x)));
 
     // norm(dist) < a.r+b.r
     // powf(,2) is much faster than sqrt

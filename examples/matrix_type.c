@@ -33,7 +33,7 @@ int main() {
     rotation_matrix.col[1].y = -1;      // y column, value y
 
     mat3_println(rotation_matrix);      // nice to view
-    mat3_println_repr(rotation_matrix); // easy to copy into c
+    mat3_println_line(rotation_matrix); // in a single line
 
     // eye by col vectors
     vec3 x = vec3_unit_x();
@@ -47,5 +47,5 @@ int main() {
 
     // casts are like vector casts:
     float rot_mat_raw[9];
-    Mat3(rot_mat_raw) = rotation_matrix;
+    MATHC_AS_MAT3(rot_mat_raw) = rotation_matrix;
 }

@@ -7,7 +7,8 @@ The libraries are written in C11 (tested on GCC 9.3.0).
 C++11 should also work (also tested with GCC 9.3.0).
 
 ## Content
-- types: vector and matrix types (vec3, mat4, ...)
+- publictypes: definitions of the vector and matrix types (mathc_vec3, mathc_mat4, ...)
+- types: typedefs to publictypes (vec3, mat4, ...)
 - io: debug print for the types
 - vec: vector math
 - mat: matrix math
@@ -21,8 +22,6 @@ There are multiple types for different sizes and value types: (sizes (*): 2 - 4)
 - mat* for float square matrices
 - dvec*, dmat* for double vectors / square matrices
 - ivec*, imat* for int vectors / square matrices
-- uvec*, umat* for unsigned vectors / square matrices
-- cvec*, cmat* for char vectors / square matrices
 - ucvec*, ucmat* for unsigned char vectors / square matrices
 - bvec* for bool vectors
 
@@ -47,18 +46,10 @@ int main() {
     c.v1 = a.v1 + b.v1;
     c.v2 = a.v2 + b.v2;
 
-    // or by color:
-    c.r = a.r + b.r;
-    c.g = a.g + b.g;
-    c.b = a.b + b.b;
-
     // or by raw float *:
     c.v[0] = a.v[0] + b.v[0];
     c.v[1] = a.v[1] + b.v[1];
     c.v[2] = a.v[2] + b.v[2];
-
-    // or by function
-    c = vec3_add_vec(a, b);
 
     // copies c into copy1
     vec3 copy1 = c;
@@ -71,15 +62,15 @@ int main() {
 
 
     vec3 rgb = {{0, 1, 0.5}};
-    
+
     vec4 rgba;
-    
+
     // .xyz returns a vec3
     rgba.xyz = rgb;         // or .rgb
-    
+
     // .w is the 4. component (xyzw, rgba)
     rgba.w = 1;             // or .a
-    
+
     // copies gb (vec2)
     vec2 gb = rgba.gb;      // or .yz
     vec2_println(gb);
@@ -95,23 +86,31 @@ Functions, that operates on the types, normally have the type as prefix: vec3_*
 // use the types from raw pointers
 void foo1(float *result3, const float *vector3) {
     // tmp = vector3 * 1000
-    // Vec3() casts a raw pointer into a vec3
-    vec3 tmp = vec3_scale(Vec3(vector3), 1000);
+    // MATHC_AS_VEC3() casts a raw pointer into a vec3
+    vec3 tmp = vec3_scale(MATHC_AS_VEC3(vector3), 1000);
 
     // tmp = tmp + 50
     tmp = vec3_add(tmp, 50);
 
     // cast result3 into a vec3 and copy tmp into it
-    Vec3(result3) = tmp;
+    MATHC_AS_VEC3(result3) = tmp;
 }
 
 // like foo1, but without tmp
 void foo2(float *result3, const float *vector3) {
     // result3 = (vector3 * 1000) + 50
-    // the *_v functions take raw float pointers, instead of vec3
-    //    can be used instead of vec3_scale(Vec3(vector3), 1000)
-    Vec3(result3) = vec3_add(
-            vec3_scale_v(vector3, 1000),
+    MATHC_AS_VEC3(result3) = vec3_add(
+            vec3_scale(MATHC_AS_VEC3(vector3), 1000),
+            50);
+}
+
+// like foo2, but with a different cast style
+void foo3(float *result3, const float *vector3) {
+    vec3 *res = (vec3*) result3;
+    const vec3 *v = (const vec3*) vector3;
+    // result3 = (vector3 * 1000) + 50
+    *res = vec3_add(
+            vec3_scale(*v, 1000),
             50);
 }
 
@@ -124,7 +123,7 @@ int main() {
     float vec_raw[3] = {1, 2, 3};
     float res_raw[3];
     foo1(res_raw, vec_raw);
-    vec3_println(Vec3(res_raw));
+    vec3_println(MATHC_AS_VEC3(res_raw));
 
     vec3 vec = {{1, 2, 3}};
     vec3 res;
@@ -140,6 +139,7 @@ int main() {
 The matrices are stored in column major order.
 ```c
 #include "mathc/mathc.h"
+
 int main() {
 
     // 180° via Z matrix (X points to -X, Y to -Y)
@@ -173,8 +173,8 @@ int main() {
     rotation_matrix.col[1].y = -1;      // y column, value y
 
     mat3_println(rotation_matrix);      // nice to view
-    mat3_println_repr(rotation_matrix); // easy to copy into c
-    
+    mat3_println_line(rotation_matrix); // in a single line
+
     // eye by col vectors
     vec3 x = vec3_unit_x();
     vec3 y = vec3_unit_y();
@@ -184,10 +184,10 @@ int main() {
     rotation_matrix.col[2] = z;
 
     mat3_println(rotation_matrix);
-    
+
     // casts are like vector casts:
     float rot_mat_raw[9];
-    Mat3(rot_mat_raw) = rotation_matrix;
+    MATHC_AS_MAT3(rot_mat_raw) = rotation_matrix;
 }
 ```
 
@@ -196,7 +196,7 @@ int main() {
 Vectors and matrices are defined as unions.
 With this convention (instead of passing pointers), 
 vectors and matrices can be copied with the ```operator=``` in C.
-In addition to this, the compiler can generate errors,
+In addition to that the compiler generates errors,
 if a program wants to pass a vec3 where a vec4 is needed.
 The copying seems like an overhead, but the compiler can optimize this out.
 Not only that, he can do better because he knows more about the data.
@@ -204,6 +204,7 @@ Not only that, he can do better because he knows more about the data.
 
 The vec2 is defined as:
 ```c
+// publictypes:
 typedef union {
     float v[2];
     struct {
@@ -215,8 +216,10 @@ typedef union {
     struct {
         float r, g;
     };
-} vec2;
-static_assert(sizeof(vec2) == sizeof(float) * 2, "[Mathc] wrong expected size");
+} mathc_vec2;
+static_assert(sizeof(mathc_vec2) == sizeof(float) * 2, "[Mathc] wrong expected size");
+// types:
+typedef mathc_vec2 vec2;
 ```
 
 
@@ -234,33 +237,37 @@ printf("a.x = %f = %f = %f = %f\n",
 
 The type vec3 can do a little bit more:
 ```c
+// publictypes:
 typedef union {
     float v[3];
     struct {
         float v0, v1, v2;
     };
-    vec2 xy;
+    mathc_vec2 xy;
     struct {
         float x;
         union {
             struct {
                 float y, z;
             };
-            vec2 yz;
+            mathc_vec2 yz;
         };
     };
-    vec2 rg;
+    mathc_vec2 rg;
     struct {
         float r;
         union {
             struct {
                 float g, b;
             };
-            vec2 gb;
+            mathc_vec2 gb;
         };
     };
-} vec3;
-static_assert(sizeof(vec3) == sizeof(float) * 3, "[Mathc] wrong expected size");
+} mathc_vec3;
+static_assert(sizeof(mathc_vec3) == sizeof(float) * 3, "[Mathc] wrong expected size");
+
+// types:
+typedef mathc_vec3 vec3;
 ```
 
 
@@ -273,7 +280,7 @@ assert(b.v0 == 2 && b.v1 == 3);
 
 
 vec4 has subdata for both, vec2 and vec3 (.xy, .xyz, .yza, .za, ...).
-There are also variants for double, int, unsigned, char, uchar and bool with d, i, u, c, uc and b prefix.
+There are also variants for double, int, uchar and bool with d, i, uc and b prefix.
 
 
 ## Basic functions
@@ -329,6 +336,7 @@ There are a lot of functions to use with the types:
 - vec*_smoothstep_vec
 - vec*_sum
 - vec*_dot
+- vec*_cross
 - vec*_norm
 - vec*_norm_p
 - vec*_norm_1
@@ -345,7 +353,6 @@ There are a lot of functions to use with the types:
 - vec*_less_than_equal_vec
 - vec*_...
 - vec*_isnan
-- vec*_cross
 
 
 Special bool vector functions:
@@ -452,7 +459,7 @@ Import only float typeless vector functions:
 Import only float vector4 functions:
 ```#include "mathc/vec/vec4.h"```
 
-Same for double, int, unsigned, char, uchar and bool.
+Same for double, int, uchar and bool.
 
 Only importing a subset (like mathc/float.h), speeds up the compilation process
 
@@ -499,8 +506,9 @@ typedef struct {
 
 /** Test collision between spheres */
 bool sphere_collision(Sphere_s a, Sphere_s b) {
-    // _v functions take const float * and treats them as vec3
-    vec3 dist = vec3_sub_vec_v(&b.x, &a.x);
+    // MATHC_AS_* casts a pointer into a mathc type
+    // these macros do the same thing as the second parameter:
+    vec3 dist = vec3_sub_vec(MATHC_AS_VEC3(&b.x), *((vec3*)(&a.x)));
 
     // norm(dist) < a.r+b.r
     // powf(,2) is much faster than sqrt
@@ -593,8 +601,19 @@ int main() {
 
     printf("in_limits: %d\n", axles_in_limits((vec3) {{0, M_PI_2, M_PI_4}}));
 }
-
 ```
+
+## Templates
+The Mathc library is template generated.
+The template files are written for the float types (vec*).
+Each other size and type is generated by that files via a regex search and replace script: [template.py](template/template.py).
+
+You can generate more different data types like signed char, short, unsigned short, unsigned int, long long, ...
+Or different vecX types like vec6, vec12, ...
+See the main "function" of the script.
+
+Because Mathc uses prefixes for all stuff (e. g: sca_abs and isca_abs instead of fasbs and abs) 
+its easy to generate different C files for different primitive formats (float -> double) with the regex replace system
 
 ## Performance
 It seems that there will be an overhead due to the casts and copying. 
