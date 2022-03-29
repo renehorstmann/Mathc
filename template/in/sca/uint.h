@@ -11,6 +11,9 @@
 /** minimum possible value */
 #define UISCA_MIN 0
 
+/** for printing in IO */
+#define UISCA_PRINT_FORMAT_SPECIFIER "u"
+
 /** dst = pow(x, y) */
 static unsigned int uisca_pow(unsigned int x, unsigned int y) {
     return (unsigned int) pow(x, y);

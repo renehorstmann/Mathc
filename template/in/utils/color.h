@@ -1,5 +1,5 @@
-#ifndef MATHC_UTILS_COLOR_H
-#define MATHC_UTILS_COLOR_H
+#ifndef MATHC_UTILS___PREFIX__COLOR_H
+#define MATHC_UTILS___PREFIX__COLOR_H
 
 /*/ 0 /*/   // template file!
 /*/ 0 /*/   //
@@ -10,6 +10,7 @@
 /*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
 /*/ 0 /*/   // if cond is false:
 /*/ 0 /*/   //      the whole line will be removed
+/*/ 0 /*/
 /*/ 0 /*/   // the following setup is just here to pleasure an ide
 /*/ 0 /*/ #include "../../out/vec/vec3.h"
 
@@ -120,4 +121,4 @@ static vec3 vec3_hsv2rgb(vec3 hsv) {
     return rgb;
 }
 
-#endif //MATHC_UTILS_COLOR_H
+#endif //MATHC_UTILS___PREFIX__COLOR_H

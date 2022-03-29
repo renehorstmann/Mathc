@@ -1,5 +1,5 @@
-#ifndef MATHC_UTILS_ROTATION_H
-#define MATHC_UTILS_ROTATION_H
+#ifndef MATHC_UTILS___PREFIX__ROTATION_H
+#define MATHC_UTILS___PREFIX__ROTATION_H
 
 /*/ 0 /*/   // template file!
 /*/ 0 /*/   //
@@ -10,6 +10,7 @@
 /*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
 /*/ 0 /*/   // if cond is false:
 /*/ 0 /*/   //      the whole line will be removed
+/*/ 0 /*/
 /*/ 0 /*/   // the following setup is just here to pleasure an ide
 /*/ 0 /*/ #include "../../out/vec/vec3.h"
 /*/ 0 /*/ #include "../../out/mat/mat3.h"
@@ -54,7 +55,7 @@ static mat3 mat3_rotation_from_dir_z(vec3 dir_z) {
 
     // align rotation x to unit x (if unit x ~= dir_z, align to unit y)
     vec3 align_x = vec3_unit_x();
-    if (fabsf(vec3_dot(z, align_x)) > (float) 0.9)
+    if (sca_abs(vec3_dot(z, align_x)) > (float) 0.9)
         align_x = vec3_unit_y();
 
     vec3 y = vec3_normalize(vec3_cross(z, align_x));
@@ -78,4 +79,4 @@ static mat4 mat4_pose_from_ray(vec3 ray_start, vec3 ray_dir) {
 }
 
 
-#endif //MATHC_UTILS_ROTATION_H
+#endif //MATHC_UTILS___PREFIX__ROTATION_H

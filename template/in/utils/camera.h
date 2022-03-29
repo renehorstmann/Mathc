@@ -1,5 +1,5 @@
-#ifndef MATHC_UTILS_CAMERA_H
-#define MATHC_UTILS_CAMERA_H
+#ifndef MATHC_UTILS___PREFIX__CAMERA_H
+#define MATHC_UTILS___PREFIX__CAMERA_H
 
 /*/ 0 /*/   // template file!
 /*/ 0 /*/   //
@@ -10,6 +10,7 @@
 /*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
 /*/ 0 /*/   // if cond is false:
 /*/ 0 /*/   //      the whole line will be removed
+/*/ 0 /*/
 /*/ 0 /*/   // the following setup is just here to pleasure an ide
 /*/ 0 /*/ #include "../../out/vec/vec3.h"
 /*/ 0 /*/ #include "../../out/mat/mat4.h"
@@ -112,4 +113,4 @@ static mat4 mat4_camera_lookat(vec3 eye, vec3 center, vec3 up) {
     return res;
 }
 
-#endif //MATHC_UTILS_CAMERA_H
+#endif //MATHC_UTILS___PREFIX__CAMERA_H

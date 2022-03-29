@@ -11,6 +11,9 @@
 /** minimum possible value */
 #define ISCA_MIN (-INT_MIN)
 
+/** for printing in IO */
+#define ISCA_PRINT_FORMAT_SPECIFIER "i"
+
 /** dst = pow(x, y) */
 static int isca_pow(int x, int y) {
     return (int) pow(x, y);

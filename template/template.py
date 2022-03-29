@@ -93,83 +93,93 @@ def create_replace_conditions(template: dict, X=0):
     return replace
 
 
-def create_replace_list(template: dict, X=0):
+def create_replace_list(template: dict, X=0, prefix=''):
     """creates the whole replace list for the Mathc template files, based on the float data type"""
     replace = create_replace_conditions(template, X)
 
     # start with X, to first replace vec__X__* with vec2, 3, 4
     replace.append(('__X__', '%i' % X))
 
-    # primitive file (before primitive below)
-    replace.append((regex_name('float.h'), template['primitive_file'] + '.h'))
+    prefix = template['prefix'].lower()
+    PREFIX = template['prefix'].upper()
 
-    # primitive
-    replace.append((regex_name('float'), template['primitive']))
+    # prefix __prefix__ (quat -> dquat, RANDOM -> dRANDOM)
+    replace.append(('__prefix__', prefix))
+    replace.append(('__PREFIX__', PREFIX))
 
-    # primitive really_a_float (after primitive above)
+    # float file (before float below)
+    replace.append((regex_name('float.h'), template['float_file'] + '.h'))
+
+    # float
+    replace.append((regex_name('float'), template['float']))
+
+    # float really_a_float (after float above)
     replace.append((regex_name('really_a_float'), 'float'))
 
     # sca_ functions
-    replace.append((regex_name_prefix('sca_'), template['sca'] + '_'))
+    replace.append((regex_name_prefix('sca_'), prefix + 'sca_'))
 
     # vecN_ functions
-    replace.append((regex_name_prefix('vecN_'), template['vec'] + 'N_'))
+    replace.append((regex_name_prefix('vecN_'), prefix + 'vecN_'))
 
     # matN_ functions
-    replace.append((regex_name_prefix('matN_'), template['mat'] + 'N_'))
+    replace.append((regex_name_prefix('matN_'), prefix + 'matN_'))
 
     # vecn.h include
-    replace.append((regex_name_postfix('vecn.h'), template['vec'] + 'n.h'))
+    replace.append((regex_name_postfix('vecn.h'), prefix + 'vecn.h'))
 
     # matn.h include
-    replace.append((regex_name_postfix('matn.h'), template['mat'] + 'n.h'))
+    replace.append((regex_name_postfix('matn.h'), prefix + 'matn.h'))
 
     # _FLOAT_H header
-    replace.append((regex_name_postfix('_FLOAT_H'), '_' + template['primitive_header'] + '_H'))
+    replace.append((regex_name_postfix('_FLOAT_H'), '_' + template['FLOAT'] + '_H'))
 
     # _VECN_H header
-    replace.append((regex_name_postfix('_VECN_H'), '_' + template['vec_header'] + 'N_H'))
+    replace.append((regex_name_postfix('_VECN_H'), '_' + PREFIX + 'VECN_H'))
 
     # _MATN_H header
-    replace.append((regex_name_postfix('_MATN_H'), '_' + template['mat_header'] + 'N_H'))
+    replace.append((regex_name_postfix('_MATN_H'), '_' + PREFIX + 'MATN_H'))
 
     # MATHC_VEC* macro
-    replace.append((regex_name_prefix('MATHC_VEC'), 'MATHC_' + template['vec_header']))
+    replace.append((regex_name_prefix('MATHC_VEC'), 'MATHC_' + PREFIX + 'VEC'))
 
     # MATHC_MAT* macro
-    replace.append((regex_name_prefix('MATHC_MAT'), 'MATHC_' + template['mat_header']))
+    replace.append((regex_name_prefix('MATHC_MAT'), 'MATHC_' + PREFIX + 'MAT'))
+    
+    # SCA_* constands
+    replace.append((regex_name_prefix('SCA_'), PREFIX + 'SCA_'))
 
     for x in range(X_MIN, X_MAX + 1):
         # vecX_ functions
-        replace.append((regex_name_prefix('vec%i_' % x), template['vec'] + '%i_' % x))
+        replace.append((regex_name_prefix('vec%i_' % x), prefix + 'vec%i_' % x))
 
         # matX_ functions
-        replace.append((regex_name_prefix('mat%i_' % x), template['mat'] + '%i_' % x))
+        replace.append((regex_name_prefix('mat%i_' % x), prefix + 'mat%i_' % x))
 
         # vecX type
-        replace.append((regex_name('vec%i' % x), template['vec'] + '%i' % x))
+        replace.append((regex_name('vec%i' % x), prefix + 'vec%i' % x))
 
         # matX type
-        replace.append((regex_name('mat%i' % x), template['mat'] + '%i' % x))
+        replace.append((regex_name('mat%i' % x), prefix + 'mat%i' % x))
 
         # mathc_vecX type
-        replace.append((regex_name('mathc_vec%i' % x), 'mathc_' + template['vec'] + '%i' % x))
+        replace.append((regex_name('mathc_vec%i' % x), 'mathc_' + prefix + 'vec%i' % x))
 
         # mathc_matX type
-        replace.append((regex_name('mathc_mat%i' % x), 'mathc_' + template['mat'] + '%i' % x))
+        replace.append((regex_name('mathc_mat%i' % x), 'mathc_' + prefix + 'mat%i' % x))
 
         # _VECX_H header
-        replace.append((regex_name_postfix('_VEC%i_H' % x), '_' + template['vec_header'] + '%i_H' % x))
+        replace.append((regex_name_postfix('_VEC%i_H' % x), '_' + PREFIX + 'VEC%i_H' % x))
 
         # _MATX_H header
-        replace.append((regex_name_postfix('_MAT%i_H' % x), '_' + template['mat_header'] + '%i_H' % x))
+        replace.append((regex_name_postfix('_MAT%i_H' % x), '_' + PREFIX + 'MAT%i_H' % x))
 
     return replace
 
 
-def apply_template(src_file, dst_file, template: dict, X=0):
+def apply_template(src_file, dst_file, template: dict, X=0, prefix=''):
     """creates a replace list of the given template and applies it on the given src file to create the dst file"""
-    replace = create_replace_list(template, X)
+    replace = create_replace_list(template, X, prefix)
     apply_replace(src_file, dst_file, replace)
 
 
@@ -211,6 +221,24 @@ def create_types(template: dict, X_list_vec, X_list_mat):
                        template, x)
 
 
+def create_io(template: dict, X_list_vec, X_list_mat):
+    """creates the Mathc types files for the given template"""
+    replace_to_float_basic = create_replace_list(template)
+
+    apply_template('in/io/float.h',
+                   apply_regex_replace_list('out/io/float.h', replace_to_float_basic),
+                   template)
+
+    apply_template('in/io/vecn.h',
+                   apply_regex_replace_list('out/io/vecn.h', replace_to_float_basic),
+                   template)
+
+    for x in X_list_vec:
+        apply_template('in/io/vecX.h',
+                       apply_regex_replace_list('out/io/vec%i.h' % x, replace_to_float_basic),
+                       template, x)
+
+
 def create_vec(template: dict, X_list):
     """creates the Mathc vec files for the given template"""
     replace_to_float_basic = create_replace_list(template)
@@ -249,6 +277,7 @@ def create_all(template: dict, X_list_vec, X_list_mat):
     """creates the Mathc publictypes, types, vec and mat files for the given template"""
     create_publictypes(template, X_list_vec, X_list_mat)
     create_types(template, X_list_vec, X_list_mat)
+    create_io(template, X_list_vec, X_list_mat)
     create_vec(template, X_list_vec)
     create_mat(template, X_list_mat)
 
@@ -259,6 +288,7 @@ def create_bool(X_list):
 
     create_publictypes(BOOL, X_list, [])
     create_types(BOOL, X_list, [])
+    create_io(BOOL, X_list, [])
 
     apply_template('in/vec/float.h',
                    apply_regex_replace_list('out/vec/float.h', replace_to_float_basic),
@@ -266,33 +296,23 @@ def create_bool(X_list):
 
     apply_replace('in/vec/bvecn.h', 'out/vec/bvecn.h', [])
     for X in X_list:
-        replace = []
-        # start with X, to first replace vec__X__* with vec2, 3, 4
+        replace = create_replace_conditions({}, X)
         replace.append(('__X__', '%i' % X))
-        # conditional lines:
-        for x in range(X_MIN, X_MAX+1):
-            replace.append((regex_condition('0', False), ''))
-            replace.append((regex_condition('1', True), ''))
-            replace.append((regex_condition('X==%i' % x, X == x), ''))
-            replace.append((regex_condition('X!=%i' % x, X != x), ''))
-            replace.append((regex_condition('X>%i' % x, X > x), ''))
-            replace.append((regex_condition('X>=%i' % x, X >= x), ''))
-            replace.append((regex_condition('X<%i' % x, X < x), ''))
-            replace.append((regex_condition('X<=%i' % x, X <= x), ''))
 
         apply_replace('in/vec/bvecX.h', 'out/vec/bvec%i.h' % X, replace)
 
 
-def create_util(template: dict, prefix: str):
+def create_util(template: dict):
     """creates the Mathc util files for the given template, should be floating point type"""
     replace_to_float_basic = create_replace_list(template)
-    apply_template('in/utils/float.h', apply_regex_replace_list('out/utils/float.h', replace_to_float_basic), template)
-    apply_template('in/utils/camera.h', 'out/utils/%scamera.h' % prefix, template)
-    apply_template('in/utils/color.h', 'out/utils/%scolor.h' % prefix, template)
-    apply_template('in/utils/intersection.h', 'out/utils/%sintersection.h' % prefix, template)
-    apply_template('in/utils/quat.h', 'out/utils/%squat.h' % prefix, template)
-    apply_template('in/utils/random.h', 'out/utils/%srandom.h' % prefix, template)
-    apply_template('in/utils/rotation.h', 'out/utils/%srotation.h' % prefix, template)
+    apply_template('in/utils/float.h', apply_regex_replace_list('out/utils/float.h', replace_to_float_basic),
+                   template)
+    apply_template('in/utils/camera.h', 'out/utils/%scamera.h' % template['prefix'], template)
+    apply_template('in/utils/color.h', 'out/utils/%scolor.h' % template['prefix'], template)
+    apply_template('in/utils/intersection.h', 'out/utils/%sintersection.h' % template['prefix'], template)
+    apply_template('in/utils/quat.h', 'out/utils/%squat.h' % template['prefix'], template)
+    apply_template('in/utils/random.h', 'out/utils/%srandom.h' % template['prefix'], template)
+    apply_template('in/utils/rotation.h', 'out/utils/%srotation.h' % template['prefix'], template)
 
 
 
@@ -301,152 +321,107 @@ def create_util(template: dict, prefix: str):
 #
 
 FLOAT = {
-    'primitive': 'float',
-    'sca': 'sca',
-    'vec': 'vec',
-    'mat': 'mat',
-    'primitive_header': 'FLOAT',
-    'vec_header': 'VEC',
-    'mat_header': 'MAT',
-    'primitive_file': 'float'
+    'float': 'float',
+    'FLOAT': 'FLOAT',
+    'float_file': 'float',
+    'prefix': '',
+    'is_bool': False,       # if not available: False
+    'is_integer': False,    # if not available: False
+    'is_signed': True,      # if not available: True
 }
 
 BOOL = {
-    'primitive': 'bool',
-    'sca': '###',
-    'vec': 'bvec',
-    'mat': '###',
-    'primitive_header': 'BOOL',
-    'vec_header': 'BVEC',
-    'mat_header': '###',
-    'primitive_file': 'bool',
+    'float': 'bool',
+    'FLOAT': 'BOOL',
+    'float_file': 'bool',
+    'prefix': 'b',
     'is_bool': True,
 }
 
 DOUBLE = {
-    'primitive': 'double',
-    'sca': 'dsca',
-    'vec': 'dvec',
-    'mat': 'dmat',
-    'primitive_header': 'DOUBLE',
-    'vec_header': 'DVEC',
-    'mat_header': 'DMAT',
-    'primitive_file': 'double'
+    'float': 'double',
+    'FLOAT': 'DOUBLE',
+    'float_file': 'double',
+    'prefix': 'd',
 }
 
 LONGDOUBLE = {
-    'primitive': 'long double',
-    'sca': 'ldsca',
-    'vec': 'ldvec',
-    'mat': 'ldmat',
-    'primitive_header': 'LONGDOUBLE',
-    'vec_header': 'LDVEC',
-    'mat_header': 'LDMAT',
-    'primitive_file': 'longdouble'
+    'float': 'long double',
+    'FLOAT': 'LONGDOUBLE',
+    'float_file': 'longdouble',
+    'prefix': 'ld',
 }
 
 CHAR = {
-    'primitive': 'signed char',     # signed, because char alone may be unsigned
-    'sca': 'csca',
-    'vec': 'cvec',
-    'mat': 'cmat',
-    'primitive_header': 'CHAR',
-    'vec_header': 'CVEC',
-    'mat_header': 'CMAT',
-    'primitive_file': 'char',
+    'float': 'signed char',     # signed, because char alone may be unsigned
+    'FLOAT': 'CHAR',
+    'float_file': 'char',
+    'prefix': 'c',
     'is_integer': True,
-    'is_signed': True
+    'is_signed': True,
 }
 
 SHORT = {
-    'primitive': 'short',
-    'sca': 'ssca',
-    'vec': 'svec',
-    'mat': 'smat',
-    'primitive_header': 'SHORT',
-    'vec_header': 'SVEC',
-    'mat_header': 'SMAT',
-    'primitive_file': 'short',
+    'float': 'short',
+    'FLOAT': 'SHORT',
+    'float_file': 'short',
+    'prefix': 's',
     'is_integer': True,
-    'is_signed': True
+    'is_signed': True,
 }
 
 INT = {
-    'primitive': 'int',
-    'sca': 'isca',
-    'vec': 'ivec',
-    'mat': 'imat',
-    'primitive_header': 'INT',
-    'vec_header': 'IVEC',
-    'mat_header': 'IMAT',
-    'primitive_file': 'int',
+    'float': 'int',
+    'FLOAT': 'INT',
+    'float_file': 'int',
+    'prefix': 'i',
     'is_integer': True,
-    'is_signed': True
+    'is_signed': True,
 }
 
 LONGLONG = {
-    'primitive': 'long long',
-    'sca': 'llsca',
-    'vec': 'llvec',
-    'mat': 'llmat',
-    'primitive_header': 'LONGLONG',
-    'vec_header': 'LLVEC',
-    'mat_header': 'LLMAT',
-    'primitive_file': 'longlong',
+    'float': 'long long',
+    'FLOAT': 'LONGLONG',
+    'float_file': 'longlong',
+    'prefix': 'll',
     'is_integer': True,
-    'is_signed': True
+    'is_signed': True,
 }
 
 UCHAR = {
-    'primitive': 'unsigned char',
-    'sca': 'ucsca',
-    'vec': 'ucvec',
-    'mat': 'ucmat',
-    'primitive_header': 'UCHAR',
-    'vec_header': 'UCVEC',
-    'mat_header': 'UCMAT',
-    'primitive_file': 'uchar',
+    'float': 'unsigned char',
+    'FLOAT': 'UCHAR',
+    'float_file': 'uchar',
+    'prefix': 'uc',
     'is_integer': True,
-    'is_signed': False
+    'is_signed': False,
 }
 
 USHORT = {
-    'primitive': 'unsigned short',
-    'sca': 'ussca',
-    'vec': 'usvec',
-    'mat': 'usmat',
-    'primitive_header': 'USHORT',
-    'vec_header': 'USVEC',
-    'mat_header': 'USMAT',
-    'primitive_file': 'ushort',
+    'float': 'unsigned short',
+    'FLOAT': 'USHORT',
+    'float_file': 'ushort',
+    'prefix': 'us',
     'is_integer': True,
-    'is_signed': False
+    'is_signed': False,
 }
 
 UINT = {
-    'primitive': 'unsigned int',
-    'sca': 'uisca',
-    'vec': 'uivec',
-    'mat': 'uimat',
-    'primitive_header': 'UINT',
-    'vec_header': 'UIVEC',
-    'mat_header': 'UIMAT',
-    'primitive_file': 'uint',
+    'float': 'unsigned int',
+    'FLOAT': 'UINT',
+    'float_file': 'uint',
+    'prefix': 'ui',
     'is_integer': True,
-    'is_signed': False
+    'is_signed': False,
 }
 
 ULONGLONG = {
-    'primitive': 'unsigned long long',
-    'sca': 'ullsca',
-    'vec': 'ullvec',
-    'mat': 'ullmat',
-    'primitive_header': 'ULONGLONG',
-    'vec_header': 'ULLVEC',
-    'mat_header': 'ULLMAT',
-    'primitive_file': 'ulonglong',
+    'float': 'unsigned long long',
+    'FLOAT': 'ULONGLONG',
+    'float_file': 'ulonglong',
+    'prefix': 'ull',
     'is_integer': True,
-    'is_signed': False
+    'is_signed': False,
 }
 
 if __name__ == '__main__':
@@ -456,6 +431,7 @@ if __name__ == '__main__':
         shutil.rmtree('out')
 
     # copy static files
+    os.makedirs('out/io')
     os.makedirs('out/sca')
     shutil.copyfile('in/mathc.h', 'out/mathc.h')
     shutil.copyfile('in/bool.h', 'out/bool.h')
@@ -463,6 +439,8 @@ if __name__ == '__main__':
     shutil.copyfile('in/double.h', 'out/double.h')
     shutil.copyfile('in/int.h', 'out/int.h')
     shutil.copyfile('in/uchar.h', 'out/uchar.h')
+    shutil.copyfile('in/io/terminalcolor.h', 'out/io/terminalcolor.h')
+    shutil.copyfile('in/sca/bool.h', 'out/sca/bool.h')
     shutil.copyfile('in/sca/float.h', 'out/sca/float.h')
     shutil.copyfile('in/sca/double.h', 'out/sca/double.h')
     shutil.copyfile('in/sca/longdouble.h', 'out/sca/longdouble.h')
@@ -497,6 +475,6 @@ if __name__ == '__main__':
     # create_all(LONGLONG, X_list_vec, X_list_mat)
 
     # mathc/utils (floating point types)
-    create_util(FLOAT, '')
-    create_util(DOUBLE, 'd')
-    # create_util(LONGDOUBLE, 'ld')
+    create_util(FLOAT)
+    create_util(DOUBLE)
+    # create_util(LONGDOUBLE)

@@ -1,5 +1,5 @@
-#ifndef MAHTC_UTILS_RANDOM
-#define MAHTC_UTILS_RANDOM
+#ifndef MAHTC_UTILS___PREFIX__RANDOM
+#define MAHTC_UTILS___PREFIX__RANDOM
 
 /*/ 0 /*/   // template file!
 /*/ 0 /*/   //
@@ -10,6 +10,7 @@
 /*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
 /*/ 0 /*/   // if cond is false:
 /*/ 0 /*/   //      the whole line will be removed
+/*/ 0 /*/
 /*/ 0 /*/   // the following setup is just here to pleasure an ide
 /*/ 0 /*/ #include "../../out/types/vec2.h"
 /*/ 0 /*/ #include "../../out/types/vec3.h"
@@ -270,4 +271,4 @@ static vec4 vec4_random_normal_vec(vec4 mean, vec4 sigma) {
     return res;
 }
 
-#endif // MAHTC_UTILS_RANDOM
+#endif // MAHTC_UTILS___PREFIX__RANDOM

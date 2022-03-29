@@ -1,5 +1,5 @@
-#ifndef MATHC_UTILS_QUAT_H
-#define MATHC_UTILS_QUAT_H
+#ifndef MATHC_UTILS___PREFIX__QUAT_H
+#define MATHC_UTILS___PREFIX__QUAT_H
 
 /*/ 0 /*/   // template file!
 /*/ 0 /*/   //
@@ -10,6 +10,7 @@
 /*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
 /*/ 0 /*/   // if cond is false:
 /*/ 0 /*/   //      the whole line will be removed
+/*/ 0 /*/
 /*/ 0 /*/   // the following setup is just here to pleasure an ide
 /*/ 0 /*/ #include "../../out/vec/vec3.h"
 /*/ 0 /*/ #include "../../out/vec/vec4.h"
@@ -24,25 +25,25 @@
 
 
 /** vec4 = [0, 0, 0, 1] */
-static vec4 quat_eye() {
+static vec4 __prefix__quat_eye() {
     return (vec4) {{0, 0, 0, 1}};
 }
 
 
 /** dst = -x, -y, -z, w */
-static vec4 quat_conj(vec4 q) {
+static vec4 __prefix__quat_conj(vec4 q) {
     return (vec4) {{-q.x, -q.y, -q.z, q.w}};
 }
 
 /** dst = inv(vec4) */
-static vec4 quat_inv(vec4 q) {
-    vec4 conj = quat_conj(q);
+static vec4 __prefix__quat_inv(vec4 q) {
+    vec4 conj = __prefix__quat_conj(q);
     return vec4_scale(conj, 1.0f / vec4_dot(q, q));
 }
 
 
 /** dst = a @ b Hamilton Product */
-static vec4 quat_mul(vec4 q_a, vec4 q_b) {
+static vec4 __prefix__quat_mul(vec4 q_a, vec4 q_b) {
     // from cglm/vec4/glm_quat_mul
     vec4 res;
     res.v[0] = q_a.v[3] * q_b.v[0] + q_a.v[0] * q_b.v[3] + q_a.v[1] * q_b.v[2] - q_a.v[2] * q_b.v[1];
@@ -54,7 +55,7 @@ static vec4 quat_mul(vec4 q_a, vec4 q_b) {
 
 
 /** angle_axis = xyz + w=angle in rad */
-static vec4 quat_from_angle_axis(vec4 angle_axis) {
+static vec4 __prefix__quat_from_angle_axis(vec4 angle_axis) {
     // from cglm/vec4/glm_quatv
     float a = angle_axis.w * 0.5f;
     float c = sca_cos(a);
@@ -70,7 +71,7 @@ static vec4 quat_from_angle_axis(vec4 angle_axis) {
 
 
 /** angle_axis = xyz + w=angle in rad */
-static vec4 quat_to_angle_axis(vec4 q) {
+static vec4 __prefix__quat_to_angle_axis(vec4 q) {
     // from cglm/vec4/glm_quat_angle
     /*
      sin(theta / 2) = length(x*x + y*y + z*z)
@@ -87,7 +88,7 @@ static vec4 quat_to_angle_axis(vec4 q) {
 }
 
 /** returns the orientation of vec4 as 3*3 rotation matrix */
-static mat3 quat_to_rotation_matrix(vec4 q) {
+static mat3 __prefix__quat_to_rotation_matrix(vec4 q) {
     // from cglm/vec4/glm_quat_mat3
     float norm = vec4_norm(q);
     float s = norm > 0 ? (float) 2 / norm : 0;
@@ -127,7 +128,7 @@ static mat3 quat_to_rotation_matrix(vec4 q) {
 
 
 /** returns the orientation of a 3*3 rotation matrix as vec4 */
-static vec4 quat_from_rotation_matrix(mat3 mat) {
+static vec4 __prefix__quat_from_rotation_matrix(mat3 mat) {
     // from cglm/mat3/glm_mat3_quat
     vec4 res;
     float trace, r, rinv;
@@ -170,27 +171,27 @@ static vec4 quat_from_rotation_matrix(mat3 mat) {
 }
 
 /** returns the orientation of a 3*3 rotation matrix as vec4 */
-static void quat_pose_from_pose_matrix(vec3 *out_pose_pos, vec4 *out_pose_quat, mat4 mat_pose) {
+static void __prefix__quat_pose_from_pose_matrix(vec3 *out_pose_pos, vec4 *out_pose_quat, mat4 mat_pose) {
     *out_pose_pos = mat_pose.col[3].xyz;
-    *out_pose_quat = quat_from_rotation_matrix(mat4_get_upper_left3(mat_pose));
+    *out_pose_quat = __prefix__quat_from_rotation_matrix(mat4_get_upper_left3(mat_pose));
 }
 
 /** returns the orientation of a 3*3 rotation matrix as vec4 */
-static mat4 quat_pose_to_pose_matrix(vec3 pose_pos, vec4 pose_quat) {
+static mat4 __prefix__quat_pose_to_pose_matrix(vec3 pose_pos, vec4 pose_quat) {
     mat4 pose = mat4_eye();
     pose.col[3].xyz = pose_pos;
-    mat4_set_this_upper_left3(&pose, quat_to_rotation_matrix(pose_quat));
+    mat4_set_this_upper_left3(&pose, __prefix__quat_to_rotation_matrix(pose_quat));
     return pose;
 }
 
 
 /** returns the rotated position pos with the rotation of q */
-static vec3 quat_rotate_pos(vec4 q, vec3 pos) {
+static vec3 __prefix__quat_rotate_pos(vec4 q, vec3 pos) {
     vec4 p;
     p.xyz = pos;
     p.w = 0;
     // res = q @ pos(w=0) @ conj(q)
-    return quat_mul(q, quat_mul(p, quat_conj(q))).xyz;
+    return __prefix__quat_mul(q, __prefix__quat_mul(p, __prefix__quat_conj(q))).xyz;
 }
 
 
@@ -198,29 +199,29 @@ static vec3 quat_rotate_pos(vec4 q, vec3 pos) {
  * Inverts the given pose (position + orientation)
  * Same as inverting a mat4 pose
  */
-static void quat_pose_inv(vec3 *out_pose_inv_pos, vec4 *out_pose_inv_quat, vec3 pose_pos, vec4 pose_quat) {
-    *out_pose_inv_quat = quat_inv(pose_quat);
-    *out_pose_inv_pos = vec3_neg(quat_rotate_pos(*out_pose_inv_quat, pose_pos));
+static void __prefix__quat_pose_inv(vec3 *out_pose_inv_pos, vec4 *out_pose_inv_quat, vec3 pose_pos, vec4 pose_quat) {
+    *out_pose_inv_quat = __prefix__quat_inv(pose_quat);
+    *out_pose_inv_pos = vec3_neg(__prefix__quat_rotate_pos(*out_pose_inv_quat, pose_pos));
 }
 
 
 /** returns pos transform by pose a @ b */
-static vec3 quat_pose_transform_pos(vec3 a_pos, vec4 a_quat, vec3 pos_b) {
-    return vec3_add_vec(a_pos, quat_rotate_pos(a_quat, pos_b));
+static vec3 __prefix__quat_pose_transform_pos(vec3 a_pos, vec4 a_quat, vec3 pos_b) {
+    return vec3_add_vec(a_pos, __prefix__quat_rotate_pos(a_quat, pos_b));
 }
 
 
 /** returns pose transform of a @ b */
-static void quat_pose_transform_pose(vec3 *out_pos, vec4 *out_quat,
+static void __prefix__quat_pose_transform_pose(vec3 *out_pos, vec4 *out_quat,
                                      vec3 a_pos, vec4 a_quat,
                                      vec3 b_pos, vec4 b_quat) {
-    *out_pos = quat_pose_transform_pos(a_pos, a_quat, b_pos);
-    *out_quat = quat_mul(a_quat, b_quat);
+    *out_pos = __prefix__quat_pose_transform_pos(a_pos, a_quat, b_pos);
+    *out_quat = __prefix__quat_mul(a_quat, b_quat);
 }
 
 
 /** spherical linear interpolation between a and b, t in [0 : 1] */
-static vec4 quat_slerp(vec4 q_a, vec4 q_b, float t) {
+static vec4 __prefix__quat_slerp(vec4 q_a, vec4 q_b, float t) {
     // from cglm/vec4/glm_quat_slerp
     float cos_theta = vec4_dot(q_a, q_b);
 
@@ -248,4 +249,4 @@ static vec4 quat_slerp(vec4 q_a, vec4 q_b, float t) {
 }
 
 
-#endif //MATHC_UTILS_QUAT_H
+#endif //MATHC_UTILS___PREFIX__QUAT_H

@@ -11,6 +11,9 @@
 /** minimum possible value */
 #define CSCA_MIN (-SCHAR_MIN)
 
+/** for printing in IO */
+#define CSCA_PRINT_FORMAT_SPECIFIER "hhi"
+
 /** dst = pow(x, y) */
 static signed char csca_pow(signed char x, signed char y) {
     return (signed char) pow(x, y);

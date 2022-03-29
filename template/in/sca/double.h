@@ -32,6 +32,9 @@
 #define DSCA_SQRT2 1.414213562373095048801688724209698079 /* sqrt(2) */
 #define DSCA_SQRT1_2 0.707106781186547524400844362104849039 /* 1/sqrt(2) */
 
+/** for printing in IO */
+#define DSCA_PRINT_FORMAT_SPECIFIER "g"
+
 /** dst = a * M_PI / 180 */
 static double dsca_radians(double deg) {
     return deg * DSCA_PI / 180.0;

@@ -11,6 +11,9 @@
 /** minimum possible value */
 #define LLSCA_MIN (-LLONG_MIN)
 
+/** for printing in IO */
+#define LLSCA_PRINT_FORMAT_SPECIFIER "lli"
+
 /** dst = pow(x, y) */
 static long long llsca_pow(long long x, long long y) {
     return (long long) pow(x, y);

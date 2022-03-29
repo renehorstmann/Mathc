@@ -11,6 +11,9 @@
 /** minimum possible value */
 #define USSCA_MIN 0
 
+/** for printing in IO */
+#define USSCA_PRINT_FORMAT_SPECIFIER "hu"
+
 /** dst = pow(x, y) */
 static unsigned short ussca_pow(unsigned short x, unsigned short y) {
     return (unsigned short) pow(x, y);

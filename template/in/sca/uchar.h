@@ -11,6 +11,9 @@
 /** minimum possible value */
 #define UCSCA_MIN 0
 
+/** for printing in IO */
+#define UCSCA_PRINT_FORMAT_SPECIFIER "hhu"
+
 /** dst = pow(x, y) */
 static unsigned char ucsca_pow(unsigned char x, unsigned char y) {
     return (unsigned char) pow(x, y);

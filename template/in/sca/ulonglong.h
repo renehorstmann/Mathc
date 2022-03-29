@@ -11,6 +11,9 @@
 /** minimum possible value */
 #define ULLSCA_MIN 0
 
+/** for printing in IO */
+#define ULLSCA_PRINT_FORMAT_SPECIFIER "llu"
+
 /** dst = pow(x, y) */
 static unsigned long long ullsca_pow(unsigned long long x, unsigned long long y) {
     return (unsigned long long) pow(x, y);

@@ -11,6 +11,9 @@
 /** minimum possible value */
 #define SSCA_MIN (-SHRT_MIN)
 
+/** for printing in IO */
+#define SSCA_PRINT_FORMAT_SPECIFIER "hi"
+
 /** dst = pow(x, y) */
 static short ssca_pow(short x, short y) {
     return (short) pow(x, y);
