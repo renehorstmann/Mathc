@@ -265,7 +265,6 @@ typedef union {
     };
 } mathc_vec3;
 static_assert(sizeof(mathc_vec3) == sizeof(float) * 3, "[Mathc] wrong expected size");
-
 // types:
 typedef mathc_vec3 vec3;
 ```
