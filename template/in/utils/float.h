@@ -11,11 +11,11 @@
 /*/ 0 /*/   // if cond is false:
 /*/ 0 /*/   //      the whole line will be removed
 
-/*/ 1 /*///#include "__PREFIX__quat.h"
-/*/ 1 /*///#include "__PREFIX__camera.h"
-/*/ 1 /*///#include "__PREFIX__rotation.h"
-/*/ 1 /*///#include "__PREFIX__intersection.h"
-/*/ 1 /*///#include "__PREFIX__color.h"
-/*/ 1 /*///#include "__PREFIX__random.h"
+/*/ 1 /*///#include "__prefix__quat.h"
+/*/ 1 /*///#include "__prefix__camera.h"
+/*/ 1 /*///#include "__prefix__rotation.h"
+/*/ 1 /*///#include "__prefix__intersection.h"
+/*/ 1 /*///#include "__prefix__color.h"
+/*/ 1 /*///#include "__prefix__random.h"
 
 #endif //MATHC_UTILS_FLOAT_H
