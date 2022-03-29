@@ -8,6 +8,9 @@
 /*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
 /*/ 0 /*/   // if cond is false:
 /*/ 0 /*/   //      the whole line will be removed
+/*/ 0 /*/
+/*/ 0 /*/   // the following setup is just here to pleasure an ide
+/*/ 0 /*/ typedef float really_a_float;
 
 #ifndef MATHC_MAX_SIZE
 #ifdef __STDC_NO_VLA__
@@ -36,7 +39,7 @@ do { \
 
 
 /*/ int /*//** dst = vec * 255 */
-/*/ int /*/static void vecN_cast_from_float_1(float *dst_vec, const float *vec, int n) {
+/*/ int /*/static void vecN_cast_from_float_1(float *dst_vec, const really_a_float *vec, int n) {
 /*/ int /*/    for (int i = 0; i < n; i++)
 /*/ int /*/        dst_vec[i] = (float) (vec[i] * 255.0f);
 /*/ int /*/}
