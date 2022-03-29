@@ -60,7 +60,7 @@ static vec__X__ vec__X___cast_from_uchar(const unsigned char *cast) {
 /*/ float /*/}
 
 /*/ int /*//** dst = vec * 255 */
-/*/ int /*/static vec__X__ vec__X___cast_from_float_1(const float *cast) {
+/*/ int /*/static vec__X__ vec__X___cast_from_float_1(const really_a_float *cast) {
 /*/ int /*/    vec__X__ res;
 /*/ int /*/    vecN_cast_from_float_1(res.v, cast, __X__);
 /*/ int /*/    return res;
