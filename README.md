@@ -279,7 +279,7 @@ assert(b.v0 == 2 && b.v1 == 3);
 ```
 
 
-vec4 has subdata for both, vec2 and vec3 (.xy, .xyz, .yza, .za, ...).
+vec4 has subdata for both, vec2 and vec3 (.xy, .xyz, .yz, .yzw, .zw, .rg, .rgb, .gb, .gba, .ba...).
 There are also variants for double, int, uchar and bool with d, i, uc and b prefix.
 
 
