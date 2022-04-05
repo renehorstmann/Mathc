@@ -63,7 +63,7 @@ static dmat4 dmat4_camera_frustum(double left, double right,
  */
 static dmat4 dmat4_camera_perspective(double fovy, double aspect, double near_z, double far_z) {
     // from cglm/cam.h/glm_perspective
-    double f = (double) 1 / dsca_tan(fovy * 0.5f);
+    double f = (double) 1 / dsca_tan(fovy * (double) 0.5);
     double fn = (double) 1 / (near_z - far_z);
 
     dmat4 res = {{0}};
