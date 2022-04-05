@@ -57,6 +57,13 @@ static vec4 vec4_set(float s) {
 }
 
 
+/** dst = v0, v1, ... */
+static vec4 vec4_new(float v0, float v1, float v2, float v3
+) {
+    return (vec4) {v0, v1, v2, v3
+    };
+}
+
 /** dst = unit_x */
 static vec4 vec4_unit_x() {
     vec4 res;

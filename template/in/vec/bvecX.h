@@ -25,6 +25,17 @@ static bool bvec__X___cmp(bvec__X__ a, bvec__X__ b) {
     return bvecN_cmp(a.v, b.v, __X__);
 }
 
+/*/ X<5 /*//** dst = v0, v1, ... */
+/*/ X<5 /*/static bvec__X__ bvec__X___new(bool v0, bool v1
+/*/ X<5 /*//*/ X>=3 /*/         , bool v2
+/*/ X<5 /*//*/ X>=4 /*/         , bool v3
+/*/ X<5 /*/) {
+/*/ X<5 /*/    return (bvec__X__) {v0, v1
+/*/ X<5 /*//*/ X>=3 /*/         , v2
+/*/ X<5 /*//*/ X>=4 /*/         , v3
+/*/ X<5 /*/     };
+/*/ X<5 /*/}
+
 /** dst = scalar */
 static bvec__X__ bvec__X___set(bool set) {
     bvec__X__ res;

@@ -11,6 +11,7 @@
 #include <string.h>     // memcmp
 #include <stdbool.h>
 #include <assert.h>
+#include <stdarg.h>     // ivecN_new
 #include "../sca/int.h"
 
 /** macro to cast a vector into a int vector */
@@ -49,6 +50,20 @@ static bool ivecN_cmp(const int *a, const int *b, int n) {
 static void ivecN_copy(int *dst, const int *v, int n) {
     for (int i = 0; i < n; i++)
         dst[i] = v[i];
+}
+
+
+/**
+ * dst = (int) {v0, v1, ...}
+ * v0, v1, ... needs to be int, integers produce invalid values!, so 1 instead of 1.0!
+ */
+static void ivecN_new(int *dst, int n, int v0, ...) {
+    va_list args;
+    va_start(args, v0);
+    dst[0] = (int) v0;
+    for (int i = 1; i < n; i++)
+        dst[i] = (int) va_arg(args, int);
+    va_end(args);
 }
 
 /** dst = s */

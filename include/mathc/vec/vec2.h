@@ -57,6 +57,13 @@ static vec2 vec2_set(float s) {
 }
 
 
+/** dst = v0, v1, ... */
+static vec2 vec2_new(float v0, float v1
+) {
+    return (vec2) {v0, v1
+    };
+}
+
 /** dst = unit_x */
 static vec2 vec2_unit_x() {
     vec2 res;

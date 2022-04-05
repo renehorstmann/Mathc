@@ -57,6 +57,13 @@ static dvec3 dvec3_set(double s) {
 }
 
 
+/** dst = v0, v1, ... */
+static dvec3 dvec3_new(double v0, double v1, double v2
+) {
+    return (dvec3) {v0, v1, v2
+    };
+}
+
 /** dst = unit_x */
 static dvec3 dvec3_unit_x() {
     dvec3 res;

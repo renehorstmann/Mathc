@@ -11,6 +11,13 @@ static bool bvec3_cmp(bvec3 a, bvec3 b) {
     return bvecN_cmp(a.v, b.v, 3);
 }
 
+/** dst = v0, v1, ... */
+static bvec3 bvec3_new(bool v0, bool v1, bool v2
+) {
+    return (bvec3) {v0, v1, v2
+    };
+}
+
 /** dst = scalar */
 static bvec3 bvec3_set(bool set) {
     bvec3 res;

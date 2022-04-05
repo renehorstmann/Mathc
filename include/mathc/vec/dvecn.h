@@ -11,6 +11,7 @@
 #include <string.h>     // memcmp
 #include <stdbool.h>
 #include <assert.h>
+#include <stdarg.h>     // dvecN_new
 #include "../sca/double.h"
 
 /** macro to cast a vector into a double vector */
@@ -38,6 +39,20 @@ static void dvecN_copy(double *dst, const double *v, int n) {
     for (int i = 0; i < n; i++)
         dst[i] = v[i];
 }
+
+/**
+ * dst = (double) {v0, v1, ...}
+ * v0, v1, ... needs to be double, integers produce invalid values!, so 1.0 instead of 1!
+ */
+static void dvecN_new(double *dst, int n, double v0, ...) {
+    va_list args;
+    va_start(args, v0);
+    dst[0] = (double) v0;
+    for (int i = 1; i < n; i++)
+        dst[i] = (double) va_arg(args, double);
+    va_end(args);
+}
+
 
 /** dst = s */
 static void dvecN_set(double *dst, double s, int n) {

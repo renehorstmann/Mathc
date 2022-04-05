@@ -71,6 +71,13 @@ static ivec4 ivec4_set(int s) {
 }
 
 
+/** dst = v0, v1, ... */
+static ivec4 ivec4_new(int v0, int v1, int v2, int v3
+) {
+    return (ivec4) {v0, v1, v2, v3
+    };
+}
+
 /** dst = unit_x */
 static ivec4 ivec4_unit_x() {
     ivec4 res;

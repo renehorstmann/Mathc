@@ -71,6 +71,13 @@ static ucvec3 ucvec3_set(unsigned char s) {
 }
 
 
+/** dst = v0, v1, ... */
+static ucvec3 ucvec3_new(unsigned char v0, unsigned char v1, unsigned char v2
+) {
+    return (ucvec3) {v0, v1, v2
+    };
+}
+
 /** dst = unit_x */
 static ucvec3 ucvec3_unit_x() {
     ucvec3 res;

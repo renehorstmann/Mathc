@@ -21,6 +21,7 @@
 #include <string.h>     // memcmp
 #include <stdbool.h>
 #include <assert.h>
+#include <stdarg.h>     // vecN_new
 #include "../sca/float.h"
 
 /** macro to cast a vector into a float vector */
@@ -67,6 +68,32 @@ static void vecN_copy(float *dst, const float *v, int n) {
     for (int i = 0; i < n; i++)
         dst[i] = v[i];
 }
+
+/*/ float /*////**
+/*/ float /*/// * dst = (float) {v0, v1, ...}
+/*/ float /*/// * v0, v1, ... needs to be double, integers produce invalid values!, so 1.0 instead of 1!
+/*/ float /*/// */
+/*/ float /*/static void vecN_new(float *dst, int n, double v0, ...) {
+/*/ float /*/    va_list args;
+/*/ float /*/    va_start(args, v0);
+/*/ float /*/    dst[0] = (float) v0;
+/*/ float /*/    for(int i=1; i<n; i++)
+/*/ float /*/        dst[i] = (float) va_arg(args, double);
+/*/ float /*/    va_end(args);
+/*/ float /*/}
+
+/*/ int /*////**
+/*/ int /*/// * dst = (float) {v0, v1, ...}
+/*/ int /*/// * v0, v1, ... needs to be int, integers produce invalid values!, so 1 instead of 1.0!
+/*/ int /*/// */
+/*/ int /*///static void vecN_new(float *dst, int n, int v0, ...) {
+/*/ int /*///    va_list args;
+/*/ int /*///    va_start(args, v0);
+/*/ int /*///    dst[0] = (float) v0;
+/*/ int /*///    for(int i=1; i<n; i++)
+/*/ int /*///        dst[i] = (float) va_arg(args, int);
+/*/ int /*///    va_end(args);
+/*/ int /*///}
 
 /** dst = s */
 static void vecN_set(float *dst, float s, int n) {

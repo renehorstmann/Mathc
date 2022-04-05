@@ -57,6 +57,13 @@ static vec3 vec3_set(float s) {
 }
 
 
+/** dst = v0, v1, ... */
+static vec3 vec3_new(float v0, float v1, float v2
+) {
+    return (vec3) {v0, v1, v2
+    };
+}
+
 /** dst = unit_x */
 static vec3 vec3_unit_x() {
     vec3 res;

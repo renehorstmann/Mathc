@@ -285,6 +285,7 @@ There are also variants for double, int, uchar and bool with d, i, uc and b pref
 ## Basic functions
 There are a lot of functions to use with the types:
 - vec*_unit*
+- vec*_new
 - vec*_set
 - vec*_cast_from
 - vec*_cmp
