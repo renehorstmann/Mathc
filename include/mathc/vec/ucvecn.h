@@ -11,7 +11,6 @@
 #include <string.h>     // memcmp
 #include <stdbool.h>
 #include <assert.h>
-#include <stdarg.h>     // ucvecN_new
 #include "../sca/uchar.h"
 
 /** macro to cast a vector into a unsigned char vector */
@@ -50,20 +49,6 @@ static bool ucvecN_cmp(const unsigned char *a, const unsigned char *b, int n) {
 static void ucvecN_copy(unsigned char *dst, const unsigned char *v, int n) {
     for (int i = 0; i < n; i++)
         dst[i] = v[i];
-}
-
-
-/**
- * dst = (unsigned char) {v0, v1, ...}
- * v0, v1, ... needs to be int, integers produce invalid values!, so 1 instead of 1.0!
- */
-static void ucvecN_new(unsigned char *dst, int n, int v0, ...) {
-    va_list args;
-    va_start(args, v0);
-    dst[0] = (unsigned char) v0;
-    for (int i = 1; i < n; i++)
-        dst[i] = (unsigned char) va_arg(args, int);
-    va_end(args);
 }
 
 /** dst = s */

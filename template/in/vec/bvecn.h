@@ -4,7 +4,6 @@
 #include <string.h>     // memcmp
 #include <assert.h>
 #include <stdbool.h>
-#include <stdarg.h>     // vecN_new
 
 /** vec_a == vec_b */
 static bool bvecN_cmp(const bool *vec_a, const bool *vec_b, int n) {
@@ -15,20 +14,6 @@ static bool bvecN_cmp(const bool *vec_a, const bool *vec_b, int n) {
 static void bvecN_copy(bool *dst, const bool *vec, int n) {
     for (int i = 0; i < n; i++)
         dst[i] = vec[i];
-}
-
-
-/**
- * dst = (bool) {v0, v1, ...}
- * v0, v1, ... needs to be int, integers produce invalid values!, so 1|0 instead of true|false
- */
-static void bvecN_new(bool *dst, int n, int v0, ...) {
-    va_list args;
-    va_start(args, v0);
-    dst[0] = (bool) v0;
-    for(int i=1; i<n; i++)
-        dst[i] = (bool) va_arg(args, int);
-    va_end(args);
 }
 
 /** dst = scalar */
