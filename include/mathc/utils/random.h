@@ -1,5 +1,5 @@
-#ifndef MAHTC_UTILS_RANDOM
-#define MAHTC_UTILS_RANDOM
+#ifndef MATHC_UTILS_RANDOM
+#define MATHC_UTILS_RANDOM
 
 
 #ifndef MATHC_RANDOM_FUNCTION
@@ -42,7 +42,7 @@ static float sca_random_normal(float mean, float sigma) {
     u2 = sca_random();
 
     float mag = sigma * sca_sqrt((float) -2 * log(u1));
-    return mean + mag * sca_cos(2 * M_PI * u2);
+    return mean + mag * sca_cos(2 * SCA_PI * u2);
 }
 
 //
@@ -258,4 +258,4 @@ static vec4 vec4_random_normal_vec(vec4 mean, vec4 sigma) {
     return res;
 }
 
-#endif // MAHTC_UTILS_RANDOM
+#endif // MATHC_UTILS_RANDOM
