@@ -1,5 +1,5 @@
-#ifndef MAHTC_UTILS_DRANDOM
-#define MAHTC_UTILS_DRANDOM
+#ifndef MATHC_UTILS_DRANDOM
+#define MATHC_UTILS_DRANDOM
 
 
 #ifndef MATHC_RANDOM_FUNCTION
@@ -40,7 +40,7 @@ static double dsca_random_normal(double mean, double sigma) {
     u2 = dsca_random();
 
     double mag = sigma * dsca_sqrt((double) -2 * log(u1));
-    return mean + mag * dsca_cos(2 * M_PI * u2);
+    return mean + mag * dsca_cos(2 * DSCA_PI * u2);
 }
 
 //
@@ -256,4 +256,4 @@ static dvec4 dvec4_random_normal_vec(dvec4 mean, dvec4 sigma) {
     return res;
 }
 
-#endif // MAHTC_UTILS_DRANDOM
+#endif // MATHC_UTILS_DRANDOM
