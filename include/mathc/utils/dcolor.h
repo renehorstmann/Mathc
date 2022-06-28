@@ -46,7 +46,7 @@ static dvec3 dvec3_rgb2hsv(dvec3 rgb) {
     hsv.v0 *= 60; // degrees
 
     if (hsv.v0 < 0)
-        hsv.v0 += 60;
+        hsv.v0 += 360;
     return hsv;
 }
 
