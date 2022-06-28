@@ -1,5 +1,5 @@
-#ifndef MAHTC_UTILS___PREFIX__RANDOM
-#define MAHTC_UTILS___PREFIX__RANDOM
+#ifndef MATHC_UTILS___PREFIX__RANDOM
+#define MATHC_UTILS___PREFIX__RANDOM
 
 /*/ 0 /*/   // template file!
 /*/ 0 /*/   //
@@ -55,7 +55,7 @@ static float sca_random_normal(float mean, float sigma) {
     u2 = sca_random();
 
     float mag = sigma * sca_sqrt((float) -2 * log(u1));
-    return mean + mag * sca_cos(2 * M_PI * u2);
+    return mean + mag * sca_cos(2 * SCA_PI * u2);
 }
 
 //
@@ -271,4 +271,4 @@ static vec4 vec4_random_normal_vec(vec4 mean, vec4 sigma) {
     return res;
 }
 
-#endif // MAHTC_UTILS___PREFIX__RANDOM
+#endif // MATHC_UTILS___PREFIX__RANDOM
