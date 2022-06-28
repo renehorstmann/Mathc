@@ -46,7 +46,7 @@ static vec3 vec3_rgb2hsv(vec3 rgb) {
     hsv.v0 *= 60; // degrees
 
     if (hsv.v0 < 0)
-        hsv.v0 += 60;
+        hsv.v0 += 360;
     return hsv;
 }
 
