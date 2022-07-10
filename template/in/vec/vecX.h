@@ -470,14 +470,6 @@ static vec__X__ vec__X___mix(vec__X__ a, vec__X__ b, float t) {
 }
 
 
-/** dst = a * (1-t) + b * t */
-static vec__X__ vec__X___mix_vec(vec__X__ a, vec__X__ b, vec__X__ t) {
-    vec__X__ res;
-    vecN_mix_vec(res.v, a.v, b.v, t.v, __X__);
-    return res;
-}
-
-
 /** dst = x < edge ? 0 : 1 */
 static vec__X__ vec__X___step(vec__X__ x, float edge) {
     vec__X__ res;

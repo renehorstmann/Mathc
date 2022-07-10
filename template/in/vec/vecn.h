@@ -357,13 +357,13 @@ static void vecN_clamp_vec(float *dst, const float *x, const float *min, const f
 }
 
 /** dst = a * (1-t) + b * t */
-static void vecN_mix(float *dst, const float *a, const float *b, float t, int n) {
+static void vecN_mix(float *dst, const float *a, const float *b, really_a_float t, int n) {
     for (int i = 0; i < n; i++)
         dst[i] = sca_mix(a[i], b[i], t);
 }
 
 /** dst = a * (1-t) + b * t */
-static void vecN_mix_vec(float *dst, const float *a, const float *b, const float *t, int n) {
+static void vecN_mix_vec(float *dst, const float *a, const float *b, const really_a_float *t, int n) {
     for (int i = 0; i < n; i++)
         dst[i] = sca_mix(a[i], b[i], t[i]);
 }
