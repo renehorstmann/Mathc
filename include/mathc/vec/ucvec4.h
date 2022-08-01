@@ -313,14 +313,6 @@ static ucvec4 ucvec4_mix(ucvec4 a, ucvec4 b, unsigned char t) {
 }
 
 
-/** dst = a * (1-t) + b * t */
-static ucvec4 ucvec4_mix_vec(ucvec4 a, ucvec4 b, ucvec4 t) {
-    ucvec4 res;
-    ucvecN_mix_vec(res.v, a.v, b.v, t.v, 4);
-    return res;
-}
-
-
 /** dst = x < edge ? 0 : 1 */
 static ucvec4 ucvec4_step(ucvec4 x, unsigned char edge) {
     ucvec4 res;

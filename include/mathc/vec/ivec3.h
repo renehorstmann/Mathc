@@ -329,14 +329,6 @@ static ivec3 ivec3_mix(ivec3 a, ivec3 b, int t) {
 }
 
 
-/** dst = a * (1-t) + b * t */
-static ivec3 ivec3_mix_vec(ivec3 a, ivec3 b, ivec3 t) {
-    ivec3 res;
-    ivecN_mix_vec(res.v, a.v, b.v, t.v, 3);
-    return res;
-}
-
-
 /** dst = x < edge ? 0 : 1 */
 static ivec3 ivec3_step(ivec3 x, int edge) {
     ivec3 res;

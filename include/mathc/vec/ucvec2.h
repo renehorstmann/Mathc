@@ -297,14 +297,6 @@ static ucvec2 ucvec2_mix(ucvec2 a, ucvec2 b, unsigned char t) {
 }
 
 
-/** dst = a * (1-t) + b * t */
-static ucvec2 ucvec2_mix_vec(ucvec2 a, ucvec2 b, ucvec2 t) {
-    ucvec2 res;
-    ucvecN_mix_vec(res.v, a.v, b.v, t.v, 2);
-    return res;
-}
-
-
 /** dst = x < edge ? 0 : 1 */
 static ucvec2 ucvec2_step(ucvec2 x, unsigned char edge) {
     ucvec2 res;

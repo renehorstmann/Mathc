@@ -427,14 +427,6 @@ static dvec4 dvec4_mix(dvec4 a, dvec4 b, double t) {
 }
 
 
-/** dst = a * (1-t) + b * t */
-static dvec4 dvec4_mix_vec(dvec4 a, dvec4 b, dvec4 t) {
-    dvec4 res;
-    dvecN_mix_vec(res.v, a.v, b.v, t.v, 4);
-    return res;
-}
-
-
 /** dst = x < edge ? 0 : 1 */
 static dvec4 dvec4_step(dvec4 x, double edge) {
     dvec4 res;
