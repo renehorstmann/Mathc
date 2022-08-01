@@ -83,7 +83,7 @@ def create_replace_conditions(template: dict, X=0):
     replace.append((regex_condition('signed', is_float or ('is_integer' in template and template['is_signed'])), ''))
     replace.append((regex_condition('bool', 'is_bool' in template and template['is_bool']), ''))
     replace.append((regex_condition('!bool', not 'is_bool' in template or not template['is_bool']), ''))
-    for x in range(X_MIN, X_MAX+1):
+    for x in range(X_MIN, X_MAX + 1):
         replace.append((regex_condition('X==%i' % x, X == x), ''))
         replace.append((regex_condition('X!=%i' % x, X != x), ''))
         replace.append((regex_condition('X>%i' % x, X > x), ''))
@@ -145,7 +145,7 @@ def create_replace_list(template: dict, X=0, prefix=''):
 
     # MATHC_MAT* macro
     replace.append((regex_name_prefix('MATHC_AS_MAT'), 'MATHC_AS_' + PREFIX + 'MAT'))
-    
+
     # SCA_* constands
     replace.append((regex_name_prefix('SCA_'), PREFIX + 'SCA_'))
 
@@ -190,7 +190,7 @@ def create_publictypes(template: dict, X_list_vec, X_list_mat):
     apply_template('in/publictypes/float.h',
                    apply_regex_replace_list('out/mathc/publictypes/float.h', replace_to_float_basic),
                    template)
-    
+
     for x in X_list_vec:
         apply_template('in/publictypes/vecX.h',
                        apply_regex_replace_list('out/mathc/publictypes/vec%i.h' % x, replace_to_float_basic),
@@ -258,12 +258,12 @@ def create_vec(template: dict, X_list):
                    template)
 
     apply_template('in/vec/vecn.h',
-                         apply_regex_replace_list('out/mathc/vec/vecn.h', replace_to_float_basic),
-                         template)
+                   apply_regex_replace_list('out/mathc/vec/vecn.h', replace_to_float_basic),
+                   template)
     for x in X_list:
         apply_template('in/vec/vecX.h',
-                             apply_regex_replace_list('out/mathc/vec/vec%i.h' % x, replace_to_float_basic),
-                             template, x)
+                       apply_regex_replace_list('out/mathc/vec/vec%i.h' % x, replace_to_float_basic),
+                       template, x)
 
 
 def create_mat(template: dict, X_list):
@@ -275,12 +275,12 @@ def create_mat(template: dict, X_list):
                    template)
 
     apply_template('in/mat/matn.h',
-                         apply_regex_replace_list('out/mathc/mat/matn.h', replace_to_float_basic),
-                         template)
+                   apply_regex_replace_list('out/mathc/mat/matn.h', replace_to_float_basic),
+                   template)
     for x in X_list:
         apply_template('in/mat/matX.h',
-                             apply_regex_replace_list('out/mathc/mat/mat%i.h' % x, replace_to_float_basic),
-                             template, x)
+                       apply_regex_replace_list('out/mathc/mat/mat%i.h' % x, replace_to_float_basic),
+                       template, x)
 
 
 def create_all(template: dict, X_list_vec, X_list_mat):
@@ -325,7 +325,6 @@ def create_util(template: dict):
     apply_template('in/utils/rotation.h', 'out/mathc/utils/%srotation.h' % template['prefix'], template)
 
 
-
 #
 # templates
 #
@@ -335,9 +334,9 @@ FLOAT = {
     'FLOAT': 'FLOAT',
     'float_file': 'float',
     'prefix': '',
-    'is_bool': False,       # if not available: False
-    'is_integer': False,    # if not available: False
-    'is_signed': True,      # if not available: True
+    'is_bool': False,  # if not available: False
+    'is_integer': False,  # if not available: False
+    'is_signed': True,  # if not available: True
 }
 
 BOOL = {
@@ -363,7 +362,7 @@ LONGDOUBLE = {
 }
 
 CHAR = {
-    'float': 'signed char',     # signed, because char alone may be unsigned
+    'float': 'signed char',  # signed, because char alone may be unsigned
     'FLOAT': 'CHAR',
     'float_file': 'char',
     'prefix': 'c',
