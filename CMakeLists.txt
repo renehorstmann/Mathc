@@ -40,6 +40,9 @@ if(PLATFORM_MSVC)
     # set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /W4 /WX")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /wd4267 /wd4244 /wd4305 /wd4996 /wd5105")
 
+    # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 /WX")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4267 /wd4244 /wd4305 /wd4996 /wd5105")
+
     set(LINK_LIST)
 endif()
 

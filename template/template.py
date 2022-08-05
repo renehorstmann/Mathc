@@ -436,6 +436,8 @@ ULONGLONG = {
 if __name__ == '__main__':
     import shutil
 
+    print('applying template')
+
     if os.path.exists('out'):
         shutil.rmtree('out')
 
@@ -488,3 +490,6 @@ if __name__ == '__main__':
     create_util(FLOAT)
     create_util(DOUBLE)
     # create_util(LONGDOUBLE)
+
+
+    print('done')

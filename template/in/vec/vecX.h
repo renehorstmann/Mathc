@@ -93,16 +93,17 @@ static vec__X__ vec__X___set(float s) {
     return res;
 }
 
-
 /*/ X<5 /*//** dst = v0, v1, ... */
 /*/ X<5 /*/static vec__X__ vec__X___new(float v0, float v1
 /*/ X<5 /*//*/ X>=3 /*/         , float v2
 /*/ X<5 /*//*/ X>=4 /*/         , float v3
 /*/ X<5 /*/) {
-/*/ X<5 /*/    return (vec__X__) {v0, v1
-/*/ X<5 /*//*/ X>=3 /*/         , v2
-/*/ X<5 /*//*/ X>=4 /*/         , v3
-/*/ X<5 /*/     };
+/*/ X<5 /*/    vec__X__ self;
+/*/ X<5 /*/    self.v0 = v0;
+/*/ X<5 /*/    self.v1 = v1;
+/*/ X<5 /*//*/ X>=3 /*/    self.v2 = v2;
+/*/ X<5 /*//*/ X>=4 /*/    self.v3 = v3;
+/*/ X<5 /*/    return self;
 /*/ X<5 /*/}
 
 /** dst = unit_x */

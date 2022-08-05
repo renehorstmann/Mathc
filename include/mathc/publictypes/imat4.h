@@ -4,10 +4,14 @@
 #include <assert.h>     // for static_assert
 
 
-#include "ivec4.h"
 
+
+
+
+
+#include "ivec4.h"
 typedef union {
-    int v[4 * 4];
+    int v[4*4];
     int m[4][4];
     mathc_ivec4 col[4];
     struct {
@@ -23,6 +27,8 @@ typedef union {
         int m30, m31, m32, m33;
     };
 } mathc_imat4;
+
+
 
 
 static_assert(sizeof(mathc_imat4) == sizeof(int) * 4 * 4, "[Mathc] wrong expected size");

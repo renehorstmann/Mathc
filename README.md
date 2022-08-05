@@ -6,7 +6,7 @@ Copy the header files into your project and have fun.
 
 The libraries are written in C11 (tested on GCC 9.3.0, MSVC).
 
-C++11 may also work (also tested with GCC 9.3.0, MSVC fails).
+C++11 should also work (also tested with GCC 9.3.0, MSVC).
 
 ## Content
 - publictypes: definitions of the vector and matrix types (mathc_vec3, mathc_mat4, ...)

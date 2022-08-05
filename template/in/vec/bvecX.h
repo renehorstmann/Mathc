@@ -30,10 +30,12 @@ static bool bvec__X___cmp(bvec__X__ a, bvec__X__ b) {
 /*/ X<5 /*//*/ X>=3 /*/         , bool v2
 /*/ X<5 /*//*/ X>=4 /*/         , bool v3
 /*/ X<5 /*/) {
-/*/ X<5 /*/    return (bvec__X__) {v0, v1
-/*/ X<5 /*//*/ X>=3 /*/         , v2
-/*/ X<5 /*//*/ X>=4 /*/         , v3
-/*/ X<5 /*/     };
+/*/ X<5 /*/    bvec__X__ self;
+/*/ X<5 /*/    self.v0 = v0;
+/*/ X<5 /*/    self.v1 = v1;
+/*/ X<5 /*//*/ X>=3 /*/    self.v2 = v2;
+/*/ X<5 /*//*/ X>=4 /*/    self.v3 = v3;
+/*/ X<5 /*/    return self;
 /*/ X<5 /*/}
 
 /** dst = scalar */

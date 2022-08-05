@@ -150,4 +150,5 @@ static imat2 imat2_inv(imat2 m) {
 }
 
 
+
 #endif //MATHC_MAT_IMAT2_H

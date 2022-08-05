@@ -4,8 +4,12 @@
 #include <assert.h>     // for static_assert
 
 
-#include "ivec2.h"
 
+
+
+
+
+#include "ivec2.h"
 typedef union {
     int v[3];
     struct {
@@ -32,6 +36,10 @@ typedef union {
         };
     };
 } mathc_ivec3;
+
+
+
+
 
 
 static_assert(sizeof(mathc_ivec3) == sizeof(int) * 3, "[Mathc] wrong expected size");

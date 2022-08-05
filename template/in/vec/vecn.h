@@ -13,9 +13,7 @@
 /*/ 0 /*/ typedef float really_a_float;
 
 #ifndef MATHC_MAX_SIZE
-#ifdef __STDC_NO_VLA__
 #define MATHC_MAX_SIZE 16
-#endif
 #endif
 
 #include <string.h>     // memcmp
@@ -472,24 +470,16 @@ static float vecN_length(const float *v, int n) {
 
 /** returns norm(b-a) */
 static float vecN_distance(const float *a, const float *b, int n) {
-#ifdef MATHC_MAX_SIZE
     assert(n <= MATHC_MAX_SIZE);
     float tmp[MATHC_MAX_SIZE];
-#else
-    float tmp[n];
-#endif
     vecN_sub_vec(tmp, b, a, n);
     return vecN_norm(tmp, n);
 }
 
 /** returns dot(b-a) */
 static float vecN_sqr_distance(const float *a, const float *b, int n) {
-#ifdef MATHC_MAX_SIZE
     assert(n <= MATHC_MAX_SIZE);
     float tmp[MATHC_MAX_SIZE];
-#else
-    float tmp[n];
-#endif
     vecN_sub_vec(tmp, b, a, n);
     return vecN_dot(tmp, tmp, n);
 }

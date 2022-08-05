@@ -3,9 +3,7 @@
 
 
 #ifndef MATHC_MAX_SIZE
-#ifdef __STDC_NO_VLA__
 #define MATHC_MAX_SIZE 16
-#endif
 #endif
 
 #include <string.h>     // memcmp
@@ -26,6 +24,10 @@ static void dvecN_cast_from_uchar_1(double *dst, const unsigned char *v, int n) 
     for (int i = 0; i < n; i++)
         dst[i] = (double) v[i] / (double) 255;
 }
+
+
+
+
 
 
 /** a == b */
@@ -59,14 +61,14 @@ static void dvecN_unit_y(double *dst, int n) {
 
 /** assert(n>=3); dst = unit_z */
 static void dvecN_unit_z(double *dst, int n) {
-    assert(n >= 3 && "mathc vec*_unit_z");
+    assert(n>=3 && "mathc vec*_unit_z");
     dvecN_set(dst, 0, n);
     dst[2] = 1;
 }
 
 /** assert(n>=4); dst = unit_w */
 static void dvecN_unit_w(double *dst, int n) {
-    assert(n >= 4 && "mathc vec*_unit_w");
+    assert(n>=4 && "mathc vec*_unit_w");
     dvecN_set(dst, 0, n);
     dst[3] = 1;
 }
@@ -382,11 +384,11 @@ static double dvecN_dot(const double *a, const double *b, int n) {
 
 /** assert(n>=3) ; dst = a x b , dst.w... = 0 */
 static void dvecN_cross(double *dst, const double *a, const double *b, int n) {
-    assert(n >= 3 && "mathc vec*_cross only in 3D");
+    assert(n>=3 && "mathc vec*_cross only in 3D");
     dst[0] = a[1] * b[2] - a[2] * b[1];
     dst[1] = a[2] * b[0] - a[0] * b[2];
     dst[2] = a[0] * b[1] - a[1] * b[0];
-    for (int i = 3; i < n; i++)
+    for(int i=3; i<n; i++)
         dst[i] = 0;
 }
 
@@ -441,24 +443,16 @@ static double dvecN_length(const double *v, int n) {
 
 /** returns norm(b-a) */
 static double dvecN_distance(const double *a, const double *b, int n) {
-#ifdef MATHC_MAX_SIZE
     assert(n <= MATHC_MAX_SIZE);
     double tmp[MATHC_MAX_SIZE];
-#else
-    double tmp[n];
-#endif
     dvecN_sub_vec(tmp, b, a, n);
     return dvecN_norm(tmp, n);
 }
 
 /** returns dot(b-a) */
 static double dvecN_sqr_distance(const double *a, const double *b, int n) {
-#ifdef MATHC_MAX_SIZE
     assert(n <= MATHC_MAX_SIZE);
     double tmp[MATHC_MAX_SIZE];
-#else
-    double tmp[n];
-#endif
     dvecN_sub_vec(tmp, b, a, n);
     return dvecN_dot(tmp, tmp, n);
 }

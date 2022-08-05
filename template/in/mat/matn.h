@@ -7,9 +7,7 @@
 #endif
 
 #ifndef MATHC_MAX_SIZE
-#ifdef __STDC_NO_VLA__
 #define MATHC_MAX_SIZE 16
-#endif
 #endif
 
 #include <assert.h>
@@ -84,12 +82,8 @@ static void matN_transpose_no_alias(float *restrict dst, const float *restrict m
 
 /** dst = m^t */
 static void matN_transpose(float *dst, const float *m, int n) {
-#ifdef MATHC_MAX_SIZE
     assert(n <= MATHC_MAX_SIZE);
     float tmp[MATHC_MAX_SIZE * MATHC_MAX_SIZE];
-#else
-    float tmp[n * n];
-#endif
     matN_transpose_no_alias(tmp, m, n);
     for (int i = 0; i < n * n; i++)
         dst[i] = tmp[i];
@@ -109,12 +103,8 @@ static void matN_mul_mat_no_alias(float *restrict dst, const float *restrict a,
 
 /** dst = a @ b */
 static void matN_mul_mat(float *dst, const float *a, const float *b, int n) {
-#ifdef MATHC_MAX_SIZE
     assert(n <= MATHC_MAX_SIZE);
     float tmp[MATHC_MAX_SIZE * MATHC_MAX_SIZE];
-#else
-    float tmp[n * n];
-#endif
     matN_mul_mat_no_alias(tmp, a, b, n);
     for (int i = 0; i < n * n; i++)
         dst[i] = tmp[i];
@@ -133,12 +123,8 @@ static void matN_mul_vec_no_alias(float *restrict dst_vec, const float *restrict
 
 /** dst = a @ b */
 static void matN_mul_vec(float *dst_vec, const float *a, const float *b, int n) {
-#ifdef MATHC_MAX_SIZE
     assert(n <= MATHC_MAX_SIZE);
     float tmp[MATHC_MAX_SIZE];
-#else
-    float tmp[n];
-#endif
     matN_mul_vec_no_alias(tmp, a, b, n);
     for (int i = 0; i < n; i++)
         dst_vec[i] = tmp[i];
@@ -157,12 +143,8 @@ static void vecN_mul_mat_no_alias(float *restrict dst_vec, const float *restrict
 
 /** dst = a @ b */
 static void vecN_mul_mat(float *dst_vec, const float *a, const float *b, int n) {
-#ifdef MATHC_MAX_SIZE
     assert(n <= MATHC_MAX_SIZE);
     float tmp[MATHC_MAX_SIZE];
-#else
-    float tmp[n];
-#endif
     vecN_mul_mat_no_alias(tmp, a, b, n);
     for (int i = 0; i < n; i++)
         dst_vec[i] = tmp[i];
