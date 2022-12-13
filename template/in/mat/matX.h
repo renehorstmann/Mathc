@@ -30,6 +30,63 @@
 #include "../vec/vecn.h"
 
 
+/** dst = (mat__X__) v */
+static mat__X__ mat__X___cast_from_float(const really_a_float *cast) {
+    mat__X__ res;
+    matN_cast_into(res.v, cast, __X__);
+    return res;
+}
+
+/** dst = (mat__X__) v */
+static mat__X__ mat__X___cast_from_double(const double *cast) {
+    mat__X__ res;
+    matN_cast_into(res.v, cast, __X__);
+    return res;
+}
+
+/** dst = (mat__X__) v */
+static mat__X__ mat__X___cast_from_int(const int *cast) {
+    mat__X__ res;
+    matN_cast_into(res.v, cast, __X__);
+    return res;
+}
+
+/** dst = (mat__X__) v */
+static mat__X__ mat__X___cast_from_uchar(const unsigned char *cast) {
+    mat__X__ res;
+    matN_cast_into(res.v, cast, __X__);
+    return res;
+}
+
+/*/ float /*//** dst = v / 255 */
+/*/ float /*/static mat__X__ mat__X___cast_from_uchar_1(const unsigned char *cast) {
+/*/ float /*/    mat__X__ res;
+/*/ float /*/    matN_cast_from_uchar_1(res.v, cast, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
+
+/*/ int /*//** dst = mat * 255 */
+/*/ int /*/static mat__X__ mat__X___cast_from_float_1(const really_a_float *cast) {
+/*/ int /*/    mat__X__ res;
+/*/ int /*/    matN_cast_from_float_1(res.v, cast, __X__);
+/*/ int /*/    return res;
+/*/ int /*/}
+
+/*/ int /*//** dst = mat * 255 */
+/*/ int /*/static mat__X__ mat__X___cast_from_double_1(const double *cast) {
+/*/ int /*/    mat__X__ res;
+/*/ int /*/    matN_cast_from_double_1(res.v, cast, __X__);
+/*/ int /*/    return res;
+/*/ int /*/}
+
+/*/ int /*//** dst = mat * 255 */
+/*/ int /*/static mat__X__ mat__X___cast_from_longdouble_1(const long double *cast) {
+/*/ int /*/    mat__X__ res;
+/*/ int /*/    matN_cast_from_longdouble_1(res.v, cast, __X__);
+/*/ int /*/    return res;
+/*/ int /*/}
+
+
 /** dst = r==c ? 1 : 0 (identity)  */
 static mat__X__ mat__X___eye() {
     mat__X__ res;

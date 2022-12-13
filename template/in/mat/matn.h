@@ -1,6 +1,17 @@
 #ifndef MATHC_MAT_MATN_H
 #define MATHC_MAT_MATN_H
 
+/*/ 0 /*/   // template file!
+/*/ 0 /*/   //
+/*/ 0 /*/   // all lines starting with "/*/ cond /*/[//]" may be removed
+/*/ 0 /*/   // if cond is true:
+/*/ 0 /*/   //      only the condition comment will be removed "/*/ cond /*/)"
+/*/ 0 /*/   // if cond is false:
+/*/ 0 /*/   //      the whole line will be removed
+/*/ 0 /*/
+/*/ 0 /*/   // the following setup is just here to pleasure an ide
+/*/ 0 /*/ typedef float really_a_float;
+
 // restrict
 #ifdef __cplusplus
 #define restrict __restrict
@@ -10,7 +21,60 @@
 #define MATHC_MAX_SIZE 16
 #endif
 
+#include <string.h>     // memcmp
 #include <assert.h>
+#include <stdbool.h>
+
+/** macro to cast a mattor into a float mattor */
+#define matN_cast_into(dst, from, n) \
+do { \
+    for(int matN_cast_into_i_=0; matN_cast_into_i_<((n)*(n)); matN_cast_into_i_++) \
+        (dst)[matN_cast_into_i_] = (float) (from)[matN_cast_into_i_]; \
+} while(0)
+
+
+/*/ float /*//** dst = v / 255 */
+/*/ float /*/static void matN_cast_from_uchar_1(float *dst_mat, const unsigned char *mat, int n) {
+/*/ float /*/    for (int i = 0; i < n*n; i++)
+/*/ float /*/        dst_mat[i] = (float) mat[i] / (float) 255;
+/*/ float /*/}
+
+
+/*/ int /*//** dst = mat * 255 */
+/*/ int /*/static void matN_cast_from_float_1(float *dst_mat, const really_a_float *mat, int n) {
+/*/ int /*/    for (int i = 0; i < n*n; i++)
+/*/ int /*/        dst_mat[i] = (float) (mat[i] * 255.0f);
+/*/ int /*/}
+
+/*/ int /*//** dst = mat * 255 */
+/*/ int /*/static void matN_cast_from_double_1(float *dst_mat, const double *mat, int n) {
+/*/ int /*/    for (int i = 0; i < n*n; i++)
+/*/ int /*/        dst_mat[i] = (float) (mat[i] * 255.0);
+/*/ int /*/}
+
+/*/ int /*//** dst = mat * 255 */
+/*/ int /*/static void matN_cast_from_longdouble_1(float *dst_mat, const long double *mat, int n) {
+/*/ int /*/    for (int i = 0; i < n*n; i++)
+/*/ int /*/        dst_mat[i] = (float) (mat[i] * 255.0);
+/*/ int /*/}
+
+
+/** a == b */
+static bool matN_cmp(const float *a, const float *b, int n) {
+    return memcmp(a, b, (n*n) * sizeof(float)) == 0;
+}
+
+/** dst = v */
+static void matN_copy(float *dst, const float *v, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst[i] = v[i];
+}
+
+/** dst = s */
+static void matN_set(float *dst, float s, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst[i] = s;
+}
 
 
 /** dst = r==c ? 1 : 0 (identity) */

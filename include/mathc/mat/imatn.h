@@ -1,6 +1,7 @@
 #ifndef MATHC_MAT_IMATN_H
 #define MATHC_MAT_IMATN_H
 
+
 // restrict
 #ifdef __cplusplus
 #define restrict __restrict
@@ -10,7 +11,55 @@
 #define MATHC_MAX_SIZE 16
 #endif
 
+#include <string.h>     // memcmp
 #include <assert.h>
+#include <stdbool.h>
+
+/** macro to cast a mattor into a int mattor */
+#define imatN_cast_into(dst, from, n) \
+do { \
+    for(int imatN_cast_into_i_=0; imatN_cast_into_i_<((n)*(n)); imatN_cast_into_i_++) \
+        (dst)[imatN_cast_into_i_] = (int) (from)[imatN_cast_into_i_]; \
+} while(0)
+
+
+
+
+/** dst = mat * 255 */
+static void imatN_cast_from_float_1(int *dst_mat, const float *mat, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst_mat[i] = (int) (mat[i] * 255.0f);
+}
+
+/** dst = mat * 255 */
+static void imatN_cast_from_double_1(int *dst_mat, const double *mat, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst_mat[i] = (int) (mat[i] * 255.0);
+}
+
+/** dst = mat * 255 */
+static void imatN_cast_from_longdouble_1(int *dst_mat, const long double *mat, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst_mat[i] = (int) (mat[i] * 255.0);
+}
+
+
+/** a == b */
+static bool imatN_cmp(const int *a, const int *b, int n) {
+    return memcmp(a, b, (n*n) * sizeof(int)) == 0;
+}
+
+/** dst = v */
+static void imatN_copy(int *dst, const int *v, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst[i] = v[i];
+}
+
+/** dst = s */
+static void imatN_set(int *dst, int s, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst[i] = s;
+}
 
 
 /** dst = r==c ? 1 : 0 (identity) */

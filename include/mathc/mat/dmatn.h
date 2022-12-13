@@ -1,6 +1,7 @@
 #ifndef MATHC_MAT_DMATN_H
 #define MATHC_MAT_DMATN_H
 
+
 // restrict
 #ifdef __cplusplus
 #define restrict __restrict
@@ -10,7 +11,45 @@
 #define MATHC_MAX_SIZE 16
 #endif
 
+#include <string.h>     // memcmp
 #include <assert.h>
+#include <stdbool.h>
+
+/** macro to cast a mattor into a double mattor */
+#define dmatN_cast_into(dst, from, n) \
+do { \
+    for(int dmatN_cast_into_i_=0; dmatN_cast_into_i_<((n)*(n)); dmatN_cast_into_i_++) \
+        (dst)[dmatN_cast_into_i_] = (double) (from)[dmatN_cast_into_i_]; \
+} while(0)
+
+
+/** dst = v / 255 */
+static void dmatN_cast_from_uchar_1(double *dst_mat, const unsigned char *mat, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst_mat[i] = (double) mat[i] / (double) 255;
+}
+
+
+
+
+
+
+/** a == b */
+static bool dmatN_cmp(const double *a, const double *b, int n) {
+    return memcmp(a, b, (n*n) * sizeof(double)) == 0;
+}
+
+/** dst = v */
+static void dmatN_copy(double *dst, const double *v, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst[i] = v[i];
+}
+
+/** dst = s */
+static void dmatN_set(double *dst, double s, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst[i] = s;
+}
 
 
 /** dst = r==c ? 1 : 0 (identity) */

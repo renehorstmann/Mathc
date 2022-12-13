@@ -20,9 +20,9 @@ do { \
 
 
 /** dst = v / 255 */
-static void dvecN_cast_from_uchar_1(double *dst, const unsigned char *v, int n) {
+static void dvecN_cast_from_uchar_1(double *dst_vec, const unsigned char *vec, int n) {
     for (int i = 0; i < n; i++)
-        dst[i] = (double) v[i] / (double) 255;
+        dst_vec[i] = (double) vec[i] / (double) 255;
 }
 
 

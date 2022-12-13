@@ -9,6 +9,57 @@
 #include "../vec/ucvecn.h"
 
 
+/** dst = (ucmat4) v */
+static ucmat4 ucmat4_cast_from_float(const float *cast) {
+    ucmat4 res;
+    ucmatN_cast_into(res.v, cast, 4);
+    return res;
+}
+
+/** dst = (ucmat4) v */
+static ucmat4 ucmat4_cast_from_double(const double *cast) {
+    ucmat4 res;
+    ucmatN_cast_into(res.v, cast, 4);
+    return res;
+}
+
+/** dst = (ucmat4) v */
+static ucmat4 ucmat4_cast_from_int(const int *cast) {
+    ucmat4 res;
+    ucmatN_cast_into(res.v, cast, 4);
+    return res;
+}
+
+/** dst = (ucmat4) v */
+static ucmat4 ucmat4_cast_from_uchar(const unsigned char *cast) {
+    ucmat4 res;
+    ucmatN_cast_into(res.v, cast, 4);
+    return res;
+}
+
+
+/** dst = mat * 255 */
+static ucmat4 ucmat4_cast_from_float_1(const float *cast) {
+    ucmat4 res;
+    ucmatN_cast_from_float_1(res.v, cast, 4);
+    return res;
+}
+
+/** dst = mat * 255 */
+static ucmat4 ucmat4_cast_from_double_1(const double *cast) {
+    ucmat4 res;
+    ucmatN_cast_from_double_1(res.v, cast, 4);
+    return res;
+}
+
+/** dst = mat * 255 */
+static ucmat4 ucmat4_cast_from_longdouble_1(const long double *cast) {
+    ucmat4 res;
+    ucmatN_cast_from_longdouble_1(res.v, cast, 4);
+    return res;
+}
+
+
 /** dst = r==c ? 1 : 0 (identity)  */
 static ucmat4 ucmat4_eye() {
     ucmat4 res;

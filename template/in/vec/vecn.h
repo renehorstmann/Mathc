@@ -30,9 +30,9 @@ do { \
 
 
 /*/ float /*//** dst = v / 255 */
-/*/ float /*/static void vecN_cast_from_uchar_1(float *dst, const unsigned char *v, int n) {
+/*/ float /*/static void vecN_cast_from_uchar_1(float *dst_vec, const unsigned char *vec, int n) {
 /*/ float /*/    for (int i = 0; i < n; i++)
-/*/ float /*/        dst[i] = (float) v[i] / (float) 255;
+/*/ float /*/        dst_vec[i] = (float) vec[i] / (float) 255;
 /*/ float /*/}
 
 

@@ -1,6 +1,7 @@
 #ifndef MATHC_MAT_UCMATN_H
 #define MATHC_MAT_UCMATN_H
 
+
 // restrict
 #ifdef __cplusplus
 #define restrict __restrict
@@ -10,7 +11,55 @@
 #define MATHC_MAX_SIZE 16
 #endif
 
+#include <string.h>     // memcmp
 #include <assert.h>
+#include <stdbool.h>
+
+/** macro to cast a mattor into a unsigned char mattor */
+#define ucmatN_cast_into(dst, from, n) \
+do { \
+    for(int ucmatN_cast_into_i_=0; ucmatN_cast_into_i_<((n)*(n)); ucmatN_cast_into_i_++) \
+        (dst)[ucmatN_cast_into_i_] = (unsigned char) (from)[ucmatN_cast_into_i_]; \
+} while(0)
+
+
+
+
+/** dst = mat * 255 */
+static void ucmatN_cast_from_float_1(unsigned char *dst_mat, const float *mat, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst_mat[i] = (unsigned char) (mat[i] * 255.0f);
+}
+
+/** dst = mat * 255 */
+static void ucmatN_cast_from_double_1(unsigned char *dst_mat, const double *mat, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst_mat[i] = (unsigned char) (mat[i] * 255.0);
+}
+
+/** dst = mat * 255 */
+static void ucmatN_cast_from_longdouble_1(unsigned char *dst_mat, const long double *mat, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst_mat[i] = (unsigned char) (mat[i] * 255.0);
+}
+
+
+/** a == b */
+static bool ucmatN_cmp(const unsigned char *a, const unsigned char *b, int n) {
+    return memcmp(a, b, (n*n) * sizeof(unsigned char)) == 0;
+}
+
+/** dst = v */
+static void ucmatN_copy(unsigned char *dst, const unsigned char *v, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst[i] = v[i];
+}
+
+/** dst = s */
+static void ucmatN_set(unsigned char *dst, unsigned char s, int n) {
+    for (int i = 0; i < n*n; i++)
+        dst[i] = s;
+}
 
 
 /** dst = r==c ? 1 : 0 (identity) */
