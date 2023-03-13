@@ -474,7 +474,11 @@ static double dvec4_sum(dvec4 v) {
 
 /** returns a dot b */
 static double dvec4_dot(dvec4 a, dvec4 b) {
+#ifdef __SSE4_1__
+    return ((_mm_dp_pd(_mm_load_pd(a.v), _mm_load_pd(b.v), 0b00110001) + _mm_dp_pd(_mm_load_pd(&a.v[2]), _mm_load_pd(&b.v[2]), 0b00110001))[0]);
+#else
     return dvecN_dot(a.v, b.v, 4);
+#endif
 }
 
 

@@ -11,6 +11,10 @@
 #include <assert.h>
 #include "../sca/float.h"
 
+#if defined(__i386__) || defined(__x86_64__)
+#include "immintrin.h"
+#endif
+
 /** macro to cast a vector into a float vector */
 #define vecN_cast_into(dst, from, n) \
 do { \
@@ -385,9 +389,17 @@ static float vecN_dot(const float *a, const float *b, int n) {
 /** assert(n>=3) ; dst = a x b , dst.w... = 0 */
 static void vecN_cross(float *dst, const float *a, const float *b, int n) {
     assert(n>=3 && "mathc vec*_cross only in 3D");
+#ifdef __AVX2__
+    const __m128i mask_xyz = _mm_setr_epi32(0x80000000, 0x80000000, 0x80000000, 0x00000000);
+    __m128 src[2] = { _mm_maskload_ps(a, mask_xyz), _mm_maskload_ps(b, mask_xyz) };
+    __m128 ror[2] = { _mm_permute_ps(src[0], 0b11010010), _mm_permute_ps(src[1], 0b11010010) };
+
+    _mm_maskstore_ps(dst, mask_xyz, _mm_permute_ps(src[1] * ror[0] - src[0] * ror[1], 0b11010010));
+#else
     dst[0] = a[1] * b[2] - a[2] * b[1];
     dst[1] = a[2] * b[0] - a[0] * b[2];
     dst[2] = a[0] * b[1] - a[1] * b[0];
+#endif
     for(int i=3; i<n; i++)
         dst[i] = 0;
 }
