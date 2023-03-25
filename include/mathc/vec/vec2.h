@@ -458,7 +458,11 @@ static float vec2_sum(vec2 v) {
 
 /** returns a dot b */
 static float vec2_dot(vec2 a, vec2 b) {
+#ifdef __SSE4_1_
+    return _mm_dp_ps(_mm_load_ps(a.v), _mm_load_ps(b.v), 0b00110001)[0];
+#else
     return vecN_dot(a.v, b.v, 2);
+#endif
 }
 
 
