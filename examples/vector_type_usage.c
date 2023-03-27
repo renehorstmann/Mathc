@@ -26,6 +26,11 @@ int main() {
     vec3 copy1 = c;
     vec3_println(copy1);  // mathc/io
 
+    // or print using the format strings
+    // mathc_uX is a macro tu unpack the values
+    //    replaced by: c.v0, c.v1, c.v2
+    printf("c: " VEC3_PRINT_FORMAT "\n", mathc_u3(c));
+
     // copies c into copy2, by a memcpy and the raw pointer
     vec3 copy2;
     memcpy(copy2.v, c.v, sizeof(vec3));

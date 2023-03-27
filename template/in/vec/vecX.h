@@ -209,6 +209,20 @@ static vec__X__ vec__X___div(vec__X__ a, float b) {
     return res;
 }
 
+/** dst = a + b * c */
+static vec__X__ vec__X___add_scaled_vec(vec__X__ a, vec__X__ b, vec__X__ c) {
+    vec__X__ res;
+    vecN_add_scaled_vec(res.v, a.v, b.v, c.v, __X__);
+    return res;
+}
+
+/** dst = a + b * c */
+static vec__X__ vec__X___add_scaled(vec__X__ a, vec__X__ b, float c) {
+    vec__X__ res;
+    vecN_add_scaled(res.v, a.v, b.v, c, __X__);
+    return res;
+}
+
 
 /*/ float /*//** dst = a * M_PI / 180 */
 /*/ float /*/static vec__X__ vec__X___radians(vec__X__ deg) {
@@ -559,6 +573,13 @@ static float vec__X___norm(vec__X__ v) {
 /*/ float /*/static vec__X__ vec__X___normalize(vec__X__ v) {
 /*/ float /*/    vec__X__ res;
 /*/ float /*/    vecN_normalize(res.v, v.v, __X__);
+/*/ float /*/    return res;
+/*/ float /*/}
+
+/*/ float /*//** dst = normalize(cross(a, b)) */
+/*/ float /*/static vec__X__ vec__X___cross_normalized(vec__X__ a, vec__X__ b) {
+/*/ float /*/    vec__X__ res;
+/*/ float /*/    vecN_cross_normalized(res.v, a.v, b.v, __X__);
 /*/ float /*/    return res;
 /*/ float /*/}
 

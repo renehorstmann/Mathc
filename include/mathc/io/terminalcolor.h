@@ -12,6 +12,7 @@
 
 
 #ifdef _WIN32
+
 #include <windows.h>
 // Some old MinGW/CYGWIN distributions don't define this:
 #ifndef ENABLE_VIRTUAL_TERMINAL_PROCESSING
@@ -19,6 +20,7 @@
 #endif
 static HANDLE mathc___terminalcolor_stdout_handle;
 static DWORD mathc___terminalcolor_out_mode_init;
+
 static void mathc_terminalcolor_start() {
     DWORD out_mode = 0;
     mathc___terminalcolor_stdout_handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -29,6 +31,7 @@ static void mathc_terminalcolor_start() {
     out_mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
     SetConsoleMode(mathc___terminalcolor_stdout_handle, out_mode);
 }
+
 static void mathc_terminalcolor_stop() {
     // Reset console mode
     SetConsoleMode(mathc___terminalcolor_stdout_handle, mathc___terminalcolor_out_mode_init);

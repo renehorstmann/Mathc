@@ -2,7 +2,6 @@
 #define MATHC_UTILS_DRANDOM
 
 
-
 #ifndef MATHC_RANDOM_FUNCTION
 #include <stdlib.h>
 #define MATHC_RANDOM_FUNCTION rand

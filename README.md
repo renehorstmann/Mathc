@@ -57,6 +57,11 @@ int main() {
     vec3 copy1 = c;
     vec3_println(copy1);  // mathc/io
 
+    // or print using the format strings
+    // mathc_uX is a macro tu unpack the values
+    //    replaced by: c.v0, c.v1, c.v2
+    printf("c: " VEC3_PRINT_FORMAT "\n", mathc_u3(c));
+
     // copies c into copy2, by a memcpy and the raw pointer
     vec3 copy2;
     memcpy(copy2.v, c.v, sizeof(vec3));
@@ -300,6 +305,8 @@ There are a lot of functions to use with the types:
 - vec*_scale_vec
 - vec*_div
 - vec*_div_vec
+- vec*_add_scaled
+- vec*_add_scaled_vec
 - vec*_radians
 - vec*_degrees
 - vec*_sin
@@ -344,6 +351,7 @@ There are a lot of functions to use with the types:
 - vec*_norm_1
 - vec*_norm_inf
 - vec*_normalize
+- vec*_cross_normalized
 - vec*_length
 - vec*_distance
 - vec*_sqr_distance
@@ -415,6 +423,10 @@ Scalar function:
 - sca_mix
 - sca_step
 - sca_smoothstep
+- sca_signal_wave
+- sca_signal_ramp
+- sca_signal_saw
+- sca_signal_block
 - sca_isnan
 
 ### Typeless functions

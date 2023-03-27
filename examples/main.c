@@ -3,10 +3,15 @@
 
 int main() {
     // some tests here...
-
     ucvec4 rgba = {{100, 200, 50, 255}};
     vec4 col = vec4_cast_from_uchar_1(rgba.v);
     vec4_println(col);
+
+    printf("color: " VEC4_PRINT_FORMAT "\n", mathc_u4(col));
+    printf("color: " VEC4_PRINT_FORMAT_VALUES "\n", mathc_u4(col));
+    mathc_terminalcolor_start();
+    printf("color: " VEC4_PRINT_FORMAT_COLORED "\n", mathc_u4(col));
+    mathc_terminalcolor_stop();
 
     vec3 hsv = vec3_rgb2hsv(col.rgb);
     vec3_println(hsv);
@@ -38,4 +43,10 @@ int main() {
     printf("intersection2: %f %f\n", a_tau2, b_tau2);
 
 
+    for(int i=0; i<10; i++) {
+        float x = (float) i / 10.0f;
+
+        printf("signals: %+5.3f %+5.3f %+5.3f %+5.3f\n",
+               sca_signal_wave(x), sca_signal_ramp(x), sca_signal_saw(x), sca_signal_block(x));
+    }
 }

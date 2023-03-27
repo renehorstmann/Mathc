@@ -174,6 +174,12 @@ def create_replace_list(template: dict, X=0, prefix=''):
         # _MATX_H header
         replace.append((regex_name_postfix('_MAT%i_H' % x), '_' + PREFIX + 'MAT%i_H' % x))
 
+        # VECX_PRINT_FORMAT macro
+        replace.append(('VEC%i_PRINT_FORMAT' % x, PREFIX + 'VEC%i_PRINT_FORMAT' % x))
+
+        # MATX_PRINT_FORMAT macro
+        replace.append(('MAT%i_PRINT_FORMAT' % x, PREFIX + 'MAT%i_PRINT_FORMAT' % x))
+
     return replace
 
 
@@ -446,6 +452,7 @@ if __name__ == '__main__':
     os.makedirs('out/mathc/sca')
     shutil.copyfile('in/LICENSE', 'out/mathc/LICENSE')
     shutil.copyfile('in/mathc.h', 'out/mathc/mathc.h')
+    shutil.copyfile('in/common.h', 'out/mathc/common.h')
     shutil.copyfile('in/bool.h', 'out/mathc/bool.h')
     shutil.copyfile('in/float.h', 'out/mathc/float.h')
     shutil.copyfile('in/double.h', 'out/mathc/double.h')
@@ -474,6 +481,8 @@ if __name__ == '__main__':
     # floating point types
     create_all(FLOAT, X_list_vec, X_list_mat)
     create_all(DOUBLE, X_list_vec, X_list_mat)
+
+    # > long double equals double on Windows
     # create_all(LONGDOUBLE, X_list_vec, X_list_mat)
 
     # integer types

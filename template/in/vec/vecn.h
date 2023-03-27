@@ -152,6 +152,18 @@ static void vecN_div(float *dst, const float *a, float b, int n) {
         dst[i] = a[i] / b;
 }
 
+/** dst = a + b * c */
+static void vecN_add_scaled_vec(float *dst, const float *a, const float *b, const float *c, int n) {
+    for (int i = 0; i < n; i++)
+        dst[i] = a[i] + b[i] * c[i];
+}
+
+/** dst = a + b * c */
+static void vecN_add_scaled(float *dst, const float *a, const float *b, float c, int n) {
+    for (int i = 0; i < n; i++)
+        dst[i] = a[i] + b[i] * c;
+}
+
 /*/ float /*//** dst = a * M_PI / 180 */
 /*/ float /*/static void vecN_radians(float *dst, const float *deg, int n) {
 /*/ float /*/    for (int i = 0; i < n; i++)
@@ -461,6 +473,12 @@ static float vecN_norm(const float *v, int n) {
 /*/ float /*/static void vecN_normalize(float *dst, const float *v, int n) {
 /*/ float /*/    float norm = vecN_norm(v, n);
 /*/ float /*/    vecN_scale(dst, v, (float) 1 / (norm > (float) 0 ? norm : (float) 1), n);
+/*/ float /*/}
+
+/*/ float /*//** dst = normalize(cross(a, b)) */
+/*/ float /*/static void vecN_cross_normalized(float *dst, const float *a, const float *b, int n) {
+/*/ float /*/    vecN_cross(dst, a, b, n);
+/*/ float /*/    vecN_normalize(dst, dst, n);
 /*/ float /*/}
 
 /** returns length of a vector, see vecN_norm. Just here to match glsl */
