@@ -478,7 +478,7 @@ static vec__X__ vec__X___clamp_vec(vec__X__ x, vec__X__ min, vec__X__ max) {
 
 
 /** dst = a * (1-t) + b * t */
-static vec__X__ vec__X___mix(vec__X__ a, vec__X__ b, float t) {
+static vec__X__ vec__X___mix(vec__X__ a, vec__X__ b, really_a_float t) {
     vec__X__ res;
     vecN_mix(res.v, a.v, b.v, t, __X__);
     return res;
