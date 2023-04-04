@@ -247,7 +247,8 @@ static float sca_signal_smoothsaw_single(float x, float edge) {
 // 0.50 ->  0.0
 static float sca_signal_smoothsaw(float x, float edge) {
     if (x < 0.5f) {
-        return -0.5f - sca_signal_smoothsaw_single((0.5f - x) * 2.0f, edge * 2.0f) / 2.0f;
+        // 0.5*2 is exactly 1.0f, which will mod to 0, which will result in 1.0 instead of -1.0
+        return -0.5f - sca_signal_smoothsaw_single((0.5f - x) * 1.99999f, edge * 2.0f) / 2.0f;
     }
     return 0.5f + sca_signal_smoothsaw_single((x - 0.5f) * 2.0f, edge * 2.0f) / 2.0f;
 }

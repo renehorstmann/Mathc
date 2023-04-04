@@ -248,7 +248,8 @@ static long double ldsca_signal_smoothsaw_single(long double x, long double edge
 // 0.50 ->  0.0
 static long double ldsca_signal_smoothsaw(long double x, long double edge) {
     if (x < 0.5L) {
-        return -0.5L - ldsca_signal_smoothsaw_single((0.5L - x) * 2.0L, edge * 2.0L) / 2.0L;
+        // 0.5*2 is exactly 1.0f, which will mod to 0, which will result in 1.0 instead of -1.0
+        return -0.5L - ldsca_signal_smoothsaw_single((0.5L - x) * 1.99999L, edge * 2.0L) / 2.0L;
     }
     return 0.5L + ldsca_signal_smoothsaw_single((x - 0.5L) * 2.0L, edge * 2.0L) / 2.0L;
 }

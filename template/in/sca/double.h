@@ -247,7 +247,8 @@ static double dsca_signal_smoothsaw_single(double x, double edge) {
 // 0.50 ->  0.0
 static double dsca_signal_smoothsaw(double x, double edge) {
     if (x < 0.5) {
-        return -0.5 - dsca_signal_smoothsaw_single((0.5 - x) * 2.0, edge * 2.0) / 2.0;
+        // 0.5*2 is exactly 1.0f, which will mod to 0, which will result in 1.0 instead of -1.0
+        return -0.5 - dsca_signal_smoothsaw_single((0.5 - x) * 1.99999, edge * 2.0) / 2.0;
     }
     return 0.5 + dsca_signal_smoothsaw_single((x - 0.5) * 2.0, edge * 2.0) / 2.0;
 }
