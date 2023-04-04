@@ -220,14 +220,14 @@ static double dsca_signal_ramp(double x) {
 // 0.00 -> -1.0
 // 1.00 -> +1.0
 static double dsca_signal_smoothsaw_single(double x, double edge) {
+    x = dsca_mod(x, 1.0);
+
     // linear: y = a*x
     // smooth: y = 1-b*(x-1)^2
     // equations solved, so that f==(1-edge) -> y and derivate are equal
     double f = 1.0 - edge;
     double b = -1.0 / (2.0 * (f - 1.0));
     double a = (1.0 - b * dsca_pow(f - 1.0, 2.0)) / f;
-
-    x = dsca_mod(x, 1.0);
 
     double signal;
     // linear up
@@ -246,6 +246,7 @@ static double dsca_signal_smoothsaw_single(double x, double edge) {
 // 0.00 -> -1.0
 // 0.50 ->  0.0
 static double dsca_signal_smoothsaw(double x, double edge) {
+    x = dsca_mod(x, 1.0);
     if (x < 0.5) {
         // 0.5*2 is exactly 1.0f, which will mod to 0, which will result in 1.0 instead of -1.0
         return -0.5 - dsca_signal_smoothsaw_single((0.5 - x) * 1.99999, edge * 2.0) / 2.0;
@@ -261,6 +262,7 @@ static double dsca_signal_smoothsaw(double x, double edge) {
 // 0.50 -> +1.0
 // 0.75 ->  0.0
 static double dsca_signal_smoothramp(double x, double edge) {
+    x = dsca_mod(x, 1.0);
     if (x < 0.5) {
         return dsca_signal_smoothsaw(x * 2.0, edge * 2.0);
     }
