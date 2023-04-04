@@ -23,6 +23,14 @@
 /*/ 1 /*///#include "../types/vec__X__.h"
 /*/ 1 /*///#include "../types/bvec__X__.h"
 
+// macro to create a vec__X__
+/*/ X<5 /*/#define vec__X___(x, y \
+/*/ X<5 /*//*/ X>=3 /*/, z\
+/*/ X<5 /*//*/ X>=4 /*/, w\
+/*/ X<5 /*/) (vec__X__) {{(x), (y)\
+/*/ X<5 /*//*/ X>=3 /*/, (z)\
+/*/ X<5 /*//*/ X>=4 /*/, (w)\
+/*/ X<5 /*/}}
 
 /** dst = (vec__X__) v */
 static vec__X__ vec__X___cast_from_float(const really_a_float *cast) {

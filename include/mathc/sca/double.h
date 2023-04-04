@@ -227,6 +227,8 @@ static double dsca_signal_smoothsaw_single(double x, double edge) {
     double b = -1.0 / (2.0 * (f - 1.0));
     double a = (1.0 - b * dsca_pow(f - 1.0, 2.0)) / f;
 
+    x = dsca_mod(x, 1.0);
+
     double signal;
     // linear up
     if (x < f) {

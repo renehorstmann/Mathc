@@ -132,5 +132,5 @@ int main() {
 
     printf("angle: %f\n", vec_angle(vec3_unit_x(), vec3_unit_y()));
 
-    printf("in_limits: %d\n", axles_in_limits((vec3) {{0, M_PI_2, M_PI_4}}));
+    printf("in_limits: %d\n", axles_in_limits((vec3) {{0, SCA_PI_2, SCA_PI_4}}));
 }

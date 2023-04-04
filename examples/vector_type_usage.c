@@ -22,6 +22,10 @@ int main() {
     c.v[1] = a.v[1] + b.v[1];
     c.v[2] = a.v[2] + b.v[2];
 
+    // or with the macro
+    c = vec3_(11, 22, 33);
+    // evaluates as c = (vec3) {{11, 22, 33}};
+
     // copies c into copy1
     vec3 copy1 = c;
     vec3_println(copy1);  // mathc/io

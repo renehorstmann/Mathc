@@ -227,6 +227,8 @@ static float sca_signal_smoothsaw_single(float x, float edge) {
     float b = -1.0f / (2.0f * (f - 1.0f));
     float a = (1.0f - b * sca_pow(f - 1.0f, 2.0f)) / f;
 
+    x = sca_mod(x, 1.0f);
+
     float signal;
     // linear up
     if (x < f) {

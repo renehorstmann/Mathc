@@ -228,6 +228,8 @@ static long double ldsca_signal_smoothsaw_single(long double x, long double edge
     long double b = -1.0L / (2.0L * (f - 1.0L));
     long double a = (1.0L - b * ldsca_pow(f - 1.0L, 2.0L)) / f;
 
+    x = ldsca_mod(x, 1.0L);
+
     long double signal;
     // linear up
     if (x < f) {

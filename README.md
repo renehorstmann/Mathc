@@ -30,6 +30,10 @@ There are multiple types for different sizes and value types: (sizes (*): 2 - 4)
 ### Vector type usage:
 ```c
 #include "mathc/mathc.h"
+
+#define CONST_VEC4 vec4_(1, 2, 3, 4)
+static const vec4 ANOTHER_CONST_VEC4 = vec4_(5, 6, 7, 8);
+
 int main() {
     vec3 a = {{1, 2, 3}};
 
@@ -52,6 +56,10 @@ int main() {
     c.v[0] = a.v[0] + b.v[0];
     c.v[1] = a.v[1] + b.v[1];
     c.v[2] = a.v[2] + b.v[2];
+
+    // or with the macro
+    c = vec3_(11, 22, 33);
+    // evaluates as c = (vec3) {{11, 22, 33}};
 
     // copies c into copy1
     vec3 copy1 = c;
@@ -619,7 +627,7 @@ int main() {
 
     printf("angle: %f\n", vec_angle(vec3_unit_x(), vec3_unit_y()));
 
-    printf("in_limits: %d\n", axles_in_limits((vec3) {{0, M_PI_2, M_PI_4}}));
+    printf("in_limits: %d\n", axles_in_limits((vec3) {{0, SCA_PI_2, SCA_PI_4}}));
 }
 ```
 

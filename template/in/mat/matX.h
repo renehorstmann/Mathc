@@ -29,6 +29,15 @@
 /*/ X==4 /*///#include "../types/mat3.h"
 #include "../vec/vecn.h"
 
+// macro to create a mat__X__
+/*/ X<5 /*/#define mat__X___(v0, v1, v2, v3 \
+/*/ X<5 /*//*/ X>=3 /*/, v4, v5, v6, v7, v8\
+/*/ X<5 /*//*/ X>=4 /*/, v9, v10, v11, v12, v13, v14, v15\
+/*/ X<5 /*/) (mat__X__) {{(v0), (v1), (v2), (v3)\
+/*/ X<5 /*//*/ X>=3 /*/, (v4), (v5), (v6), (v7), (v8)\
+/*/ X<5 /*//*/ X>=4 /*/, (v9), (v10), (v11), (v12), (v13), (v14), (v15)\
+/*/ X<5 /*/}}
+
 
 /** dst = (mat__X__) v */
 static mat__X__ mat__X___cast_from_float(const really_a_float *cast) {
