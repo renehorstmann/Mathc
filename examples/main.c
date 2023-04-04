@@ -43,10 +43,17 @@ int main() {
     printf("intersection2: %f %f\n", a_tau2, b_tau2);
 
 
-    for(int i=0; i<10; i++) {
-        float x = (float) i / 10.0f;
+    for (int i = 0; i < 100; i++) {
+        float x = (float) i / 100.0f;
 
-        printf("signals: %+5.3f %+5.3f %+5.3f %+5.3f\n",
-               sca_signal_wave(x), sca_signal_ramp(x), sca_signal_saw(x), sca_signal_block(x));
+        printf("signals (%+5.3f): %+5.3f %+5.3f %+5.3f %+5.3f %+5.3f %+5.3f %+5.3f\n",
+               x,
+               sca_signal_wave(x),
+               sca_signal_block(x),
+               sca_signal_saw(x),
+               sca_signal_ramp(x),
+               sca_signal_smoothsaw_single(x, 0.1),
+               sca_signal_smoothsaw(x, 0.1),
+               sca_signal_smoothramp(x, 0.1));
     }
 }
