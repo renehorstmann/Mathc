@@ -432,10 +432,14 @@ Scalar function:
 - sca_step
 - sca_smoothstep
 - sca_signal_wave
-- sca_signal_ramp
-- sca_signal_saw
 - sca_signal_block
+- sca_signal_saw
+- sca_signal_ramp
+- sca_signal_smoothsaw_single
+- sca_signal_smoothsaw
+- sca_signal_smoothramp
 - sca_isnan
+- sca_isinf
 
 ### Typeless functions
 Most functions have their base function as vecN_* or matN_*.
