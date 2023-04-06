@@ -30,10 +30,6 @@ There are multiple types for different sizes and value types: (sizes (*): 2 - 4)
 ### Vector type usage:
 ```c
 #include "mathc/mathc.h"
-
-#define CONST_VEC4 vec4_(1, 2, 3, 4)
-static const vec4 ANOTHER_CONST_VEC4 = vec4_(5, 6, 7, 8);
-
 int main() {
     vec3 a = {{1, 2, 3}};
 
