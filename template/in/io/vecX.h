@@ -24,37 +24,37 @@
 #include "terminalcolor.h"
 
 
-/*/ X==2 /*/ #define VEC__X___PRINT_FORMAT "(vec__X__) {{ %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER " }}"
+/*/ X==2 /*/// #define VEC__X___PRINT_FORMAT "(vec__X__) {{ %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER " }}"
 
-/*/ X==2 /*/ #define VEC__X___PRINT_FORMAT_COLORED "(vec__X__)"\
-/*/ X==2 /*/ MATHC_TERMINALCOLOR_CYAN " {{ %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER " }}"\
-/*/ X==2 /*/ MATHC_TERMINALCOLOR_RESET
+/*/ X==2 /*/// #define VEC__X___PRINT_FORMAT_COLORED "(vec__X__)"\
+/*/ X==2 /*/// MATHC_TERMINALCOLOR_CYAN " {{ %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER " }}"\
+/*/ X==2 /*/// MATHC_TERMINALCOLOR_RESET
 
-/*/ X==2 /*/ #define VEC__X___PRINT_FORMAT_VALUES "%" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER
-
-
-/*/ X==3 /*/ #define VEC__X___PRINT_FORMAT "(vec__X__) {{  %" SCA_PRINT_FORMAT_SPECIFIER \
-/*/ X==3 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER " }}"
-
-/*/ X==3 /*/ #define VEC__X___PRINT_FORMAT_COLORED "(vec__X__)"\
-/*/ X==3 /*/ MATHC_TERMINALCOLOR_CYAN " {{  %" SCA_PRINT_FORMAT_SPECIFIER \
-/*/ X==3 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER " }}"\
-/*/ X==3 /*/ MATHC_TERMINALCOLOR_RESET
-
-/*/ X==3 /*/ #define VEC__X___PRINT_FORMAT_VALUES  "%" SCA_PRINT_FORMAT_SPECIFIER \
-/*/ X==3 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER
+/*/ X==2 /*/// #define VEC__X___PRINT_FORMAT_VALUES "%" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER
 
 
-/*/ X==4 /*/ #define VEC__X___PRINT_FORMAT "(vec__X__) {{  %" SCA_PRINT_FORMAT_SPECIFIER \
-/*/ X==4 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER " }}"
+/*/ X==3 /*/// #define VEC__X___PRINT_FORMAT "(vec__X__) {{  %" SCA_PRINT_FORMAT_SPECIFIER \
+/*/ X==3 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER " }}"
 
-/*/ X==4 /*/ #define VEC__X___PRINT_FORMAT_COLORED "(vec__X__)" \
-/*/ X==4 /*/ MATHC_TERMINALCOLOR_CYAN " {{  %" SCA_PRINT_FORMAT_SPECIFIER \
-/*/ X==4 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER " }}"\
-/*/ X==4 /*/ MATHC_TERMINALCOLOR_RESET
+/*/ X==3 /*/// #define VEC__X___PRINT_FORMAT_COLORED "(vec__X__)"\
+/*/ X==3 /*/// MATHC_TERMINALCOLOR_CYAN " {{  %" SCA_PRINT_FORMAT_SPECIFIER \
+/*/ X==3 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER " }}"\
+/*/ X==3 /*/// MATHC_TERMINALCOLOR_RESET
 
-/*/ X==4 /*/ #define VEC__X___PRINT_FORMAT_VALUES "%" SCA_PRINT_FORMAT_SPECIFIER \
-/*/ X==4 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER
+/*/ X==3 /*/// #define VEC__X___PRINT_FORMAT_VALUES  "%" SCA_PRINT_FORMAT_SPECIFIER \
+/*/ X==3 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER
+
+
+/*/ X==4 /*/// #define VEC__X___PRINT_FORMAT "(vec__X__) {{  %" SCA_PRINT_FORMAT_SPECIFIER \
+/*/ X==4 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER " }}"
+
+/*/ X==4 /*/// #define VEC__X___PRINT_FORMAT_COLORED "(vec__X__)" \
+/*/ X==4 /*/// MATHC_TERMINALCOLOR_CYAN " {{  %" SCA_PRINT_FORMAT_SPECIFIER \
+/*/ X==4 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER " }}"\
+/*/ X==4 /*/// MATHC_TERMINALCOLOR_RESET
+
+/*/ X==4 /*/// #define VEC__X___PRINT_FORMAT_VALUES "%" SCA_PRINT_FORMAT_SPECIFIER \
+/*/ X==4 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER
 
 /**
  * Example:
@@ -72,8 +72,14 @@ static size_t vec__X___snprint(char *str, size_t size, vec__X__ v) {
     size_t used = 0;
     used += snprintf(str, size, "(vec__X__) {{ ");
     for(int i=0; i<__X__; i++) {
+        if(used>=size) {
+            str = NULL;
+        }
         used += snprintf(!str? NULL : str+used, !size? 0 : size - used,
                          "%" SCA_PRINT_FORMAT_SPECIFIER "%s", v.v[i], i<__X__-1? ", " : "");
+    }
+    if(used>=size) {
+        str = NULL;
     }
     used += snprintf(!str? NULL : str+used, !size? 0 : size - used, " }}");
     return used;
@@ -86,6 +92,9 @@ static size_t vec__X___snprintln(char *str, size_t size, vec__X__ v) {
         size = 0;
     }
     size_t used = vec__X___snprint(str, size, v);
+    if(used>=size) {
+        str = NULL;
+    }
     used += snprintf(!str? NULL : str+used, !size? 0 : size - used, "\n");
     return used;
 }

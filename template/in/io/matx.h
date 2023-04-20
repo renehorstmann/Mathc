@@ -23,73 +23,73 @@
 /*/ 1 /*///#include "../types/mat__X__.h"
 #include "terminalcolor.h"
 
-/*/ X==2 /*/ #define MAT__X___PRINT_FORMAT "(mat__X__) {{"\
-/*/ X==2 /*/ "\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==2 /*/ ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"
+/*/ X==2 /*/// #define MAT__X___PRINT_FORMAT "(mat__X__) {{"\
+/*/ X==2 /*/// "\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==2 /*/// ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"
 
-/*/ X==2 /*/ #define MAT__X___PRINT_FORMAT_COLORED "(mat__X__)"\
-/*/ X==2 /*/ MATHC_TERMINALCOLOR_CYAN" {{"\
-/*/ X==2 /*/ "\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==2 /*/ ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"\
-/*/ X==2 /*/ MATHC_TERMINALCOLOR_RESET
+/*/ X==2 /*/// #define MAT__X___PRINT_FORMAT_COLORED "(mat__X__)"\
+/*/ X==2 /*/// MATHC_TERMINALCOLOR_CYAN" {{"\
+/*/ X==2 /*/// "\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==2 /*/// ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"\
+/*/ X==2 /*/// MATHC_TERMINALCOLOR_RESET
 
-/*/ X==2 /*/ #define MAT__X___PRINT_FORMAT_LINE "(mat__X__) {{"\
-/*/ X==2 /*/ "%" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==2 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"
+/*/ X==2 /*/// #define MAT__X___PRINT_FORMAT_LINE "(mat__X__) {{"\
+/*/ X==2 /*/// "%" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==2 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"
 
-/*/ X==2 /*/ #define MAT__X___PRINT_FORMAT_VALUES \
-/*/ X==2 /*/ "%" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==2 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER
-
-
-/*/ X==3 /*/ #define MAT__X___PRINT_FORMAT "(mat__X__) {{"\
-/*/ X==3 /*/ "\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==3 /*/ ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==3 /*/ ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"
-
-/*/ X==3 /*/ #define MAT__X___PRINT_FORMAT_COLORED "(mat__X__)"\
-/*/ X==3 /*/ MATHC_TERMINALCOLOR_CYAN " {{"\
-/*/ X==3 /*/ "\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==3 /*/ ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==3 /*/ ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"\
-/*/ X==3 /*/ MATHC_TERMINALCOLOR_RESET
-
-/*/ X==3 /*/ #define MAT__X___PRINT_FORMAT_LINE "(mat__X__) {{"\
-/*/ X==3 /*/ "%" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==3 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==3 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"
-
-/*/ X==3 /*/ #define MAT__X___PRINT_FORMAT_VALUES \
-/*/ X==3 /*/ "%" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==3 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==3 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER
+/*/ X==2 /*/// #define MAT__X___PRINT_FORMAT_VALUES \
+/*/ X==2 /*/// "%" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==2 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER
 
 
-/*/ X==4 /*/ #define MAT__X___PRINT_FORMAT "(mat__X__) {{"\
-/*/ X==4 /*/ "\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==4 /*/ ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==4 /*/ ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==4 /*/ ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"
+/*/ X==3 /*/// #define MAT__X___PRINT_FORMAT "(mat__X__) {{"\
+/*/ X==3 /*/// "\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==3 /*/// ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==3 /*/// ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"
 
-/*/ X==4 /*/ #define MAT__X___PRINT_FORMAT_COLORED "(mat__X__)"\
-/*/ X==4 /*/ MATHC_TERMINALCOLOR_CYAN " {{"\
-/*/ X==4 /*/ "\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==4 /*/ ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==4 /*/ ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==4 /*/ ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"\
-/*/ X==4 /*/ MATHC_TERMINALCOLOR_RESET
+/*/ X==3 /*/// #define MAT__X___PRINT_FORMAT_COLORED "(mat__X__)"\
+/*/ X==3 /*/// MATHC_TERMINALCOLOR_CYAN " {{"\
+/*/ X==3 /*/// "\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==3 /*/// ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==3 /*/// ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"\
+/*/ X==3 /*/// MATHC_TERMINALCOLOR_RESET
 
-/*/ X==4 /*/ #define MAT__X___PRINT_FORMAT_LINE "(mat__X__) {{"\
-/*/ X==4 /*/ "%" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==4 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==4 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==4 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"
+/*/ X==3 /*/// #define MAT__X___PRINT_FORMAT_LINE "(mat__X__) {{"\
+/*/ X==3 /*/// "%" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==3 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==3 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"
 
-/*/ X==4 /*/ #define MAT__X___PRINT_FORMAT_VALUES \
-/*/ X==4 /*/ "%" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==4 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==4 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
-/*/ X==4 /*/ ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER
+/*/ X==3 /*/// #define MAT__X___PRINT_FORMAT_VALUES \
+/*/ X==3 /*/// "%" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==3 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==3 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER
+
+
+/*/ X==4 /*/// #define MAT__X___PRINT_FORMAT "(mat__X__) {{"\
+/*/ X==4 /*/// "\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==4 /*/// ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==4 /*/// ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==4 /*/// ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"
+
+/*/ X==4 /*/// #define MAT__X___PRINT_FORMAT_COLORED "(mat__X__)"\
+/*/ X==4 /*/// MATHC_TERMINALCOLOR_CYAN " {{"\
+/*/ X==4 /*/// "\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==4 /*/// ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==4 /*/// ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==4 /*/// ",\n%12" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"\
+/*/ X==4 /*/// MATHC_TERMINALCOLOR_RESET
+
+/*/ X==4 /*/// #define MAT__X___PRINT_FORMAT_LINE "(mat__X__) {{"\
+/*/ X==4 /*/// "%" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==4 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==4 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==4 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER" }}"
+
+/*/ X==4 /*/// #define MAT__X___PRINT_FORMAT_VALUES \
+/*/ X==4 /*/// "%" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==4 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==4 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER\
+/*/ X==4 /*/// ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER ", %" SCA_PRINT_FORMAT_SPECIFIER
 
 
 /**
@@ -109,11 +109,20 @@ static size_t mat__X___snprint_line(char *str, size_t size, mat__X__ m) {
     size_t used = 0;
     used += snprintf(str, size, "(mat__X__) {{ ");
     for (int c = 0; c < __X__; c++) {
+        if(used>=size) {
+            str = NULL;
+        }
         used += snprintf(!str ? NULL : str + used, !size ? 0 : size - used, "%s", c > 0 ? ",   " : "");
         for (int r = 0; r < __X__; r++) {
+            if(used>=size) {
+                str = NULL;
+            }
             used += snprintf(!str ? NULL : str + used, !size ? 0 : size - used,
                              "%" SCA_PRINT_FORMAT_SPECIFIER "%s", m.m[c][r], r < __X__ - 1 ? ", " : "");
         }
+    }
+    if(used>=size) {
+        str = NULL;
     }
     used += snprintf(!str ? NULL : str + used, !size ? 0 : size - used, " }}");
     return used;
@@ -126,6 +135,9 @@ static size_t mat__X___snprintln_line(char *str, size_t size, mat__X__ m) {
         size = 0;
     }
     size_t used = mat__X___snprint_line(str, size, m);
+    if(used>=size) {
+        str = NULL;
+    }
     used += snprintf(!str ? NULL : str + used, !size ? 0 : size - used, "\n");
     return used;
 }
@@ -150,11 +162,20 @@ static size_t mat__X___snprint(char *str, size_t size, mat__X__ m) {
     size_t used = 0;
     used += snprintf(str, size, "(mat__X__) {{ ");
     for (int c = 0; c < __X__; c++) {
+        if(used>=size) {
+            str = NULL;
+        }
         used += snprintf(!str ? NULL : str + used, !size ? 0 : size - used, "%s\n    ", c > 0 ? "," : "");
         for (int r = 0; r < __X__; r++) {
+            if(used>=size) {
+                str = NULL;
+            }
             used += snprintf(!str ? NULL : str + used, !size ? 0 : size - used,
                              "%12" SCA_PRINT_FORMAT_SPECIFIER "%s", m.m[c][r], r < __X__ - 1 ? ", " : "");
         }
+    }
+    if(used>=size) {
+        str = NULL;
     }
     used += snprintf(!str ? NULL : str + used, !size ? 0 : size - used, " }}");
     return used;
@@ -167,6 +188,9 @@ static size_t mat__X___snprintln(char *str, size_t size, mat__X__ m) {
         size = 0;
     }
     size_t used = mat__X___snprint(str, size, m);
+    if(used>=size) {
+        str = NULL;
+    }
     used += snprintf(!str ? NULL : str + used, !size ? 0 : size - used, "\n");
     return used;
 }
