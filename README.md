@@ -1,6 +1,10 @@
 # Mathc
 A simple and clean, glsl like, math (linear algebra) header only library for C.
 
+> This is my old spatial lin alg library for C.
+> My new engine "Mia" embeds its own math module, which in fact was initially Mathc but got a fresh cleanup.
+> Ill left it here at github to show what I once coded.
+
 ## Getting Started
 Copy the header files into your project and have fun.
 
